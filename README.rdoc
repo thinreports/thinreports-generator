@@ -1,0 +1,59 @@
+= ThinReports Generator
+
+ThinReports is Open Source Reporting Solution for Web Application,
+and it provide you these tools.
+
+* ThinReports Editor (GUI Layout Editor)
+* ThinReports Generator (Report Generation Interface for Ruby)
+
+Please refer to {Official Site}[http://www.thinreports.org/] and
+{Project Site}[http://osc.matsukei.net/projects/thinreports/wiki] for more details.
+
+== Documentation
+
+We provide you a few useful resources to help you get started with ThinReports.
+
+* {Guide}[http://osc.matsukei.net/projects/thinreports/wiki/Guide]
+* {Roadmap}[http://osc.matsukei.net/projects/thinreports/wiki/Roadmap]
+* {Changelog}[http://osc.matsukei.net/projects/thinreports/wiki/Changelog]
+
+== Dependencies
+
+* <code>json</code> <code>>= 1.4.6</code>
+  (Only for less than Ruby 1.9)
+
+Note: We tested on <code>Ruby 1.8.7/1.9.2</code>.
+
+== Resources
+
+=== Fonts
+
+ThinReports includes the following fonts.
+
+* IPAFonts: Copyright(c) 2003-2011 Information-technology Promotion Agency, Japan.
+  (Please see the lincense file {IPA_Font_License_Agreement_v1.0.txt}[http://ipafont.ipa.go.jp/ipa_font_license_v1.html].
+
+== License
+
+(The MIT License)
+
+Copyright (c) 2010-2011 Matsukei Co.,Ltd.
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
