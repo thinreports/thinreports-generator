@@ -9,6 +9,7 @@ require 'thinreports/generator/pdf/document/parse_svg'
 module ThinReports
   module Generator
     
+    # @private
     class Pdf::Document
       include Pdf::Font
       include Pdf::ParseColor
@@ -84,7 +85,7 @@ module ThinReports
       end
       
       # @param [Numeric, String] x
-      # @parem [Numeric, String] y
+      # @param [Numeric, String] y
       def translate(x, y, &block)
         x, y = rpos(x, y)
         pdf.translate(x, y, &block)
@@ -116,11 +117,9 @@ module ThinReports
     private
       
       # @return [Prawn::Document]
-      # @private
       attr_reader :pdf
       
       # @return [Array<Symbol>]
-      # @private
       attr_reader :format_stamp_registry
       
       def finalize

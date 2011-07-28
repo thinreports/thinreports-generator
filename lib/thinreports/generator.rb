@@ -3,7 +3,9 @@
 module ThinReports
 
   module Generator
-    # @private
+    # @param [Symbol] type
+    # @param report (see ThinReports::Generator::Base#initialize)
+    # @param options (see ThinReports::Generator::Base#initialize)
     def self.new(type, report, options = {})
       unless generator = registry[type]
         raise ThinReports::Errors::UnknownGeneratorType

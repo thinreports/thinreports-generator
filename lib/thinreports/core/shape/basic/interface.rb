@@ -47,7 +47,7 @@ module ThinReports
     
     private
       
-      # @private
+      # @see ThinReports::Core::Shape::Base::Interface#init_internal
       def init_internal(parent, format)
         Basic::Internal.new(parent, format)
       end

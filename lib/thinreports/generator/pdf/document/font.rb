@@ -3,6 +3,7 @@
 module ThinReports
   module Generator
     
+    # @private
     module Pdf::Font
       FONT_STORE = File.join(ThinReports::ROOTDIR, 'resources', 'fonts')
       

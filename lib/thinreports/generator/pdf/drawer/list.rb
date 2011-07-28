@@ -3,6 +3,7 @@
 module ThinReports
   module Generator
     
+    # @private
     class Pdf::Drawer::List < Pdf::Drawer::Base
       # @param (see Pdf::Drawer::Base#initialize)
       def initialize(pdf, format)

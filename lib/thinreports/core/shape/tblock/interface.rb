@@ -42,7 +42,7 @@ module ThinReports
     
     private
       
-      # @private
+      # @see ThinReports::Core::Shape::Base::Interface#init_internal
       def init_internal(parent, format)
         Tblock::Internal.new(parent, format)
       end

@@ -3,6 +3,7 @@
 module ThinReports
   module Generator
     
+    # @private
     module Pdf::Drawer
     end
     

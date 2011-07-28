@@ -2,7 +2,6 @@
 
 module ThinReports
   
-  # @private
   module Errors
     class Basic < ::StandardError
     end

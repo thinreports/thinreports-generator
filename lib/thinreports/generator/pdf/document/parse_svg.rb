@@ -5,6 +5,7 @@ require 'rexml/document'
 module ThinReports
   module Generator
     
+    # @private
     module Pdf::ParseSVG
       # @param [String] source
       # @param [String] base_path
@@ -82,8 +83,6 @@ module ThinReports
                     x, y, w, h)
       end
     
-    private
-      
       # @param [Hash] attributes
       # @return [Hash]
       def svg_text_attrs(attributes)

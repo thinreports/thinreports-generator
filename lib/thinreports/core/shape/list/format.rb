@@ -24,14 +24,20 @@ module ThinReports
       
       config_accessor :sections
       
+      # @param [Symbol] section_name
+      # @return [Hash]
       def section(section_name)
         __send__(section_name)
       end
       
+      # @param [Symbol] section_name
+      # @return [Boolean]
       def has_section?(section_name)
         section_name == :detail ? true : __send__(:"has_#{section_name}?")
       end
       
+      # @param [Symbol] section_name
+      # @return [Numeric]
       def section_height(section_name)
         has_section?(section_name) ? __send__(:"#{section_name}_height") : 0
       end
@@ -40,6 +46,8 @@ module ThinReports
         
       private
         
+        # @param [Hash] raw_format
+        # @return [ThinReports::Core::Shape::List::Format]
         def build_internal(raw_format)
           new(raw_format) do |f|
             f.sections = {}
@@ -50,6 +58,9 @@ module ThinReports
           end
         end
         
+        # @param [Symbol] section_name
+        # @param [ThinReports::Core::Shape::List::Format] list
+        # @return [ThinReports::Core::Shape::List::SectionFormat]
         def build_section(section_name, list)
           list.sections[section_name] =
             List::SectionFormat.build(list.section(section_name))

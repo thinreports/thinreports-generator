@@ -3,12 +3,13 @@
 module ThinReports
   module Generator
     
+    # @private
     module Pdf::Graphics
-      
-    private
       
       BASE_LINE_WIDTH = 0.9
       
+    private
+
       # Change the default graphic states defined by Prawn.
       def setup_custom_graphic_states
         pdf.line_width(BASE_LINE_WIDTH)

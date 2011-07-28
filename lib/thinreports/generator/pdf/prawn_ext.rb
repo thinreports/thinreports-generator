@@ -1,7 +1,9 @@
 # coding: utf-8
 
+# @private
 module Prawn
   # Patch for issue {https://github.com/sandal/prawn/issues/245 #245}.
+  # @private
   class Font::TTF
     def character_width_by_code(code)    
         return 0 unless cmap[code]
@@ -10,6 +12,7 @@ module Prawn
     end    
   end
   
+  # @private
   class Document
     # Create around alias.
     alias_method :original_width_of, :width_of

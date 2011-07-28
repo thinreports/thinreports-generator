@@ -5,6 +5,7 @@ require 'forwardable'
 module ThinReports
   module Core::Shape
     
+    # @private
     module Base
     end
     

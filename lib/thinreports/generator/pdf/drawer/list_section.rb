@@ -3,6 +3,7 @@
 module ThinReports
   module Generator
     
+    # @private
     class Pdf::Drawer::ListSection < Pdf::Drawer::Page
       # @param pdf (see Pdf::Drawer::Page#initialize)
       # @param section [ThinReports::Core::Shape::List::SectionInternal] section

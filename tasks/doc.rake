@@ -7,6 +7,7 @@ YARD::Rake::YardocTask.new(:doc) do |yard|
   yard.options = [
     '--no-private', 
     '--readme',     'README.rdoc',
-    '--output-dir', 'doc/yardoc'
+    '--output-dir', 'doc/yardoc', 
+    '--template-path', 'doc/yardoc_templates'
   ]
 end

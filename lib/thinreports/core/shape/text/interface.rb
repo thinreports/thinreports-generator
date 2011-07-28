@@ -6,7 +6,7 @@ module ThinReports
     class Text::Interface < Basic::Interface
     private
     
-      # @private
+      # @see ThinReports::Core::Shape::Base::Interface#init_internal
       def init_internal(parent, format)
         Text::Internal.new(parent, format)
       end

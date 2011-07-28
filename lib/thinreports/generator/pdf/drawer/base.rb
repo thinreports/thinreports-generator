@@ -4,6 +4,7 @@ module ThinReports
   module Generator
     
     # @abstract
+    # @private
     class Pdf::Drawer::Base
       # @param [ThinReports::Generator::Pdf::Document] pdf
       # @param [ThinReports::Core::Shape::Manager::Format] format

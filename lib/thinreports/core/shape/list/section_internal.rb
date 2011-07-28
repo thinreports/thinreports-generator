@@ -10,8 +10,10 @@ module ThinReports
                         :relative_top,
                         :svg_tag
       
+      # @return [Symbol]
       attr_accessor :section_name
       
+      # @param [Numeric] ry
       def move_top_to(ry)
         states[:relative_top] = ry
       end

@@ -103,7 +103,7 @@ module ThinReports
       
     private
       
-      # @private
+      # @see ThinReports::Core::Shape::Base::Interface#init_internal
       def init_internal(parent, format)
         List::PageState.new(parent, format)
       end

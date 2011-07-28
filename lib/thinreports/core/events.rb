@@ -4,7 +4,7 @@ module ThinReports
   module Core
     
     class Events
-      class Event < ::Struct.new(:type, :target); end
+      Event = ::Struct.new(:type, :target)
       
       # @return [Hash<Symbol, ThinReports::Core::Events::Event>]
       # @private
@@ -57,7 +57,7 @@ module ThinReports
       
     private
       
-      # @private
+      # @param [Symbol] type
       def verify_event_type(type)
         return if @types.empty?
         

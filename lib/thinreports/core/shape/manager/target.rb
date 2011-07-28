@@ -39,11 +39,11 @@ module ThinReports
         item_values.each {|id, val| item(id).value(val)}
       end
       
-      # @deprecated Please using the #values method instead.
+      # @deprecated Please use the #values method instead.
       # @see #values
       def items(*args)
         warn '[DEPRECATION] The #items method is deprecated. ' +
-             'Please using the #values method instead.'
+             'Please use the #values method instead.'
         values(*args)
       end
       
@@ -71,13 +71,11 @@ module ThinReports
       # @param format (see ThinReports::Core::Shape::Manager::Internal#initialize)
       # @yield [format] Handler for initialize item.
       # @yieldparam [ThinReports::Core::Shape::Basic::Format] format
-      # @private
       def initialize_manager(format, &block)
         @manager = Manager::Internal.new(format, block)
       end
       
       # @see ThinReports::Core::Shape::Manager::Internal#find_item
-      # @private
       def find_item(id, limit = {})
         manager.find_item(id, limit)
       end

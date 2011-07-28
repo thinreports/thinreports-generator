@@ -13,6 +13,9 @@ module ThinReports
         # @return [ThinReports::Core::Shape::List::Store]
         attr_reader :store
         
+        # @param type (see ThinReports::Core::Events::Event#initialize)
+        # @param target (see ThinReports::Core::Events::Event#initialize)
+        # @param [ThinReports::Core::Shape::List::Store] store
         def initialize(type, target, store)
           super(type, target)
           @store = store

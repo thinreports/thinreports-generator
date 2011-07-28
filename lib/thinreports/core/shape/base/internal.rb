@@ -4,6 +4,7 @@ module ThinReports
   module Core::Shape
     
     # @private
+    # @abstract
     class Base::Internal
       extend ::Forwardable
       

@@ -10,7 +10,7 @@ module ThinReports
       
       class << self
         # @param options (see #initialize)
-        # @yield [report,]
+        # @yield [report]
         # @yieldparam [ThinReports::Report::Base] report
         # @return [ThinReports::Report::Base]
         def create(options = {}, &block)

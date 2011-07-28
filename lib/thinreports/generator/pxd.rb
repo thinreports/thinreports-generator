@@ -41,13 +41,11 @@ module ThinReports
     
     private
     
-      # @private
       def renderer(page)
         @renderers[page.layout.format.identifier] ||=
             PageRenderer.new(page.layout.format)
       end
       
-      # @private
       def render_page(output, page)
         output << unless page.blank?
           content_tag(:page, renderer(page).render(page.manager), nil,
@@ -57,7 +55,6 @@ module ThinReports
         end
       end
       
-      # @private
       def render_start_pxd(output)
         format = default_layout.format
         attrs  = @options.merge('title'       => format.report_title,
@@ -69,7 +66,6 @@ module ThinReports
         output << tag(:pxd, attrs, true)
       end
       
-      # @private
       def render_end_pxd(output)
         output << '</pxd>'
       end

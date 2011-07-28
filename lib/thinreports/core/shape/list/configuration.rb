@@ -22,6 +22,7 @@ module ThinReports
         @store = List::Store.init(stores)
       end
       
+      # @return [ThinReports::Core::Shape::List::Configuration]
       # @private
       def copy
         self.class.new(@events.copy, @store && @store.copy)

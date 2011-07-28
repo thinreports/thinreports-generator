@@ -4,6 +4,7 @@ module ThinReports
   module Core::Shape
     
     # @private
+    # @abstract
     class Base::Interface
       extend ::Forwardable
       
@@ -24,6 +25,9 @@ module ThinReports
       
     private
     
+      # @param [ThinReports::Core::Page, ThinReports::Core::Shape::List::SectionInterface] parent
+      # @param [ThinReports::Core::Shape::Basic::Format] format
+      # @return [ThinReports::Core::Shape::Basic::Internal]
       # @abstract
       def init_internal(parent, format)
         raise NotImplementedError

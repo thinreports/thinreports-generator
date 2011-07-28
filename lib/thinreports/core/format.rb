@@ -3,6 +3,7 @@
 module ThinReports
   module Core
     
+    # @private
     module Format
     end
     

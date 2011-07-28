@@ -3,8 +3,10 @@
 module ThinReports
   module Core::Shape::Tblock
     
+    # @private
     module Formatter
-      # @private
+      # @param [ThinReports::Core::Shape::Tblock::Format] format
+      # @return [ThinReports::Core::Shape::Tblock::Formatter::Base]
       def self.setup(format)
         klass = if format.format_type.blank?
           Basic

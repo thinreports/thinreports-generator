@@ -117,14 +117,17 @@ module ThinReports
         @page_max_height
       end
       
+      # @return [ThinReports::Core::Shape::List::Store]
       def store
         config.store
       end
       
+      # @return [ThinReports::Core::Shape::List::Events]
       def events
         config.events
       end
       
+      # @return [Boolean]
       def auto_page_break?
         format.auto_page_break?
       end
@@ -170,6 +173,7 @@ module ThinReports
         @finalized = true
       end
       
+      # @return [Boolean]
       # @private
       def finalized?
         @finalized
@@ -178,24 +182,21 @@ module ThinReports
     private
       
       # @return [ThinReports::Report::Base]
-      # @private
       def report
         current_page_state.parent.report
       end
       
       # @return [ThinReports::Layout::Base]
-      # @private
       def layout
         current_page_state.parent.layout
       end
       
       # @return [ThinReports::Core::Shape::List::Format]
-      # @private
       def format
         current_page_state.format
       end
       
-      # @private
+      # @return [ThinReports::Core::Shape::List::Configuration]
       def init_config
         layout.config.activate(current_page.id) || List::Configuration.new
       end

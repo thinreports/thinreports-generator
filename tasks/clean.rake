@@ -2,5 +2,5 @@
 
 require 'rake/clean'
 
-CLEAN.include(['doc', '.yardoc'])
+CLEAN.include(['doc/yardoc', '.yardoc'])
 CLOBBER.include([ 'pkg' ])

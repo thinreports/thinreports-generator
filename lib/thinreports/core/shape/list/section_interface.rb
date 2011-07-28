@@ -36,7 +36,9 @@ module ThinReports
       
     private
       
-      # @private
+      # @param parent (see #initialize)
+      # @param format (see #initialize)
+      # @return [ThinReports::Core::Shape::List::SectionInternal]
       def init_internal(parent, format)
         List::SectionInternal.new(parent, format)
       end
