@@ -62,7 +62,7 @@ module ThinReports
         
         common_text_attrs(shape.attributes) do |attrs|
           # Set the :line_height option.
-          attrs[:line_height] = format.line_height if format.line_height
+          attrs[:line_height] = format.line_height unless format.line_height.blank?
           # Set the :valign option.
           attrs[:valign]      = text_valign(format.valign)
         end
