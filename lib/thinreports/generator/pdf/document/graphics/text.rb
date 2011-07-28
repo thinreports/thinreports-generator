@@ -43,9 +43,12 @@ module ThinReports
       # @yieldparam [Hash] built_attrs The finalized attributes.
       # @yieldparam [Array] font_styles The finalized styles.
       def with_text_styles(attrs, &block)
+        # When no color is given, do not draw.
+        return unless attrs.key?(:color) && attrs[:color] != 'none'
+        
         save_graphics_state
         
-        fontinfo = {:name  => attrs.delete(:font).to_s, 
+        fontinfo = {:name  => attrs.delete(:font).to_s,
                     :color => parse_color(attrs.delete(:color)),
                     :size  => s2f(attrs.delete(:size))}
         
