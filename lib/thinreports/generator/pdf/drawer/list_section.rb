@@ -28,7 +28,8 @@ module ThinReports
         
         unless @stamp_created
           @pdf.create_stamp(id) do
-            @pdf.parse_svg("<g>#{@format.layout}</g>", '/g')
+            @pdf.parse_svg('<svg xmlns:xlink="http://www.w3.org/1999/xlink">' +
+                           "#{@format.layout}</svg>", '/svg')
           end
           @stamp_created = true
         end
