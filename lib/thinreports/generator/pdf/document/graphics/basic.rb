@@ -62,11 +62,14 @@ module ThinReports
       
       # @param [Hash] attrs
       def with_graphic_styles(attrs, &block)
-        save_graphics_state
-        
         stroke = build_stroke_styles(attrs)
         fill   = build_fill_styles(attrs)
         
+        # Do not draw if no colors given.
+        return unless fill || stroke
+        
+        save_graphics_state
+
         # Apply stroke-dashed.
         if stroke && stroke[:dash]
           length, space = stroke[:dash]
@@ -95,9 +98,6 @@ module ThinReports
             pdf.stroke_color(stroke[:color])
             block.call
           }
-        # Draw without any.
-        else
-          block.call
         end
         
         restore_graphics_state
