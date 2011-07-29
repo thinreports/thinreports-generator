@@ -12,6 +12,12 @@ module ThinReports
         attrs = {:stroke       => svg_attrs['stroke'],
                  :stroke_width => svg_attrs['stroke-width'],
                  :fill         => svg_attrs['fill']}
+        
+        # Set 0 to stroke_width if stroke_opacity is '0'.
+        if svg_attrs['stroke-opacity'] == '0'
+          attrs[:stroke_width] = 0
+        end
+        
         # Setting for stroke dash.
         if (dash = svg_attrs['stroke-dasharray']) && dash != 'none'
           attrs[:stroke_dash] = dash.split(',')

@@ -31,6 +31,12 @@ class ThinReports::Generator::Pdf::Graphics::TestAttributes < MiniTest::Unit::Te
     assert_nil   result3[:stroke_dash]
   end
   
+  def test_common_graphic_attrs_set_0_to_stroke_width_when_opacity_is_0
+    result = @attrs.common_graphic_attrs('stroke-width' => '1',
+                                         'stroke-opacity' => '0')
+    assert_equal result[:stroke_width], 0
+  end
+  
   def test_common_graphic_attrs_with_block
     result = @attrs.common_graphic_attrs('stroke' => '#ff0000') do |attrs|
       attrs[:stroke].gsub!(/0/, 'f')
