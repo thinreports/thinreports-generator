@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = ['README.rdoc']
   
   s.files         = Dir['{lib,tasks,resources}/**/*'] +
+                    Dir['doc/yardoc_templates/**/*'] +
                     Dir['test/unit/**/*'] +
                     ['Rakefile', 'README.rdoc', '.yardopts']
   s.require_path  = 'lib'
