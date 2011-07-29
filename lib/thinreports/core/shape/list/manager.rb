@@ -132,15 +132,17 @@ module ThinReports
         format.auto_page_break?
       end
       
+      # @param [Hash] options
+      # @option [Boolean] :ignore_page_footer (false)
       # @private
-      def finalize_page        
+      def finalize_page(options = {})
         return if current_page_state.finalized?
         
         if format.has_header?
           current_page_state.header ||= init_section(:header)
         end
         
-        if format.has_page_footer?
+        if !options[:ignore_page_footer] && format.has_page_footer?
           footer = insert_new_row(:page_footer)
           # Dispatch event on footer insert.
           events.
@@ -161,7 +163,8 @@ module ThinReports
           
           if auto_page_break? && overflow_with?(:footer)
             change_new_page do |new_list|
-              footer = new_list.internal.insert_new_row(:footer)
+              footer = new_list.manager.insert_new_row(:footer)
+              new_list.manager.finalize_page(:ignore_page_footer => true)
             end
           else
             footer = insert_new_row(:footer)
