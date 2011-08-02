@@ -5,8 +5,8 @@ module ThinReports
     
     class BlankPage
       # @return [Integer]
-			attr_accessor :no
-			
+      attr_accessor :no
+      
       # @param [Boolean] count (nil)
       def initialize(count = nil)
         @count = count.nil? ? true : count
@@ -61,7 +61,7 @@ module ThinReports
           new_page.manager.shapes[id] = new_shape
           
           if new_shape.internal.type_of?(:list)
-						new_page.manager.lists[id] = new_shape
+            new_page.manager.lists[id] = new_shape
           end
         end
         new_page
@@ -71,11 +71,11 @@ module ThinReports
       # @option options [:create, :copy] :at (:create)
       # @private
       def finalize(options = {})
-				at = options[:at] || :create
-				
+        at = options[:at] || :create
+        
         # For list shapes.
         if at == :create
-					manager.lists.values.each {|list| list.manager.finalize }
+          manager.lists.values.each {|list| list.manager.finalize }
         end
         
         @finalized = true
