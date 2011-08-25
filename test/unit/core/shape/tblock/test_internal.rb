@@ -62,37 +62,20 @@ class ThinReports::Core::Shape::Tblock::TestInternal < MiniTest::Unit::TestCase
                             "Because 'id' refers to 'ref id'."
   end
   
-  def test_real_value_return_the_formatted_value
-    format = flexmock('format')
-    format.should_receive(:has_format? => true,
-                          :multiple?   => false)
-    
-    internal = init_internal(format)
-    flexmock(internal, :read_value => 'dummy')
+  def test_real_value_return_the_formatted_value_when_has_any_format
+    internal = init_internal(flexmock('format'))
+    flexmock(internal, :format_enabled? => true, 
+                       :read_value      => 'dummy')
     
     assert_equal internal.real_value, 'formatted value'
   end
   
-  def test_real_value_return_the_raw_value_when_has_not_format
-    format = flexmock('format')
-    format.should_receive(:has_format? => false,
-                          :multiple?   => false)
-    
-    internal = init_internal(format)
-    flexmock(internal, :read_value => 'raw value')
+  def test_real_value_return_the_raw_value_when_has_no_format
+    internal = init_internal(flexmock('format'))
+    flexmock(internal, :format_enabled? => false,
+                       :read_value      => 'raw value')
     
     assert_equal internal.real_value, 'raw value'
-  end
-  
-  def test_real_value_return_the_raw_value_constantly_when_is_multiple
-    format = flexmock('format')
-    format.should_receive(:has_format? => true,
-                          :multiple?   => true)
-    
-    internal = init_internal(format)
-    flexmock(internal, :read_value => 'raw value')
-    
-    assert_equal internal.real_value, 'raw value'    
   end
   
   def test_format_enabled
@@ -102,19 +85,44 @@ class ThinReports::Core::Shape::Tblock::TestInternal < MiniTest::Unit::TestCase
     assert_equal internal.states[:format_enabled], true
   end
   
-  def test_format_enabled?
+  def test_format_enabled_return_the_true_when_format_has_format
     internal = init_internal(flexmock(:has_format? => true,
-                                      :multiple?   => false))
+                                      :multiple?   => false,
+                                      :format_base => nil))
     
     assert_equal internal.format_enabled?, true
+  end
+  
+  def test_format_enabled_return_the_true_when_format_base_has_any_value
+    internal = init_internal(flexmock(:has_format? => false,
+                                      :multiple?   => false,
+                                      :format_base => '{value}'))
     
-    internal.format_enabled(false)
+    assert_equal internal.format_enabled?, true
+  end
+  
+  def test_format_enabled_return_the_false_when_has_not_format_and_base_has_no_value
+    internal = init_internal(flexmock(:has_format? => false,
+                                      :multiple?   => false,
+                                      :format_base => ''))
     
     assert_equal internal.format_enabled?, false
+  end
+  
+  def test_format_enabled_return_the_false_constantly_when_tblock_is_multiple_mode
+    internal = init_internal(flexmock(:has_format? => true,
+                                      :multiple?   => true,
+                                      :format_base => '{value}'))
     
-    flexmock(internal.format, :multiple? => true)
-    internal.format_enabled(true)
+    assert_equal internal.format_enabled?, false
+  end
+  
+  def test_format_enabled_return_the_specified_value
+    internal = init_internal(flexmock(:has_format? => true,
+                                      :multiple?   => false,
+                                      :format_base => '{value}'))
     
+    internal.format_enabled(false)
     assert_equal internal.format_enabled?, false
   end
   

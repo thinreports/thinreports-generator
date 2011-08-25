@@ -51,7 +51,7 @@ module ThinReports
         if states.key?(:format_enabled)
           states[:format_enabled]
         else
-          format.has_format?
+          !format.format_base.blank? || format.has_format?
         end
       end
       
