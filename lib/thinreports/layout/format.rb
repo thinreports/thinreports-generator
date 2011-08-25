@@ -8,7 +8,7 @@ module ThinReports
     # @private
     class Format < Core::Shape::Manager::Format
       config_reader :last_version        => %w( version )
-      config_reader :report_title        => %w( title )
+      config_reader :report_title        => %w( config title )
       config_reader :page_paper_type     => %w( config page paper-type ),
                     :page_width          => %w( config page width ),
                     :page_height         => %w( config page height ),
