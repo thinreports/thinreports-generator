@@ -7,10 +7,7 @@ class ThinReports::Layout::TestFormat < MiniTest::Unit::TestCase
   
   TEST_SIMPLE_FORMAT = <<-'EOF'
   {
-    "built-at":"",
     "version":"%s",
-    "encoding":"utf-8",
-    "updated-at":"20110528120710",
     "finger-print":-860627816,
     "config":{
       "title":"Sample Layout",
@@ -36,6 +33,26 @@ class ThinReports::Layout::TestFormat < MiniTest::Unit::TestCase
   # Alias
   Shape  = ThinReports::Core::Shape
   Layout = ThinReports::Layout
+  
+  def test_report_title
+    format = Layout::Format.new('config' => {'title' => 'Title'})
+    assert_equal format.report_title, 'Title'
+  end
+  
+  def test_user_paper_type_return_true_when_type_is_user
+    format = Layout::Format.new('config' => {'page' => {'paper-type' => 'user'}})
+    assert_equal format.user_paper_type?, true
+  end
+  
+  def test_user_paper_type_return_false_when_type_is_not_user
+    format = Layout::Format.new('config' => {'page' => {'paper-type' => 'A4'}})
+    assert_equal format.user_paper_type?, false
+  end
+  
+  def test_last_version
+    format = Layout::Format.new('version' => '1.0')
+    assert_equal format.last_version, '1.0'
+  end
   
   def test_build_simple_format
     flexmock(Layout::Format).

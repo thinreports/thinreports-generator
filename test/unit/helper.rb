@@ -34,4 +34,18 @@ module ThinReports::TestHelpers
       skip('This test is not required Ruby 1.8 below.')
     end
   end
+  
+  def create_basic_report(&block)
+    report = ThinReports::Report.new :layout => data_file('basic_layout.tlf')
+    block.call(report) if block_given?
+    report
+  end
+  
+  def create_basic_layout
+    ThinReports::Layout.new(data_file('basic_layout.tlf'))
+  end
+  
+  def data_file(filename)
+    File.join(File.dirname(__FILE__), 'data', filename)
+  end
 end

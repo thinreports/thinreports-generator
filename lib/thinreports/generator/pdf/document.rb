@@ -18,12 +18,15 @@ module ThinReports
       include Pdf::ParseSVG
       
       # @param options (see ThinReports::Generator::Pdf#initialize)
-      def initialize(options = {})
+      # @param [Hash] metadata
+      # @option metadata [String] :Title
+      def initialize(options = {}, metadata = {})
         @pdf = Prawn::Document.new(
           :skip_page_creation => true,
           :margin => [0, 0],
-          :info   => {:Creator => 'ThinReports Generator for Ruby ' +
-                                  ThinReports::VERSION}
+          :info   => {:CreationDate => Time.now, 
+                      :Creator      => 'ThinReports Generator for Ruby ' +
+                                        ThinReports::VERSION}.merge(metadata)
         )
         @format_stamp_registry = []
         
