@@ -28,7 +28,7 @@ module ThinReports
         shape = find_item(id, :except => Core::Shape::List::TYPE_NAME)
         
         unless shape
-          raise ThinReports::Errors::UnknownItemId, id
+          raise ThinReports::Errors::UnknownItemId.new(id)
         else
           block_exec_on(shape, &block)
         end
@@ -59,7 +59,7 @@ module ThinReports
         shape = find_item(id, :only => Core::Shape::List::TYPE_NAME)
 
         unless shape
-          raise ThinReports::Errors::UnknownItemId, id
+          raise ThinReports::Errors::UnknownItemId.new(id, 'List')
         else
           manager.lists[id.to_sym] ||= shape
           block_exec_on(shape, &block)

@@ -22,9 +22,15 @@ module ThinReports
     end
     
     class UnknownItemId < Basic
+      def initialize(id, item_type = 'Basic')
+        super("The layout does not have a #{item_type} Item with id '#{id}'.")
+      end
     end
     
     class DisabledListSection < Basic
+      def initialize(section)
+        super("The #{section} section is disabled.")
+      end
     end
     
     class UnknownEventType < Basic
