@@ -9,7 +9,7 @@ module Prawn
     
     def width_of(string, options={})
       font.compute_width_of(string, options) +
-        (character_spacing * font.character_count(string) - 1)
+        (character_spacing * (font.character_count(string) - 1))
     end
   end
 end
