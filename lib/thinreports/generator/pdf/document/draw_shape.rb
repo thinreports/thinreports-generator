@@ -13,7 +13,7 @@ module ThinReports
         unless shape.multiple?
           content = content.gsub(/\n/, ' ')
         end
-        text_box(content, x, y, w, h, common_text_attrs(shape.attributes))
+        text_box(content, x, y, w, h, shape_text_attrs(shape))
       end
       
       # @param [ThinReports::Core::Shape::Basic::Internal] shape
@@ -55,7 +55,7 @@ module ThinReports
     
     private
       
-      # @param [ThinReports::Core::Shape::Text::Internal]
+      # @param [ThinReports::Core::Shape::Text::Internal, ThinReports::Core::Shape::Tblock::Internal]
       # @return [Hash]
       def shape_text_attrs(shape)
         format = shape.format
