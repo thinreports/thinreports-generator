@@ -1,6 +1,6 @@
 # coding: utf-8
 
-class ThinReports::CaseRunner
+class ThinReports::TestCaseRunner
   ROOTDIR = File.expand_path(File.join('test', 'case'))
   
   class << self
@@ -20,4 +20,4 @@ class ThinReports::CaseRunner
   end
 end
 
-CaseRunner = ThinReports::CaseRunner
+CaseRunner = ThinReports::TestCaseRunner

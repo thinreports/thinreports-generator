@@ -86,13 +86,13 @@ module ThinReports
           
           new_list = self.class.new(new_parent, internal.format,
                                     internal.copy(new_parent), manager)
-          
-          new_list.internal.header = internal.header.copy(new_list)
           internal.rows.each do |row|
             new_list.internal.rows << row.copy(new_list)
           end
           new_list.finalized!
         end
+        # New-List inherit List-Header of Old-List.
+        new_list.internal.header = internal.header.copy(new_list)
         new_list
       end
       
