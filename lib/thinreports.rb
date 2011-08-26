@@ -5,6 +5,7 @@ module ThinReports
   VERSION = '0.6.0.pre3'
 end
 
+require 'thinreports/config'
 require 'thinreports/core'
 require 'thinreports/report'
 require 'thinreports/layout'
