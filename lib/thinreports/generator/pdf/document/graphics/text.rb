@@ -28,6 +28,12 @@ module ThinReports
                                                    :width  => w,
                                                    :height => h))
         end
+      rescue Prawn::Errors::CannotFit => e
+        # Nothing to do.
+        # 
+        # When the area is too small compared
+        # with the content and the style of the text.
+        #   (See prawn/core/text/formatted/line_wrap.rb#L185)
       end
       
       # @see #text_box
@@ -104,7 +110,7 @@ module ThinReports
         end
         
         # Emulate bold style.
-        if manual.include?(:bold)
+        if manual && manual.include?(:bold)
           pdf.stroke_color(font[:color])
           pdf.line_width(font[:size] * 0.025)
           
@@ -113,7 +119,7 @@ module ThinReports
         end
         
         # Emulate italic style.
-        if manual.include?(:italic)
+        if manual && manual.include?(:italic)
           # FIXME
           # pdf.transformation_matrix(1, 0, 0.26, 1, 0, 0)
         end
