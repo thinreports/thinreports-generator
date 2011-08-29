@@ -5,14 +5,6 @@ module ThinReports
     
     # @private
     module Utils
-      def in_utf8(&block)
-        original = $KCODE
-        $KCODE = 'u'
-        block.call
-      ensure
-        $KCODE = original
-      end
-      
       def block_exec_on(context, &block)
         return context unless block_given?
         

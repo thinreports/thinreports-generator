@@ -10,18 +10,20 @@ module ThinReports
     
     ruby_18 do
       def apply_format_to(value)
-        strs    = in_utf8 { value.to_s.split(//) }
-        pad_len = format.format_padding_length
+        value = value.to_s
         
-        if pad_len > strs.size
-          pad_strs = format.format_padding_char * (pad_len - strs.size)
+        char_length = value.unpack('U*').length
+        pad_length  = format.format_padding_length
+        
+        if pad_length > char_length
+          pad_strs = format.format_padding_char * (pad_length - char_length)
           if format.format_padding_rdir?
-            strs.to_s + pad_strs
+            value + pad_strs
           else
-            pad_strs + strs.to_s
+            pad_strs + value
           end
         else
-          value.to_s
+          value
         end
       end
     end

@@ -16,17 +16,22 @@ class ThinReports::Core::Shape::Tblock::Formatter::TestPadding < MiniTest::Unit:
     Formatter.new(format)
   end
   
-  def test_apply_padding_formats
+  def test_apply_padding_formats_with_left_direction
     formatter = init_formatter(:format_padding_length => 5,
                                :format_padding_char   => '0')
     
     assert_equal formatter.apply(1), '00001'
     assert_equal formatter.apply('日本語'), '00日本語'
+  end
+  
+  def test_apply_padding_formats_should_not_apply_when_character_length_is_short
+    formatter = init_formatter(:format_padding_length => 5,
+                               :format_padding_char   => '0')
     
-    # Text length is longer than the specified length.
     assert_equal formatter.apply('1234567'), '1234567'
-    
-    # When direction is right
+  end
+  
+  def test_apply_padding_formats_with_right_direction
     formatter = init_formatter(:format_padding_length => 5,
                                :format_padding_char   => '0',
                                :format_padding_rdir?  => true)
