@@ -11,11 +11,15 @@ class ThinReports::TestCaseRunner
     end
     
     def layout_file
-      File.join(ROOTDIR, @current, "#{@current}.tlf")
+      case_file("#{@current}.tlf")
     end
     
     def output_file
-      File.join(ROOTDIR, @current, "#{@current}.pdf")
+      case_file("#{@current}.pdf")
+    end
+    
+    def case_file(filename)
+      File.join(ROOTDIR, @current, filename)
     end
   end
 end

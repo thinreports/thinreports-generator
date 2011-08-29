@@ -20,20 +20,36 @@ module ThinReports
         # Install built-in fonts.
         pdf.font_families.update(BUILTIN_FONTS)
         
-        # Install fall-back font that IPAMincho.
-        fallback_font = BUILTIN_FONTS['IPAMincho'][:normal]
-        pdf.font_families['FallbackFont'] = {:normal      => fallback_font,
-                                             :bold        => fallback_font,
-                                             :italic      => fallback_font,
-                                             :bold_italic => fallback_font}
-        # Setup fallback font.
-        pdf.fallback_fonts(['FallbackFont'])
+        fallback_fonts = []
+        
+        # Install EUDC fonts.
+        ThinReports.config.generator.pdf.eudc_ttf.each_with_index do |eudc, i|
+          eudc_name = "EUDC#{i}"
+          install_font_family(eudc_name, eudc)
+          fallback_fonts << eudc_name
+        end        
+        
+        # Install fall-back font(default font) that IPAMincho.
+        install_font_family('DefaultFont', BUILTIN_FONTS['IPAMincho'][:normal])
+        fallback_fonts << 'DefaultFont'
+        
+        # Setup fallback fonts.
+        pdf.fallback_fonts(fallback_fonts)
         
         # Create aliases from the font list provided by Prawn.
         pdf.font_families.update(
           'Courier New'     => pdf.font_families['Courier'],
           'Times New Roman' => pdf.font_families['Times-Roman']
         )
+      end
+      
+      # @param [String] name
+      # @param [String] file
+      def install_font_family(name, file)
+        pdf.font_families[name] = {:normal      => file,
+                                   :bold        => file,
+                                   :italic      => file,
+                                   :bold_italic => file}
       end
       
       # @return [String]

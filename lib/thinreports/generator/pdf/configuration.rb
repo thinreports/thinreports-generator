@@ -5,14 +5,14 @@ module ThinReports
     
     class Pdf::Configuration
       # @return [false, String]
-      attr_accessor :cache_template
+      attr_accessor :cache_templates
       
       # @return [Array]
       attr_reader :eudc_ttf
       
       def initialize
-        @cache_template = false
-        @eudc_ttf       = nil
+        @cache_templates = false
+        @eudc_ttf        = []
       end
       
       # @param [String, Array<String>]
@@ -20,7 +20,7 @@ module ThinReports
         ttfs = [ttfs] unless ttfs.is_a?(::Array)
         
         ttfs.each do |ttf|
-          unless File.extname(ttf) == '.ttf'
+          unless File.extname(ttf.to_s) == '.ttf'
             raise ArgumentError, 'The EUDC Fonts can specify only the TTF file.'
           end
         end
