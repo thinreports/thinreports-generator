@@ -1,14 +1,14 @@
 # coding: utf-8
 
-CaseRunner.current :using_templates
+CaseRunner.current :template_management
 
 ThinReports.configure do
   generator.pdf.manage_templates = CaseRunner.case_resource
 end
 
 ThinReports::Report.generate_file(:pdf, CaseRunner.output_file) do
-  use_layout(CaseRunner.case_resource('using_templates_1.tlf'))
-  use_layout(CaseRunner.case_resource('using_templates_2.tlf'), :id => :list_layout)
+  use_layout(CaseRunner.case_resource('template_management_1.tlf'))
+  use_layout(CaseRunner.case_resource('template_management_2.tlf'), :id => :list_layout)
   
   start_new_page
   

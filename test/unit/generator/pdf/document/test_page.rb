@@ -182,4 +182,12 @@ class ThinReports::Generator::Pdf::Document::TestPage < MiniTest::Unit::TestCase
     
     @pdf.add_blank_page
   end
+  
+  def test_add_blank_page_should_call_with_no_arguments_since_second_page
+    create_pdf
+    @pdf.start_new_page(create_basic_layout_format('basic_layout1.tlf'))
+    flexmock(@pdf.internal).should_receive(:start_new_page).with(Hash.new).once
+    
+    @pdf.add_blank_page
+  end
 end

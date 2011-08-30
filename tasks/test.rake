@@ -10,12 +10,18 @@ namespace :test do
   end
   
   namespace :case do
-    desc 'Run all special test cases'
+    desc 'Run all special test cases [MANAGE_TEMPLATES(false): true/false]'
     task :all do
       $LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__) + '/..'))
       
       require 'test/case/helper'
-      Dir['test/case/*/*.rb'].each {|f| require f }
+      
+      Dir['test/case/*/*.rb'].each do |f|
+        if ENV['MANAGE_TEMPLATES']
+          ThinReports.config.generator.pdf.manage_templates = File.expand_path(File.dirname(f))
+        end
+        require f
+      end
     end
     
     desc 'Reset all output of test cases'
@@ -26,11 +32,15 @@ namespace :test do
     Dir['test/case/*/*.rb'].each do |f|
       casename = File.basename(File.dirname(f))
       
-      desc "Run #{casename} case"
+      desc "Run #{casename} case [MANAGE_TEMPLATE(false): true/false]"
       task casename.to_sym do
         $LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__) + '/..'))
         
         require 'test/case/helper'
+        
+        if ENV['MANAGE_TEMPLATES']
+          ThinReports.config.generator.pdf.manage_templates = File.expand_path(File.dirname(f))
+        end        
         require "test/case/#{casename}/#{casename}"
       end
     end
