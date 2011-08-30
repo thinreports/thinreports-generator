@@ -4,32 +4,23 @@ module ThinReports
   module Generator
     
     class Pdf::Configuration
-      # @return [false, String]
-      attr_accessor :manage_templates
-      
       # @return [Array]
-      attr_reader :eudc_ttf
+      attr_reader :eudc_fonts
       
       def initialize
-        @manage_templates = false
-        @eudc_ttf         = []
+        @eudc_fonts = []
       end
       
-      # @param [String, Array<String>]
-      def eudc_ttf=(ttfs)
-        ttfs = [ttfs] unless ttfs.is_a?(::Array)
+      # @param [String, Array<String>] fonts
+      def eudc_fonts=(fonts)
+        fonts = [fonts] unless fonts.is_a?(::Array)
         
-        ttfs.each do |ttf|
-          unless File.extname(ttf.to_s) == '.ttf'
+        fonts.each do |f|
+          unless File.extname(f.to_s) == '.ttf'
             raise ArgumentError, 'The EUDC Fonts can specify only the TTF file.'
           end
         end
-        @eudc_ttf = ttfs
-      end
-      
-      # @return [Boolean]
-      def manage_templates?
-        @manage_templates
+        @eudc_fonts = fonts
       end
     end
     

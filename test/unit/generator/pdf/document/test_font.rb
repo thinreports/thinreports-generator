@@ -24,7 +24,7 @@ class ThinReports::Generator::Pdf::TestFont < MiniTest::Unit::TestCase
   end
   
   def test_setup_fonts_install_eudc_fonts
-    ThinReports.config.generator.pdf.eudc_ttf = ['eudc1.ttf', 'eudc2.ttf']
+    ThinReports.config.generator.pdf.eudc_fonts = ['eudc1.ttf', 'eudc2.ttf']
     setup
     
     assert_includes @doc.internal.font_families.keys, 'EUDC0'
@@ -32,7 +32,7 @@ class ThinReports::Generator::Pdf::TestFont < MiniTest::Unit::TestCase
   end
   
   def test_setup_fonts_install_fallback_fonts_as_eudc
-    ThinReports.config.generator.pdf.eudc_ttf = 'eudc.ttf'
+    ThinReports.config.generator.pdf.eudc_fonts = 'eudc.ttf'
     setup
     
     assert_includes @doc.internal.fallback_fonts, 'EUDC0'

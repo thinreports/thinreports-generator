@@ -3,7 +3,7 @@
 CaseRunner.current :eudc
 
 ThinReports.configure do |config|
-  config.generator.pdf.eudc_ttf = CaseRunner.case_resource('eudc.ttf')
+  config.generator.pdf.eudc_fonts = CaseRunner.case_resource('eudc.ttf')
 end
 
 ThinReports::Report.generate_file(:pdf, CaseRunner.output_file) do
@@ -17,4 +17,4 @@ ThinReports::Report.generate_file(:pdf, CaseRunner.output_file) do
               :eudc_bold_italic => '太字斜体')
 end
 
-ThinReports.config.generator.pdf.eudc_ttf = []
+ThinReports.config.generator.pdf.eudc_fonts = []

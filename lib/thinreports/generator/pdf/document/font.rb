@@ -23,11 +23,11 @@ module ThinReports
         fallback_fonts = []
         
         # Install EUDC fonts.
-        ThinReports.config.generator.pdf.eudc_ttf.each_with_index do |eudc, i|
+        ThinReports.config.generator.pdf.eudc_fonts.each_with_index do |eudc, i|
           eudc_name = "EUDC#{i}"
           install_font_family(eudc_name, eudc)
           fallback_fonts << eudc_name
-        end        
+        end
         
         # Install fall-back font(default font) that IPAMincho.
         install_font_family('DefaultFont', BUILTIN_FONTS['IPAMincho'][:normal])
