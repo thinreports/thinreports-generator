@@ -35,14 +35,18 @@ module ThinReports::TestHelpers
     end
   end
   
-  def create_basic_report(&block)
-    report = ThinReports::Report.new :layout => data_file('basic_layout.tlf')
+  def create_basic_report(file, &block)
+    report = ThinReports::Report.new :layout => data_file(file)
     block.call(report) if block_given?
     report
   end
   
-  def create_basic_layout
-    ThinReports::Layout.new(data_file('basic_layout.tlf'))
+  def create_basic_layout(file)
+    ThinReports::Layout.new(data_file(file))
+  end
+  
+  def create_basic_layout_format(file)
+    ThinReports::Layout::Format.build(data_file(file))
   end
   
   def data_file(filename)

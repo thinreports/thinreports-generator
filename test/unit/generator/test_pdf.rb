@@ -9,7 +9,7 @@ class ThinReports::Generator::TestPdf < MiniTest::Unit::TestCase
   Pdf = ThinReports::Generator::Pdf
   
   def test_new_should_set_title_as_metadata
-    report = create_basic_report {|r| r.start_new_page }
+    report = create_basic_report('basic_layout1.tlf') {|r| r.start_new_page }
     
     flexmock(Pdf::Document).should_receive(:new).
       with(Hash, :Title => 'Basic Layout').once

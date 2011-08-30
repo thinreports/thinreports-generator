@@ -5,14 +5,14 @@ module ThinReports
     
     class Pdf::Configuration
       # @return [false, String]
-      attr_accessor :cache_templates
+      attr_accessor :manage_templates
       
       # @return [Array]
       attr_reader :eudc_ttf
       
       def initialize
-        @cache_templates = false
-        @eudc_ttf        = []
+        @manage_templates = false
+        @eudc_ttf         = []
       end
       
       # @param [String, Array<String>]
@@ -25,6 +25,11 @@ module ThinReports
           end
         end
         @eudc_ttf = ttfs
+      end
+      
+      # @return [Boolean]
+      def manage_templates?
+        @manage_templates
       end
     end
     

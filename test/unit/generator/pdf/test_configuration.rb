@@ -9,13 +9,13 @@ class ThinReports::Generator::Pdf::TestConfiguration < MiniTest::Unit::TestCase
     @config = ThinReports::Generator::Pdf::Configuration.new
   end
   
-  def test_cache_templates_should_return_false_by_default
-    assert_equal @config.cache_templates, false
+  def test_manage_templates_should_return_false_by_default
+    assert_equal @config.manage_templates, false
   end
   
-  def test_cache_templates_can_be_set_string_of_store_dir
-    @config.cache_templates = '/path/to/template/dir'
-    assert_equal @config.cache_templates, '/path/to/template/dir'
+  def test_manage_templates_can_be_set_string_of_store_dir
+    @config.manage_templates = '/path/to/template/dir'
+    assert_equal @config.manage_templates, '/path/to/template/dir'
   end
   
   def test_eudc_ttf_can_only_set_font_of_TTF

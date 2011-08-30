@@ -15,7 +15,6 @@ module ThinReports
         @pdf = Document.new(options, :Title => default_layout.format.report_title)
         
         @drawers = {}
-        @current_format = nil
       end
       
       # @see ThinReports::Generator::Base#generate
@@ -42,12 +41,8 @@ module ThinReports
         return @pdf.add_blank_page if page.blank?
         
         format = page.layout.format
-        # On format change.
-        unless @current_format == format.identifier
-          @pdf.start_new_page(format)
-        else
-          @pdf.start_new_page
-        end
+        @pdf.start_new_page(format)
+        
         drawer(format).draw(page.manager)
       end
       

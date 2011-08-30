@@ -5,6 +5,7 @@ require 'thinreports/generator/pdf/document/parse_color'
 require 'thinreports/generator/pdf/document/graphics'
 require 'thinreports/generator/pdf/document/draw_shape'
 require 'thinreports/generator/pdf/document/parse_svg'
+require 'thinreports/generator/pdf/document/page'
 
 module ThinReports
   module Generator
@@ -16,6 +17,7 @@ module ThinReports
       include Pdf::Graphics
       include Pdf::DrawShape
       include Pdf::ParseSVG
+      include Pdf::Page
       
       # @param options (see ThinReports::Generator::Pdf#initialize)
       # @param [Hash] metadata
@@ -28,8 +30,6 @@ module ThinReports
                       :Creator      => 'ThinReports Generator for Ruby ' +
                                         ThinReports::VERSION}.merge(metadata)
         )
-        @format_stamp_registry = []
-        
         # Setup to Prawn::Document.
         setup_fonts
         setup_custom_graphic_states
@@ -38,38 +38,6 @@ module ThinReports
         if options[:security]
           @pdf.encrypt_document(options[:security])
         end
-      end
-      
-      # @param [ThinReports::Layout::Format] format (nil)
-      def start_new_page(format = nil)
-        options   = {}
-        format_id = format.identifier
-        
-        if format
-          options[:layout] = format.page_orientation.to_sym
-          options[:size]   = if format.user_paper_type?
-            [format.page_width.to_f, format.page_height.to_f]
-          else
-            format.page_paper_type
-          end
-        end
-        
-        pdf.start_new_page(options)
-        
-        # @note
-        #   The best way is to create a template for each layout.
-        #   However, in the latest Prawn library, because of problems handling
-        #   the template that you want supported by future releases.
-        # @see https://github.com/sandal/prawn/issues/199
-        unless format_stamp_registry.include?(format_id)
-          create_format_stamp(format)
-        end
-        # Apply the static shapes of current format.
-        stamp(format_id.to_s)
-      end
-      
-      def add_blank_page
-        pdf.start_new_page(pdf.page_count.zero? ? {:size => 'A4'} : {})
       end
       
       # Delegate to Prawn::Document#render
@@ -122,20 +90,9 @@ module ThinReports
       # @return [Prawn::Document]
       attr_reader :pdf
       
-      # @return [Array<Symbol>]
-      attr_reader :format_stamp_registry
-      
       def finalize
         clean_temp_images
       end
-      
-      # @param [ThinReports::Layout::Format] format
-      def create_format_stamp(format)
-        create_stamp(format.identifier.to_s) do
-          parse_svg(format.layout, '/svg/g')
-        end
-        format_stamp_registry << format.identifier
-      end      
       
       # @param [Array<String, Numeric>] values
       # @return [Numeric, Array<Numeric>, nil]

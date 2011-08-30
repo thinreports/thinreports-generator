@@ -3,7 +3,7 @@
 CaseRunner.current :eudc
 
 ThinReports.configure do |config|
-  config.generator.pdf.eudc_ttf = CaseRunner.case_file('eudc.ttf')
+  config.generator.pdf.eudc_ttf = CaseRunner.case_resource('eudc.ttf')
 end
 
 ThinReports::Report.generate_file(:pdf, CaseRunner.output_file) do

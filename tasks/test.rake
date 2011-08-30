@@ -15,7 +15,6 @@ namespace :test do
       $LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__) + '/..'))
       
       require 'test/case/helper'
-      
       Dir['test/case/*/*.rb'].each {|f| require f }
     end
     
