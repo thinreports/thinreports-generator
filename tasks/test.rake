@@ -9,6 +9,17 @@ namespace :test do
     files.each {|f| require f }
   end
   
+  namespace :bench do
+    Dir['test/benchmark/bench_*.rb'].each do |f|
+      benchname = File.basename(f, '.*').sub(/bench_/, '')
+      
+      desc "Run #{benchname} benchmark"
+      task benchname.to_sym do
+        require File.expand_path(f)
+      end
+    end
+  end
+  
   namespace :case do
     desc 'Run all special test cases [MANAGE_TEMPLATES(false): true/false]'
     task :all do
