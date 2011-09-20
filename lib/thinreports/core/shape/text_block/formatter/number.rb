@@ -3,7 +3,7 @@
 require 'bigdecimal'
 
 module ThinReports
-  module Core::Shape::Tblock
+  module Core::Shape::TextBlock
     
     # @private
     class Formatter::Number < Formatter::Basic

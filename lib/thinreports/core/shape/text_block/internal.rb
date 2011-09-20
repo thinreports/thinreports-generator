@@ -4,8 +4,8 @@ module ThinReports
   module Core::Shape
     
     # @private
-    class Tblock::Internal < Basic::Internal
-      format_delegators :multiple?, :box
+    class TextBlock::Internal < Basic::BlockInternal
+      format_delegators :multiple?
       
       def initialize(*args)
         super(*args)
@@ -19,17 +19,16 @@ module ThinReports
           @reference ||= parent.item(format.ref_id)
           @reference.value
         else
-          states.key?(:value) ? states[:value] : format.value
+          super
         end
       end
-      alias_method :value, :read_value
       
       def write_value(val)
         if format.has_reference?
-          warn 'The set value is not reflected, ' +
+          warn 'The set value was not saved, ' +
                "Because '#{format.id}' refers to '#{format.ref_id}'."
         else
-          states[:value] = val
+          super
         end
       end
       
@@ -56,13 +55,13 @@ module ThinReports
       end
       
       def type_of?(type_name)
-        type_name == :tblock
+        type_name == :tblock || super
       end
       
     private
       
       def formatter
-        @formatter ||= Tblock::Formatter.setup(format)
+        @formatter ||= TextBlock::Formatter.setup(format)
       end
     end
     

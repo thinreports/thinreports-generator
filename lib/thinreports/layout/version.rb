@@ -24,7 +24,7 @@ module ThinReports
       end
       
       # @return [String]
-      def self.required_rules_inspect
+      def self.inspect_required_rules
         '(' + REQUIRED_RULES.join(' and ') + ')'
       end
       

@@ -35,7 +35,7 @@ module ThinReports
             # Check the compatibility of specified layout file.
             unless ThinReports::Layout::Version.compatible?(raw_format['version'])
               info = [filename, raw_format['version'],
-                      ThinReports::Layout::Version.required_rules_inspect]
+                      ThinReports::Layout::Version.inspect_required_rules]
               raise ThinReports::Errors::IncompatibleLayoutFormat.new(*info)
             end
             

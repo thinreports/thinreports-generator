@@ -5,15 +5,18 @@ module ThinReports
     
     # @private
     module Pdf::DrawShape
-      # @param [ThinReports::Core::Shape::Tblock::Internal] shape
+      # @param [ThinReports::Core::Shape::TextBlock::Internal] shape
       def draw_shape_tblock(shape)
         x, y, w, h = shape.box.values_at('x', 'y', 'width', 'height')
         
         content = shape.real_value.to_s
-        unless shape.multiple?
-          content = content.gsub(/\n/, ' ')
+        
+        unless content.empty?
+          unless shape.multiple?
+            content = content.gsub(/\n/, ' ')
+          end
+          text_box(content, x, y, w, h, shape_text_attrs(shape))
         end
-        text_box(content, x, y, w, h, shape_text_attrs(shape))
       end
       
       # @param [ThinReports::Core::Shape::Basic::Internal] shape
@@ -21,6 +24,19 @@ module ThinReports
         x, y, w, h = shape.svg_attrs.values_at('x', 'y', 'width', 'height')
         base64image(extract_base64_string(shape.svg_attrs['xlink:href']),
                     x, y, w, h)
+      end
+      
+      # @param [ThinReports::Core::Shape::ImageBlock::Internal] shape
+      def draw_shape_iblock(shape)
+        x, y, w, h = shape.box.values_at('x', 'y', 'width', 'height')
+        unless shape.src.blank?
+          posx = shape.format.position_x
+          posy = shape.format.position_y
+          
+          image_box(shape.src, x, y, w, h,
+                    :position_x => posx ? posx.to_sym : nil,
+                    :position_y => posy ? posy.to_sym : nil)
+        end
       end
       
       # @param [ThinReports::Core::Shape::Text::Internal] shape
@@ -55,7 +71,7 @@ module ThinReports
     
     private
       
-      # @param [ThinReports::Core::Shape::Text::Internal, ThinReports::Core::Shape::Tblock::Internal]
+      # @param [ThinReports::Core::Shape::Text::Internal, ThinReports::Core::Shape::TextBlock::Internal]
       # @return [Hash]
       def shape_text_attrs(shape)
         format = shape.format

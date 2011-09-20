@@ -13,3 +13,6 @@ end
 require 'thinreports/core/shape/basic/format'
 require 'thinreports/core/shape/basic/internal'
 require 'thinreports/core/shape/basic/interface'
+require 'thinreports/core/shape/basic/block_format'
+require 'thinreports/core/shape/basic/block_internal'
+require 'thinreports/core/shape/basic/block_interface'

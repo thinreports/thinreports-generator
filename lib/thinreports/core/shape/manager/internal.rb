@@ -50,7 +50,7 @@ module ThinReports
         sformat = find_format(id)
         if sformat.display?
           case sformat.type
-          when Tblock::TYPE_NAME
+          when TextBlock::TYPE_NAME
             if sformat.has_reference? || !sformat.value.blank?
               init_item(sformat)
             end

@@ -21,10 +21,10 @@ class ThinReports::Core::Shape::Manager::TestTarget < MiniTest::Unit::TestCase
   end
   
   def setup
-    tblock1_format = Shape::Tblock::Format.new('id'   => 'tblock1',
-                                               'type' => 's-tblock')
-    tblock2_format = Shape::Tblock::Format.new('id'   => 'tblock2',
-                                               'type' => 's-tblock')
+    tblock1_format = Shape::TextBlock::Format.new('id'   => 'tblock1',
+                                                  'type' => 's-tblock')
+    tblock2_format = Shape::TextBlock::Format.new('id'   => 'tblock2',
+                                                  'type' => 's-tblock')
     list_format    = Shape::List::Format.new('id' => 'list',
                                              'type' => 's-list')
     
@@ -37,11 +37,11 @@ class ThinReports::Core::Shape::Manager::TestTarget < MiniTest::Unit::TestCase
   end
   
   def test_item_with_Symbol_id
-    assert_instance_of Shape::Tblock::Interface, @manager.item(:tblock1)
+    assert_instance_of Shape::TextBlock::Interface, @manager.item(:tblock1)
   end
   
   def test_item_with_String_id
-    assert_instance_of Shape::Tblock::Interface, @manager.item('tblock1')
+    assert_instance_of Shape::TextBlock::Interface, @manager.item('tblock1')
   end
   
   def test_item_raise_error_when_given_the_id_of_list
@@ -96,7 +96,14 @@ class ThinReports::Core::Shape::Manager::TestTarget < MiniTest::Unit::TestCase
                     :tblock2 => 2000
     
     assert_equal @manager.item(:tblock1).value, 1000
-    assert_equal @manager.item(:tblock2).value, 2000
+  end
+  
+  def test_values_should_properly_set_to_ImageBlock
+    @format.shapes[:image] = Shape::ImageBlock::Format.new({'id'   => 'image',
+                                                            'type' => 's-iblock'})
+    @manager.values(:image => '/path/to/image.png')
+    
+    assert_equal @manager.item(:image).src, '/path/to/image.png'
   end
   
   def test_item_exists?

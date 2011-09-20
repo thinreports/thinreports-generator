@@ -2,11 +2,11 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Core::Shape::Tblock::Formatter::TestPadding < MiniTest::Unit::TestCase
+class ThinReports::Core::Shape::TextBlock::Formatter::TestPadding < MiniTest::Unit::TestCase
   include ThinReports::TestHelpers
   
   # Alias
-  Formatter = ThinReports::Core::Shape::Tblock::Formatter::Padding
+  Formatter = ThinReports::Core::Shape::TextBlock::Formatter::Padding
   
   def init_formatter(expect_formats)
     format = flexmock({:format_base           => nil,

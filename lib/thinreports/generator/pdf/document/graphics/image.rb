@@ -24,6 +24,23 @@ module ThinReports
         image(image.path, x, y, w, h)
       end
       
+      # @param file (see Prawn#image)
+      # @param [Numeric, Strng] x
+      # @param [Numeric, Strng] y
+      # @param [Numeric, Strng] w
+      # @param [Numeric, Strng] h
+      # @param [Hash] options
+      # @option options [:left, :center, :right] :position_x (:left)
+      # @option options [:top, :center, :bottom] :position_y (:top)
+      def image_box(file, x, y, w, h, options = {})
+        w, h = s2f(w, h)
+        pdf.bounding_box(pos(x, y), :width => w, :height => h) do
+          pdf.image(file, :position  => options[:position_x] || :left,
+                          :vposition => options[:position_y] || :top,
+                          :auto_fit  => [w, h])
+        end
+      end
+      
     private
       
       def clean_temp_images

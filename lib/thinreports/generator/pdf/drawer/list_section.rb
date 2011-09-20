@@ -40,6 +40,11 @@ module ThinReports
       def draw_tblock_shape(shape)
         @pdf.translate(*@draw_at) { super }
       end
+      
+      # @see ThinReports::Generator::Pdf::Drawer::Page#draw_iblock_shape      
+      def draw_iblock_shape(shape)
+        @pdf.translate(*@draw_at) { super }
+      end
     end
     
   end

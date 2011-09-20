@@ -2,11 +2,11 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Core::Shape::Tblock::Formatter::TestDatetime < MiniTest::Unit::TestCase
+class ThinReports::Core::Shape::TextBlock::Formatter::TestDatetime < MiniTest::Unit::TestCase
   include ThinReports::TestHelpers
   
   # Alias
-  Formatter = ThinReports::Core::Shape::Tblock::Formatter::Datetime
+  Formatter = ThinReports::Core::Shape::TextBlock::Formatter::Datetime
   
   def setup
     @datetime_format = '%Y/%m/%d %H:%M:%S'

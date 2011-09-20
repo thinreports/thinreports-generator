@@ -2,11 +2,11 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Core::Shape::Tblock::Formatter::TestBasic < MiniTest::Unit::TestCase
+class ThinReports::Core::Shape::TextBlock::Formatter::TestBasic < MiniTest::Unit::TestCase
   include ThinReports::TestHelpers
   
   # Alias
-  Formatter = ThinReports::Core::Shape::Tblock::Formatter::Basic
+  Formatter = ThinReports::Core::Shape::TextBlock::Formatter::Basic
   
   def test_apply_simple_format
     format = flexmock(:format_base => 'Hello {value}!')

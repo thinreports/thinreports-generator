@@ -2,11 +2,11 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Core::Shape::Tblock::TestFormatter < MiniTest::Unit::TestCase
+class ThinReports::Core::Shape::TextBlock::TestFormatter < MiniTest::Unit::TestCase
   include ThinReports::TestHelpers
   
   # Alias
-  Formatter = ThinReports::Core::Shape::Tblock::Formatter
+  Formatter = ThinReports::Core::Shape::TextBlock::Formatter
   
   def test_initialize_formatter_by_type
     assert_instance_of Formatter::Basic,

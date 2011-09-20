@@ -2,20 +2,19 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Core::Shape::Tblock::TestInternal < MiniTest::Unit::TestCase
+class ThinReports::Core::Shape::TextBlock::TestInternal < MiniTest::Unit::TestCase
   include ThinReports::TestHelpers
   
-  Tblock = ThinReports::Core::Shape::Tblock
+  TextBlock = ThinReports::Core::Shape::TextBlock
   
   def test_read_value_return_the_format_value
     format = flexmock('format')
-    format.should_receive(:value => 'format value').times(2)
+    format.should_receive(:value => 'format value').once
     format.should_receive(:has_reference? => false)
     
     internal = init_internal(format)
     
     assert_equal internal.read_value, 'format value'
-    assert_equal internal.value, 'format value'
   end
   
   def test_read_value_return_the_value_of_referenced_shape
@@ -26,7 +25,6 @@ class ThinReports::Core::Shape::Tblock::TestInternal < MiniTest::Unit::TestCase
     internal = init_internal(format)
     
     assert_equal internal.read_value, 'referenced value'
-    assert_equal internal.value, 'referenced value'
   end
   
   def test_read_value_return_the_value_stored_in_states
@@ -37,7 +35,6 @@ class ThinReports::Core::Shape::Tblock::TestInternal < MiniTest::Unit::TestCase
     internal.states[:value] = 'any value'
     
     assert_equal internal.read_value, 'any value'
-    assert_equal internal.value, 'any value'
   end
   
   def test_write_value
@@ -47,7 +44,7 @@ class ThinReports::Core::Shape::Tblock::TestInternal < MiniTest::Unit::TestCase
     internal = init_internal(format)
     internal.write_value('value written')
     
-    assert_equal internal.value, 'value written'
+    assert_equal internal.read_value, 'value written'
   end
   
   def test_write_value_show_warnings_when_has_reference
@@ -58,7 +55,7 @@ class ThinReports::Core::Shape::Tblock::TestInternal < MiniTest::Unit::TestCase
     out, err = capture_io do
       init_internal(format).write_value('value written')
     end
-    assert_equal err.chomp, 'The set value is not reflected, ' +
+    assert_equal err.chomp, 'The set value was not saved, ' +
                             "Because 'id' refers to 'ref id'."
   end
   
@@ -126,8 +123,12 @@ class ThinReports::Core::Shape::Tblock::TestInternal < MiniTest::Unit::TestCase
     assert_equal internal.format_enabled?, false
   end
   
-  def test_type_of?
+  def test_type_of_asker_should_return_true_when_tblock_value_is_given
     assert_equal init_internal(flexmock('format')).type_of?(:tblock), true
+  end
+  
+  def test_type_of_asker_should_return_true_when_block_value_is_given
+    assert_equal init_internal(flexmock('format')).type_of?(:block), true
   end
   
   def init_internal(format)
@@ -139,9 +140,9 @@ class ThinReports::Core::Shape::Tblock::TestInternal < MiniTest::Unit::TestCase
     formatter.should_receive(:apply).
         and_return('formatted value')
     
-    flexmock(Tblock::Internal).new_instances.should_receive(:formatter).
+    flexmock(TextBlock::Internal).new_instances.should_receive(:formatter).
         and_return(formatter)
     
-    Tblock::Internal.new(parent, format)
+    TextBlock::Internal.new(parent, format)
   end
 end

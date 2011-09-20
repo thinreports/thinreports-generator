@@ -41,12 +41,12 @@ class ThinReports::Layout::TestVersion < MiniTest::Unit::TestCase
     end
   end
   
-  def test_required_rules_inspect
+  def test_inspect_required_rules
     required_rules('== 0.6.0.pre3') do
-      assert_equal Version.required_rules_inspect, '(== 0.6.0.pre3)'
+      assert_equal Version.inspect_required_rules, '(== 0.6.0.pre3)'
     end
     required_rules('> 0.6.0', '< 0.7.0') do
-      assert_equal Version.required_rules_inspect, '(> 0.6.0 and < 0.7.0)'
+      assert_equal Version.inspect_required_rules, '(> 0.6.0 and < 0.7.0)'
     end
   end
   

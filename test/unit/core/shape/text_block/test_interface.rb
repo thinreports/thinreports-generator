@@ -2,13 +2,13 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Core::Shape::Tblock::TestInterface < MiniTest::Unit::TestCase
+class ThinReports::Core::Shape::TextBlock::TestInterface < MiniTest::Unit::TestCase
   include ThinReports::TestHelpers
   
-  Tblock = ThinReports::Core::Shape::Tblock
+  TextBlock = ThinReports::Core::Shape::TextBlock
   
   def setup
-    @interface = Tblock::Interface.new(flexmock('parent'), flexmock('format'))
+    @interface = TextBlock::Interface.new(flexmock('parent'), flexmock('format'))
   end
   
   def test_value_work_as_getter_when_receive_no_arguments
@@ -22,12 +22,6 @@ class ThinReports::Core::Shape::Tblock::TestInterface < MiniTest::Unit::TestCase
     flexmock(@interface.internal).should_receive(:write_value).once
     
     @interface.value('any value')
-  end
-  
-  def test_value_raise_error_when_receive_more_than_two
-    assert_raises ArgumentError do
-      @interface.value('arg1', 'arg2')
-    end
   end
   
   def test_set

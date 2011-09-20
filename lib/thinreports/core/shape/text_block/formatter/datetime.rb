@@ -1,7 +1,7 @@
 # coding: utf-8
 
 module ThinReports
-  module Core::Shape::Tblock
+  module Core::Shape::TextBlock
     
     # @private
     class Formatter::Datetime < Formatter::Basic

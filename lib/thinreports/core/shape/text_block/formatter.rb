@@ -1,12 +1,12 @@
 # coding: utf-8
 
 module ThinReports
-  module Core::Shape::Tblock
+  module Core::Shape::TextBlock
     
     # @private
     module Formatter
-      # @param [ThinReports::Core::Shape::Tblock::Format] format
-      # @return [ThinReports::Core::Shape::Tblock::Formatter::Base]
+      # @param [ThinReports::Core::Shape::TextBlock::Format] format
+      # @return [ThinReports::Core::Shape::TextBlock::Formatter::Base]
       def self.setup(format)
         klass = if format.format_type.blank?
           Basic
@@ -26,7 +26,7 @@ module ThinReports
   end
 end
 
-require 'thinreports/core/shape/tblock/formatter/basic'
-require 'thinreports/core/shape/tblock/formatter/datetime'
-require 'thinreports/core/shape/tblock/formatter/padding'
-require 'thinreports/core/shape/tblock/formatter/number'
+require 'thinreports/core/shape/text_block/formatter/basic'
+require 'thinreports/core/shape/text_block/formatter/datetime'
+require 'thinreports/core/shape/text_block/formatter/padding'
+require 'thinreports/core/shape/text_block/formatter/number'

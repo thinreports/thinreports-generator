@@ -109,7 +109,7 @@ class ThinReports::Layout::TestFormat < MiniTest::Unit::TestCase
   end
   
   def setup
-    flexmock(Shape::Tblock::Format).
+    flexmock(Shape::TextBlock::Format).
       should_receive(:build).and_return {|f| flexmock(:id => f['id']) }
     flexmock(Shape::Basic::Format).
       should_receive(:build).and_return {|f| flexmock(:id => f['id']) }

@@ -29,6 +29,8 @@ module ThinReports
           draw_tblock_shape(shape)
         when shape.type_of?(:list)
           draw_list_shape(shape)
+        when shape.type_of?(:iblock)
+          draw_iblock_shape(shape)
         else
           id = shape_stamp_id(shape)
           unless @stamps.include?(id)
@@ -48,6 +50,11 @@ module ThinReports
       # @see #draw_shape
       def draw_tblock_shape(shape)
         @pdf.draw_shape_tblock(shape)
+      end
+      
+      # @see #draw_shape
+      def draw_iblock_shape(shape)
+        @pdf.draw_shape_iblock(shape)
       end
       
       # @param [ThinReports::Core::Shape::Base::Internal] shape

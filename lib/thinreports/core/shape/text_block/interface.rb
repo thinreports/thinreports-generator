@@ -3,7 +3,7 @@
 module ThinReports
   module Core::Shape
     
-    class Tblock::Interface < Basic::Interface
+    class TextBlock::Interface < Basic::BlockInterface
       internal_delegators :format_enabled?
       
       # @param [Boolean] enabled
@@ -11,25 +11,6 @@ module ThinReports
       def format_enabled(enabled)
         internal.format_enabled(enabled)
         self
-      end
-      
-      # @overload value(val)
-      #   Set a val
-      #   @param [Object] val
-      #   @return [self]
-      # @overload value
-      #   Return the value
-      #   @return [Object]
-      def value(*args)
-        case args.size
-        when 0
-          internal.read_value
-        when 1
-          internal.write_value(args.first)
-          self
-        else
-          raise ArgumentError, '#value can take 0 or 1 argument.'
-        end
       end
       
       # @param [Object] val
@@ -44,7 +25,7 @@ module ThinReports
       
       # @see ThinReports::Core::Shape::Base::Interface#init_internal
       def init_internal(parent, format)
-        Tblock::Internal.new(parent, format)
+        TextBlock::Internal.new(parent, format)
       end
     end
     
