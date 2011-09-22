@@ -4,8 +4,8 @@ module ThinReports
   module Generator
     
     # @private
-    class Pdf::Drawer::Page < Pdf::Drawer::Base
-      # @param see Pdf::Drawer::Base#initialize)
+    class PDF::Drawer::Page < PDF::Drawer::Base
+      # @param see PDF::Drawer::Base#initialize)
       def initialize(pdf, format)
         super
         @lists = {}
@@ -43,7 +43,7 @@ module ThinReports
       
       # @see #draw_shape
       def draw_list_shape(shape)
-        drawer = @lists[shape.id] ||= Pdf::Drawer::List.new(@pdf, shape.format)
+        drawer = @lists[shape.id] ||= PDF::Drawer::List.new(@pdf, shape.format)
         drawer.draw(shape)
       end
       

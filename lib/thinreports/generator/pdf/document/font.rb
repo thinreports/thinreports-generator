@@ -4,7 +4,7 @@ module ThinReports
   module Generator
     
     # @private
-    module Pdf::Font
+    module PDF::Font
       FONT_STORE = File.join(ThinReports::ROOTDIR, 'resources', 'fonts')
       
       BUILTIN_FONTS = {

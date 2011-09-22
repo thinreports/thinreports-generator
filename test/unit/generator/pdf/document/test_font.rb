@@ -2,14 +2,14 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Generator::Pdf::TestFont < MiniTest::Unit::TestCase
+class ThinReports::Generator::PDF::TestFont < MiniTest::Unit::TestCase
   include ThinReports::TestHelpers
   
   # Alias
-  Font = ThinReports::Generator::Pdf::Font
+  Font = ThinReports::Generator::PDF::Font
   
   def setup
-    @doc = ThinReports::Generator::Pdf::Document.new
+    @doc = ThinReports::Generator::PDF::Document.new
   end
   
   def test_setup_fonts_install_builtin_fonts

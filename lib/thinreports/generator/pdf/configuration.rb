@@ -3,7 +3,7 @@
 module ThinReports
   module Generator
     
-    class Pdf::Configuration
+    class PDF::Configuration
       # @return [Array]
       attr_reader :eudc_fonts
       

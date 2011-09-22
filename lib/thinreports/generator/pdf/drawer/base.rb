@@ -5,8 +5,8 @@ module ThinReports
     
     # @abstract
     # @private
-    class Pdf::Drawer::Base
-      # @param [ThinReports::Generator::Pdf::Document] pdf
+    class PDF::Drawer::Base
+      # @param [ThinReports::Generator::PDF::Document] pdf
       # @param [ThinReports::Core::Shape::Manager::Format] format
       def initialize(pdf, format)
         @pdf     = pdf

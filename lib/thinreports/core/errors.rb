@@ -40,6 +40,9 @@ module ThinReports
     end
     
     class UnknownGeneratorType < Basic
+      def initialize(type)
+        super("The specified generator type, '#{type}', was not found.")
+      end
     end
     
     class NoConfigurationFound < Basic

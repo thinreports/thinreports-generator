@@ -2,11 +2,11 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Generator::Pdf::TestConfiguration < MiniTest::Unit::TestCase
+class ThinReports::Generator::PDF::TestConfiguration < MiniTest::Unit::TestCase
   include ThinReports::TestHelpers
   
   def setup
-    @config = ThinReports::Generator::Pdf::Configuration.new
+    @config = ThinReports::Generator::PDF::Configuration.new
   end
   
   def test_eudc_fonts_can_only_set_font_of_TTF

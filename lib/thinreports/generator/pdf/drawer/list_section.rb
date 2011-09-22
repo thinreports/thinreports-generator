@@ -4,8 +4,8 @@ module ThinReports
   module Generator
     
     # @private
-    class Pdf::Drawer::ListSection < Pdf::Drawer::Page
-      # @param pdf (see Pdf::Drawer::Page#initialize)
+    class PDF::Drawer::ListSection < PDF::Drawer::Page
+      # @param pdf (see PDF::Drawer::Page#initialize)
       # @param section [ThinReports::Core::Shape::List::SectionInternal] section
       def initialize(pdf, section)
         super(pdf, section.format)
@@ -36,12 +36,12 @@ module ThinReports
         pdf_stamp(id)
       end
       
-      # @see ThinReports::Generator::Pdf::Drawer::Page#draw_tblock_shape      
+      # @see ThinReports::Generator::PDF::Drawer::Page#draw_tblock_shape      
       def draw_tblock_shape(shape)
         @pdf.translate(*@draw_at) { super }
       end
       
-      # @see ThinReports::Generator::Pdf::Drawer::Page#draw_iblock_shape      
+      # @see ThinReports::Generator::PDF::Drawer::Page#draw_iblock_shape      
       def draw_iblock_shape(shape)
         @pdf.translate(*@draw_at) { super }
       end

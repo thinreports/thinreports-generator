@@ -4,7 +4,7 @@ module ThinReports
   module Generator
     
     # @private
-    module Pdf::Page
+    module PDF::Page
       
       # @param [ThinReports::Layout::Format] format
       def start_new_page(format)

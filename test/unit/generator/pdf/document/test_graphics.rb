@@ -2,12 +2,12 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Generator::Pdf::TestGraphics < MiniTest::Unit::TestCase
+class ThinReports::Generator::PDF::TestGraphics < MiniTest::Unit::TestCase
   include ThinReports::TestHelpers
   
   class TestGraphics
     attr_accessor :pdf
-    include ThinReports::Generator::Pdf::Graphics
+    include ThinReports::Generator::PDF::Graphics
   end
   
   def setup

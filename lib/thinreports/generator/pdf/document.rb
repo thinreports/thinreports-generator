@@ -11,15 +11,15 @@ module ThinReports
   module Generator
     
     # @private
-    class Pdf::Document
-      include Pdf::Font
-      include Pdf::ParseColor
-      include Pdf::Graphics
-      include Pdf::DrawShape
-      include Pdf::ParseSVG
-      include Pdf::Page
+    class PDF::Document
+      include PDF::Font
+      include PDF::ParseColor
+      include PDF::Graphics
+      include PDF::DrawShape
+      include PDF::ParseSVG
+      include PDF::Page
       
-      # @param options (see ThinReports::Generator::Pdf#initialize)
+      # @param options (see ThinReports::Generator::PDF#initialize)
       # @param [Hash] metadata
       # @option metadata [String] :Title
       def initialize(options = {}, metadata = {})

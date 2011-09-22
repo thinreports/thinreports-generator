@@ -4,8 +4,8 @@ module ThinReports
   module Generator
     
     # @private
-    class Pdf::Drawer::List < Pdf::Drawer::Base
-      # @param (see Pdf::Drawer::Base#initialize)
+    class PDF::Drawer::List < PDF::Drawer::Base
+      # @param (see PDF::Drawer::Base#initialize)
       def initialize(pdf, format)
         super
         @sections = {}
@@ -28,10 +28,10 @@ module ThinReports
       end
       
       # @param [ThinReports::Core::Shape::List::SectionInternal] section
-      # @return [ThinReports::Generator::Pdf::Drawer::ListSection]
+      # @return [ThinReports::Generator::PDF::Drawer::ListSection]
       def drawer(section)
         @sections[section.section_name] ||=
-          Pdf::Drawer::ListSection.new(@pdf, section)
+          PDF::Drawer::ListSection.new(@pdf, section)
       end
     end
     

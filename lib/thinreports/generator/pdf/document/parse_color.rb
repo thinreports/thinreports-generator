@@ -4,7 +4,7 @@ module ThinReports
   module Generator
     
     # @private
-    module Pdf::ParseColor
+    module PDF::ParseColor
       # @param [String] color
       # @return [String]
       def parse_color(color)

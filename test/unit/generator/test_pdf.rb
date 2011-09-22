@@ -2,18 +2,18 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Generator::TestPdf < MiniTest::Unit::TestCase
+class ThinReports::Generator::TestPDF < MiniTest::Unit::TestCase
   include ThinReports::TestHelpers
   
   # Alias
-  Pdf = ThinReports::Generator::Pdf
+  PDF = ThinReports::Generator::PDF
   
   def test_new_should_set_title_as_metadata
     report = create_basic_report('basic_layout1.tlf') {|r| r.start_new_page }
     
-    flexmock(Pdf::Document).should_receive(:new).
+    flexmock(PDF::Document).should_receive(:new).
       with(Hash, :Title => 'Basic Layout').once
     
-    Pdf.new(report, {})
+    PDF.new(report, {})
   end
 end

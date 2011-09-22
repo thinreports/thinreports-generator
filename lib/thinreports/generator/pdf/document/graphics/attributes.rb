@@ -3,7 +3,7 @@
 module ThinReports
   module Generator
     
-    module Pdf::Graphics
+    module PDF::Graphics
       # @param [Hash] svg_attrs
       # @yield [attrs]
       # @yieldparam [Hash] attrs
@@ -36,9 +36,17 @@ module ThinReports
                  :color  => svg_attrs['fill'],
                  :align  => text_align(svg_attrs['text-anchor']),
                  :styles => font_styles(svg_attrs)}
-        # Letter Spacing.
-        if space = svg_attrs['letter-spacing']
-          attrs[:letter_spacing] = space unless space == 'normal'
+        
+        # The Letter Spacing Property.
+        # 
+        # When the version of Layout is
+        #   smaller then 0.6.0: 
+        #     Use letter-spacing attribute (normal is none).
+        #   0.6.0 or more:
+        #     Use kerning attribute (auto is none).
+        # 
+        if space = text_letter_spacing(svg_attrs['kerning'] || svg_attrs['letter-spacing'])
+          attrs[:letter_spacing] = space
         end
         block.call(attrs) if block_given?
         attrs
@@ -57,6 +65,12 @@ module ThinReports
           styles << :strikethrough if deco.include?('line-through')
         end
         styles
+      end
+      
+      # @param [String] space
+      # @return [String, nil]
+      def text_letter_spacing(space)
+        %w( normal auto ).include?(space) ? nil : space
       end
       
       # @param [String] svg_align

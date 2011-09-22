@@ -4,7 +4,7 @@ module ThinReports
   module Generator
     
     # @private
-    module Pdf::Drawer
+    module PDF::Drawer
     end
     
   end

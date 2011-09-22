@@ -8,7 +8,7 @@ module ThinReports
     # @param options (see ThinReports::Generator::Base#initialize)
     def self.new(type, report, options = {})
       unless generator = registry[type]
-        raise ThinReports::Errors::UnknownGeneratorType
+        raise ThinReports::Errors::UnknownGeneratorType.new(type)
       end
       generator.new(report, options)
     end
@@ -27,5 +27,4 @@ end
 
 require 'thinreports/generator/configuration'
 require 'thinreports/generator/base'
-require 'thinreports/generator/pxd'
 require 'thinreports/generator/pdf'

@@ -6,7 +6,7 @@ require 'base64'
 module ThinReports
   module Generator
     
-    module Pdf::Graphics
+    module PDF::Graphics
       # @param [String] filename
       # @param [Numeric, Strng] x
       # @param [Numeric, Strng] y

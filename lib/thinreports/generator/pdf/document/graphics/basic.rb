@@ -3,7 +3,7 @@
 module ThinReports
   module Generator
     
-    module Pdf::Graphics
+    module PDF::Graphics
       # @param [Numeric, String] x1
       # @param [Numeric, String] y1
       # @param [Numeric, String] x2

@@ -12,176 +12,230 @@ class ThinReports::Report::TestBase < MiniTest::Unit::TestCase
     @report = Report::Base.new
   end
   
-  def test_initialize_with_options
-    flexmock(Report::Internal).
-      should_receive(:new).with(Report::Base, {:layout => 'layout.tlf'}).
-      and_return(flexmock('report_internal')).once
-    
-    report = Report::Base.new(:layout => 'layout.tlf')
-    assert_equal report.internal.flexmock_name, 'report_internal'
+  def test_initialize_should_register_layout_as_default_when_layout_is_specified_as_the_option
+    report = Report::Base.new :layout => data_file('basic_layout1.tlf')
+    assert_equal report.default_layout.filename, data_file('basic_layout1.tlf')
   end
   
-  def test_use_layout
-    flexmock(@report.internal).
-      should_receive(:register_layout).with('layout.tlf', {:default => true}).
-      and_return(flexmock('layout_config')).once
-    
-    assert_equal @report.use_layout('layout.tlf', :default => true).flexmock_name,
-                 'layout_config'
+  def test_initialize_should_initialize_new_Report_without_default_layout
+    assert_nil @report.default_layout
   end
   
-  def test_start_new_page
-    layout = flexmock('layout')
-    layout.should_receive(:init_new_page).once
+  def test_use_layout_should_register_default_layout_when_default_property_is_omitted
+    @report.use_layout(data_file('basic_layout1.tlf'))
     
-    flexmock(@report.internal).
-      should_receive(:load_layout).and_return(layout).once.
-      should_receive(:add_page).and_return(flexmock('new_page')).once
-    
-    assert_equal @report.start_new_page.flexmock_name, 'new_page'
+    assert_equal @report.default_layout.filename, data_file('basic_layout1.tlf')
   end
   
-  def test_start_new_page_raise_when_no_layout_registered_yet
+  def test_use_layout_should_register_default_layout_when_default_property_is_true
+    @report.use_layout(data_file('basic_layout2.tlf'), :default => true)
+    
+    assert_equal @report.default_layout.filename, data_file('basic_layout2.tlf')
+  end
+  
+  def test_start_new_page_should_properly_create_a_new_Page_and_return
+    @report.use_layout(data_file('basic_layout1'))
+    
+    assert_instance_of ThinReports::Core::Page, @report.start_new_page
+  end
+  
+  def test_start_new_page_should_raise_when_the_layout_has_not_been_registered_yet
     assert_raises ThinReports::Errors::NoRegisteredLayoutFound do
       @report.start_new_page(:layout => :unknown)
     end
   end
   
-  def test_add_blank_page
-    blank_page = flexmock('blank_page')
+  def test_start_new_page_should_create_a_new_page_using_a_default_layout
+    @report.use_layout(data_file('basic_layout1.tlf'), :default => true)
     
-    flexmock(ThinReports::Core::BlankPage).
-      should_receive(:new).and_return(blank_page)
-    
-    flexmock(@report.internal).
-      should_receive(:add_page).with(blank_page)
-    
-    @report.add_blank_page
+    assert_equal @report.start_new_page.layout.filename, data_file('basic_layout1.tlf')
   end
   
-  def test_layout_with_nil_return_the_default_layout
-    flexmock(@report.internal).
-      should_receive(:default_layout).and_return(flexmock('default_layout'))
+  def test_start_new_page_should_create_a_new_page_using_a_layout_with_specified_id
+    @report.use_layout(data_file('basic_layout1.tlf'), :id => :foo)
     
-    assert_equal @report.layout.flexmock_name, 'default_layout'
+    assert_equal @report.start_new_page(:layout => :foo).layout.filename,
+                 data_file('basic_layout1.tlf')
   end
   
-  def test_layout_with_id_raise_when_no_layout_found
+  def test_start_new_page_should_create_a_new_page_using_a_specified_layoutfile
+    new_page = @report.start_new_page(:layout => data_file('basic_layout1.tlf'))
+    assert_equal new_page.layout.filename, data_file('basic_layout1.tlf')
+  end
+  
+  def test_add_blank_page_should_properly_create_a_new_blank_page
+    @report.use_layout(data_file('basic_layout1'))
+    
+    assert_instance_of ThinReports::Core::BlankPage, @report.add_blank_page
+  end
+  
+  def test_layout_should_return_the_default_layout_with_no_arguments
+    @report.use_layout(data_file('basic_layout1.tlf'), :default => true)
+    
+    assert_equal @report.layout.filename, data_file('basic_layout1.tlf')
+  end
+  
+  def test_layout_should_raise_when_the_specified_layout_is_not_found
     assert_raises ThinReports::Errors::UnknownLayoutId do
-      @report.layout(:unknown)
+      @report.layout(:unknown_layout_id)
     end
   end
   
-  def test_generate
-    setup_generator do |g|
-      g.should_receive(:generate).and_return('output').once
-    end
-    assert_equal @report.generate(:pdf, {:option => :value}), 'output'
-  end
-  
-  def test_generate_file
-    setup_generator do |g|
-      g.should_receive(:generate_file).with(String).once
-    end
-    @report.generate_file(:pdf, 'output.pdf', {:option => :value})
-  end
-  
-  def test_events
-    flexmock(@report.internal).
-      should_receive(:events).and_return(flexmock('report_events')).once
+  def test_layout_should_return_the_layout_with_specified_id
+    @report.use_layout(data_file('basic_layout2.tlf'), :id => :foo)
     
-    assert_equal @report.events.flexmock_name, 'report_events'
+    assert_equal @report.layout(:foo).filename, data_file('basic_layout2.tlf')
   end
   
-  def test_page
-    flexmock(@report.internal).
-      should_receive(:page).and_return(flexmock('current_page')).once
+  def test_generate_should_properly_initialize_Generator_and_call_generate_method_when_type_is_specified
+    flexmock(ThinReports::Generator).
+      should_receive(:new).
+      with(:pdf, @report, {:option => :value}).
+      and_return(flexmock(:generate => 'Success')).once
     
-    assert_equal @report.page.flexmock_name, 'current_page'
+    assert_equal @report.generate(:pdf, :option => :value), 'Success'
   end
   
-  def test_page_count
-    assert_equal @report.page_count, 0
+  def test_generate_should_properly_initialize_Generator_and_call_generate_method_when_type_is_omitted
+    flexmock(ThinReports::Generator).
+      should_receive(:new).
+      with(:pdf, @report, {:option => :value}).
+      and_return(flexmock(:generate => 'Success')).once
+    
+    assert_equal @report.generate(:option => :value), 'Success'
   end
   
-  def test_finalize
+  def test_generate_file_should_properly_initialize_Generator_and_call_generate_file_method_when_type_is_specified
+    generator = flexmock('generator')
+    generator.should_receive(:generate_file).with('output.pdf').once
+    
+    flexmock(ThinReports::Generator).
+      should_receive(:new).
+      with(:pdf, @report, {}).
+      and_return(generator).once
+    
+    @report.generate_file(:pdf, 'output.pdf')
+  end
+  
+  def test_generate_file_should_properly_initialize_Generator_and_call_generate_file_method_when_type_is_omitted
+    generator = flexmock('generator')
+    generator.should_receive(:generate_file).with('output.pdf').once
+    
+    flexmock(ThinReports::Generator).
+      should_receive(:new).
+      with(:pdf, @report, {:option => :value}).
+      and_return(generator).once
+    
+    @report.generate_file('output.pdf', :option => :value)
+  end
+  
+  def test_events_should_return_Report_Events
+    assert_instance_of ThinReports::Report::Events, @report.events
+  end
+  
+  def test_page_should_return_the_current_page
+    @report.use_layout(data_file('basic_layout1.tlf'))
+    @report.start_new_page
+    
+    assert_instance_of ThinReports::Core::Page, @report.page
+  end
+  
+  def test_page_count_should_return_total_page_count
+    @report.use_layout(data_file('basic_layout1.tlf'))
+    2.times { @report.start_new_page }
+    
+    assert_equal @report.page_count, 2
+  end
+  
+  def test_finalize_should_finalize_report
     @report.finalize
     assert_equal @report.finalized?, true
   end
   
-  def test_Base_create
+  def test_finalized_asker_should_return_false_when_report_has_not_been_finalized_yet
+    assert_equal @report.finalized?, false
+  end
+  
+  def test_finalized_asker_should_return_true_when_report_is_already_finalized
+    @report.finalize
+    assert_equal @report.finalized?, true
+  end
+  
+  def test_Base_create_should_finalize_report
     report = Report::Base.create do |r|
       assert_instance_of Report::Base, r
     end
     assert_equal report.finalized?, true
   end
   
-  def test_Base_create_raise_when_no_block_given
+  def test_Base_create_should_raise_when_no_block_given
     assert_raises ArgumentError do
       Report::Base.create
     end
   end
   
-  def test_Base_generate
+  def test_Base_generate_should_properly_generate_when_type_is_specified
     flexmock(Report::Base).new_instances.
-      should_receive(:generate).with(:pdf, Hash).once
+      should_receive(:generate).
+      with(:pdf, :option => :value).once
     
     flexmock(Report::Base).
-      should_receive(:create).with(Hash, Proc).
+      should_receive(:create).
+      with({:layout => 'layout.tlf'}, Proc).
       and_return(Report::Base.new).once
     
     Report::Base.generate(:pdf, :report    => {:layout => 'layout.tlf'},
                                 :generator => {:option => :value}) {}
   end
   
-  def test_Base_generate_raise_when_no_block_given
+  def test_Base_generate_should_properly_generate_when_type_is_omitted
+    flexmock(Report::Base).new_instances.
+      should_receive(:generate).
+      with({}).once
+    
+    flexmock(Report::Base).
+      should_receive(:create).
+      with({}, Proc).
+      and_return(Report::Base.new).once
+    
+    Report::Base.generate {}
+  end
+  
+  def test_Base_generate_file_should_properly_generate_file_when_type_is_specified
+    flexmock(Report::Base).new_instances.
+      should_receive(:generate_file).
+      with(:pdf, 'output.pdf', {}).once
+    
+    flexmock(Report::Base).
+      should_receive(:create).
+      with({:layout => 'layout.tlf'}, Proc).
+      and_return(Report::Base.new).once
+    
+    Report::Base.generate_file(:pdf, 'output.pdf', :report => {:layout => 'layout.tlf'}) {}
+  end
+  
+  def test_Base_generate_file_should_properly_generate_file_when_type_is_omitted
+    flexmock(Report::Base).new_instances.
+      should_receive(:generate_file).
+      with('output.pdf', :option => :value).once
+      
+    flexmock(Report::Base).
+      should_receive(:create).
+      with({}, Proc).
+      and_return(Report::Base.new).once
+    
+    Report::Base.generate_file('output.pdf', :generator => {:option => :value}) {}
+  end
+  
+  def test_Base_generate_should_raise_when_no_block_given
     assert_raises ArgumentError do
       Report::Base.generate(:pdf)
     end
   end
   
-  def test_Base_generate_file
-    flexmock(Report::Base).new_instances.
-      should_receive(:generate_file).with(:pdf, String, Hash).once
-    
-    flexmock(Report::Base).
-      should_receive(:create).with(Hash, Proc).
-      and_return(Report::Base.new).once
-    
-    Report::Base.generate_file(:pdf, 'output.pdf', :report    => {:layout => 'layout.tlf'},
-                                                   :generator => {:option => :value}) {}
-  end
-  
-  def test_Base_generate_file_raise_when_no_block_given
+  def test_Base_generate_file_should_raise_when_no_block_given
     assert_raises ArgumentError do
       Report::Base.generate_file(:pdf, 'output.pdf')
     end
-  end
-  
-  def test_Base_init_generate_params_with_empty_options
-    Report::Base.send(:init_generate_params, options = {}) {}
-    assert_equal options.values_at(:report, :generator), [{}, {}]
-  end
-  
-  def test_Base_init_generate_params_with_configured_options
-    options = {:report    => {:layout => 'layout.tlf'},
-               :generator => {:option => :value}}
-    Report::Base.send(:init_generate_params, options) {}
-    
-    assert_equal options[:report], {:layout => 'layout.tlf'}
-    assert_equal options[:generator], {:option => :value}
-  end
-  
-  def test_Base_init_generate_params_raise_when_no_block_given
-    assert_raises ArgumentError do
-      Report::Base.send(:init_generate_params)
-    end
-  end
-  
-  def setup_generator(&block)
-    block.call(generator = flexmock('generator'))
-    
-    flexmock(ThinReports::Generator).
-      should_receive(:new).with(:pdf, @report, Hash).and_return(generator)
   end
 end

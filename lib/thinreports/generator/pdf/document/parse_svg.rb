@@ -6,7 +6,7 @@ module ThinReports
   module Generator
     
     # @private
-    module Pdf::ParseSVG
+    module PDF::ParseSVG
       # @param [String] source
       # @param [String] base_path
       def parse_svg(source, base_path)

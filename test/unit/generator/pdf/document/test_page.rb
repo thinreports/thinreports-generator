@@ -2,11 +2,11 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Generator::Pdf::Document::TestPage < MiniTest::Unit::TestCase
+class ThinReports::Generator::PDF::Document::TestPage < MiniTest::Unit::TestCase
   include ThinReports::TestHelpers
   
   def create_pdf
-    @pdf = ThinReports::Generator::Pdf::Document.new
+    @pdf = ThinReports::Generator::PDF::Document.new
   end
   
   def test_change_page_format_should_return_true_at_first_time

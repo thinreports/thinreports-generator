@@ -2,11 +2,11 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Generator::Pdf::TestParseColor < MiniTest::Unit::TestCase
+class ThinReports::Generator::PDF::TestParseColor < MiniTest::Unit::TestCase
   include ThinReports::TestHelpers
   
   class TestColorParser
-    include ThinReports::Generator::Pdf::ParseColor
+    include ThinReports::Generator::PDF::ParseColor
   end
   
   def setup

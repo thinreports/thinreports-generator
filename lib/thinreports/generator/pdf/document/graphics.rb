@@ -4,7 +4,7 @@ module ThinReports
   module Generator
     
     # @private
-    module Pdf::Graphics
+    module PDF::Graphics
       
       BASE_LINE_WIDTH = 0.9
       

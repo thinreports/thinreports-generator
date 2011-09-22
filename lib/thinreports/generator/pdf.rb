@@ -5,7 +5,7 @@ require 'prawn'
 module ThinReports
   module Generator
     
-    class Pdf < Base
+    class PDF < Base
       # @param report (see ThinReports::Generator::Base#initialize)
       # @param [Hash] options
       # @option options [Hash] :security (nil)

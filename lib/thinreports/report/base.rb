@@ -10,6 +10,7 @@ module ThinReports
       
       class << self
         # @param options (see #initialize)
+        # @option options (see #initialize)
         # @yield [report]
         # @yieldparam [ThinReports::Report::Base] report
         # @return [ThinReports::Report::Base]
@@ -24,39 +25,39 @@ module ThinReports
           report
         end
         
-        # @param [Symbol] type
-        # @param [Hash] options
-        # @option options [Hash] :report Options for Report (see #initialize)
-        # @option options [Hash] :generator Options for Generator.
-        # @yield (see #create)
+        # @overload generate(type, options = {}, &block)
+        #   @param [Symbol] type
+        #   @param [Hash] options
+        #   @option options [Hash] :report ({}) Options for Report.
+        #   @option options [Hash] :generator ({}) Options for Generator.
+        # @overload generate(options = {}, &block)
+        #   @param [Hash] options
+        #   @option options [Hash] :report ({}) Options for Report.
+        #   @option options [Hash] :generator ({}) Options for Generator.
+        # @yield (see .create)
+        # @yieldparam (see .create)
         # @return [String]
-        def generate(type, options = {}, &block)
-          init_generate_params(options, &block)
+        def generate(*args, &block)
+          raise ArgumentError, '#generate requires a block' unless block_given?
           
-          create(options[:report], &block).generate(type, options[:generator])
+          options = args.last.is_a?(::Hash) ? args.pop : {}
+          report  = create(options[:report] || {}, &block)
+          report.generate(*args.push(options[:generator] || {}))
         end
         
-        # @param [Symbol] type
-        # @param [String] filename
-        # @param options (see #generate)
-        # @yield (see #create)
-        def generate_file(type, filename, options = {}, &block)
-          init_generate_params(options, &block)
+        # @overload generate_file(type, filename, options = {}, &block)
+        # @overload generate_file(filename, options = {}, &block)
+        # @param filename (see #generate_file)
+        # @yield (see .create)
+        # @yieldparam (see .create)
+        # @see .generate
+        # @return [void]
+        def generate_file(*args, &block)
+          raise ArgumentError, '#generate_file requires a block' unless block_given?
           
-          create(options[:report], &block).
-              generate_file(type, filename, options[:generator])
-        end
-        
-      private
-        
-        # @param (see #generate)
-        # @private
-        def init_generate_params(options, &block)
-          unless block_given?
-            raise ArgumentError, '#generate or #generate_file requires a block'
-          end
-          options[:report]    ||= {}
-          options[:generator] ||= {}
+          options = args.last.is_a?(::Hash) ? args.pop : {}
+          report  = create(options[:report] || {}, &block)
+          report.generate_file(*args.push(options[:generator] || {}))
         end
       end
       
@@ -66,19 +67,20 @@ module ThinReports
         @internal = Report::Internal.new(self, options)
       end
       
-      # @param [String] path of layout-file.
+      # @param [String] layout path to layout-file.
       # @param [Hash] options
       # @option options [Boolean] :default (true)
       # @option options [Symbol] :id (nil)
-      # @yield [config,]
+      # @yield [config]
       # @yieldparam [ThinReports::Layout::Configuration] config
+      # @return [void]
       def use_layout(layout, options = {}, &block)
         internal.register_layout(layout, options, &block)
       end
       
       # @param [Hash] options
       # @option options [String, Symbol] :layout (nil)
-      # @yield [page,]
+      # @yield [page]
       # @yieldparam [ThinReports::Core::Page] page
       # @return [ThinReports::Core::Page]
       def start_new_page(options = {}, &block)
@@ -115,17 +117,29 @@ module ThinReports
         internal.default_layout
       end
       
-      # @param [Symbol] type
-      # @param options (see ThinReports::Generator)
+      # @overload generate(type, options = {})
+      #   Specify the generator type.
+      #   @param [Symbol] type
+      # @overload generate(options = {})
+      #   Using the default generator type.
+      # @param [Hash] options ({})
       # @return [String]
-      def generate(type, options = {})
+      def generate(*args)
+        options = args.last.is_a?(::Hash) ? args.pop : {}
+        type    = args.first || ThinReports.config.generator.default
         ThinReports::Generator.new(type, self, options).generate
       end
       
-      # @param type (see #generate)
+      # @overload generate_file(type, filename, options = {})
+      #   @param type (#generate)
+      # @overload generate_file(filename, options = {})
       # @param [String] filename
       # @param options (see #generate)
-      def generate_file(type, filename, options = {})
+      # @return [void]
+      def generate_file(*args)
+        options = args.last.is_a?(::Hash) ? args.pop : {}
+        args.unshift(ThinReports.config.generator.default) if args.size == 1
+        type, filename = args
         ThinReports::Generator.new(type, self, options).generate_file(filename)
       end
       
@@ -144,6 +158,7 @@ module ThinReports
         internal.page_count
       end
       
+      # @return [void]
       # @private
       def finalize
         internal.finalize

@@ -4,7 +4,7 @@ module ThinReports
   module Generator
     
     # @private
-    module Pdf::DrawShape
+    module PDF::DrawShape
       # @param [ThinReports::Core::Shape::TextBlock::Internal] shape
       def draw_shape_tblock(shape)
         x, y, w, h = shape.box.values_at('x', 'y', 'width', 'height')
