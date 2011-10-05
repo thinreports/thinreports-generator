@@ -40,9 +40,10 @@ module ThinReports
         def generate(*args, &block)
           raise ArgumentError, '#generate requires a block' unless block_given?
           
-          options = args.last.is_a?(::Hash) ? args.pop : {}
-          report  = create(options[:report] || {}, &block)
-          report.generate(*args.push(options[:generator] || {}))
+          report_opts, generator_opts = extract_options!(args)
+          
+          report = create(report_opts, &block)
+          report.generate(*args.push(generator_opts))
         end
         
         # @overload generate_file(type, filename, options = {}, &block)
@@ -55,9 +56,30 @@ module ThinReports
         def generate_file(*args, &block)
           raise ArgumentError, '#generate_file requires a block' unless block_given?
           
-          options = args.last.is_a?(::Hash) ? args.pop : {}
-          report  = create(options[:report] || {}, &block)
-          report.generate_file(*args.push(options[:generator] || {}))
+          report_opts, generator_opts = extract_options!(args)
+          
+          report = create(report_opts, &block)
+          report.generate_file(*args.push(generator_opts))
+        end
+        
+      private
+        
+        # @param [Array] args
+        # @return [Array<Hash>]
+        def extract_options!(args)
+          if args.last.is_a?(::Hash)
+            options = args.pop
+          
+            generator = options.delete(:generator) || {}
+            report    = options.delete(:report) || {}
+            
+            if options.key?(:layout)
+              report[:layout] = options.delete(:layout)
+            end
+            [report, generator.merge(options)]
+          else
+            [{}, {}]
+          end
         end
       end
       
