@@ -19,14 +19,15 @@ module ThinReports
       # @option attrs [:top, :center, :bottom] :valign (:top)
       # @option attrs [Numeric, String] :line_height The total height of an text line.
       # @option attrs [Numeric, String] :letter_spacing
+      # @option attrs [Boolean] :single (false)
       def text_box(content, x, y, w, h, attrs = {})
         w, h = s2f(w, h)
+        box_attrs = text_box_attrs(x, y, w, h, attrs.delete(:single))
+        
         with_text_styles(attrs) do |built_attrs, font_styles|
           pdf.formatted_text_box([{:text   => text_without_line_wrap(content),
                                    :styles => font_styles}],
-                                 built_attrs.merge(:at     => pos(x, y),
-                                                   :width  => w,
-                                                   :height => h))
+                                 built_attrs.merge(box_attrs))
         end
       rescue Prawn::Errors::CannotFit => e
         # Nothing to do.
@@ -43,6 +44,22 @@ module ThinReports
       end
       
     private
+      
+      # @param x (see #text_box)
+      # @param y (see #text_box)
+      # @param w (see #text_box)
+      # @param h (see #text_box)
+      # @param [Boolean, nil] single
+      # @return [Hash]
+      def text_box_attrs(x, y, w, h, single = nil)
+        attrs = {:at    => pos(x, y),
+                 :width => s2f(w)}
+        if single
+          attrs.merge(:single_line => true)
+        else
+          attrs.merge(:height => s2f(h))
+        end
+      end
       
       # @param attrs (see #text)
       # @yield [built_attrs, font_styles]

@@ -10,12 +10,14 @@ module ThinReports
         x, y, w, h = shape.box.values_at('x', 'y', 'width', 'height')
         
         content = shape.real_value.to_s
-        
         unless content.empty?
+          attrs = shape_text_attrs(shape)
+          
           unless shape.multiple?
             content = content.gsub(/\n/, ' ')
+            attrs[:single] = true
           end
-          text_box(content, x, y, w, h, shape_text_attrs(shape))
+          text_box(content, x, y, w, h, attrs)
         end
       end
       
