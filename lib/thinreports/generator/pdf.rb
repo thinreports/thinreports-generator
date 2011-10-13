@@ -1,5 +1,6 @@
 # coding: utf-8
 
+gem 'prawn', '0.12.0'
 require 'prawn'
 
 module ThinReports
