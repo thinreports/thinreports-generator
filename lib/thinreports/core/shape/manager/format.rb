@@ -16,7 +16,7 @@ module ThinReports
       end
       
       def find_shape(id)
-        shapes && shapes[id]
+        shapes[id]
       end
       
       def shapes

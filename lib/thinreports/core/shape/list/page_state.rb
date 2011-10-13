@@ -18,6 +18,10 @@ module ThinReports
         @finalized = false
       end
       
+      def style
+        @style ||= Style::Basic.new(format)
+      end
+      
       def finalized?
         @finalized
       end

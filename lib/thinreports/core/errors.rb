@@ -7,6 +7,10 @@ module ThinReports
     end
     
     class UnknownShapeStyleName < Basic
+      def initialize(style, availables)
+        super("The specified style name, '#{style}', cannot be used. " +
+              "The available styles are #{availables.map{|s| ":#{s}"}.join(', ')}.")
+      end
     end
     
     class UnknownShapeType < Basic

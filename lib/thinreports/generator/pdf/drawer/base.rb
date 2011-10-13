@@ -30,13 +30,11 @@ module ThinReports
       
       # @see #pdf_stamp_id
       def shape_stamp_id(shape)
-        id = shape.id.dup
-        id << shape.attrs.values_at('fill', 'stroke').join unless shape.attrs.empty?
-        id.gsub(/#/, '')
+        "#{shape.id}#{shape.style.identifier}"
       end
       
-      # @overload pdf_stamp('stamp_id')
-      #   @param [String] shape
+      # @overload pdf_stamp(shape_id)
+      #   @param [String] shape_id
       # @overload pdf_stamp(shape)
       #   @param [ThinReports::Core::Shape::Base::Internal] shape
       def pdf_stamp(shape)

@@ -8,109 +8,109 @@ class ThinReports::Core::Shape::Manager::TestTarget < MiniTest::Unit::TestCase
   # Alias
   Shape = ThinReports::Core::Shape
   
-  class TestFormat < Shape::Manager::Format; end
-  
   class TestManager
     include Shape::Manager::Target
     
-    def initialize(format)
-      initialize_manager(format) do |f|
+    attr_reader :layout, :report
+    
+    def initialize(report, layout)
+      @report = report
+      @layout = layout
+      
+      initialize_manager(layout.format) do |f|
         Shape::Interface(self, f)
       end
     end
   end
   
-  def setup
-    tblock1_format = Shape::TextBlock::Format.new('id'   => 'tblock1',
-                                                  'type' => 's-tblock')
-    tblock2_format = Shape::TextBlock::Format.new('id'   => 'tblock2',
-                                                  'type' => 's-tblock')
-    list_format    = Shape::List::Format.new('id' => 'list',
-                                             'type' => 's-list')
+  def create_shape_format(type, id)
+    Shape::Format(type).new('id' => id, 'type' => type)
+  end
+  
+  def create_manager
+    report = create_basic_report('basic_layout1.tlf')
+    layout = report.layout
     
-    @format = TestFormat.new({}) do |f|
-      f.shapes[:tblock1] = tblock1_format
-      f.shapes[:tblock2] = tblock2_format
-      f.shapes[:list]    = list_format
-    end
-    @manager = TestManager.new(@format)
-  end
-  
-  def test_item_with_Symbol_id
-    assert_instance_of Shape::TextBlock::Interface, @manager.item(:tblock1)
-  end
-  
-  def test_item_with_String_id
-    assert_instance_of Shape::TextBlock::Interface, @manager.item('tblock1')
-  end
-  
-  def test_item_raise_error_when_given_the_id_of_list
-    assert_raises ThinReports::Errors::UnknownItemId do
-      @manager.item(:list)
-    end
-  end
-  
-  def test_item_raise_error_when_given_the_unknown_id
-    assert_raises ThinReports::Errors::UnknownItemId do
-      @manager.item(:unknown)
-    end
-  end
-  
-  def test_item_with_block_that_has_no_arguments
-    @manager.item(:tblock1) do
-      value(1000)
-    end
-    assert_equal @manager.item(:tblock1).value, 1000
-  end
-  
-  def test_item_with_block_that_has_an_argument
-    @manager.item(:tblock2) do |t|
-      t.value(1000)
-    end
-    assert_equal @manager.item(:tblock2).value, 1000
-  end
-  
-  def test_list_raise_error_when_given_id_of_non_list
-    assert_raises ThinReports::Errors::UnknownItemId do
-      @manager.list(:tblock1)
-    end
-  end
-  
-  def test_list_should_be_stored_in_the_special_store
-    flexmock(@manager).
-      should_receive(:find_item).and_return(flexmock('item_list'))
+    # Add to dummy shapes.
+    layout.format.shapes[:t1] = create_shape_format('s-tblock', 't1')
+    layout.format.shapes[:t2] = create_shape_format('s-tblock', 't2')
+    layout.format.shapes[:ls] = create_shape_format('s-list', 'ls')
     
-    @manager.list(:list)
-    assert_includes @manager.manager.lists, :list
+    TestManager.new(report, layout)
   end
   
-  def test_items_should_be_warned_as_deprecated
+  def test_manager_should_return_instance_of_ManagerInternal
+    assert_instance_of Shape::Manager::Internal, create_manager.manager
+  end
+  
+  def test_item_should_properly_return_shape_with_the_specified_Symbol_id
+    assert_equal create_manager.item(:t1).id, 't1'
+  end
+  
+  def test_item_should_properly_return_shape_with_the_specified_String_id
+    assert_equal create_manager.item('t2').id, 't2'
+  end
+  
+  def test_item_should_raise_when_the_shape_with_the_specified_id_is_not_found
+    assert_raises ThinReports::Errors::UnknownItemId do
+      create_manager.item(:unknown)
+    end
+  end
+  
+  def test_item_should_set_an_shape_as_argument_when_a_block_is_given
+    id = nil
+    create_manager.item(:t1) {|s| id = s.id }
+    assert_equal id, 't1'
+  end
+  
+  def test_item_should_raise_when_type_of_shape_with_the_specified_id_is_list
+    assert_raises ThinReports::Errors::UnknownItemId do
+      create_manager.item(:ls)
+    end
+  end
+  
+  def test_list_should_properly_return_list_with_the_specified_Symbol_id
+    assert_equal create_manager.list(:ls).id, 'ls'
+  end
+  
+  def test_list_should_properly_return_list_with_the_specified_String_id
+    assert_equal create_manager.list('ls').id, 'ls'
+  end
+  
+  def test_list_should_raise_when_type_of_shape_with_the_specified_id_is_not_list
+    assert_raises ThinReports::Errors::UnknownItemId do
+      create_manager.list(:t1)
+    end
+  end
+  
+  def test_values_should_properly_set_values_to_shapes_with_specified_id
+    manager = create_manager
+    manager.values(:t1 => 1000, 't2' => 'value')
+    
+    assert_equal [manager.item(:t1).value, manager.item(:t2).value], [1000, 'value']
+  end
+  
+  def test_items_should_show_deprecation_warning
     out, err = capture_io do
-      @manager.items :tblock1 => 1000
+      create_manager.items(:t1 => 1000)
     end
     assert_match %r!DEPRECATION!, err
   end
   
-  def test_values
-    @manager.values :tblock1 => 1000,
-                    :tblock2 => 2000
-    
-    assert_equal @manager.item(:tblock1).value, 1000
+  def test_item_exists_asker_should_return_true_when_shape_with_specified_Symbol_id_is_found
+    assert_equal create_manager.item_exists?(:t1), true
   end
   
-  def test_values_should_properly_set_to_ImageBlock
-    @format.shapes[:image] = Shape::ImageBlock::Format.new({'id'   => 'image',
-                                                            'type' => 's-iblock'})
-    @manager.values(:image => '/path/to/image.png')
-    
-    assert_equal @manager.item(:image).src, '/path/to/image.png'
+  def test_item_exists_asker_should_return_true_when_shape_with_specified_String_id_is_found
+    assert_equal create_manager.item_exists?('t2'), true
   end
   
-  def test_item_exists?
-    assert_equal @manager.item_exists?(:tblock1), true
-    assert_equal @manager.item_exists?('list'), true
-    assert_equal @manager.item_exists?(:unknown), false
-    # Alias method
-    assert_equal @manager.exists?(:tblock1), true
+  def test_item_exists_asker_should_return_false_when_shape_with_specified_id_not_found
+    assert_equal create_manager.item_exists?('unknown'), false
+  end
+  
+  def test_exists_asker_should_operate_like_as_item_exists_asker
+    manager = create_manager
+    assert_equal manager.exists?(:unknown), manager.item_exists?(:unknown)
   end
 end

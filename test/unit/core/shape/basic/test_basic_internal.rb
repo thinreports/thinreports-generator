@@ -23,6 +23,12 @@ class ThinReports::Core::Shape::Basic::TestBlockInternal < MiniTest::Unit::TestC
     assert_equal internal.read_value, 'new value'
   end
   
+  def test_real_value_should_return_the_same_value_as_a_read_value_method
+    internal = init_internal
+    internal.states[:value] = 'foo'
+    assert_same internal.real_value, internal.read_value
+  end
+  
   def test_write_value_should_save_value_to_states_store_as_value
     internal = init_internal
     internal.write_value('new value')

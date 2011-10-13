@@ -42,6 +42,7 @@ module ThinReports
   end
 end
 
+require 'thinreports/core/shape/style'
 require 'thinreports/core/shape/manager'
 require 'thinreports/core/shape/base'
 require 'thinreports/core/shape/basic'

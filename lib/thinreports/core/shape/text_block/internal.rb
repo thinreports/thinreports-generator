@@ -12,6 +12,13 @@ module ThinReports
         
         @reference = nil
         @formatter = nil
+        
+        @style = Style::Text.new(format)
+        @style.accessible_styles.delete(:valign) unless multiple?
+      end
+      
+      def style
+        @style
       end
       
       def read_value
@@ -36,7 +43,7 @@ module ThinReports
         if format_enabled?
           formatter.apply(read_value)
         else
-          read_value
+          super
         end
       end
       

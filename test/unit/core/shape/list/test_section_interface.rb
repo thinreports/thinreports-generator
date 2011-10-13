@@ -8,45 +8,52 @@ class ThinReports::Core::Shape::List::TestSectionInterface < MiniTest::Unit::Tes
   # Alias
   List = ThinReports::Core::Shape::List
   
-  def setup
-    parent = flexmock('parent')
-    format = flexmock('format')
-    
-    @interface = List::SectionInterface.new(parent, format, :section)
+  def create_interface(format_config = {})
+    List::SectionInterface.new(flexmock('parent'),
+                               List::SectionFormat.new(format_config),
+                               :section)
   end
   
-  def test_undef_list_method
-    refute_respond_to @interface, :list
+  def test_internal_should_return_instance_of_SectionInternal
+    assert_instance_of List::SectionInternal, create_interface.internal
   end
   
-  def test_internal
-    assert_instance_of List::SectionInternal, @interface.internal
+  def test_initialize_should_properly_set_the_specified_section_name_to_internal
+    assert_equal create_interface.internal.section_name, :section
   end
   
-  def test_properly_set_init_item_handler
-    shape_format = flexmock('shape_format')
-    
-    flexmock(ThinReports::Core::Shape).
-      should_receive(:Interface).with(@interface, shape_format).once
-      
-    @interface.manager.init_item(shape_format)
+  def test_initialize_should_properly_initialize_manager
+    assert_instance_of ThinReports::Core::Shape::Manager::Internal,
+                       create_interface.manager
   end
   
-  def test_copy
-    original_foo = flexmock('original_foo')
-    copied_foo   = flexmock('copied_foo')
-
-    flexmock(original_foo).
-      should_receive(:copy).and_return(copied_foo).once
-    @interface.manager.shapes[:foo] = original_foo
+  def test_height_should_operate_as_delegator_of_internal
+    list = create_interface('height' => 100)
+    assert_same list.height, list.internal.height
+  end
+  
+  def test_copied_interface_should_succeed_an_section_name_of_original
+    list = create_interface
+    assert_same list.copy(flexmock('new_parent')).internal.section_name,
+                list.internal.section_name
+  end
+  
+  def test_copied_interface_should_have_all_the_copies_of_Shape_which_original_holds
+    list = create_interface
+    copied_list(list) do |new_list|
+      assert_equal new_list.manager.shapes.size, 3
+    end
+  end
+  
+  def copied_list(list, &block)
+    tblock     = ThinReports::Core::Shape::TextBlock
+    new_parent = flexmock('new_parent')
     
-    copied_interface = @interface.copy(flexmock('new_parent'))
+    %w( foo bar hoge ).each do |id|
+      list.manager.format.shapes[id.to_sym] = tblock::Format.new('type' => 's-tblock', 'id' => id)
+      list.item(id).value(10)
+    end
     
-    assert_instance_of List::SectionInterface, copied_interface
-    refute_equal @interface.object_id, copied_interface.object_id
-    
-    assert_equal copied_interface.internal.section_name,
-                 @interface.internal.section_name
-    assert_same copied_interface.manager.shapes[:foo], copied_foo
+    block.call(list.copy(new_parent))
   end
 end

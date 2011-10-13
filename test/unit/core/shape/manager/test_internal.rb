@@ -5,133 +5,167 @@ require 'test/unit/helper'
 class ThinReports::Core::Shape::Manager::TestInternal < MiniTest::Unit::TestCase
   include ThinReports::TestHelpers
   
-  def setup
-    @init_item_handler = flexmock('init_item_handler')
-    
-    @format_tblock = flexmock(:type => 's-tblock')
-    @format_list   = flexmock(:type => 's-list')
-    @format_rect   = flexmock(:type => 's-rect')
-    
-    @item_tblock   = flexmock(:type => 's-tblock')
-    @item_list     = flexmock(:type => 's-list')
-    @item_rect     = flexmock(:type => 's-rect')
-    
-    layout_format = flexmock('layout_format')
-    
-    layout_format.should_receive(:find_shape).
-      with(:tblock).and_return(@format_tblock)
-    layout_format.should_receive(:find_shape).
-      with(:list).and_return(@format_list)
-    layout_format.should_receive(:find_shape).
-      with(:rect).and_return(@format_rect)
-    layout_format.should_receive(:find_shape).
-      with(:unknown).and_return(nil)
-    
-    @manager = ThinReports::Core::Shape::Manager::Internal.new(layout_format,
-                                                               @init_item_handler)
+  # Alias
+  Shape = ThinReports::Core::Shape
+  
+  def create_shape_format(type, id, other_config = {})
+    Shape::Format(type).new({'id'      => id,
+                             'type'    => type,
+                             'display' => 'true'}.merge(other_config))
   end
   
-  def test_find_format
-    assert_same @manager.find_format(:tblock), @format_tblock
-    assert_same @manager.find_format('list'), @format_list
-    assert_nil  @manager.find_format(:unknown)
+  def create_internal(&block)
+    report = create_basic_report('basic_layout1.tlf')
+    format = report.layout.format
+    
+    # Add to default dummy shapes.
+    format.shapes[:t1] = create_shape_format('s-tblock', 't1', 'value' => '')
+    format.shapes[:t2] = create_shape_format('s-tblock', 't2', 'value' => '')
+    format.shapes[:ls] = create_shape_format('s-list', 'ls')
+    
+    block.call(format) if block_given?
+    
+    report.start_new_page.manager
   end
   
-  def test_valid_type?
-    # Without limit options.
-    assert_equal @manager.valid_type?('s-list'), true
-    # With only limitation.
-    assert_equal @manager.valid_type?('s-list', :only => 's-list'), true
-    assert_equal @manager.valid_type?('s-list', :only => 'other'), false
-    # With except limitation.
-    assert_equal @manager.valid_type?('s-list', :except => 'other'), true
-    assert_equal @manager.valid_type?('s-list', :except => 's-list'), false
+  def test_find_format_should_return_format_with_the_specified_Symbol_id
+    assert_equal create_internal.find_format(:t1).id, 't1'
   end
   
-  def test_find_item
-    flexmock(@init_item_handler).
-      should_receive(:call).once.and_return(@item_tblock)
-    
-    # Should initialize item.
-    @manager.find_item(:tblock)
-    # Should be stored a one initialized item.
-    assert_equal @manager.shapes.size, 1
-    assert_same @manager.shapes[:tblock], @item_tblock
-    
-    flexmock(@init_item_handler).
-      should_receive(:call).times(0)
-    
-    # Should must not be initialized when given a initialized item.
-    assert_same @manager.find_item(:tblock), @item_tblock
-    
-    # Should returnes the nil value when given unknown item.
-    assert_nil @manager.find_item(:unknown)
+  def test_find_format_should_return_format_with_the_specified_String_id
+    assert_equal create_internal.find_format('t2').id, 't2'
   end
   
-  def test_find_item_with_limitation
-    # Should returns the nil value when outside limitation.
-    assert_nil @manager.find_item(:tblock, :only => 's-list')
-    assert_nil @manager.find_item(:list, :except => 's-list')
-    
-    flexmock(@init_item_handler).
-      should_receive(:call).and_return(@item_tblock)
-    
-    # Should initialize and store item.
-    @manager.find_item(:tblock, :except => 's-list')
-    assert_equal @manager.shapes[:tblock], @item_tblock
-    
-    # Should returns the nil value.
-    assert_nil @manager.find_item(:tblock, :only => 's-list')
+  def test_find_format_should_return_nil_when_format_with_specified_id_is_not_found
+    assert_nil create_internal.find_format(:unknown)
   end
   
-  def test_final_shape_when_give_the_initialized_item_that_visibility_is_enabled
-    @manager.shapes[:tblock] = flexmock(:visible? => true)
-    
-    assert_same @manager.final_shape(:tblock), @manager.shapes[:tblock]
+  def test_find_item_should_return_shape_with_the_specified_id
+    assert_instance_of Shape::TextBlock::Interface, create_internal.find_item(:t1)
   end
   
-  def test_final_shape_when_give_the_initialized_item_that_visibility_is_disabled
-    @manager.shapes[:tblock] = flexmock(:visible? => false)
+  def test_find_item_should_return_shape_in_shapes_registry_when_the_specified_shape_exists_in_registry
+    internal = create_internal
+    internal.find_item(:t1)
     
-    assert_nil @manager.final_shape(:tblock)
+    assert_same internal.find_item(:t1), internal.shapes[:t1]
   end
   
-  def test_final_shape_when_give_the_uninitialized_basic_item
-    flexmock(@format_rect, :display? => true)
-    
-    flexmock(@init_item_handler).
-      should_receive(:call).once.and_return(@item_rect)
-    
-    # Should initialize item.
-    assert_same @manager.final_shape(:rect), @item_rect
+  def test_find_item_should_return_shape_when_passing_in_the_specified_only_filter
+    internal = create_internal
+    assert_equal internal.find_item(:t1, :only => 's-tblock').id, 't1'
   end
   
-  def test_final_shape_return_nil_when_give_the_tblock_item_that_has_no_value
-    flexmock(@format_tblock, :display? => true,
-                             :has_reference? => false,
-                             :value => '')
-    assert_nil @manager.final_shape(:tblock)
+  def test_find_item_should_return_nil_when_not_passing_in_the_specified_only_filter
+    internal = create_internal
+    assert_nil internal.find_item(:t1, :only => 's-list')
   end
   
-  def test_final_shape_initialize_item_when_give_the_tblock_item_that_has_an_reference
-    flexmock(@format_tblock, :display? => true,
-                             :has_reference? => true,
-                             :value => '')
-    
-    flexmock(@init_item_handler).
-      should_receive(:call).once.and_return(@item_tblock)
-    
-    assert_same @manager.final_shape(:tblock), @item_tblock
+  def test_find_item_should_return_shape_when_passing_in_the_specified_except_filter
+    internal = create_internal
+    assert_equal internal.find_item(:ls, :except => 's-tblock').id, 'ls'
   end
   
-  def test_final_shape_initialize_item_when_give_the_tblock_item_that_has_a_value
-    flexmock(@format_tblock, :display? => true,
-                             :has_reference? => false,
-                             :value => 'value')
+  def test_find_item_should_return_shape_when_not_passing_in_the_specified_except_filter
+    internal = create_internal
+    assert_nil internal.find_item(:ls, :except => 's-list')
+  end
+  
+  def test_final_shape_should_return_nil_when_shape_is_not_found
+    internal = create_internal
+    assert_nil internal.final_shape(:unknown)
+  end
+  
+  def test_final_shape_should_return_nil_when_shape_is_stored_in_shapes_and_hidden
+    internal = create_internal
+    internal.find_item(:t1).hide
     
-    flexmock(@init_item_handler).
-      should_receive(:call).once.and_return(@item_tblock)
+    assert_nil internal.final_shape(:t1)
+  end
+  
+  def test_final_shape_should_return_shape_when_shape_is_stored_in_shapes_and_not_Block
+    internal = create_internal do |f|
+      f.shapes[:rect] = create_shape_format('s-rect', 'rect')
+    end
+    internal.find_item(:rect)
     
-    assert_same @manager.final_shape(:tblock), @item_tblock    
+    assert_equal internal.final_shape(:rect).id, 'rect'
+  end
+  
+  def test_final_shape_should_return_shape_when_shape_is_stored_in_shapes_and_TextBlock_with_value
+    internal = create_internal
+    internal.find_item(:t1).value('value')
+    
+    assert_equal internal.final_shape(:t1).id, 't1'
+  end
+  
+  def test_final_shape_should_return_nil_when_shape_is_stored_in_shapes_and_TextBlock_with_no_value
+    internal = create_internal
+    internal.find_item(:t2)
+    
+    assert_nil internal.final_shape(:t2)
+  end
+  
+  def test_final_shape_should_return_shape_when_shape_is_stored_in_shapes_and_ImageBlock_with_src
+    internal = create_internal do |f|
+      f.shapes[:iblock] = create_shape_format('s-iblock', 'iblock')
+    end
+    internal.find_item(:iblock).src('/path/to/image.png')
+    
+    assert_equal internal.final_shape(:iblock).id, 'iblock'
+  end
+  
+  def test_final_shape_should_return_nil_when_shape_is_stored_in_shapes_and_ImageBlock_with_no_src
+    internal = create_internal do |f|
+      f.shapes[:iblock] = create_shape_format('s-iblock', 'iblock')
+    end
+    
+    assert_nil internal.final_shape(:iblock)
+  end
+  
+  def test_final_shape_should_return_nil_when_shape_isnot_stored_in_shapes_and_hidden
+    internal = create_internal do |f|
+      f.shapes[:t3] = create_shape_format('s-tblock', 't3', 'display' => 'false')
+    end
+    
+    assert_nil internal.final_shape(:t3)
+  end
+  
+  def test_final_shape_should_return_shape_when_shape_isnot_stored_in_shapes_and_not_Block
+    internal = create_internal do |f|
+      f.shapes[:rect] = create_shape_format('s-rect', 'rect')
+    end
+    
+    assert_equal internal.final_shape(:rect).id, 'rect'
+  end
+  
+  def test_final_shape_should_return_nil_when_shape_isnot_stored_in_shapes_and_ImageBlock
+    internal = create_internal do |f|
+      f.shapes[:iblock] = create_shape_format('s-iblock', 'iblock')
+    end
+    
+    assert_nil internal.final_shape(:iblock)
+  end
+  
+  def test_final_shape_should_return_shape_when_shape_isnot_stored_in_shapes_and_TextBlock_with_value
+    internal = create_internal do |f|
+      f.shapes[:t3] = create_shape_format('s-tblock', 't3', 'value' => 'default value')
+    end
+    
+    assert_equal internal.final_shape(:t3).id, 't3'
+  end
+  
+  def test_final_shape_should_return_shape_when_shape_isnot_stored_in_shapes_and_TextBlock_with_reference
+    internal = create_internal do |f|
+      f.shapes[:t3] = create_shape_format('s-tblock', 't3', 'ref-id' => 't1')
+    end
+    
+    assert_equal internal.final_shape(:t3).id, 't3'
+  end
+  
+  def test_final_shape_should_return_nil_when_shape_isnot_stored_in_shapes_and_TextBlock_with_no_value_no_reference
+    internal = create_internal
+    
+    assert_nil internal.final_shape(:t1)
   end
 end
