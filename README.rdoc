@@ -1,69 +1,73 @@
 = ThinReports Generator
 
 ThinReports is Open Source Reporting Solution for Ruby.
-And it provide you these tools.
+And it provides you these tools:
 
-* ThinReports Editor (GUI Layout Editor)
-* ThinReports Generator (Report Generation Interface for Ruby)
+* ThinReports Editor (GUI Designer)
+* ThinReports Generator (Report Generator for Ruby)
 
-Please refer to {Official Site}[http://www.thinreports.org/] and
-{Project Site}[http://osc.matsukei.net/projects/thinreports/wiki] for more details.
+You can see more details:
+
+* {Official Site}[http://www.thinreports.org/]
+* {Project Site}[http://osc.matsukei.net/projects/thinreports/wiki]
 
 == Quick Start
 
 Getting started with ThinReports Generator can be as simple as:
 
- require 'thinreports'
+  require 'thinreports'
   
- report = ThinReports::Report.new :layout => 'report.tlf'
- report.start_new_page do
-   page.item(:title).value('ThinReports')
- end
+  report = ThinReports::Report.new :layout => 'report.tlf'
+  report.start_new_page do
+    page.item(:title).value('ThinReports')
+  end
   
- report.generate_file(:pdf, 'report.pdf')
+  # :pdf is used as default when the type argument of a #generate_file is omitted.
+  report.generate_file('report.pdf')
 
 Or can be as:
-  
- ThinReports::Report.generate_file(:pdf, 'report.pdf', :layout => 'report.tlf') do
-   start_new_page
+
+  ThinReports::Report.generate_file(:pdf, 'report.pdf', :layout => 'report.tlf') do
+    start_new_page
     
-   page.item(:title).value('ThinReports')
+    page.item(:title).value('ThinReports')
     
-   start_new_page
+    start_new_page
     
-   page.item(:title).value('ThinReports').style(:fill, 'red')
- end
-  
+    page.item(:title).value('ThinReports').style(:color, '#ff0000')
+  end
+
 {Learn more}[http://osc.matsukei.net/projects/thinreports/wiki/Getting_Started].
+
+== Release Note
+
+* {Changelog}[http://osc.matsukei.net/projects/thinreports/wiki/Changelog]
 
 == Documentation
 
-We provide you a few useful resources to help you get started with ThinReports.
-
 * {Getting Started}[http://osc.matsukei.net/projects/thinreports/wiki/Getting_Started]
-* {Guide}[http://osc.matsukei.net/projects/thinreports/wiki/Guide]
+* {Examples}[http://osc.matsukei.net/projects/thinreports/wiki/Examples]
+* {HowTos}[http://osc.matsukei.net/projects/thinreports/wiki/HowTos]
+
+== Project
+
 * {Roadmap}[http://osc.matsukei.net/projects/thinreports/roadmap]
-* {Changelog}[http://osc.matsukei.net/projects/thinreports/wiki/Changelog]
+* {Issue Tracker (Read-Only)}[http://osc.matsukei.net/projects/thinreports/issues]
+* {Source Code}[http://osc.matsukei.net/projects/thinreports/wiki/Source_Code]
 
-== Source Code
-
-Please see {here}[http://osc.matsukei.net/projects/thinreports/wiki/Source_Code].
-
-== Community Support
+== Help
 
 * {Open Forum}[http://osc.matsukei.net/projects/thinreports/boards]
-* {Issue Tracker (Read-Only)}[http://osc.matsukei.net/projects/thinreports/issues]
 
 == Dependencies
 
-* <code>prawn</code> <code>= 0.11.1</code>
-* <code>json</code> <code>>= 1.4.6</code>
-  (Only for less than Ruby 1.9)
+* <code>prawn</code> <code>= 0.12.0</code>
+* <code>json</code> <code>>= 1.4.6</code> (Only for less than Ruby 1.9)
 
 === Note
 
 We tested on <code>Ruby 1.8.7</code> and <code>1.9.2</code>.
-We recommend <code>1.9.2+</code>.
+But we recommend <code>1.9.2+</code>.
 
 == Resources
 
@@ -71,7 +75,7 @@ We recommend <code>1.9.2+</code>.
 
 ThinReports includes the following fonts.
 
-* IPAFonts: Copyright(c) 2003-2011 Information-technology Promotion Agency, Japan.
+* IPAFonts: Copyright(c) 2003-2011 Information-technology Promotion Agency, Japan.  
   Please see the lincense file {IPA_Font_License_Agreement_v1.0.txt}[http://ipafont.ipa.go.jp/ipa_font_license_v1.html].
 
 == License

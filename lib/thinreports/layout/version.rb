@@ -5,7 +5,7 @@ module ThinReports
     
     # @private
     module Version
-      REQUIRED_RULES = ["== #{ThinReports::VERSION}"]
+      REQUIRED_RULES = ['>= 0.6.0.pre3', '< 0.8.0']
       
       # @param [String] version
       # @return [Boolean]

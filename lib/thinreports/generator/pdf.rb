@@ -1,7 +1,12 @@
 # coding: utf-8
 
-gem 'prawn', '0.12.0'
-require 'prawn'
+begin
+  gem 'prawn', '0.12.0'
+  require 'prawn'
+rescue LoadError
+  puts 'ThinReports requires Prawn = 0.12.0. ' +
+       'Please `gem install prawn -v 0.12.0` and try again.'
+end
 
 module ThinReports
   module Generator

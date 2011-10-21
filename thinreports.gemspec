@@ -8,13 +8,13 @@ Gem::Specification.new do |s|
   s.version     = ThinReports::VERSION
   s.author      = 'Matsukei Co.,Ltd.'
   s.email       = 'thinreports@matsukei.co.jp'
-
-  s.summary     = 'Reporting solution for Ruby and Web Applications, and Enterprise.'
-  s.description = 'ThinReports is Open Source Reporting Solution. ' +
-                  'ThinReports provide a special "GUI Layout Editor" ' +
-                  'and a special "Generator" for Ruby.'
+  
+  s.summary     = 'Reporting solution for Ruby and Rails.'
+  s.description = 'ThinReports is Open Source Reporting Solution for Ruby. ' +
+                  'It provides a GUI Designer and a Library for Ruby.'
   s.homepage    = 'http://www.thinreports.org/'
   
+  s.platform                  = Gem::Platform::RUBY
   s.required_ruby_version     = '>= 1.8.7'
   s.required_rubygems_version = '>= 1.3.6'
   
@@ -23,10 +23,10 @@ Gem::Specification.new do |s|
   
   s.files         = Dir['{lib,tasks,resources}/**/*'] +
                     Dir['doc/yardoc_templates/**/*'] +
-                    Dir['test/{unit,case}/**/*'] +
+                    Dir['test/{unit,case,benchmark}/**/*'] +
                     ['Rakefile', 'README.rdoc', '.yardopts']
   s.require_path  = 'lib'
   
-  s.add_runtime_dependency('prawn', '>= 0.12.0', '<= 0.12.0')
-  s.add_runtime_dependency('json',  '>= 1.4.6')
+  s.add_dependency('prawn', '>= 0.12.0', '<= 0.12.0')
+  s.add_dependency('json',  '>= 1.4.6') if RUBY_VERSION < '1.9'
 end

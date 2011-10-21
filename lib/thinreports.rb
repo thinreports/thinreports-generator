@@ -2,7 +2,7 @@
 
 module ThinReports
   # The current version.
-  VERSION = '0.6.0.pre3'
+  VERSION = '0.7.0'
 end
 
 require 'thinreports/config'
