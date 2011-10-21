@@ -94,12 +94,12 @@ class ThinReports::Layout::TestFormat < MiniTest::Unit::TestCase
     assert_same result1, result2
   end
   
-  def test_build_raise_when_layout_file_is_incompatible
+  def test_build_should_raise_when_layout_file_is_incompatible
     original_rules = Layout::Version::REQUIRED_RULES.dup
-    Layout::Version::REQUIRED_RULES.replace(['== 2.0.0'])
+    Layout::Version::REQUIRED_RULES.replace(['>= 0.6.0.pre3', '< 0.8.0'])
     
     flexmock(Layout::Format).
-      should_receive(:read_format_file).and_return(create_raw_format('1.0.0'))
+      should_receive(:read_format_file).and_return(create_raw_format('0.6.0.pre2'))
     
     assert_raises ThinReports::Errors::IncompatibleLayoutFormat do
       Layout::Format.build('dummy.tlf')
