@@ -151,12 +151,18 @@ module ThinReports
         
         if !options[:ignore_page_footer] && format.has_page_footer?
           footer = insert_new_row(:page_footer)
-          # Dispatch event on footer insert.
+          # Dispatch page-footer insert event.
           events.
             dispatch(List::Events::SectionEvent.new(:page_footer_insert,
                                                     footer, store))
         end
         current_page_state.finalized!
+        
+        # Dispatch page finalize event.
+        events.
+          dispatch(List::Events::PageEvent.new(:page_finalize,
+                                               current_page, 
+                                               current_page_state.parent))
       end      
       
       # @private
@@ -176,7 +182,7 @@ module ThinReports
           else
             footer = insert_new_row(:footer)
           end
-          # Dispatch event on footer insert.
+          # Dispatch footer insert event.
           events.dispatch(List::Events::SectionEvent.new(:footer_insert,
                                                          footer, store))
         end
