@@ -46,6 +46,7 @@ Or can be as:
 == Documentation
 
 * {Getting Started}[http://osc.matsukei.net/projects/thinreports/wiki/Getting_Started]
+* {Guide}[http://osc.matsukei.net/projects/thinreports/wiki/Guide]
 * {Examples}[http://osc.matsukei.net/projects/thinreports/wiki/Examples]
 * {HowTos}[http://osc.matsukei.net/projects/thinreports/wiki/HowTos]
 
