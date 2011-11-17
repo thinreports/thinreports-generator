@@ -19,7 +19,7 @@ Getting started with ThinReports Generator can be as simple as:
   
   report = ThinReports::Report.new :layout => 'report.tlf'
   report.start_new_page do
-    page.item(:title).value('ThinReports')
+    item(:title).value('ThinReports')
   end
   
   # :pdf is used as default when the type argument of a #generate_file is omitted.
