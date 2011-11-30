@@ -27,7 +27,6 @@ module ThinReports
         # @param [String] filename
         # @param [Hash] options
         # @option options [Boolean] :force (false)
-        # @private
         def build_internal(filename, options = {})
           build_once(filename, options[:force]) do |content, id|
             raw_format = parse_json(content)
@@ -39,6 +38,8 @@ module ThinReports
               raise ThinReports::Errors::IncompatibleLayoutFormat.new(*info)
             end
             
+            compact_format!(raw_format)
+            
             # Build and initialize format.
             new(raw_format, id) do |f|
               build_layout(f) do |type, shape_format|
@@ -49,7 +50,13 @@ module ThinReports
           end
         end
         
-        # @private
+        # @param [raw_format] Hash A parsed json.
+        def compact_format!(raw_format)
+          %w( finger-print state version ).each {|attr| raw_format.delete(attr) }
+        end
+        
+        # @param [String] filename
+        # @param [Boolean] force (false)
         def build_once(filename, force = false, &block)
           content = read_format_file(filename)
           
@@ -61,12 +68,13 @@ module ThinReports
           end
         end
         
-        # @private
+        # @param [String] filename
+        # @return [String]
         def read_format_file(filename)
           File.open(filename, 'r:UTF-8') {|f| f.read }
         end
         
-        # @private
+        # @return [Hash]
         def built_format_registry
           @built_format_registry ||= {}
         end        

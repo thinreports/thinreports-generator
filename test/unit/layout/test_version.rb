@@ -87,10 +87,9 @@ class ThinReports::Layout::TestVersion < MiniTest::Unit::TestCase
   def required_rules(*rules, &block)
     original_required_rules = Version::REQUIRED_RULES.dup
     
-    Version::REQUIRED_RULES.clear
-    rules.each {|rule| Version::REQUIRED_RULES << rule }
+    Version::REQUIRED_RULES.replace(rules)
     block.call
   ensure
-    original_required_rules.each {|rule| Version::REQUIRED_RULES << rule }
+    Version::REQUIRED_RULES.replace(original_required_rules)
   end
 end
