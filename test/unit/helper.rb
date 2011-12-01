@@ -10,11 +10,14 @@ rescue LoadError => e
   raise e
 end
 
-# Run a test automaticaly
-MiniTest::Unit.autorun
+# Load ThinReports.
+require 'thinreports'
 
-# Load misc
+# Load misc.
 require 'digest/sha1'
+
+# Run the test.
+MiniTest::Unit.autorun
 
 module ThinReports::TestHelpers
   include FlexMock::TestCase

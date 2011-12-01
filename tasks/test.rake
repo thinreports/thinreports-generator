@@ -1,14 +1,17 @@
 # coding: utf-8
 
-namespace :test do
-  desc 'Run all unit tests'
-  task :unit do
-    $LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__) + '/..'))
+require 'rake/testtask'
 
-    files = Dir['test/unit/**/test_*.rb'] + Dir['test/unit/**/*_spec.rb']
-    files.each {|f| require f }
-  end
-  
+# Normal Test Tasks.
+Rake::TestTask.new do |t|
+  t.name =  :'test:unit'
+  t.libs << '.'
+  t.test_files = Dir['test/unit/**/test_*.rb'] +
+                 Dir['test/unit/**/*_spec.rb']
+end
+
+# Custom Test Tasks.
+namespace :test do
   namespace :bench do
     Dir['test/benchmark/bench_*.rb'].each do |f|
       benchname = File.basename(f, '.*').sub(/bench_/, '')
@@ -21,18 +24,13 @@ namespace :test do
   end
   
   namespace :case do
-    desc 'Run all special test cases [MANAGE_TEMPLATES(false): true/false]'
+    desc 'Run all special test cases'
     task :all do
       $LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__) + '/..'))
       
       require 'test/case/helper'
       
-      Dir['test/case/*/*.rb'].each do |f|
-        if ENV['MANAGE_TEMPLATES']
-          ThinReports.config.generator.pdf.manage_templates = File.expand_path(File.dirname(f))
-        end
-        require f
-      end
+      Dir['test/case/*/*.rb'].each {|f| require f }
     end
     
     desc 'Reset all output of test cases'
@@ -43,15 +41,11 @@ namespace :test do
     Dir['test/case/*/*.rb'].each do |f|
       casename = File.basename(File.dirname(f))
       
-      desc "Run #{casename} case [MANAGE_TEMPLATE(false): true/false]"
+      desc "Run #{casename} case"
       task casename.to_sym do
         $LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__) + '/..'))
         
         require 'test/case/helper'
-        
-        if ENV['MANAGE_TEMPLATES']
-          ThinReports.config.generator.pdf.manage_templates = File.expand_path(File.dirname(f))
-        end        
         require "test/case/#{casename}/#{casename}"
       end
     end

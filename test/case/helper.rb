@@ -1,5 +1,7 @@
 # coding: utf-8
 
+require 'thinreports'
+
 class ThinReports::TestCaseRunner
   ROOTDIR = File.expand_path(File.join('test', 'case'))
   
