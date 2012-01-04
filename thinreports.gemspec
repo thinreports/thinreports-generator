@@ -1,7 +1,7 @@
 # coding: utf-8
 
 $LOAD_PATH.unshift(File.expand_path('../lib/', __FILE__))
-require 'thinreports'
+require 'thinreports/version'
 
 Gem::Specification.new do |s|
   s.name        = 'thinreports'
@@ -28,5 +28,8 @@ Gem::Specification.new do |s|
   s.require_path  = 'lib'
   
   s.add_dependency('prawn', '>= 0.12.0', '<= 0.12.0')
-  s.add_dependency('json',  '>= 1.4.6') if RUBY_VERSION < '1.9'
+  
+  s.add_development_dependency('bundler', ['>= 1.0.0'])
+  s.add_development_dependency('flexmock', ['>= 0'])
+  s.add_development_dependency('yard', ['>= 0'])
 end
