@@ -1,5 +1,7 @@
 = ThinReports Generator
 
+{<img src="https://secure.travis-ci.org/thinreports/thinreports-generator.png" />}[http://travis-ci.org/thinreports/thinreports-generator]
+
 ThinReports is Open Source Reporting Solution for Ruby.
 And it provides you these tools:
 
