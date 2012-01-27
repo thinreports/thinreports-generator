@@ -55,7 +55,7 @@ module ThinReports
       alias_method :exists?, :item_exists?
       
       # @see #item
-      def list(id, &block)
+      def list(id = :default, &block)
         shape = find_item(id, :only => Core::Shape::List::TYPE_NAME)
 
         unless shape

@@ -35,6 +35,7 @@ class ThinReports::Core::Shape::Manager::TestTarget < MiniTest::Unit::TestCase
     layout.format.shapes[:t1] = create_shape_format('s-tblock', 't1')
     layout.format.shapes[:t2] = create_shape_format('s-tblock', 't2')
     layout.format.shapes[:ls] = create_shape_format('s-list', 'ls')
+    layout.format.shapes[:default] = create_shape_format('s-list', 'default')
     
     TestManager.new(report, layout)
   end
@@ -81,6 +82,10 @@ class ThinReports::Core::Shape::Manager::TestTarget < MiniTest::Unit::TestCase
     assert_raises ThinReports::Errors::UnknownItemId do
       create_manager.list(:t1)
     end
+  end
+  
+  def test_list_should_use_default_as_id_when_id_is_omitted
+    assert_equal create_manager.list.id, 'default'
   end
   
   def test_values_should_properly_set_values_to_shapes_with_specified_id
