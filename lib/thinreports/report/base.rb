@@ -165,6 +165,12 @@ module ThinReports
         ThinReports::Generator.new(type, self, options).generate_file(filename)
       end
       
+      # @see ThinReports::Core::Shape::Manager::Target#list
+      def list(id = nil, &block)
+        start_new_page if page.nil? || page.finalized?
+        page.list(id, &block)
+      end
+      
       # @return [ThinReports::Report::Events]
       def events
         internal.events

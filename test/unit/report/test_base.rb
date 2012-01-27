@@ -161,6 +161,30 @@ class ThinReports::Report::TestBase < MiniTest::Unit::TestCase
     assert_equal @report.finalized?, true
   end
   
+  def test_list_should_create_new_page_when_page_is_not_created
+    @report.use_layout(data_file('basic_list_layout.tlf'))
+    @report.list(:list)
+    
+    refute_nil @report.page
+  end
+  
+  def test_list_should_create_new_page_when_page_is_finalized
+    @report.tap do |r|
+      r.use_layout(data_file('basic_list_layout.tlf'))
+      r.start_new_page
+      r.page.finalize
+    end
+    @report.list(:list)
+    
+    assert_equal @report.page.finalized?, false
+  end
+  
+  def test_list_should_properly_return_shape_with_the_specified_id
+    @report.use_layout(data_file('basic_list_layout.tlf'))
+    
+    assert_equal @report.list(:list).id, 'list'
+  end
+  
   def test_Base_create_should_finalize_report
     report = Report::Base.create do |r|
       assert_instance_of Report::Base, r

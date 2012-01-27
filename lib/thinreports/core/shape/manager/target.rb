@@ -55,8 +55,8 @@ module ThinReports
       alias_method :exists?, :item_exists?
       
       # @see #item
-      def list(id = :default, &block)
-        shape = find_item(id, :only => Core::Shape::List::TYPE_NAME)
+      def list(id = nil, &block)
+        shape = find_item(id ||= :default, :only => Core::Shape::List::TYPE_NAME)
 
         unless shape
           raise ThinReports::Errors::UnknownItemId.new(id, 'List')
