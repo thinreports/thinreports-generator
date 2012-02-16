@@ -64,4 +64,12 @@ class ThinReports::Core::Shape::List::TestPage < MiniTest::Unit::TestCase
     
     assert_dispatched_event
   end
+  
+  def test_copy_should_properly_work_when_list_has_not_header
+    report = create_basic_report('basic_list_noheader_layout.tlf')
+    
+    10.times {|t| report.list.add_row }
+  rescue => e
+    flunk exception_details(e, 'Not worked when list has not header')
+  end
 end

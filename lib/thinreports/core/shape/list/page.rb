@@ -91,8 +91,10 @@ module ThinReports
           end
           new_list.finalized!
         end
-        # New-List inherit List-Header of Old-List.
-        new_list.internal.header = internal.header.copy(new_list)
+        
+        if internal.format.has_header?
+          new_list.internal.header = internal.header.copy(new_list)
+        end
         new_list
       end
       
