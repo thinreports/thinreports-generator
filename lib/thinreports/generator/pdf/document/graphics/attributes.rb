@@ -95,6 +95,17 @@ module ThinReports
         end
       end
       
+      # @param [String] overflow
+      # @return [Symbol]
+      def text_overflow(overflow)
+        case overflow
+        when 'truncate' then :truncate
+        when 'fit'      then :shrink_to_fit
+        when 'expand'   then :expand
+        else :truncate
+        end
+      end
+        
       # @param [String] xlink
       # @return [String]
       def extract_base64_string(xlink)

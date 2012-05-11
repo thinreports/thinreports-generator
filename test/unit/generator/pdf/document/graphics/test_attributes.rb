@@ -129,4 +129,11 @@ class ThinReports::Generator::PDF::Graphics::TestAttributes < MiniTest::Unit::Te
   def test_text_letter_spacing_should_return_nil_when_value_is_auto
     assert_nil @pdf.text_letter_spacing('auto')
   end
+
+  def test_text_overflow
+    assert_equal @pdf.text_overflow('truncate'), :truncate
+    assert_equal @pdf.text_overflow('fit'), :shrink_to_fit
+    assert_equal @pdf.text_overflow('expand'), :expand
+    assert_equal @pdf.text_overflow(''), :truncate
+  end
 end

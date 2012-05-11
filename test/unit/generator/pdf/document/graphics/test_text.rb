@@ -137,13 +137,18 @@ class ThinReports::Generator::PDF::Graphics::TestText < MiniTest::Unit::TestCase
                  [@pdf.send(:pos, 0, 0), @pdf.send(:s2f, 50)]
   end
   
-  def test_text_box_attrs_should_return_a_Hash_containing_a_single_line_option_when_single_is_true
-    attrs = @pdf.send(:text_box_attrs, 0, 0, 100, 100, true)
+  def test_text_box_attrs_should_return_a_Hash_which_doesnt_contain_the_single_line_option_when_single_is_true_but_overflow_is_expand
+    attrs = @pdf.send(:text_box_attrs, 0, 0, 100, 100, :single => true, :overflow => :expand)
+    refute attrs.key?(:single_line)
+  end
+  
+  def test_text_box_attrs_should_return_a_Hash_containing_a_single_line_option_when_single_is_true_and_overflow_isnot_expand
+    attrs = @pdf.send(:text_box_attrs, 0, 0, 100, 100, :single => true, :overflow => :truncate)
     assert_equal attrs[:single_line], true
   end
   
-  def test_text_box_attrs_should_return_a_Hash_which_does_not_contain_a_heigh_option_when_single_is_true
-    attrs = @pdf.send(:text_box_attrs, 0, 0, 100, 100, true)
+  def test_text_box_attrs_should_return_a_Hash_which_does_not_contain_a_height_option_when_single_is_true
+    attrs = @pdf.send(:text_box_attrs, 0, 0, 100, 100, :single => true)
     refute attrs.key?(:height)
   end
   

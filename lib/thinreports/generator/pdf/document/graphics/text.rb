@@ -20,9 +20,11 @@ module ThinReports
       # @option attrs [Numeric, String] :line_height The total height of an text line.
       # @option attrs [Numeric, String] :letter_spacing
       # @option attrs [Boolean] :single (false)
+      # @option attrs [:trancate, :shrink_to_fit, :expand] :overflow (:trancate)
       def text_box(content, x, y, w, h, attrs = {})
         w, h = s2f(w, h)
-        box_attrs = text_box_attrs(x, y, w, h, attrs.delete(:single))
+        box_attrs = text_box_attrs(x, y, w, h, :single   => attrs.delete(:single), 
+                                               :overflow => attrs[:overflow])
         
         with_text_styles(attrs) do |built_attrs, font_styles|
           pdf.formatted_text_box([{:text   => text_without_line_wrap(content),
@@ -40,7 +42,7 @@ module ThinReports
       # @see #text_box
       def text(content, x, y, w, h, attrs = {})
         # Set the :overflow property to :shirink_to_fit.
-        text_box(content, x, y, w, h, attrs.merge(:overflow => :shrink_to_fit))
+        text_box(content, x, y, w, h, {:overflow => :shrink_to_fit}.merge(attrs))
       end
       
     private
@@ -49,13 +51,15 @@ module ThinReports
       # @param y (see #text_box)
       # @param w (see #text_box)
       # @param h (see #text_box)
-      # @param [Boolean, nil] single
+      # @param [Hash] states
+      # @option states [Boolean] :single
+      # @option states [Symbold] :overflow
       # @return [Hash]
-      def text_box_attrs(x, y, w, h, single = nil)
+      def text_box_attrs(x, y, w, h, states = {})
         attrs = {:at    => pos(x, y),
                  :width => s2f(w)}
-        if single
-          attrs.merge(:single_line => true)
+        if states[:single]
+          states[:overflow] != :expand ? attrs.merge(:single_line => true) : attrs
         else
           attrs.merge(:height => s2f(h))
         end

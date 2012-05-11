@@ -10,6 +10,7 @@ class ThinReports::Core::Shape::TextBlock::TestFormat < MiniTest::Unit::TestCase
     "id" => "block_1", 
     "display" => "true", 
     "multiple" => "false",
+    "overflow" => "truncate",
     "box" => {
       "x" => 100.0,
       "y" => 100.0,
@@ -104,6 +105,10 @@ class ThinReports::Core::Shape::TextBlock::TestFormat < MiniTest::Unit::TestCase
     assert_equal format(TEST_TBLOCK_FORMAT).multiple?, false
   end
   
+  def test_overflow_via_TEST_TBLOCK_FORMAT
+    assert_equal format(TEST_TBLOCK_FORMAT).overflow, 'truncate'
+  end
+  
   def test_multiple_checker_should_return_true
     assert format('multiple' => 'true').multiple?
   end
@@ -126,7 +131,7 @@ class ThinReports::Core::Shape::TextBlock::TestFormat < MiniTest::Unit::TestCase
     data = {'format' => {'padding' => {'length' => '999'}}}
     assert_kind_of ::Numeric, format(data).format_padding_length
   end
-  
+
   def test_has_format_asker_should_return_false_with_empty_value
     data = {'format' => {'type' => ''}}
     refute format(data).has_format?

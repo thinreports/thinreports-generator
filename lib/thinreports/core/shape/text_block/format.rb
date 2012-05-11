@@ -6,7 +6,7 @@ module ThinReports
     # @private
     class TextBlock::Format < Basic::BlockFormat
       config_reader :ref_id => %w( ref-id )
-      config_reader :valign
+      config_reader :valign, :overflow
       config_reader :line_height => %w( line-height )      
       config_reader :format_base             => %w( format base ),
                     :format_type             => %w( format type ),
