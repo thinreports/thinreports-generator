@@ -6,4 +6,5 @@ gemspec
 unless RUBY_VERSION > '1.9'
   gem 'json', '>= 1.4.6'
   gem 'minitest', '>= 0'
+  gem 'turn', '>=0'
 end

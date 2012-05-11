@@ -4,6 +4,7 @@ begin
   require 'rubygems'
   require 'minitest/unit'
   require 'minitest/spec'
+  require 'turn'
   require 'flexmock'
 rescue LoadError => e
   $stderr.puts 'To run the unit tests, you need minitest and flexmock.'
