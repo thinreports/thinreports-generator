@@ -1,4 +1,6 @@
 Gemfile.lock
 *.gem
+*.swp
+*.pdf
 
 doc/yardoc
