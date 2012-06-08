@@ -142,10 +142,11 @@ module ThinReports
       # @overload generate(type, options = {})
       #   Specify the generator type.
       #   @param [Symbol] type
+      #   @return [String]
       # @overload generate(options = {})
       #   Using the default generator type.
-      # @param [Hash] options ({})
-      # @return [String]
+      #   @param [Hash] options ({})
+      #   @return [String]
       def generate(*args)
         options = args.last.is_a?(::Hash) ? args.pop : {}
         type    = args.first || ThinReports.config.generator.default
@@ -154,10 +155,11 @@ module ThinReports
       
       # @overload generate_file(type, filename, options = {})
       #   @param type (#generate)
+      #   @return [void]
       # @overload generate_file(filename, options = {})
-      # @param [String] filename
-      # @param options (see #generate)
-      # @return [void]
+      #   @param [String] filename
+      #   @param options (see #generate)
+      #   @return [void]
       def generate_file(*args)
         options = args.last.is_a?(::Hash) ? args.pop : {}
         args.unshift(ThinReports.config.generator.default) if args.size == 1

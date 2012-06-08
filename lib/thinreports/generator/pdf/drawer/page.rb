@@ -5,7 +5,7 @@ module ThinReports
     
     # @private
     class PDF::Drawer::Page < PDF::Drawer::Base
-      # @param see PDF::Drawer::Base#initialize)
+      # @param (see PDF::Drawer::Base#initialize)
       def initialize(pdf, format)
         super
         @lists = {}

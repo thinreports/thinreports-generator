@@ -18,7 +18,10 @@ module ThinReports
       end
       
       # @param [String] base64
-      # @param x, y, w, h (see #image)
+      # @param [Numeric, Strng] x
+      # @param [Numeric, Strng] y
+      # @param [Numeric, Strng] w
+      # @param [Numeric, Strng] h
       def base64image(base64, x, y, w, h)
         image = create_temp_imagefile(base64)
         image(image.path, x, y, w, h)

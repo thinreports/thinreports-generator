@@ -8,7 +8,7 @@ module ThinReports
       
       undef_method :items, :values
       
-      # @param [ThinReports::Layout::Base]
+      # @param [ThinReports::Layout::Base] layout
       def initialize(layout)
         initialize_manager(layout.format) do |f|
           Core::Shape::Configuration(f.type).new

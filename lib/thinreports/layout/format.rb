@@ -50,7 +50,7 @@ module ThinReports
           end
         end
         
-        # @param [raw_format] Hash A parsed json.
+        # @param [Hash] raw_format A parsed json.
         def compact_format!(raw_format)
           %w( finger-print state version ).each {|attr| raw_format.delete(attr) }
         end

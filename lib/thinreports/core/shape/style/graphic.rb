@@ -48,7 +48,7 @@ module ThinReports
         [self.border_width, self.border_color]
       end
       
-      # @param [Array<String, Number>]
+      # @param [Array<String, Number>] width_and_color
       def border=(width_and_color)
         w, c = width_and_color
         self.border_width = w

@@ -68,7 +68,7 @@ module ThinReports
       end
       
       # @param [Symbol] style_method
-      # @param [String, Number, Array<String, Number>]
+      # @param [String, Number, Array<String, Number>] value
       def []=(style_method, value)
         verify_style_method(style_method)
         send(:"#{style_method}=", value)

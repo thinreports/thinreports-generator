@@ -42,7 +42,7 @@ module ThinReports
         end
       end
       
-      # @param [REXML::Element] svg_elm
+      # @param [REXML::Element] elm
       def draw_svg_rect(elm)
         x, y, w, h = element_attributes_values_at(elm, 'x', 'y', 'width', 'height')
         attributes = common_graphic_attrs(elm.attributes) do |attrs|

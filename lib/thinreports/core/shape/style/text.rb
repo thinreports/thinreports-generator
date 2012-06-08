@@ -22,14 +22,12 @@ module ThinReports
         @valign = default_valign
       end
       
-      # @override
       def copy
         new_style = super
         new_style.valign = self.valign
         new_style
       end
       
-      # @override
       def identifier
         super + (@valign == default_valign ? '' : @valign.to_s)
       end

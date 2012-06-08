@@ -73,7 +73,7 @@ module ThinReports
     
     private
       
-      # @param [ThinReports::Core::Shape::Text::Internal, ThinReports::Core::Shape::TextBlock::Internal]
+      # @param [ThinReports::Core::Shape::Text::Internal, ThinReports::Core::Shape::TextBlock::Internal] shape
       # @return [Hash]
       def shape_text_attrs(shape)
         format = shape.format
