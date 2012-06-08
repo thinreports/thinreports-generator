@@ -4,3 +4,4 @@ Gemfile.lock
 *.pdf
 
 doc/yardoc
+.yardoc/
