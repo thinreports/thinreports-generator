@@ -2,14 +2,16 @@
 
 begin
   require 'rubygems'
-  require 'minitest/unit'
   require 'minitest/spec'
+  require 'minitest/unit'
   require 'turn'
   require 'flexmock'
 rescue LoadError => e
   $stderr.puts 'To run the unit tests, you need minitest and flexmock.'
   raise e
 end
+
+Turn.config.format = :progress
 
 # Load ThinReports.
 require 'thinreports'
