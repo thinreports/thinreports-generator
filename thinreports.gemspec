@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.files         = Dir['{lib,tasks,resources}/**/*'] +
                     Dir['doc/yardoc_templates/**/*'] +
                     Dir['test/{unit,case,benchmark}/**/*'] +
-                    ['Rakefile', 'README.rdoc', '.yardopts']
+                    ['MIT-LICENSE', 'Rakefile', 'README.rdoc', '.yardopts']
   s.require_path  = 'lib'
   
   s.add_dependency('prawn', '>= 0.12.0', '<= 0.12.0')
