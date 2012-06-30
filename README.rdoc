@@ -2,106 +2,162 @@
 
 {<img src="https://secure.travis-ci.org/thinreports/thinreports-generator.png" />}[http://travis-ci.org/thinreports/thinreports-generator]
 
-ThinReports is Open Source Reporting Solution for Ruby.
-And it provides you these tools:
+{ThinReports}[http://www.thinreports.org/] is Open Source Reporting Solution for Ruby.
 
 * ThinReports Editor (GUI Designer)
 * ThinReports Generator (Report Generator for Ruby)
 
-You can see more details:
+== Generator's features
 
-* {Official Site}[http://www.thinreports.org/]
-* {Project Site}[http://osc.matsukei.net/projects/thinreports/wiki]
+Editor's features is {here}[http://www.thinreports.org/features/editor/].
 
-== Quick Start
+=== Easy to generate PDF file
 
-Getting started with ThinReports Generator can be as simple as:
+Design the layout using Editor, then embed values to text field in layout. That's it!
+
+=== Simple runtime environments
+
+Ruby, RubyGems, Prawn and Generator.
+
+=== Dynamic
+
+Generator can be dynamically operated ...
+
+* value of TextBlock
+* image of ImageBlock
+* styles (border, fill, visibility, position, color, font) of shape
+
+=== For Japan
+
+* Japanese OK
+* External characters (Gaiji)
+
+== Supported Versions
+
+* Ruby 1.8.7, 1.9.2, 1.9.3
+* JRuby 1.6.5+ (Only 1.8mode)
+
+== Install
+
+Add the following line in your Gemfile:  
+
+  gem 'thinreports'
+
+Then bundle:
+
+  $ bundle
+
+Or:
+
+  $ gem install thinreports
+
+== Usage
+
+*Caution:* In order to use the Generator, you must need the layout file(*.tlf) created with {ThinReportsEditor}[http://www.thinreports.org/features/editor/].
+
+=== Basic format
 
   require 'thinreports'
   
   report = ThinReports::Report.new :layout => 'report.tlf'
+  # Page 1
   report.start_new_page do
     item(:title).value('ThinReports')
   end
-  
-  # :pdf is used as default when the type argument of a #generate_file is omitted.
+
+  # Page 2
+  report.start_new_page do |page|
+    page.item(:title).value('Pure Ruby')
+    page.item(:title).style(:color, 'red')
+  end
+
   report.generate_file('report.pdf')
 
-Or can be as:
+Or, 
 
-  ThinReports::Report.generate_file(:pdf, 'report.pdf', :layout => 'report.tlf') do
+  ThinReports::Report.generate_file('report.pdf', :layout => 'report.tlf') do
     start_new_page
     
     page.item(:title).value('ThinReports')
     
     start_new_page
     
-    page.item(:title).value('ThinReports').style(:color, '#ff0000')
+    page.item(:title).value('Pure Ruby').style(:color, '#ff0000')
   end
+
+=== List format
+
+  report = ThinReports::Report.new :layout => 'list.tlf'
+  report.start_new_page
+
+  10.times do |n|
+    report.page.list(:default).add_row do |row|
+      row.item(:no).value(n)
+    end
+  end
+
+  report.generate_file('list.tlf')
+
+Or, 
+
+  report.page.list(:default) do |list|
+    10.times do |n|
+      list.add_row :no => n
+    end
+  end
+
+Since 0.7.5:
+
+  report = ThinReports::Report.new :layout => 'list.tlf'
+
+  10.times do |n|
+    report.list.add_row do |row|
+      row.item(:no).value(n)
+    end
+  end
+
+More simply,
+
+  report.list do |list|
+    10.times do |n|
+      list.add_row :title => n
+    end
+  end
+
+* +#start_new_page+ can be omitted because it is created new page automatically when +#list+ is called
+* id argument of +#list+ can be omitted if is :default
 
 {Learn more}[http://osc.matsukei.net/projects/thinreports/wiki/Getting_Started].
 
-== Release Note
+== For more information
 
-* {Changelog}[http://osc.matsukei.net/projects/thinreports/wiki/Changelog]
+=== Release information
 
-== Documentation
+{News}[http://osc.matsukei.net/projects/thinreports/news] /
+{Changelog}[http://osc.matsukei.net/projects/thinreports/wiki/Changelog]
 
-* {Getting Started}[http://osc.matsukei.net/projects/thinreports/wiki/Getting_Started]
-* {Guide}[http://osc.matsukei.net/projects/thinreports/wiki/Guide]
-* {Examples}[http://osc.matsukei.net/projects/thinreports/wiki/Examples]
-* {HowTos}[http://osc.matsukei.net/projects/thinreports/wiki/HowTos]
+=== Documentation
 
-== Project
+{Getting Started}[http://osc.matsukei.net/projects/thinreports/wiki/Getting_Started] /
+{Examples}[http://osc.matsukei.net/projects/thinreports/wiki/Examples] /
+{HowTos}[http://osc.matsukei.net/projects/thinreports/wiki/HowTos]
 
-* {Roadmap}[http://osc.matsukei.net/projects/thinreports/roadmap]
-* {Issue Tracker (Read-Only)}[http://osc.matsukei.net/projects/thinreports/issues]
-* {Source Code}[http://osc.matsukei.net/projects/thinreports/wiki/Source_Code]
+=== Support
 
-== Help
+{Open Forum}[http://osc.matsukei.net/projects/thinreports/boards]
 
-* {Open Forum}[http://osc.matsukei.net/projects/thinreports/boards]
+== Author
 
-== Dependencies
+{Matsukei}[http://www.matsukei.co.jp/] Co.,Ltd.
 
-* <code>prawn</code> <code>= 0.12.0</code>
-* <code>json</code> <code>>= 1.4.6</code> (Only for less than Ruby 1.9)
+* twitter: {@thinreports_org}[https://twitter.com/thinreports_org]
+* email: {thinreports@gmail.com}[mailto:thinreports@gmail.com]
 
-=== Note
+== Contributing
 
-We tested on <code>Ruby 1.8.7</code> and <code>1.9.2</code>.
-But we recommend <code>1.9.2+</code>.
-
-== Resources
-
-=== Fonts
-
-ThinReports includes the following fonts.
-
-* IPAFonts: Copyright(c) 2003-2011 Information-technology Promotion Agency, Japan.  
-  Please see the lincense file {IPA_Font_License_Agreement_v1.0.txt}[http://ipafont.ipa.go.jp/ipa_font_license_v1.html].
+* Pull request
+* Feedback from {here}[http://osc.matsukei.net/projects/thinreports/issues/new]
 
 == License
 
-(The MIT License)
-
-Copyright (c) 2010-2011 Matsukei Co.,Ltd.
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-'Software'), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+See LICENSE file.
