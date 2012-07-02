@@ -8,3 +8,7 @@ unless RUBY_VERSION > '1.9'
   gem 'minitest', '>= 0'
   gem 'turn', '>=0'
 end
+
+platforms :mswin, :mingw do
+  gem 'win32console'
+end
