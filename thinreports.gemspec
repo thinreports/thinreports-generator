@@ -21,10 +21,8 @@ Gem::Specification.new do |s|
   s.rdoc_options     = ['--main', 'README.rdoc']
   s.extra_rdoc_files = ['README.rdoc']
   
-  s.files         = Dir['{lib,tasks,resources}/**/*'] +
-                    Dir['doc/yardoc_templates/**/*'] +
-                    Dir['test/{unit,case,benchmark}/**/*'] +
-                    ['LICENSE', 'MIT-LICENSE', 'Rakefile', 'README.rdoc', '.yardopts']
+  s.files         = `git ls-files`.split($\)
+  s.test_files    = s.files.grep(%r{^test/})
   s.require_path  = 'lib'
   
   s.add_dependency('prawn', '>= 0.12.0', '<= 0.12.0')
