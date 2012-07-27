@@ -1,14 +1,18 @@
 # coding: utf-8
 
-begin
-  require 'rubygems'
-  require 'minitest/spec'
-  require 'minitest/unit'
-  require 'turn'
-  require 'flexmock'
-rescue LoadError => e
-  $stderr.puts 'To run the unit tests, you need minitest and flexmock.'
-  raise e
+require 'rubygems'
+require 'minitest/spec'
+require 'minitest/unit'
+require 'turn'
+require 'flexmock'
+
+require 'simplecov'
+SimpleCov.start do
+  add_filter 'test/'
+  add_group 'Core', 'lib/thinreports/core'
+  add_group 'Generator', 'lib/thinreports/generator'
+  add_group 'Layout', 'lib/thinreports/layout'
+  add_group 'Report', 'lib/thinreports/report'
 end
 
 Turn.config.format = :progress
