@@ -18,8 +18,10 @@ module ThinReports
       #   See Prawn::Document#encrypt_document
       def initialize(report, options)
         super
-        @pdf = Document.new(options, :Title => default_layout.format.report_title)
         
+        title = default_layout ? default_layout.format.report_title : nil
+
+        @pdf = Document.new(options, :Title => title)
         @drawers = {}
       end
       
