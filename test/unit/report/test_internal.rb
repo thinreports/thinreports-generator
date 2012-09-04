@@ -109,7 +109,7 @@ class ThinReports::Report::TestInternal < MiniTest::Unit::TestCase
   
   def test_add_page_should_switch_to_a_reference_to_the_current_page
     layout = ThinReports::Layout.new(sample_layout1)
-    new_pages = (1..2).inject([]) do |pages|
+    new_pages = (1..2).inject([]) do |pages, i|
       pages << ThinReports::Core::Page.new(report, layout)
     end
 
