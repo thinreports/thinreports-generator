@@ -31,9 +31,6 @@ module ThinReports
       # @see ThinReports::Report::Base#use_layout
       def register_layout(layout, options = {}, &block)
         layout = if options.empty? || options[:default]
-          if @default_layout
-            raise ArgumentError, 'The default layout is already set.'
-          end
           @default_layout = init_layout(layout)
         else
           id = options[:id].to_sym

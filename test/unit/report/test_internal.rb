@@ -39,11 +39,11 @@ class ThinReports::Report::TestInternal < MiniTest::Unit::TestCase
     assert_equal internal.default_layout.filename, sample_layout1
   end
   
-  def test_register_layout_should_raise_an_error_when_default_layout_is_already_set
+  def test_register_layout_should_be_able_to_change_the_default_layout
     internal = Report::Internal.new(report, :layout => sample_layout1)
-    assert_raises ArgumentError do
-      internal.register_layout(sample_layout2)
-    end
+    internal.register_layout(sample_layout2, :default => true)
+
+    assert_equal internal.default_layout.filename, sample_layout2
   end
   
   def test_register_layout_should_be_set_as_with_id_when_id_option_is_set
