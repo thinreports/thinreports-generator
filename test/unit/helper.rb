@@ -21,6 +21,7 @@ Turn.config.format = :progress
 require 'thinreports'
 
 # Load misc.
+require 'fileutils'
 require 'digest/sha1'
 
 # Run the test.
@@ -28,7 +29,21 @@ MiniTest::Unit.autorun
 
 module ThinReports::TestHelpers
   include FlexMock::TestCase
+
+  ROOT_DIR = File.expand_path(File.dirname(__FILE__))
+  TEMP_DIR = ROOT_DIR + '/tmp'
+
+  alias_method :_teardown, :teardown
   
+  def teardown
+    _teardown
+    clear_outputs
+  end
+
+  def clear_outputs
+    FileUtils.rm Dir.glob(TEMP_DIR + '/*')
+  end
+
   def clean_whitespaces(str)
     str.gsub(/^\s*|\n\s*/, '')
   end
@@ -61,5 +76,9 @@ module ThinReports::TestHelpers
   
   def data_file(filename)
     File.join(File.dirname(__FILE__), 'data', filename)
+  end
+
+  def temp_file(extname = 'pdf')
+    File.join(TEMP_DIR, [*'a'..'z', *0..9].shuffle[0, 8].join + ".#{extname}")
   end
 end

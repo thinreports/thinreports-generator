@@ -5,42 +5,44 @@ require 'test/unit/helper'
 class ThinReports::Core::Shape::TextBlock::Formatter::TestDatetime < MiniTest::Unit::TestCase
   include ThinReports::TestHelpers
   
-  # Alias
-  Formatter = ThinReports::Core::Shape::TextBlock::Formatter::Datetime
+  # Aliases
+  TextBlock = ThinReports::Core::Shape::TextBlock
+  Formatter = TextBlock::Formatter::Datetime
   
   def setup
     @datetime_format = '%Y/%m/%d %H:%M:%S'
-    @time            = Time.now
-
-    @format = flexmock(:format_base => '', 
-                       :format_datetime_format => @datetime_format)
+    @time = Time.now
   end
   
+  def text_block_format(format = {})
+    default = {'base' => '', 'datetime' => {'format' => '%Y/%m/%d %H:%M:%S'}}
+    TextBlock::Format.new('format' => default.merge(format))
+  end
+
   def test_apply_datetime_format_without_basic_format
-    formatter = Formatter.new(@format)
+    formatter = Formatter.new(text_block_format)
     
-    assert_equal formatter.apply(@time), @time.strftime(@datetime_format)
+    assert_equal @time.strftime(@datetime_format), 
+                 formatter.apply(@time)
   end
   
   def test_apply_datetime_format_with_basic_format
-    # Partial mock
-    format = flexmock(@format, :format_base => 'Now: {value}')
+    formatter = Formatter.new(text_block_format('base' => 'Now: {value}'))
     
-    formatter = Formatter.new(format)
-    
-    assert_equal formatter.apply(@time),
-                 "Now: #{@time.strftime(@datetime_format)}"
+    assert_equal "Now: #{@time.strftime(@datetime_format)}", 
+                 formatter.apply(@time)
+                 
   end
   
   def test_not_apply_datetime_format_and_return_raw_value
     # When value is invalid
-    formatter = Formatter.new(@format)
+    formatter = Formatter.new(text_block_format)
     
     assert_same formatter.apply(val = 'invalid value'), val
     assert_same formatter.apply(val = 123456), val
     
     # When format is empty
-    format = flexmock(@format, :format_datetime_format => '')
+    formatter = Formatter.new(text_block_format('datetime' => {'format' => ''}))
     
     assert_same formatter.apply(@time), @time
   end
