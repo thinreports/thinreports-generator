@@ -79,6 +79,6 @@ module ThinReports::TestHelpers
   end
 
   def temp_file(extname = 'pdf')
-    File.join(TEMP_DIR, [*'a'..'z', *0..9].shuffle[0, 8].join + ".#{extname}")
+    File.join(TEMP_DIR, (('a'..'z').to_a + (0..9).to_a).shuffle[0, 8].join + ".#{extname}")
   end
 end
