@@ -14,4 +14,4 @@ report = ThinReports::Report.new :layout => CaseRunner.layout_file
   end
 end
 
-report.generate_file CaseRunner.output_file
+report.generate :filename => CaseRunner.output_file

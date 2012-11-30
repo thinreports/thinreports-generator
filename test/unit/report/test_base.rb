@@ -104,6 +104,24 @@ class ThinReports::Report::TestBase < MiniTest::Unit::TestCase
     
     assert_equal @report.generate(:option => :value), 'Success'
   end
+
+  def test_generate_should_call_generate_file_method_when_filename_option_is_given
+    flexmock(ThinReports::Generator).
+      should_receive(:new).
+      with(:pdf, @report, {}).
+      and_return(flexmock(:generate_file => 'Success')).once
+
+    assert_equal @report.generate(:filename => 'foo.pdf'), 'Success'
+  end
+
+  def test_generate_file_should_warn_the_DEPRECATION_WARNING
+    report = create_basic_report('basic_layout1')
+
+    out, err = capture_io do
+      report.generate_file(temp_file)
+    end
+    assert_match /DEPRECATION/, err
+  end
   
   def test_generate_file_should_properly_initialize_Generator_and_call_generate_file_method_when_type_is_specified
     generator = flexmock('generator')
@@ -236,6 +254,13 @@ class ThinReports::Report::TestBase < MiniTest::Unit::TestCase
       and_return(Report::Base.new).once
     
     Report::Base.generate_file(:pdf, 'output.pdf', :report => {:layout => 'layout.tlf'}) {}
+  end
+
+  def test_Base_generate_file_should_warn_the_DEPRICATION_WARNING
+    out, err = capture_io do
+      Report.generate_file(temp_file, :report => {:layout => data_file('basic_layout1')}) { start_new_page }
+    end
+    assert_match /DEPRECATION/, err
   end
   
   def test_Base_generate_file_should_properly_generate_file_when_type_is_omitted

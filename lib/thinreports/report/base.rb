@@ -52,10 +52,11 @@ module ThinReports
         # @yield (see .create)
         # @yieldparam (see .create)
         # @see .generate
+        # @deprecated Please use the #generate method with :filename option instead.
         # @return [void]
         def generate_file(*args, &block)
           raise ArgumentError, '#generate_file requires a block' unless block_given?
-          
+
           report_opts, generator_opts = extract_options!(args)
           
           report = create(report_opts, &block)
@@ -147,10 +148,24 @@ module ThinReports
       #   Using the default generator type.
       #   @param [Hash] options ({})
       #   @return [String]
+      # @example Generate the PDF data
+      #   report.generate(:pdf) #=> "%PDF-1.4...."
+      #
+      #   # Or, you can omit the type of generator
+      #   report.generate
+      # @example Create the PDF file (Since v0.8)
+      #   report.generate(:pdf, :filename => 'foo.pdf')
       def generate(*args)
         options = args.last.is_a?(::Hash) ? args.pop : {}
-        type    = args.first || ThinReports.config.generator.default
-        ThinReports::Generator.new(type, self, options).generate
+        type = args.first || ThinReports.config.generator.default
+        filename = options.delete(:filename)
+        generator = ThinReports::Generator.new(type, self, options)
+
+        if filename
+          generator.generate_file(filename)
+        else
+          generator.generate
+        end
       end
       
       # @overload generate_file(type, filename, options = {})
@@ -160,11 +175,16 @@ module ThinReports
       #   @param [String] filename
       #   @param options (see #generate)
       #   @return [void]
+      # @deprecated Please use the #generate method with :filename option instead.
       def generate_file(*args)
+        warn '[DEPRECATION] The #generate_file method is deprecated. ' +
+             'Please use the #generate(:filename => "filename") instead.'
+
         options = args.last.is_a?(::Hash) ? args.pop : {}
         args.unshift(ThinReports.config.generator.default) if args.size == 1
         type, filename = args
-        ThinReports::Generator.new(type, self, options).generate_file(filename)
+
+        generate(type, options.merge(:filename => filename))
       end
       
       # @see ThinReports::Core::Shape::Manager::Target#list
