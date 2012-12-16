@@ -1,9 +1,8 @@
 # coding: utf-8
 
-CaseRunner.current :text_align
-
-ThinReports::Report.generate_file(:pdf, CaseRunner.output_file) do
-  use_layout(CaseRunner.layout_file)
-  
-  start_new_page
+testcase :text_align, 'Sets the text-align style to Text' do |t|
+  ThinReports::Report.generate :filename => t.output_filename do
+    use_layout t.layout_filename
+    start_new_page
+  end
 end

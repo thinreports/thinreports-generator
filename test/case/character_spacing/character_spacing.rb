@@ -1,7 +1,8 @@
 # coding: utf-8
 
-CaseRunner.current :character_spacing
+testcase :character_spacing, 'Sets the character spacing in the Editor' do
+  report = ThinReports::Report.new :layout => layout_filename
+  report.start_new_page
 
-ThinReports::Report.generate(:filename => CaseRunner.output_file, :layout => CaseRunner.layout_file) do
-  start_new_page
+  report.generate :filename => output_filename
 end
