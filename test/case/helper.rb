@@ -30,7 +30,7 @@ class ThinReports::TestCase
   end
   
   def output_filename
-    resource("#{@current}.pdf")
+    resource("#{@name}.pdf")
   end
   
   def resource(filename = nil)
