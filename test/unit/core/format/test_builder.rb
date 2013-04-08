@@ -66,7 +66,6 @@ class ThinReports::Core::Format::TestBuilder < MiniTest::Unit::TestCase
       <svg width="595.2" height="841.8">
         <g class="canvas">
           <rect x="100" y="100" width="100" height="100" fill="red" x-attr="cleaned attr"></rect>
-          <%= r(:"t1")%>
           <!--LAYOUT<text x="60" y="103">t1</text>LAYOUT-->
         </g>
       </svg>

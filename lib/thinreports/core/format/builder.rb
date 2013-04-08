@@ -31,13 +31,13 @@ module ThinReports
       # @param [Hash] options
       def build_layout(format, options = {}, &block)
         level = '-' * ((options[:level] || 1 ) - 1)
+        pattern = /<!--#{level}SHAPE(.*?)SHAPE#{level}-->/
 
-        format.layout.gsub!(/<!--#{level}SHAPE(.*?)SHAPE#{level}-->/) do
-          shape_format = block.call(*parsed_format_and_shape_type($1))
-          
+        format.layout.scan(pattern) do |m|
+          shape_format = block.call(*parsed_format_and_shape_type(m.first))
           format.shapes[shape_format.id.to_sym] = shape_format
-          shape_tag(shape_format)
         end
+        format.layout.gsub!(pattern, '')
       end
       
       # @param [String] svg
