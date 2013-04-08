@@ -77,12 +77,14 @@ class ThinReports::Core::TestEvents < MiniTest::Unit::TestCase
   end
   
   def test_copy
-    @events.on(:change) {|e| e.type }
-    @events.on(:load) {|e| e.type }
+    @events.on(:change) { :on_change }
+    @events.on(:load) { :on_load }
     
     copied = @events.copy
     
-    assert_equal @events.events, copied.events
+    assert @events.events.all? {|k,f|
+      copied.events[k].call == f.call
+    }
     refute_same  @events.events, copied.events
     
     @events.unlisten(:change)
