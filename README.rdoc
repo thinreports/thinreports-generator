@@ -1,6 +1,6 @@
 = ThinReports Generator
 
-{<img src="https://secure.travis-ci.org/thinreports/thinreports-generator.png" />}[http://travis-ci.org/thinreports/thinreports-generator] {<img src="https://codeclimate.com/github/thinreports/thinreports-generator.png" />}[https://codeclimate.com/github/thinreports/thinreports-generator]
+{<img src="https://secure.travis-ci.org/thinreports/thinreports-generator.png" />}[http://travis-ci.org/thinreports/thinreports-generator] {<img src="https://codeclimate.com/github/thinreports/thinreports-generator.png" />}[https://codeclimate.com/github/thinreports/thinreports-generator] {<img src="https://gemnasium.com/thinreports/thinreports-generator.png" />}[https://gemnasium.com/thinreports/thinreports-generator]
 
 {ThinReports}[http://www.thinreports.org/] is Open Source Reporting Solution for Ruby.
 
