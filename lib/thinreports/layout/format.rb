@@ -12,11 +12,7 @@ module ThinReports
       config_reader :page_paper_type     => %w( config page paper-type ),
                     :page_width          => %w( config page width ),
                     :page_height         => %w( config page height ),
-                    :page_orientation    => %w( config page orientation ),
-                    :page_margin_top     => %w( config page margin-top ),
-                    :page_margin_bottom  => %w( config page margin-bottom ),
-                    :page_margin_left    => %w( config page margin-left ), 
-                    :page_margin_left    => %w( config page margin-right )
+                    :page_orientation    => %w( config page orientation )
       
       config_checker 'user', :user_paper_type => %w( config page paper-type )
       
