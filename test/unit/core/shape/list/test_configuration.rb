@@ -29,6 +29,10 @@ class ThinReports::Core::Shape::List::TestConfiguration < MiniTest::Unit::TestCa
   def test_store_return_nil_when_uninitialized_yet
     assert_nil @config.store
   end
+
+  def test_type
+    assert_equal @config.type, List::TYPE_NAME
+  end
   
   def test_copy
     copied_store = flexmock('copied store')
@@ -50,3 +54,4 @@ class ThinReports::Core::Shape::List::TestConfiguration < MiniTest::Unit::TestCa
     assert_same copied_config.store, copied_store
   end
 end
+

@@ -20,6 +20,10 @@ class ThinReports::Report::TestInternal < MiniTest::Unit::TestCase
     data_file('basic_layout2.tlf')
   end
 
+  def sample_list_layout
+    data_file('basic_list_layout.tlf')
+  end
+
   def test_layout_specified_in_new_method_should_be_defined_as_default_layout
     internal = Report::Internal.new(report, :layout => sample_layout1)
     assert_equal internal.default_layout.filename, sample_layout1
@@ -67,6 +71,15 @@ class ThinReports::Report::TestInternal < MiniTest::Unit::TestCase
 
     assert_instance_of ThinReports::Layout::Configuration, 
                        internal.register_layout(sample_layout1)
+  end
+
+  def test_register_layout_should_be_able_to_set_list_configuration_without_errors
+    internal = Report::Internal.new(report, {})
+    internal.register_layout(sample_list_layout) do |config|
+      config.list(:list).use_stores :foo => 0
+      config.list(:list).use_stores :bar => 1000
+    end
+    pass
   end
   
   def test_add_page_should_finalize_the_current_page
@@ -245,3 +258,4 @@ class ThinReports::Report::TestInternal < MiniTest::Unit::TestCase
     assert_equal internal.page_count, 2
   end
 end
+

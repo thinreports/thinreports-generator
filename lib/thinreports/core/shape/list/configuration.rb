@@ -6,10 +6,10 @@ module ThinReports
     class List::Configuration
       # @return [ThinReports::Core::Shape::List::Events]
       attr_reader :events
-      
+
       # @return [ThinReports::Core::Shape::List::Store]
       attr_reader :store
-            
+
       # @param [ThinReports::Core::Shape::List::Events, nil] events (nil)
       # @param [ThinReports::Core::Shape::List::Store, nil] store (nil)
       def initialize(events = nil, store = nil)
@@ -27,7 +27,13 @@ module ThinReports
       def copy
         self.class.new(@events.copy, @store && @store.copy)
       end
+
+      # @return [String]
+      def type
+        List::TYPE_NAME
+      end
     end
     
   end
 end
+
