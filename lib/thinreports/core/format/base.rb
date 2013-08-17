@@ -6,11 +6,6 @@ module ThinReports
     # @abstract
     # @private
     class Base
-      # Work like a BlankSlate.
-      instance_methods.each do |m|
-        undef_method(m) unless m.to_s =~ /^(object|eq|__|instance_|=|!)/
-      end
-      
       class << self
         include Core::Format::Builder
         
