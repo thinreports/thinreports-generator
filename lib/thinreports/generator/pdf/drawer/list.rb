@@ -24,7 +24,7 @@ module ThinReports
       # @param [ThinReports::Core::Shape::List::SectionInterface] section
       def draw_section(section)
         internal = section.internal
-        drawer(internal).draw(section.manager, internal.relative_position)
+        drawer(internal).draw(section, internal.relative_position)
       end
       
       # @param [ThinReports::Core::Shape::List::SectionInternal] section

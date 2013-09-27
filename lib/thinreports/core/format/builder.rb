@@ -15,7 +15,7 @@ module ThinReports
       def build(*args)
         build_internal(*args)
       rescue ThinReports::Errors::Basic => e
-        raise e
+        raise
       rescue => e
         raise ThinReports::Errors::InvalidLayoutFormat
       end

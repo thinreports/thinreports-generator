@@ -13,7 +13,7 @@ class ThinReports::Core::Shape::Style::TestText < MiniTest::Unit::TestCase
     format ||= create_format
     ThinReports::Core::Shape::Style::Text.new(format)
   end
-  
+
   def test_bold_should_return_true_when_font_weight_property_of_format_is_bold
     format = create_format('svg' => {'attrs' => {'font-weight' => 'bold'}})
     style  = create_text_style(format)
@@ -301,6 +301,14 @@ class ThinReports::Core::Shape::Style::TestText < MiniTest::Unit::TestCase
     assert_raises ArgumentError do
       create_text_style.valign = :unknonw
     end
+  end
+
+  def test_initialize
+    klass = Class.new(ThinReports::Core::Shape::Style::Text) do
+      accessible_styles.delete :valign
+    end
+    style = klass.new(create_format('valign' => 'top'))
+    assert_nil style.valign, 'should not be set the default value for :valign'
   end
   
   def test_identifier_should_return_the_same_value_as_create_identifier_method_when_valign_has_not_been_changed

@@ -1,0 +1,81 @@
+# coding: utf-8
+
+require 'test/unit/helper'
+
+class ThinReports::Core::Shape::PageNumber::TestFormat < MiniTest::Unit::TestCase
+  include ThinReports::TestHelpers
+
+  TEST_PAGENO_FORMAT = {
+    "type" => "s-pageno", 
+    "id" => "", 
+    "display" => "true", 
+    "box" => {
+      "x" => 100.0, 
+      "y" => 100.0, 
+      "width" => 100.0, 
+      "height" => 100.0
+    },
+    "format" => "{page} / {total}",
+    "overflow" => "truncate", 
+    "target" => "",
+    "start-at" => 1, 
+    "svg" => {
+      "tag" => "text",
+      "attrs" => {
+        "x" => 308.2,
+        "y" => 239,
+        "kerning" => "auto",
+        "id" => "goog_939685354",
+        "fill" => "#000000",
+        "fill-opacity" => "1",
+        "font-size" => "18",
+        "font-family" => "Helvetica",
+        "font-weight" => "normal",
+        "font-style" => "normal",
+        "text-anchor" => "middle",
+        "text-decoration" => "none"
+      }
+    }
+  }
+
+  Format = ThinReports::Core::Shape::PageNumber::Format
+
+  def format(raw_format = nil)
+    Format.new(raw_format || TEST_PAGENO_FORMAT)
+  end
+
+  def test_build
+    Format.build(TEST_PAGENO_FORMAT)
+  rescue => e
+    flunk exception_details(e, 'Failed to build')
+  end
+
+  def test_id
+    pageno = format('id' => 'pageno_id')
+    assert_equal pageno.id, 'pageno_id'
+
+    pageno = format('id' => '')
+    assert_equal pageno.id, 'pageno__1__'
+    assert_same pageno.id, pageno.id
+  end
+
+  def test_overflow
+    assert_equal format.overflow, 'truncate'
+  end
+
+  def test_target
+    assert_equal format.target, ''
+    assert_equal format("target" => "list-id").target, 'list-id'
+  end
+
+  def test_default_format
+    assert_equal format.default_format, '{page} / {total}'
+  end
+
+  def test_start_at
+    assert_equal format.start_at, 0
+    assert_equal format("start-at" => "").start_at, 0
+    assert_equal format("start-at" => 0).start_at, 0
+    assert_equal format("start-at" => 10).start_at, 9
+  end
+end

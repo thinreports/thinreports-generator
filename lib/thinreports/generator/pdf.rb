@@ -51,7 +51,7 @@ module ThinReports
         format = page.layout.format
         @pdf.start_new_page(format)
         
-        drawer(format).draw(page.manager)
+        drawer(format).draw(page)
       end
       
       def drawer(format)

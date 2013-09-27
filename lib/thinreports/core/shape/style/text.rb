@@ -19,7 +19,7 @@ module ThinReports
       
       def initialize(*args)
         super
-        @valign = default_valign
+        @valign = default_valign if accessible_styles.include?(:valign)
       end
       
       def copy

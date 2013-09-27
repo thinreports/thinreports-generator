@@ -32,6 +32,7 @@ module ThinReports
         when ImageBlock::TYPE_NAME then ImageBlock
         when List::TYPE_NAME       then List
         when Text::TYPE_NAME       then Text
+        when PageNumber::TYPE_NAME then PageNumber
         when *Basic::TYPE_NAMES    then Basic
         else
           raise ThinReports::Errors::UnknownShapeType
@@ -50,3 +51,4 @@ require 'thinreports/core/shape/text'
 require 'thinreports/core/shape/text_block'
 require 'thinreports/core/shape/image_block'
 require 'thinreports/core/shape/list'
+require 'thinreports/core/shape/page_number'

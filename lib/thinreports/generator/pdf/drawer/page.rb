@@ -11,19 +11,20 @@ module ThinReports
         @lists = {}
       end
       
-      # @param [ThinReports::Core::Shape::Manager::Internal] manager
-      def draw(manager)
+      # @param [ThinReports::Core::Page] page
+      def draw(page)
+        manager = page.manager
+
         manager.format.shapes.each_key do |id|
           if shape = manager.final_shape(id)
-            draw_shape(shape.internal)
+            draw_shape(shape.internal, page)
           end
         end
       end
       
     private
-      
-      # @param [ThinReports::Core::Shape::Base::Internal] shape
-      def draw_shape(shape)
+
+      def draw_shape(shape, page)
         case
         when shape.type_of?(:tblock)
           draw_tblock_shape(shape)
@@ -31,6 +32,8 @@ module ThinReports
           draw_list_shape(shape)
         when shape.type_of?(:iblock)
           draw_iblock_shape(shape)
+        when shape.type_of?(:pageno)
+          draw_pageno_shape(shape, page.no, page.report.page_count)
         else
           id = shape_stamp_id(shape)
           unless @stamps.include?(id)
@@ -41,6 +44,10 @@ module ThinReports
         end
       end
       
+      def draw_pageno_shape(shape, page_no, page_count)
+        @pdf.draw_shape_pageno(shape, page_no, page_count)
+      end
+
       # @see #draw_shape
       def draw_list_shape(shape)
         drawer = @lists[shape.id] ||= PDF::Drawer::List.new(@pdf, shape.format)

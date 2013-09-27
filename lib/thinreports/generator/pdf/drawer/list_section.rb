@@ -13,12 +13,12 @@ module ThinReports
         @stamp_created = false
       end
       
-      # @param [ThinReports::Core::Shape::Manager::Internal] manager
+      # @param [ThinReports::Core::Shape::List::SectionInternal] section
       # @param [Array<Numeric>] at
-      def draw(manager, at)
+      def draw(section, at)
         @draw_at = at
         draw_section
-        super(manager)
+        super(section)
       end
       
     private

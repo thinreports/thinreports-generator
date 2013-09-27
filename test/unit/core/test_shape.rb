@@ -8,6 +8,10 @@ class ThinReports::Core::TestShape < MiniTest::Unit::TestCase
   # Alias
   ShapeModule = ThinReports::Core::Shape
   
+  def test_find_by_type_should_return_PageNumber
+    assert_same ShapeModule.find_by_type('s-pageno'), ShapeModule::PageNumber
+  end
+
   def test_find_by_type_should_return_ImageBlock
     assert_same ShapeModule.find_by_type('s-iblock'), ShapeModule::ImageBlock
   end

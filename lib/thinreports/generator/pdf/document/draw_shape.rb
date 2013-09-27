@@ -20,6 +20,13 @@ module ThinReports
           text_box(content, x, y, w, h, attrs)
         end
       end
+
+      def draw_shape_pageno(shape, page_no, page_count)
+        x, y, w, h = shape.box.values_at('x', 'y', 'width', 'height')
+
+        text_box(shape.build_format(page_no, page_count), x, y, w, h, 
+                 common_text_attrs(shape.style.svg_attrs))
+      end
       
       # @param [ThinReports::Core::Shape::Basic::Internal] shape
       def draw_shape_image(shape)
