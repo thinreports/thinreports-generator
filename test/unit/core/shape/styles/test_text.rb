@@ -304,9 +304,11 @@ class ThinReports::Core::Shape::Style::TestText < MiniTest::Unit::TestCase
   end
 
   def test_initialize
-    klass = Class.new(ThinReports::Core::Shape::Style::Text) do
-      accessible_styles.delete :valign
+    klass = Class.new(ThinReports::Core::Shape::Style::Text)
+    klass.class_eval do
+      accessible_styles.delete(:valign)
     end
+
     style = klass.new(create_format('valign' => 'top'))
     assert_nil style.valign, 'should not be set the default value for :valign'
   end
