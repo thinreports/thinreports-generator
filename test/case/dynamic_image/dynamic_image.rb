@@ -32,7 +32,7 @@ testcase :dynamic_image, 'Show images dynamically' do
     r.page.item(:logo1).src(matsukei_logo.path)
     r.page.item(:logo2).value(matsukei_logo.path)
     
-    r.page.item(:thinreports_logo).src(open('http://www.thinreports.org/media/i/logo.png'))
+    r.page.item(:thinreports_logo).src(open('http://www.thinreports.org/assets/images/thinreports-logo.png'))
     
     r.page.list(:list) do |list|
       3.times { list.add_row :in_list => image50x50 }
