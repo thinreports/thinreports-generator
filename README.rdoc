@@ -34,7 +34,7 @@ Generator can be dynamically operated ...
 
 == Supported Versions
 
-* Ruby 1.8.7, 1.9.2, 1.9.3, 2.0.0
+* Ruby 1.8.7, 1.9.2, 1.9.3, 2.0.0, 2.1.0-preview1
 * JRuby 1.6, 1.7.0 (Only 1.8mode)
 
 == Install
