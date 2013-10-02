@@ -25,7 +25,7 @@ module ThinReports
 
       def self.next_default_id
         @id_counter ||= 0
-        "pageno__#{@id_counter += 1}__"
+        "__pageno#{@id_counter += 1}"
       end
     end
 

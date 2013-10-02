@@ -55,7 +55,7 @@ class ThinReports::Core::Shape::PageNumber::TestFormat < MiniTest::Unit::TestCas
     assert_equal pageno.id, 'pageno_id'
 
     pageno = format('id' => '')
-    assert_equal pageno.id, 'pageno__1__'
+    assert_equal pageno.id, '__pageno1'
     assert_same pageno.id, pageno.id
   end
 

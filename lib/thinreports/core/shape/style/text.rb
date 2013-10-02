@@ -19,7 +19,7 @@ module ThinReports
       
       def initialize(*args)
         super
-        @valign = default_valign if accessible_styles.include?(:valign)
+        @valign = default_valign
       end
       
       def copy
@@ -98,9 +98,13 @@ module ThinReports
     
     private
       
-      # @return [Symbol]
+      # @return [Symbol, nil]
       def default_valign
-        @format.valign.blank? ? :top : @format.valign.to_sym
+        if accessible_styles.include?(:valign)
+          @format.valign.blank? ? :top : @format.valign.to_sym
+        else
+          :top
+        end
       end
       
       # @param [Symbol] align The interface align name.

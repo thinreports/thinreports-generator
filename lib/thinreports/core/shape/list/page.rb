@@ -4,7 +4,6 @@ module ThinReports
   module Core::Shape
     
     class List::Page < Basic::Interface
-      
       # @param [ThinReports::Core::Page] parent
       # @param [ThinReports::Core::Shape::Basic::Format] format
       # @param [ThinReports::Core::Shape::List::PageState] internal (nil)
@@ -17,6 +16,9 @@ module ThinReports
         else
           List::Manager.new(self)
         end
+
+        # Set a reference to List::PageState List::Manager
+        self.internal.manager = self.manager
       end
       
       # @param [Hash] values ({})

@@ -109,4 +109,14 @@ class ThinReports::Core::Shape::List::TestManager < MiniTest::Unit::TestCase
     
     assert_same list_used_in_event, current_list
   end
+
+  def test_page_count
+    report = create_report
+    assert_equal report.page_count, 0
+
+    report.list(:list).page_break
+    report.list(:list).page_break
+
+    assert_equal report.list(:list).manager.page_count, 2
+  end
 end

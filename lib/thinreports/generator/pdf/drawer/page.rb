@@ -16,15 +16,22 @@ module ThinReports
         manager = page.manager
 
         manager.format.shapes.each_key do |id|
-          if shape = manager.final_shape(id)
-            draw_shape(shape.internal, page)
+          next unless shape = manager.final_shape(id)
+
+          shape = shape.internal
+
+          if shape.type_of?(:pageno)
+            # Do not draw pageno if is not for Report
+            draw_pageno_shape(shape, page) if shape.for_report?
+          else
+            draw_shape(shape)
           end
         end
       end
       
     private
 
-      def draw_shape(shape, page)
+      def draw_shape(shape)
         case
         when shape.type_of?(:tblock)
           draw_tblock_shape(shape)
@@ -32,10 +39,8 @@ module ThinReports
           draw_list_shape(shape)
         when shape.type_of?(:iblock)
           draw_iblock_shape(shape)
-        when shape.type_of?(:pageno)
-          draw_pageno_shape(shape, page.no, page.report.page_count)
         else
-          id = shape_stamp_id(shape)
+          id = shape.identifier
           unless @stamps.include?(id)
             create_basic_shape_stamp(shape)
             @stamps << id
@@ -44,8 +49,8 @@ module ThinReports
         end
       end
       
-      def draw_pageno_shape(shape, page_no, page_count)
-        @pdf.draw_shape_pageno(shape, page_no, page_count)
+      def draw_pageno_shape(shape, page)
+        @pdf.draw_shape_pageno(shape, page.no, page.report.page_count)
       end
 
       # @see #draw_shape

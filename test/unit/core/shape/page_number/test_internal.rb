@@ -57,6 +57,14 @@ class ThinReports::Core::Shape::PageNumber::TestInternal < MiniTest::Unit::TestC
     assert_same pageno.style, style
   end
 
+  def test_for_report
+    pageno = init_pageno('target' => '')
+    assert_equal pageno.for_report?, true
+
+    pageno = init_pageno('target' => 'list-id')
+    assert_equal pageno.for_report?, false
+  end
+
   def test_Style_class
     refute_includes PageNumber::Style.accessible_styles, :valign
   end

@@ -6,8 +6,11 @@ module ThinReports
     # @private
     class List::PageState < Basic::Internal
       attr_reader :rows
+
       attr_accessor :height
       attr_accessor :header
+      attr_accessor :no
+      attr_accessor :manager
       
       def initialize(*args)
         super(*args)

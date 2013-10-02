@@ -36,6 +36,10 @@ module ThinReports
         @style ||= PageNumber::Style.new(format)
       end
 
+      def for_report?
+        format.target.blank?
+      end
+
       def type_of?(type_name)
         type_name == :pageno
       end

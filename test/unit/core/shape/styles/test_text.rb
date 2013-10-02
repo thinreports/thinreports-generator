@@ -309,8 +309,9 @@ class ThinReports::Core::Shape::Style::TestText < MiniTest::Unit::TestCase
       accessible_styles.delete(:valign)
     end
 
-    style = klass.new(create_format('valign' => 'top'))
-    assert_nil style.valign, 'should not be set the default value for :valign'
+    style = klass.new(create_format('valign' => ''))
+    assert_equal style.valign, :top, 'should be set :top as default to @valign style ' + 
+                                     'if :valign is not accessible'
   end
   
   def test_identifier_should_return_the_same_value_as_create_identifier_method_when_valign_has_not_been_changed

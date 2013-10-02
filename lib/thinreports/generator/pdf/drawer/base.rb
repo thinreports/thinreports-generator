@@ -25,12 +25,7 @@ module ThinReports
       # @param [ThinReports::Core::Shape::Base::Internal] shape
       # @return [String]
       def pdf_stamp_id(shape)
-        "#{@format.identifier}#{shape_stamp_id(shape)}"
-      end
-      
-      # @see #pdf_stamp_id
-      def shape_stamp_id(shape)
-        "#{shape.id}#{shape.style.identifier}"
+        "#{@format.identifier}#{shape.identifier}"
       end
       
       # @overload pdf_stamp(shape_id)

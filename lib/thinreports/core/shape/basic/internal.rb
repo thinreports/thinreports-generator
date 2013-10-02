@@ -15,6 +15,10 @@ module ThinReports
       def type_of?(type_name)
         ['s-basic', self.type].include?("s-#{type_name}")
       end
+
+      def identifier
+        "#{id}#{style.identifier}"
+      end
     end
   end
 end
