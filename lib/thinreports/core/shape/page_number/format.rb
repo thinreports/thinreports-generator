@@ -15,14 +15,6 @@ module ThinReports
         @id
       end
 
-      def start_at
-        unless @start_at
-          @start_at = read('start-at').to_i - 1
-          @start_at = 0 if @start_at < 0
-        end
-        @start_at
-      end
-
       def self.next_default_id
         @id_counter ||= 0
         "__pageno#{@id_counter += 1}"

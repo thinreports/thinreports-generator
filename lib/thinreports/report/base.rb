@@ -7,6 +7,9 @@ module ThinReports
       # @return [ThinReports::Report::Internal]
       # @private
       attr_reader :internal
+
+      # @return [Integer]
+      attr_reader :start_page_number
       
       class << self
         # @param options (see #initialize)
@@ -88,6 +91,12 @@ module ThinReports
       # @option options [String, nil] :layout (nil)
       def initialize(options = {})
         @internal = Report::Internal.new(self, options)
+        @start_page_number = 1
+      end
+
+      # @param [Integer] page_number
+      def start_page_number_from(page_number)
+        @start_page_number = page_number
       end
       
       # @param [String] layout path to layout-file.

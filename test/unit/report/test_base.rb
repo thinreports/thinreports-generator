@@ -202,6 +202,12 @@ class ThinReports::Report::TestBase < MiniTest::Unit::TestCase
     
     assert_equal @report.list(:list).id, 'list'
   end
+
+  def test_start_page_number
+    assert_equal @report.start_page_number, 1
+    @report.start_page_number_from 10
+    assert_equal @report.start_page_number, 10
+  end
   
   def test_Base_create_should_finalize_report
     report = Report::Base.create do |r|

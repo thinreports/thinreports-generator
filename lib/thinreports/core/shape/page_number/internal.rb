@@ -21,9 +21,9 @@ module ThinReports
       def build_format(page_no, page_count)
         return '' if read_format.blank?
 
-        unless format.start_at.zero?
-          page_no += format.start_at
-          page_count += format.start_at
+        if start_page_number > 1
+          page_no += start_page_number - 1
+          page_count += start_page_number
         end
 
         read_format.dup.tap do |f|
@@ -42,6 +42,10 @@ module ThinReports
 
       def type_of?(type_name)
         type_name == :pageno
+      end
+
+      def start_page_number
+        for_report? ? parent.report.start_page_number : 1
       end
     end
 

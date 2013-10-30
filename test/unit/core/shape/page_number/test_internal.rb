@@ -7,8 +7,13 @@ class ThinReports::Core::Shape::PageNumber::TestInternal < MiniTest::Unit::TestC
 
   PageNumber = ThinReports::Core::Shape::PageNumber
 
+  def setup
+    @report = create_basic_report('basic_layout1.tlf')
+    @report.start_new_page
+  end
+
   def init_pageno(format = {})
-    PageNumber::Internal.new(flexmock('parent'), PageNumber::Format.new(format))
+    PageNumber::Internal.new(@report.page, PageNumber::Format.new(format))
   end
 
   def test_read_format
@@ -32,16 +37,21 @@ class ThinReports::Core::Shape::PageNumber::TestInternal < MiniTest::Unit::TestC
     assert_equal pageno.read_format, '{page}'
   end
 
-  def tset_build_format
+  def test_build_format
     pageno = init_pageno('format' => '{page} / {total}')
     assert_equal pageno.build_format(1, 100), '1 / 100'
 
     pageno.write_format('{page}')
     assert_equal pageno.build_format(1, 100), '1'
 
-    pageno = init_pageno('format' => '{page} / {total}', 
-                         'start-at' => 5)
+    @report.start_page_number_from 5
+    pageno = init_pageno('format' => '{page} / {total}')
     assert_equal pageno.build_format(1, 100), '5 / 105'
+
+    # if counted target is a List shape
+    pageno = init_pageno('format' => '{page} / {total}',
+                         'target' => 'list-id')
+    assert_equal pageno.build_format(1, 100), '1 / 100'
   end
 
   def test_type_of

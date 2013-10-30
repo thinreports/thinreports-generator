@@ -18,7 +18,6 @@ class ThinReports::Core::Shape::PageNumber::TestFormat < MiniTest::Unit::TestCas
     "format" => "{page} / {total}",
     "overflow" => "truncate", 
     "target" => "",
-    "start-at" => 1, 
     "svg" => {
       "tag" => "text",
       "attrs" => {
@@ -70,12 +69,5 @@ class ThinReports::Core::Shape::PageNumber::TestFormat < MiniTest::Unit::TestCas
 
   def test_default_format
     assert_equal format.default_format, '{page} / {total}'
-  end
-
-  def test_start_at
-    assert_equal format.start_at, 0
-    assert_equal format("start-at" => "").start_at, 0
-    assert_equal format("start-at" => 0).start_at, 0
-    assert_equal format("start-at" => 10).start_at, 9
   end
 end
