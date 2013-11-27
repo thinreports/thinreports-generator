@@ -64,13 +64,13 @@ class ThinReports::Report::TestBase < MiniTest::Unit::TestCase
   end
 
   def test_start_new_page_with_count_option
-    @report.use_layout data_file('basic_layout1.tlf'), default: true
+    @report.use_layout data_file('basic_layout1.tlf'), :default => true
 
-    new_page = @report.start_new_page count: false
+    new_page = @report.start_new_page :count => false
     assert_nil new_page.no
     assert_equal @report.page_count, 0
 
-    new_page = @report.start_new_page count: true
+    new_page = @report.start_new_page :count => true
     assert_equal new_page.no, 1
     assert_equal @report.page_count, 1
 

@@ -17,9 +17,9 @@ testcase :page_number, 'Draw page-number automatically each pages' do |t|
   end
 
   # Do not count as total page count
-  report.start_new_page count: false
+  report.start_new_page :count => false
 
-  report.start_new_page count: true
+  report.start_new_page :count => true
 
   report.generate :filename => t.output_filename
 
