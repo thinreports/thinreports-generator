@@ -23,7 +23,7 @@ module ThinReports
 
         if start_page_number > 1
           page_no += start_page_number - 1
-          page_count += start_page_number
+          page_count += start_page_number - 1
         end
 
         read_format.dup.tap do |f|

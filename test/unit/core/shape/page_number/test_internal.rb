@@ -46,7 +46,7 @@ class ThinReports::Core::Shape::PageNumber::TestInternal < MiniTest::Unit::TestC
 
     @report.start_page_number_from 5
     pageno = init_pageno('format' => '{page} / {total}')
-    assert_equal pageno.build_format(1, 100), '5 / 105'
+    assert_equal pageno.build_format(1, 100), '5 / 104'
 
     # if counted target is a List shape
     pageno = init_pageno('format' => '{page} / {total}',
