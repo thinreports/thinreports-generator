@@ -35,8 +35,10 @@ module ThinReports
       
       # @param [ThinReports::Report::Base] report
       # @param [ThinReports::Layout::Base] layout
-      def initialize(report, layout)
-        super(true)
+      # @param [Hash] options ({})
+      # @option options [Boolean] :count (true)
+      def initialize(report, layout, options = {})
+        super(options.key?(:count) ? options[:count] : true)
         
         @report    = report
         @layout    = layout
@@ -54,7 +56,7 @@ module ThinReports
       
       # @private
       def copy
-        new_page = self.class.new(report, layout)
+        new_page = self.class.new(report, layout, count: count?)
         
         manager.shapes.each do |id, shape|
           new_shape = shape.copy(new_page)

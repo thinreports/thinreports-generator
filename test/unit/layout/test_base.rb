@@ -80,7 +80,7 @@ class ThinReports::Layout::TestBase < MiniTest::Unit::TestCase
     
     # Should call ThinReports::Core::Page#new with parent and layout.
     flexmock(ThinReports::Core::Page).
-      should_receive(:new).with(parent, layout).once
+      should_receive(:new).with(parent, layout, {}).once
     
     layout.init_new_page(parent)
   end

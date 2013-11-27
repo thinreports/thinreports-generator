@@ -22,7 +22,7 @@ module ThinReports
 
           if shape.type_of?(:pageno)
             # Do not draw pageno if is not for Report
-            draw_pageno_shape(shape, page) if shape.for_report?
+            draw_pageno_shape(shape, page) if page.count? && shape.for_report?
           else
             draw_shape(shape)
           end

@@ -67,10 +67,12 @@ module ThinReports
       end
       
       # @param [ThinReports::Report::Base] parent
+      # @param [Hash] options ({})
+      # @option option [Boolean] :count (true)
       # @return [Page]
       # @private
-      def init_new_page(parent)
-        self.class.Page.new(parent, self)
+      def init_new_page(parent, options = {})
+        self.class.Page.new(parent, self, options)
       end
     end
     

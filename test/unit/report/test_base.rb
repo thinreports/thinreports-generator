@@ -62,6 +62,22 @@ class ThinReports::Report::TestBase < MiniTest::Unit::TestCase
     new_page = @report.start_new_page(:layout => data_file('basic_layout1.tlf'))
     assert_equal new_page.layout.filename, data_file('basic_layout1.tlf')
   end
+
+  def test_start_new_page_with_count_option
+    @report.use_layout data_file('basic_layout1.tlf'), default: true
+
+    new_page = @report.start_new_page count: false
+    assert_nil new_page.no
+    assert_equal @report.page_count, 0
+
+    new_page = @report.start_new_page count: true
+    assert_equal new_page.no, 1
+    assert_equal @report.page_count, 1
+
+    new_page = @report.start_new_page
+    assert_equal new_page.no, 2
+    assert_equal @report.page_count, 2
+  end
   
   def test_add_blank_page_should_properly_create_a_new_blank_page
     @report.use_layout(data_file('basic_layout1'))

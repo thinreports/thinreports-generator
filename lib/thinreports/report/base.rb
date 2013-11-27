@@ -112,15 +112,16 @@ module ThinReports
       
       # @param [Hash] options
       # @option options [String, Symbol] :layout (nil)
+      # @option options [Boolean] :count (true)
       # @yield [page]
       # @yieldparam [ThinReports::Core::Page] page
       # @return [ThinReports::Core::Page]
       def start_new_page(options = {}, &block)
-        unless layout = internal.load_layout(options[:layout])
+        unless layout = internal.load_layout(options.delete(:layout))
           raise ThinReports::Errors::NoRegisteredLayoutFound
         end
         
-        page = internal.add_page(layout.init_new_page(self))
+        page = internal.add_page(layout.init_new_page(self, options))
         block_exec_on(page, &block)
       end
       
