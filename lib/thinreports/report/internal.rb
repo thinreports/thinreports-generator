@@ -68,17 +68,19 @@ module ThinReports
         @finalized
       end
       
-      def load_layout(layout)
-        return @default_layout if layout.nil?
+      def load_layout(id_or_filename)
+        return @default_layout if id_or_filename.nil?
         
-        case layout
+        layout = case id_or_filename
         when Symbol
-          layout_registry[layout]
+          layout_registry[id_or_filename]
         when String
-          prepare_layout(layout)
+          prepare_layout(id_or_filename)
         else
           raise ArgumentError, 'Invalid argument for layout.'
         end
+        @default_layout = layout unless @default_layout
+        layout
       end
       
     private

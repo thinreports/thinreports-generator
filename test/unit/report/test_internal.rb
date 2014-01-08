@@ -230,6 +230,14 @@ class ThinReports::Report::TestInternal < MiniTest::Unit::TestCase
     assert_nil internal.load_layout(:unknown)
   end
   
+  def test_load_layout_should_set_default_layout_when_default_layout_is_nil
+    internal = Report::Internal.new(report, {})
+    internal.load_layout(sample_layout1)
+
+    assert_equal internal.default_layout.filename,
+                 sample_layout1
+  end
+
   def test_load_layout_should_raise_error_when_invalid_value_set
     internal = Report::Internal.new(report, {})
 
