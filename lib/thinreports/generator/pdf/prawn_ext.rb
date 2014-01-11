@@ -29,18 +29,20 @@ module Prawn
   end
 
   # Patch: https://github.com/prawnpdf/prawn/commit/34039d13b7886692debca11e85b9a572a20d57ee
-  class Core::Reference
-    def <<(data)
-      (@stream ||= "") << data
-      @data[:Length] = @stream.length
-      @stream
-    end
+  module Core 
+    class Reference
+      def <<(data)
+        (@stream ||= "") << data
+        @data[:Length] = @stream.length
+        @stream
+      end
  
-    def compress_stream
-      @stream = Zlib::Deflate.deflate(@stream)
-      @data[:Filter] = :FlateDecode
-      @data[:Length] = @stream.length
-      @compressed = true
+      def compress_stream
+        @stream = Zlib::Deflate.deflate(@stream)
+        @data[:Filter] = :FlateDecode
+        @data[:Length] = @stream.length
+        @compressed = true
+      end
     end
   end
 end

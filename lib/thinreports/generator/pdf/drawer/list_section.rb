@@ -1,10 +1,10 @@
 # coding: utf-8
 
 module ThinReports
-  module Generator
+  module Generator::PDF::Drawer
     
     # @private
-    class PDF::Drawer::ListSection < PDF::Drawer::Page
+    class ListSection < Page
       # @param pdf (see PDF::Drawer::Page#initialize)
       # @param section [ThinReports::Core::Shape::List::SectionInternal] section
       def initialize(pdf, section)

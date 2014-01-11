@@ -1,11 +1,11 @@
 # coding: utf-8
 
 module ThinReports
-  module Generator
+  module Generator::PDF::Drawer
     
     # @abstract
     # @private
-    class PDF::Drawer::Base
+    class Base
       # @param [ThinReports::Generator::PDF::Document] pdf
       # @param [ThinReports::Core::Shape::Manager::Format] format
       def initialize(pdf, format)

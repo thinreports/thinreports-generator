@@ -1,17 +1,17 @@
 # coding: utf-8
 
 module ThinReports
-  module Generator
+  module Generator::PDF::Drawer
     
     # @private
-    class PDF::Drawer::List < PDF::Drawer::Base
+    class List < Base
       # @param (see PDF::Drawer::Base#initialize)
       def initialize(pdf, format)
         super
         @sections = {}
       end
       
-      # @param [ThinReports::Core::Shape::List::PageState] list
+      # @param [ThinReports::Core::Shape::List::PageState] list_page
       def draw(list_page)
         draw_section(list_page.header) if list_page.header
         list_page.rows.each do |row|
@@ -50,8 +50,7 @@ module ThinReports
       # @param [ThinReports::Core::Shape::List::SectionInternal] section
       # @return [ThinReports::Generator::PDF::Drawer::ListSection]
       def drawer(section)
-        @sections[section.section_name] ||=
-          PDF::Drawer::ListSection.new(@pdf, section)
+        @sections[section.section_name] ||= ListSection.new(@pdf, section)
       end
     end
     
