@@ -129,7 +129,7 @@ More simply,
 
 {Learn more}[http://osc.matsukei.net/projects/thinreports/wiki/En_Getting_Started].
 
-=== Rails3
+=== Rails3, 4
 
 * Rails Template handler for ThinReports DSL: {thinreports-rails}[https://github.com/takeshinoda/thinreports-rails]
 
