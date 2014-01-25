@@ -33,4 +33,10 @@ class ThinReports::Generator::PDF::TestDrawShape < MiniTest::Unit::TestCase
     tblock = create_tblock_interface('id' => 'text', 'line-height' => '')
     assert_nil @pdf.send(:shape_text_attrs, tblock.internal)[:line_height]
   end
+
+  def test_shape_text_attrs
+    tblock = create_tblock_interface('id' => 'text', 'word-wrap' => 'none')
+    assert_includes @pdf.send(:shape_text_attrs, tblock.internal).keys, :word_wrap
+  end
 end
+

@@ -105,6 +105,15 @@ module ThinReports
         else :truncate
         end
       end
+
+      # @param [String] word_wrap
+      # @return [Symbol]
+      def text_word_wrap(word_wrap)
+        case word_wrap
+        when 'break-word' then :break_word
+        else :none
+        end
+      end
         
       # @param [String] xlink
       # @return [String]

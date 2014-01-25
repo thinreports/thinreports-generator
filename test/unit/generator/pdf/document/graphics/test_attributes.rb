@@ -56,6 +56,12 @@ class ThinReports::Generator::PDF::Graphics::TestAttributes < MiniTest::Unit::Te
     assert_equal valigns.map {|a| @pdf.text_valign(a) },
                  [:top, :center, :bottom, :top]
   end
+
+  def test_text_word_wrap
+    assert_equal @pdf.text_word_wrap('break-word'), :break_word
+    assert_equal @pdf.text_word_wrap('none'), :none
+    assert_equal @pdf.text_word_wrap(''), :none
+  end
   
   def test_extract_base64_string
     base64 = 'data:image/png;base64,iVBORw0KGg1+/AAy/plYlzil'

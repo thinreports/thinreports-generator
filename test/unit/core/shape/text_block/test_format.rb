@@ -11,6 +11,7 @@ class ThinReports::Core::Shape::TextBlock::TestFormat < MiniTest::Unit::TestCase
     "display" => "true", 
     "multiple" => "false",
     "overflow" => "truncate",
+    "word-wrap" => "break-word",
     "box" => {
       "x" => 100.0,
       "y" => 100.0,
@@ -54,6 +55,10 @@ class ThinReports::Core::Shape::TextBlock::TestFormat < MiniTest::Unit::TestCase
   
   def test_value_reader_via_TEST_TBLOCK_FORMAT
     assert_equal format(TEST_TBLOCK_FORMAT).value, ''
+  end
+
+  def test_word_wrap_reader_via_TEST_TBLOCK_FORMAT
+    assert_equal format(TEST_TBLOCK_FORMAT).word_wrap, 'break-word'
   end
   
   def test_ref_id_reader_via_TEST_TBLOCK_FORMAT

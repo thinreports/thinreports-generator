@@ -15,6 +15,7 @@ module ThinReports
                     :format_number_precision => %w( format number precision ),
                     :format_padding_char     => %w( format padding char ),
                     :format_padding_dir      => %w( format padding direction )
+      config_reader :word_wrap => %w( word-wrap )
 
       config_checker 'true', :multiple
       config_checker 'R', :format_padding_rdir => %w( format padding direction )
