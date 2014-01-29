@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
   s.description = 'ThinReports is Open Source Reporting Solution for Ruby. ' +
                   'It provides a GUI Designer and a Library for Ruby.'
   s.homepage    = 'http://www.thinreports.org/'
+  s.licenses    = ['MIT']
   
   s.platform              = Gem::Platform::RUBY
   s.required_ruby_version = '>= 1.8.7'
