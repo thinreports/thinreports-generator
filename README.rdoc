@@ -34,8 +34,8 @@ Generator can be dynamically operated ...
 
 == Supported Versions
 
-* Ruby 1.8.7, 1.9.2, 1.9.3, 2.0.0, 2.1.0-preview1
-* JRuby 1.6, 1.7.0 (Only 1.8mode)
+* Ruby 1.8.7, 1.9.3, 2.0.0, 2.1.0
+* JRuby 1.7 (Only 1.8mode)
 
 == Install
 
@@ -129,7 +129,7 @@ More simply,
 
 {Learn more}[http://osc.matsukei.net/projects/thinreports/wiki/En_Getting_Started].
 
-=== Rails3
+=== Rails3, 4
 
 * Rails Template handler for ThinReports DSL: {thinreports-rails}[https://github.com/takeshinoda/thinreports-rails]
 
@@ -166,3 +166,4 @@ More simply,
 == License
 
 See LICENSE file.
+

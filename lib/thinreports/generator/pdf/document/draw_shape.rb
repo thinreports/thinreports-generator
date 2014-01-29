@@ -90,12 +90,15 @@ module ThinReports
           attrs[:line_height] = format.line_height unless format.line_height.blank?
           # Set the :valign option.
           attrs[:valign]      = shape.style.valign
-
-          # Set the :overflow option.
-          attrs[:overflow] = text_overflow(format.overflow) if shape.type_of?(:tblock)
+          
+          if shape.type_of?(:tblock)
+            # Set the :overflow option.
+            attrs[:overflow] = text_overflow(format.overflow)
+            # Set the :word_wrap option
+            attrs[:word_wrap] = text_word_wrap(format.word_wrap)
+          end
         end
       end
-      
     end
     
   end

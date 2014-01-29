@@ -3,6 +3,7 @@ Gemfile.lock
 *.swp
 *.pdf
 
+.bundle/
 doc/yardoc
 .yardoc/
 coverage

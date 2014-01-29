@@ -1,10 +1,10 @@
 # coding: utf-8
 
 module ThinReports
-  module Generator
+  module Generator::PDF::Drawer
     
     # @private
-    class PDF::Drawer::Page < PDF::Drawer::Base
+    class Page < Base
       # @param (see PDF::Drawer::Base#initialize)
       def initialize(pdf, format)
         super
@@ -55,7 +55,7 @@ module ThinReports
 
       # @see #draw_shape
       def draw_list_shape(shape)
-        drawer = @lists[shape.id] ||= PDF::Drawer::List.new(@pdf, shape.format)
+        drawer = @lists[shape.id] ||= List.new(@pdf, shape.format)
         drawer.draw(shape)
       end
       
