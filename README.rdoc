@@ -34,8 +34,8 @@ Generator can be dynamically operated ...
 
 == Supported Versions
 
-* Ruby 1.8.7, 1.9.3, 2.0.0, 2.1.0
-* JRuby 1.7 (Only 1.8mode)
+* Ruby 1.8.7,1.9.3, 2.0.0, 2.1.0
+* JRuby 1.6, 1.7.0 (Only 1.8 mode)
 
 == Install
 
@@ -71,11 +71,11 @@ Or:
     page.item(:title).style(:color, 'red')
   end
 
-  report.generate_file('report.pdf')
+  report.generate(:filename => 'report.pdf')
 
 Or, 
 
-  ThinReports::Report.generate_file('report.pdf', :layout => 'report.tlf') do
+  ThinReports::Report.generate(:filename => 'report.pdf', :layout => 'report.tlf') do
     start_new_page
     
     page.item(:title).value('ThinReports')
@@ -91,41 +91,39 @@ Or,
   report.start_new_page
 
   10.times do |n|
-    report.page.list(:default).add_row do |row|
-      row.item(:no).value(n)
-    end
-  end
-
-  report.generate_file('list.tlf')
-
-Or, 
-
-  report.page.list(:default) do |list|
-    10.times do |n|
-      list.add_row :no => n
-    end
-  end
-
-Since 0.7.5:
-
-  report = ThinReports::Report.new :layout => 'list.tlf'
-
-  10.times do |n|
     report.list.add_row do |row|
       row.item(:no).value(n)
     end
   end
 
-More simply,
+  report.generate(:filename => 'list.tlf')
 
-  report.list do |list|
+Or, 
+
+  10.times do |n|
+    report.list.add_row :no => n
+  end
+
+Or,
+
+  report.list(:other_list_id) do |list|
     10.times do |n|
-      list.add_row :title => n
+      list.add_row :no => n
     end
   end
 
 * +#start_new_page+ can be omitted because it is created new page automatically when +#list+ is called
-* id argument of +#list+ can be omitted if is :default
+* id argument of +#list+ can be omitted if is +:default+
+
+0.7.0 and earlier:
+
+  report = ThinReports::Report.new :layout => 'list.tlf'
+
+  10.times do |n|
+    report.page.list(:default).add_row do |row|
+      row.item(:no).value(n)
+    end
+  end
 
 {Learn more}[http://osc.matsukei.net/projects/thinreports/wiki/En_Getting_Started].
 
@@ -166,4 +164,3 @@ More simply,
 == License
 
 See LICENSE file.
-
