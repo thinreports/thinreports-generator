@@ -9,19 +9,25 @@ module ThinReports
                           :right  => 'end'}
       
       style_accessible :bold, :italic, :underline, :linethrough,
-                       :align, :valign, :color
+                       :align, :valign, :color, :font_size
       
       # @method color
       #   @return [String]
       # @method color=(v)
       #   @param [String] v
       style_accessor :color, 'fill'
-      
+
+      # @method font_size
+      #   @return [Numeric, String]
+      # @method font_size=(v)
+      #   @param [Numeric, String]
+      style_accessor :font_size, 'font-size'
+
       def initialize(*args)
         super
         @valign = default_valign
       end
-      
+
       def copy
         new_style = super
         new_style.valign = self.valign
@@ -31,7 +37,7 @@ module ThinReports
       def identifier
         super + (@valign == default_valign ? '' : @valign.to_s)
       end
-      
+
       # @return [Boolean]
       def bold
         read_internal_style('font-weight') == 'bold'

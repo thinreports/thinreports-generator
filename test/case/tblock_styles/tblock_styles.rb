@@ -23,5 +23,21 @@ testcase :tblock_styles, 'Set the styles of Tblock in the Editor' do |t|
                 :right_bottom  => '右下揃え')
     
     page.item(:line_height).value("行間隔2.0\n日本語\nThinReports")
+
+    start_new_page :layout => t.resource('font_size.tlf')
+
+    page.item(:text_single24).style(:font_size, 24)
+    page.item(:text_single32).style(:font_size, 32)
+
+    page.item(:text_multiple24).style(:font_size, 24)
+    page.item(:text_multiple32).style(:font_size, 32)
+
+    page.item(:block_single18).value('サイズ18')
+    page.item(:block_single24).style(:font_size, 24).value('サイズ24')
+    page.item(:block_single32).style(:font_size, 32).value('サイズ32')
+
+    page.item(:block_multiple18).value("サイズ18\nサイズ18")
+    page.item(:block_multiple24).style(:font_size, 24).value("サイズ24\nサイズ24")
+    page.item(:block_multiple32).style(:font_size, 32).value("サイズ32\nサイズ32")
   end
 end

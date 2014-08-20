@@ -14,6 +14,17 @@ class ThinReports::Core::Shape::Style::TestText < MiniTest::Unit::TestCase
     ThinReports::Core::Shape::Style::Text.new(format)
   end
 
+  def test_font_size
+    format = create_format('svg' => {'attrs' => {'font-size' => '12'}})
+    style  = create_text_style(format)
+
+    assert_equal style.font_size, '12'
+
+    style.font_size = 19
+
+    assert_equal style.styles['font-size'], 19
+  end
+
   def test_bold_should_return_true_when_font_weight_property_of_format_is_bold
     format = create_format('svg' => {'attrs' => {'font-weight' => 'bold'}})
     style  = create_text_style(format)

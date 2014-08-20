@@ -188,7 +188,7 @@ class ThinReports::Core::Shape::Style::TestBase < MiniTest::Unit::TestCase
       create_new_style[:unknown] = 'value'
     end
   end
-  
+
   def test_copy_should_return_the_instance_of_the_same_class_as_itself
     style = create_style
     assert_instance_of Style, style.copy
