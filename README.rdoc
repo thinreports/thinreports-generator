@@ -1,9 +1,8 @@
-= ThinReports Generator
+= ThinReports Generator {<img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/thinreports/thinreports-generator">}[https://gitter.im/thinreports/thinreports-generator?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge]
 
 {<img src="http://img.shields.io/travis/thinreports/thinreports-generator.svg?style=flat" />}[http://travis-ci.org/thinreports/thinreports-generator]
 {<img src="http://img.shields.io/codeclimate/github/thinreports/thinreports-generator.svg?style=flat" />}[https://codeclimate.com/github/thinreports/thinreports-generator]
 {<img src="http://img.shields.io/gemnasium/thinreports/thinreports-generator.svg?style=flat" />}[https://gemnasium.com/thinreports/thinreports-generator]
-{<img src="https://badges.gitter.im/Join%20Chat.svg" />}[https://gitter.im/thinreports/thinreports?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge]
 
 {ThinReports}[http://www.thinreports.org/] is Open Source Reporting Solution for Ruby.
 
