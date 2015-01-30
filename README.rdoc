@@ -1,6 +1,9 @@
 = ThinReports Generator
 
-{<img src="http://img.shields.io/travis/thinreports/thinreports-generator.svg?style=flat" />}[http://travis-ci.org/thinreports/thinreports-generator] {<img src="http://img.shields.io/codeclimate/github/thinreports/thinreports-generator.svg?style=flat" />}[https://codeclimate.com/github/thinreports/thinreports-generator] {<img src="http://img.shields.io/gemnasium/thinreports/thinreports-generator.svg?style=flat" />}[https://gemnasium.com/thinreports/thinreports-generator]
+{<img src="http://img.shields.io/travis/thinreports/thinreports-generator.svg?style=flat" />}[http://travis-ci.org/thinreports/thinreports-generator]
+{<img src="http://img.shields.io/codeclimate/github/thinreports/thinreports-generator.svg?style=flat" />}[https://codeclimate.com/github/thinreports/thinreports-generator]
+{<img src="http://img.shields.io/gemnasium/thinreports/thinreports-generator.svg?style=flat" />}[https://gemnasium.com/thinreports/thinreports-generator]
+{<img src="https://badges.gitter.im/Join%20Chat.svg" />}[https://gitter.im/thinreports/thinreports?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge]
 
 {ThinReports}[http://www.thinreports.org/] is Open Source Reporting Solution for Ruby.
 
@@ -39,7 +42,7 @@ Generator can be dynamically operated ...
 
 == Install
 
-Add the following line in your Gemfile:  
+Add the following line in your Gemfile:
 
   gem 'thinreports'
 
@@ -58,7 +61,7 @@ Or:
 === Basic format
 
   require 'thinreports'
-  
+
   report = ThinReports::Report.new :layout => 'report.tlf'
   # Page 1
   report.start_new_page do
@@ -73,15 +76,15 @@ Or:
 
   report.generate(:filename => 'report.pdf')
 
-Or, 
+Or,
 
   ThinReports::Report.generate(:filename => 'report.pdf', :layout => 'report.tlf') do
     start_new_page
-    
+
     page.item(:title).value('ThinReports')
-    
+
     start_new_page
-    
+
     page.item(:title).value('Pure Ruby').style(:color, '#ff0000')
   end
 
@@ -98,7 +101,7 @@ Or,
 
   report.generate(:filename => 'list.tlf')
 
-Or, 
+Or,
 
   10.times do |n|
     report.list.add_row :no => n
