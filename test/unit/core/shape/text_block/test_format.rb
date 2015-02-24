@@ -25,7 +25,8 @@ class ThinReports::Core::Shape::TextBlock::TestFormat < MiniTest::Unit::TestCase
         "delimiter" => ",", 
         "precision" => 1
       }
-    }, 
+    },
+    "inline-format" => "true",
     "value" => "", 
     "ref-id" => "", 
     "svg" => {
@@ -38,7 +39,7 @@ class ThinReports::Core::Shape::TextBlock::TestFormat < MiniTest::Unit::TestCase
         "fill" => "#000000", 
         "fill-opacity" => "1", 
         "font-size" => "12", 
-        "font-family" => "\uFF2D\uFF33 \u30B4\u30B7\u30C3\u30AF", 
+        "font-family" => "Helvetica", 
         "font-weight" => "bold", 
         "font-style" => "normal", 
         "text-decoration" => "none", 
@@ -52,7 +53,20 @@ class ThinReports::Core::Shape::TextBlock::TestFormat < MiniTest::Unit::TestCase
   rescue => e
     flunk exception_details(e, 'Building failed.')
   end
-  
+
+  def test_inline_format_config
+    tblock_format = TEST_TBLOCK_FORMAT.dup
+
+    tblock_format['inline-format'] = 'true'
+    assert_equal format(tblock_format).inline_format_enabled?, true
+
+    tblock_format['inline-format'] = 'false'
+    assert_equal format(tblock_format).inline_format_enabled?, false
+
+    tblock_format.delete('inline-format')
+    assert_equal format(tblock_format).inline_format_enabled?, false
+  end
+
   def test_value_reader_via_TEST_TBLOCK_FORMAT
     assert_equal format(TEST_TBLOCK_FORMAT).value, ''
   end

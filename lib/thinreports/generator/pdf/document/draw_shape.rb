@@ -97,6 +97,8 @@ module ThinReports
             # Set the :word_wrap option
             attrs[:word_wrap] = text_word_wrap(format.word_wrap)
           end
+
+          attrs[:inline_format] = shape.inline_format_enabled?
         end
       end
     end

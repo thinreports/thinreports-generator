@@ -23,7 +23,7 @@ class ThinReports::Generator::PDF::Graphics::TestText < MiniTest::Unit::TestCase
                      :size  => 18}
     @pdf.send(:with_text_styles, default_attrs.merge(attrs), &block)
   end
-  
+
   def test_with_text_styles_should_not_operate_when_color_is_none
     exec_with_text_styles(:color => 'none') do |attrs, styles|
       flunk
@@ -121,7 +121,21 @@ class ThinReports::Generator::PDF::Graphics::TestText < MiniTest::Unit::TestCase
   def test_text_without_line_wrap_should_replace_the_spaces_NBSP
     assert_equal @pdf.send(:text_without_line_wrap, ' ' * 2), Prawn::Text::NBSP * 2
   end
-  
+
+  def test_text_box_with_inline_format
+    contents = '<b>ThinReports</b> official site is <link href="http://www.thinreports.org">here</link>.'
+
+    flexmock(::Prawn::Text::Formatted::Parser).should_receive(:to_array).with(contents).and_return([]).once
+    @pdf.text_box(contents, 1, 1, 200, 100, :inline_format => true, :font => 'IPAMincho', :size => 18, :color => '000000')
+  end
+
+  def test_text_box_without_inline_format
+    contents = '<b>ThinReports</b> official site is <link href="http://www.thinreports.org">here</link>.'
+
+    flexmock(::Prawn::Text::Formatted::Parser).should_receive(:to_array).times(0)
+    @pdf.text_box(contents, 1, 1, 200, 100, :inline_format => false, :font => 'IPAMincho', :size => 18, :color => '000000')
+  end
+
   def test_text_box_should_not_raise_PrawnCannotFitError
     @pdf.text_box('foo', 0, 0, 1, 1, :font => 'IPAMincho',
                                      :size => 100,
@@ -160,5 +174,11 @@ class ThinReports::Generator::PDF::Graphics::TestText < MiniTest::Unit::TestCase
   def test_text_box_attrs_should_return_a_Hash_containing_a_height_optin_when_single_is_not_specified
     attrs = @pdf.send(:text_box_attrs, 0, 0, 100, 200)
     assert_equal attrs[:height], 200
+  end
+
+  def test_text
+    flexmock(@pdf).should_receive(:text_box)
+                  .with('contents', 100, 200, 150, 250, { :overflow => :shirink_to_fit }).once
+    @pdf.text('contents', 100, 200, 150, 250)
   end
 end

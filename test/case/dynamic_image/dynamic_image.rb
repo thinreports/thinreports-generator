@@ -5,7 +5,6 @@ require 'open-uri'
 testcase :dynamic_image, 'Show images dynamically' do
   image50x50    = resource('img50x50.png')
   image200x100  = resource('img200x100.png')
-  matsukei_logo = open('http://www.matsukei.co.jp/common/image/logo.jpg')
   
   ThinReports::Report.generate :filename => output_filename do |r|
     r.use_layout(layout_filename)
@@ -23,16 +22,7 @@ testcase :dynamic_image, 'Show images dynamically' do
                   :pos_bottom_right   => image50x50)
     
     r.page.item(:overflow).src(image200x100)
-    
-    # It cannot do as follows:
-    # 
-    #   r.page.item(:logo1).src(matsukei_logo)
-    #   r.page.item(:logo2).value(matsukei_logo)
-    #   
-    r.page.item(:logo1).src(matsukei_logo.path)
-    r.page.item(:logo2).value(matsukei_logo.path)
-    
-    r.page.item(:thinreports_logo).src(open('http://www.thinreports.org/assets/images/thinreports-logo.png'))
+    r.page.item(:thinreports_logo).src(open('http://www.thinreports.org/assets/logos/thinreports-logo.png'))
     
     r.page.list(:list) do |list|
       3.times { list.add_row :in_list => image50x50 }
