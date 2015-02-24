@@ -177,8 +177,10 @@ class ThinReports::Generator::PDF::Graphics::TestText < MiniTest::Unit::TestCase
   end
 
   def test_text
-    flexmock(@pdf).should_receive(:text_box)
-                  .with('contents', 100, 200, 150, 250, { :overflow => :shirink_to_fit }).once
+    flexmock(@pdf).
+      should_receive(:text_box).
+      with('contents', 100, 200, 150, 250, { :overflow => :shirink_to_fit }).once
+
     @pdf.text('contents', 100, 200, 150, 250)
   end
 end
