@@ -2,7 +2,7 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Core::Shape::List::TestEvents < MiniTest::Unit::TestCase
+class ThinReports::Core::Shape::List::TestEvents < Minitest::Test
   include ThinReports::TestHelpers
   
   List = ThinReports::Core::Shape::List

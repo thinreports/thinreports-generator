@@ -2,7 +2,7 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Core::Format::BaseTest < MiniTest::Unit::TestCase
+class ThinReports::Core::Format::BaseTest < Minitest::Test
   TEST_FORMAT_CONFIG = {
     'c1' => 'c1',
     'c2' => {

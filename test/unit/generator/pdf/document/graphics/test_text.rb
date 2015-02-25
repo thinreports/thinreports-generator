@@ -2,7 +2,7 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Generator::PDF::Graphics::TestText < MiniTest::Unit::TestCase
+class ThinReports::Generator::PDF::Graphics::TestText < Minitest::Test
   include ThinReports::TestHelpers
   
   def setup

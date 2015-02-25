@@ -2,7 +2,7 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Core::Shape::Base::TestInternal < MiniTest::Unit::TestCase
+class ThinReports::Core::Shape::Base::TestInternal < Minitest::Test
   include ThinReports::TestHelpers
   
   def create_internal(format_config = {}, &block)

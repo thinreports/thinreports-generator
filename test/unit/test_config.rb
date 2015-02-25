@@ -2,7 +2,7 @@
 
 require 'test/unit/helper'
 
-class ThinReports::TestConfig < MiniTest::Unit::TestCase
+class ThinReports::TestConfig < Minitest::Test
   include ThinReports::TestHelpers
   
   def test_generator_of_Configuration_should_return_configuration_of_generator

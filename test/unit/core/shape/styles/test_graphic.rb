@@ -2,7 +2,7 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Core::Shape::Style::TestGraphic < MiniTest::Unit::TestCase
+class ThinReports::Core::Shape::Style::TestGraphic < Minitest::Test
   include ThinReports::TestHelpers
   
   def create_graphic_style

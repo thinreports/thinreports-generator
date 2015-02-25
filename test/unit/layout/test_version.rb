@@ -2,7 +2,7 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Layout::TestVersion < MiniTest::Unit::TestCase
+class ThinReports::Layout::TestVersion < Minitest::Test
   include ThinReports::TestHelpers
   
   # Alias

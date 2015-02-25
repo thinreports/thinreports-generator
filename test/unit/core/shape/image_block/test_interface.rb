@@ -2,7 +2,7 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Core::Shape::ImageBlock::TestInterface < MiniTest::Unit::TestCase
+class ThinReports::Core::Shape::ImageBlock::TestInterface < Minitest::Test
   include ThinReports::TestHelpers
   
   ImageBlock = ThinReports::Core::Shape::ImageBlock

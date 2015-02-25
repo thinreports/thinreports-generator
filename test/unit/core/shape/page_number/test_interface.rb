@@ -2,7 +2,7 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Core::Shape::PageNumber::TestInterface < MiniTest::Unit::TestCase
+class ThinReports::Core::Shape::PageNumber::TestInterface < Minitest::Test
   include ThinReports::TestHelpers
 
   PageNumber = ThinReports::Core::Shape::PageNumber

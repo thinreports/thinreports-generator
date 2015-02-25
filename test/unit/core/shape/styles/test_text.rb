@@ -2,7 +2,7 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Core::Shape::Style::TestText < MiniTest::Unit::TestCase
+class ThinReports::Core::Shape::Style::TestText < Minitest::Test
   include ThinReports::TestHelpers
   
   def create_format(format = {})

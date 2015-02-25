@@ -2,7 +2,7 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Core::Shape::Base::TestInterface < MiniTest::Unit::TestCase
+class ThinReports::Core::Shape::Base::TestInterface < Minitest::Test
   include ThinReports::TestHelpers
   
   class TestInterface < ThinReports::Core::Shape::Base::Interface

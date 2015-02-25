@@ -2,7 +2,7 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Generator::TestConfiguration < MiniTest::Unit::TestCase
+class ThinReports::Generator::TestConfiguration < Minitest::Test
   include ThinReports::TestHelpers
   
   def setup

@@ -2,7 +2,7 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Generator::PDF::TestParseColor < MiniTest::Unit::TestCase
+class ThinReports::Generator::PDF::TestParseColor < Minitest::Test
   include ThinReports::TestHelpers
   
   class TestColorParser

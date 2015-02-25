@@ -2,7 +2,7 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Core::Format::TestBuilder < MiniTest::Unit::TestCase
+class ThinReports::Core::Format::TestBuilder < Minitest::Test
   include ThinReports::TestHelpers
   
   TEST_RAW_FORMAT = <<-'EOS'

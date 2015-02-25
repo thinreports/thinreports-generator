@@ -2,7 +2,7 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Core::Shape::List::TestSectionFormat < MiniTest::Unit::TestCase
+class ThinReports::Core::Shape::List::TestSectionFormat < Minitest::Test
   include ThinReports::TestHelpers
   
   TEST_LIST_SECTION_FORMAT = {

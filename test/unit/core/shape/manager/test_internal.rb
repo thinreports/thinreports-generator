@@ -2,7 +2,7 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Core::Shape::Manager::TestInternal < MiniTest::Unit::TestCase
+class ThinReports::Core::Shape::Manager::TestInternal < Minitest::Test
   include ThinReports::TestHelpers
   
   # Alias

@@ -3,17 +3,16 @@
 require 'rubygems'
 require 'minitest/spec'
 require 'minitest/unit'
-require 'test/unit'
+require 'minitest/reporters'
 require 'flexmock/test_unit'
-require 'turn/autorun'
-
-Turn.config.format = :dot
+require 'test/unit'
 
 require 'thinreports'
 require 'fileutils'
 require 'digest/sha1'
 
-MiniTest::Unit.autorun
+Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true)]
+Minitest.autorun
 
 module ThinReports::TestHelpers
   include FlexMock::TestCase

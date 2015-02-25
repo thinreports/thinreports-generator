@@ -2,7 +2,7 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Layout::TestFormat < MiniTest::Unit::TestCase
+class ThinReports::Layout::TestFormat < Minitest::Test
   include ThinReports::TestHelpers
   
   TEST_SIMPLE_FORMAT = <<-'EOF'

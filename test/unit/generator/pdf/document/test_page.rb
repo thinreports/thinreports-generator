@@ -2,7 +2,7 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Generator::PDF::Document::TestPage < MiniTest::Unit::TestCase
+class ThinReports::Generator::PDF::Document::TestPage < Minitest::Test
   include ThinReports::TestHelpers
   
   def create_pdf

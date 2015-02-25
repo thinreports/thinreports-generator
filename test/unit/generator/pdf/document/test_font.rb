@@ -2,7 +2,7 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Generator::PDF::TestFont < MiniTest::Unit::TestCase
+class ThinReports::Generator::PDF::TestFont < Minitest::Test
   include ThinReports::TestHelpers
   
   # Alias

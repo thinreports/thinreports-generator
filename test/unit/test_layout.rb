@@ -2,7 +2,7 @@
 
 require 'test/unit/helper'
 
-class ThinReports::TestLayout < MiniTest::Unit::TestCase
+class ThinReports::TestLayout < Minitest::Test
   include ThinReports::TestHelpers
   
   def test_new

@@ -2,7 +2,7 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Core::Shape::TextBlock::TestFormat < MiniTest::Unit::TestCase
+class ThinReports::Core::Shape::TextBlock::TestFormat < Minitest::Test
   include ThinReports::TestHelpers
 
   TEST_TBLOCK_FORMAT = {

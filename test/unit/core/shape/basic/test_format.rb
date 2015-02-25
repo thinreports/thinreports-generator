@@ -2,7 +2,7 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Core::Shape::Basic::TestFormat < MiniTest::Unit::TestCase
+class ThinReports::Core::Shape::Basic::TestFormat < Minitest::Test
   include ThinReports::TestHelpers
 
   TEST_BASIC_FORMAT = {

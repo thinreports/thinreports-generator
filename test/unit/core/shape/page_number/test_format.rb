@@ -2,7 +2,7 @@
 
 require 'test/unit/helper'
 
-class ThinReports::Core::Shape::PageNumber::TestFormat < MiniTest::Unit::TestCase
+class ThinReports::Core::Shape::PageNumber::TestFormat < Minitest::Test
   include ThinReports::TestHelpers
 
   TEST_PAGENO_FORMAT = {
