@@ -93,6 +93,7 @@ module ThinReports
           end
           # Set the :valign option.
           attrs[:valign] = text_valign(attributes['x-valign'])
+          attrs[:inline_format] = attributes['x-inline-format'] == 'true'
         end
       end
       

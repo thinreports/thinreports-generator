@@ -7,15 +7,19 @@ class ThinReports::Core::Shape::Text::TestInternal < MiniTest::Unit::TestCase
   
   Text = ThinReports::Core::Shape::Text
   
-  def setup
-    format = flexmock('format')
-    format.should_receive(:type => 's-text')
-    
-    @internal = Text::Internal.new(flexmock('parent'), format)
+  def create_internal(format_config = {})
+    report = create_basic_report('basic_layout1.tlf')
+    Text::Internal.new(report.start_new_page, Text::Format.new(format_config))
   end
   
   def test_type_of?
-    assert_equal @internal.type_of?(:text), true
-    assert_equal @internal.type_of?(:basic), false
+    assert create_internal.type_of?(:text), true
+    refute create_internal.type_of?(:basic), false
+  end
+
+  def test_inline_format_enabled?
+    assert create_internal('inline-format' => 'true').inline_format_enabled?
+    refute create_internal('inline-format' => 'false').inline_format_enabled?
+    refute create_internal.inline_format_enabled?
   end
 end

@@ -13,7 +13,18 @@ module ThinReports
         'IPAGothic'  => {:normal => File.join(FONT_STORE, 'ipag.ttf')},
         'IPAPGothic' => {:normal => File.join(FONT_STORE, 'ipagp.ttf')}
       }
-      
+
+      PRAWN_BUINTIN_FONT_ARIASES = {
+        'Courier New' => 'Courier',
+        'Times New Roman' => 'Times-Roman'
+      }
+
+      # Register alias font name to Prawn::Font::AFM::BUILT_INS.
+      # This is for <font name="font-name"> inline format.
+      PRAWN_BUINTIN_FONT_ARIASES.keys.each do |alias_name|
+        Prawn::Font::AFM::BUILT_INS << alias_name
+      end
+
     private
       
       def setup_fonts
@@ -37,10 +48,9 @@ module ThinReports
         pdf.fallback_fonts(fallback_fonts)
         
         # Create aliases from the font list provided by Prawn.
-        pdf.font_families.update(
-          'Courier New'     => pdf.font_families['Courier'],
-          'Times New Roman' => pdf.font_families['Times-Roman']
-        )
+        PRAWN_BUINTIN_FONT_ARIASES.each do |new_name, old_name|
+          pdf.font_families[new_name] = pdf.font_families[old_name]
+        end
       end
       
       # @param [String] name
