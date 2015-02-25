@@ -1,9 +1,4 @@
 Gemfile.lock
 *.gem
-*.swp
 *.pdf
-
-.bundle/
-doc/yardoc
-.yardoc/
-coverage
+.bundle

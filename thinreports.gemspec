@@ -7,13 +7,12 @@ Gem::Specification.new do |s|
   s.name        = 'thinreports'
   s.version     = ThinReports::VERSION
   s.author      = 'Matsukei Co.,Ltd.'
-  s.email       = 'thinreports@matsukei.co.jp'
-  s.summary     = 'Reporting solution for Ruby and Rails.'
-  s.description = 'ThinReports is Open Source Reporting Solution for Ruby. ' +
-                  'It provides a GUI Designer and a Library for Ruby.'
-  s.homepage    = 'http://www.thinreports.org/'
+  s.email       = 'thinreports@gmail.com'
+  s.summary     = 'An open source report generating tool for Ruby.'
+  s.description = 'Thinreports is an open source report generating tool for Ruby.'
+  s.homepage    = 'http://www.thinreports.org'
   s.licenses    = ['MIT']
-  
+
   s.platform              = Gem::Platform::RUBY
   s.required_ruby_version = '>= 1.8.7'
 
@@ -21,17 +20,15 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = ['README.rdoc']
 
   s.files         = `git ls-files`.split($\)
-  s.test_files    = s.files.grep(%r{^test/})
+  s.test_files    = s.files.grep %r{^test/}
   s.require_paths = ['lib']
-  
-  s.add_dependency('prawn', '0.12.0')
-  
-  s.add_development_dependency('bundler', ['>= 1.0.0'])
-  s.add_development_dependency('minitest', ['~> 4.7'])
-  s.add_development_dependency('flexmock', ['< 1.3.0'])
-  s.add_development_dependency('yard', ['>= 0.8.7'])
-  s.add_development_dependency('rake', ['>= 0'])
-  s.add_development_dependency('turn', ['>= 0'])
-  s.add_development_dependency('simplecov', ['>= 0'])
-  s.add_development_dependency('pdf-inspector', ['>= 0'])
+
+  s.add_dependency 'prawn', '0.12.0'
+
+  s.add_development_dependency 'bundler', ['>= 1.0.0']
+  s.add_development_dependency 'minitest', ['>= 4.7']
+  s.add_development_dependency 'test-unit', ['>= 0']
+  s.add_development_dependency 'flexmock', ['>= 1.3.0']
+  s.add_development_dependency 'rake', ['>= 0']
+  s.add_development_dependency 'turn', ['>= 0']
 end
