@@ -20,14 +20,9 @@ module ThinReports::TestHelpers
   ROOT_DIR = File.expand_path(File.dirname(__FILE__))
   TEMP_DIR = ROOT_DIR + '/tmp'
 
-  def self.included(klass)
-    klass.class_eval do
-      alias_method :_teardown, :teardown
-      def teardown
-        _teardown
-        clear_outputs
-      end
-    end
+  def teardown
+    super
+    clear_outputs
   end
 
   def clear_outputs
