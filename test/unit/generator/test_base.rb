@@ -28,12 +28,6 @@ class ThinReports::Generator::TestBase < Minitest::Test
     end
   end
 
-  def test_generate_file_is_abstract_method
-    assert_raises NotImplementedError do
-      new_generator.generate_file('output.pdf')
-    end
-  end
-
   def test_default_layout
     generator = new_generator
     flexmock(generator.report).
