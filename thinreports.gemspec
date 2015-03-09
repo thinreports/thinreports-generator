@@ -26,9 +26,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'prawn', '0.12.0'
 
   s.add_development_dependency 'bundler', ['>= 1.0.0']
-  s.add_development_dependency 'minitest', ['>= 0']
-  s.add_development_dependency 'minitest-reporters', ['>= 0']
-  s.add_development_dependency 'test-unit', ['>= 0']
+  s.add_development_dependency 'minitest', ['>= 5.0.0']
   s.add_development_dependency 'flexmock', ['>= 1.3.0']
   s.add_development_dependency 'rake', ['>= 0']
 end
