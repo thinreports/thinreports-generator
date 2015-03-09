@@ -1,6 +1,7 @@
 # coding: utf-8
 
 require 'rubygems'
+require 'minitest/autorun'
 require 'minitest/spec'
 require 'minitest/unit'
 require 'flexmock/test_unit'
@@ -11,7 +12,6 @@ require 'pathname'
 
 require 'thinreports'
 
-Minitest.autorun
 
 module ThinReports::TestHelper
   include FlexMock::TestCase
