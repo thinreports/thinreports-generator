@@ -1,9 +1,9 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
 class ThinReports::Layout::TestFormat < Minitest::Test
-  include ThinReports::TestHelpers
+  include ThinReports::TestHelper
   
   TEST_SIMPLE_FORMAT = <<-'EOF'
   {

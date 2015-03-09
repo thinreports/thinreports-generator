@@ -1,9 +1,9 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
 class ThinReports::Generator::PDF::TestConfiguration < Minitest::Test
-  include ThinReports::TestHelpers
+  include ThinReports::TestHelper
   
   def setup
     @config = ThinReports::Generator::PDF::Configuration.new

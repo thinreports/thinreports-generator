@@ -1,9 +1,9 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
 class ThinReports::Generator::PDF::Document::TestPage < Minitest::Test
-  include ThinReports::TestHelpers
+  include ThinReports::TestHelper
   
   def create_pdf
     @pdf = ThinReports::Generator::PDF::Document.new

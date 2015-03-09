@@ -1,6 +1,6 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
 describe 'String#blank?' do
   it 'should return the true value if self is empty' do

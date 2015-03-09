@@ -1,9 +1,9 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
 class ThinReports::Core::Shape::Style::TestText < Minitest::Test
-  include ThinReports::TestHelpers
+  include ThinReports::TestHelper
   
   def create_format(format = {})
     ThinReports::Core::Shape::Text::Format.new(format)

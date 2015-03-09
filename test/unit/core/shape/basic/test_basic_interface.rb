@@ -1,9 +1,9 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
 class ThinReports::Core::Shape::Basic::TestBlockInterface < Minitest::Test
-  include ThinReports::TestHelpers
+  include ThinReports::TestHelper
   
   Basic = ThinReports::Core::Shape::Basic
   

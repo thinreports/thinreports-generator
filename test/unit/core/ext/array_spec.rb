@@ -1,6 +1,6 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
 describe 'Array#simple_deep_copy' do
 

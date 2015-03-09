@@ -1,8 +1,8 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
-include ThinReports::TestHelpers
+include ThinReports::TestHelper
 
 describe 'OrderedHash#[]=' do
   before do

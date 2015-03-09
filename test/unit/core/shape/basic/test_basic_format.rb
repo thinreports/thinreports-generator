@@ -1,9 +1,9 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
 class ThinReports::Core::Shape::Basic::TestBlockFormat < Minitest::Test
-  include ThinReports::TestHelpers
+  include ThinReports::TestHelper
   
   TEST_BLOCK_FORMAT = {
     "value" => "default value",

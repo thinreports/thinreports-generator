@@ -1,9 +1,9 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
 class ThinReports::Core::Shape::TextBlock::Formatter::TestDatetime < Minitest::Test
-  include ThinReports::TestHelpers
+  include ThinReports::TestHelper
   
   # Aliases
   TextBlock = ThinReports::Core::Shape::TextBlock

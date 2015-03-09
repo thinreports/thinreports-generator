@@ -1,9 +1,9 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
 class ThinReports::Core::Shape::Base::TestInternal < Minitest::Test
-  include ThinReports::TestHelpers
+  include ThinReports::TestHelper
   
   def create_internal(format_config = {}, &block)
     format = unless format_config.empty?

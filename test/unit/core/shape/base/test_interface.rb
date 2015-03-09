@@ -1,9 +1,9 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
 class ThinReports::Core::Shape::Base::TestInterface < Minitest::Test
-  include ThinReports::TestHelpers
+  include ThinReports::TestHelper
   
   class TestInterface < ThinReports::Core::Shape::Base::Interface
     internal_delegators :m1, :m2

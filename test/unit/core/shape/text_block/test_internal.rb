@@ -1,9 +1,9 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
 class ThinReports::Core::Shape::TextBlock::TestInternal < Minitest::Test
-  include ThinReports::TestHelpers
+  include ThinReports::TestHelper
   
   # Alias
   TextBlock = ThinReports::Core::Shape::TextBlock

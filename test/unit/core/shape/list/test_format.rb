@@ -1,9 +1,9 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
 class ThinReports::Core::Shape::List::TestFormat < Minitest::Test
-  include ThinReports::TestHelpers
+  include ThinReports::TestHelper
   
   TEST_LIST_FORMAT = {
     "type" => "s-list",

@@ -1,9 +1,9 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
 class ThinReports::Generator::PDF::TestDocument < Minitest::Test
-  include ThinReports::TestHelpers
+  include ThinReports::TestHelper
   
   # Alias
   Document = ThinReports::Generator::PDF::Document

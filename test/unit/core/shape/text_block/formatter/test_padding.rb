@@ -1,9 +1,9 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
 class ThinReports::Core::Shape::TextBlock::Formatter::TestPadding < Minitest::Test
-  include ThinReports::TestHelpers
+  include ThinReports::TestHelper
   
   # Alias
   Formatter = ThinReports::Core::Shape::TextBlock::Formatter::Padding

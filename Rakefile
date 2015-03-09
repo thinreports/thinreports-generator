@@ -1,10 +1,9 @@
 # coding: utf-8
 
-# Load thinreports
-$LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__) + '/lib'))
-require 'thinreports'
+require 'rake/testtask'
 
-# Load tasks
-Dir.glob('tasks/**/*.rake').each do |r|
-  Rake.application.add_import r
+Rake::TestTask.new do |t|
+  t.libs << 'test'
+  t.test_files = Dir['test/unit/**/test_*.rb'] +
+                 Dir['test/unit/**/*_spec.rb']
 end

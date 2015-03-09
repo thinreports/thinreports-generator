@@ -1,9 +1,9 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
 class ThinReports::Core::Shape::List::TestSectionFormat < Minitest::Test
-  include ThinReports::TestHelpers
+  include ThinReports::TestHelper
   
   TEST_LIST_SECTION_FORMAT = {
     "height" => 47.7,
