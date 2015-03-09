@@ -5,7 +5,7 @@ module ThinReports
 
     # @private
     module PDF::Font
-      FONT_STORE = File.join(ThinReports::ROOTDIR, 'resources', 'fonts')
+      FONT_STORE = File.join(ThinReports::ROOTDIR, 'fonts')
 
       BUILTIN_FONTS = {
         'IPAMincho'  => {:normal => File.join(FONT_STORE, 'ipam.ttf')},
