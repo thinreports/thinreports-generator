@@ -16,10 +16,10 @@ class ThinReports::Core::Shape::Base::TestInterface < Minitest::Test
   end
   
   def setup
-    internal   = flexmock(:m1 => 'm1', :m2 => 'm2')
+    internal   = flexmock(m1: 'm1', m2: 'm2')
     @interface = TestInterface.new(flexmock('parent'), flexmock('format'))
     
-    flexmock(@interface, :internal => internal)
+    flexmock(@interface, internal: internal)
   end
   
   def test_internal_delegators_macro
@@ -41,8 +41,8 @@ class ThinReports::Core::Shape::Base::TestInterface < Minitest::Test
   end
   
   def test_copy
-    flexmock(@interface.internal, :copy   => flexmock('new_internal'),
-                                  :format => flexmock('format'))
+    flexmock(@interface.internal, copy: flexmock('new_internal'),
+                                  format: flexmock('format'))
     
     new_interface = @interface.copy(flexmock('new_parent'))
     

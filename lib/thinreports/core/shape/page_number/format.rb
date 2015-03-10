@@ -5,7 +5,7 @@ module ThinReports
 
     class PageNumber::Format < Basic::Format
       config_reader :overflow, :target, :box
-      config_reader :default_format => %w( format )
+      config_reader default_format: %w( format )
 
       def id
         unless @id

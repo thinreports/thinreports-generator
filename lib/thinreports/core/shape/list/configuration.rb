@@ -17,7 +17,7 @@ module ThinReports
         @store  = store
       end
       
-      # @param [Hash] stores :name => default value
+      # @param [Hash] stores name: default value
       def use_stores(stores)
         @store = List::Store.init(stores)
       end

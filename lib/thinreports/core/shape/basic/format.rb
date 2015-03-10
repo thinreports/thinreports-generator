@@ -6,8 +6,8 @@ module ThinReports
     # @private
     class Basic::Format < Core::Format::Base
       config_reader :type, :id
-      config_reader :svg_tag     => %w( svg tag ),
-                    :svg_attrs   => %w( svg attrs )
+      config_reader svg_tag: %w( svg tag ),
+                    svg_attrs: %w( svg attrs )
                     
       config_checker 'true', :display
       

@@ -9,14 +9,14 @@ class ThinReports::Core::Shape::TextBlock::Formatter::TestBasic < Minitest::Test
   Formatter = ThinReports::Core::Shape::TextBlock::Formatter::Basic
   
   def test_apply_simple_format
-    format = flexmock(:format_base => 'Hello {value}!')
+    format = flexmock(format_base: 'Hello {value}!')
     
     assert_equal Formatter.new(format).apply('ThinReports'),
                  'Hello ThinReports!'
   end
   
   def test_apply_multiple_format
-    format = flexmock(:format_base => 'Hello {value}! And good bye {value}.')
+    format = flexmock(format_base: 'Hello {value}! And good bye {value}.')
     
     assert_equal Formatter.new(format).apply('ThinReports'),
                  'Hello ThinReports! And good bye ThinReports.'

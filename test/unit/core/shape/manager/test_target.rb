@@ -90,7 +90,7 @@ class ThinReports::Core::Shape::Manager::TestTarget < Minitest::Test
 
   def test_values_should_properly_set_values_to_shapes_with_specified_id
     manager = create_manager
-    manager.values(:t1 => 1000, 't2' => 'value')
+    manager.values(t1: 1000, 't2' => 'value')
 
     assert_equal [manager.item(:t1).value, manager.item(:t2).value], [1000, 'value']
   end

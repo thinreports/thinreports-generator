@@ -56,7 +56,7 @@ module ThinReports
       
       # @private
       def copy
-        new_page = self.class.new(report, layout, :count => count?)
+        new_page = self.class.new(report, layout, count: count?)
         
         manager.shapes.each do |id, shape|
           new_shape = shape.copy(new_page)

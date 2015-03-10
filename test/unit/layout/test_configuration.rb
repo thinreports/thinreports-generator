@@ -10,7 +10,7 @@ class ThinReports::Layout::TestConfiguration < Minitest::Test
 
   def setup
     layout = flexmock('layout')
-    flexmock(layout).should_receive(:format => flexmock('layout_format'))
+    flexmock(layout).should_receive(format: flexmock('layout_format'))
 
     @config = Configuration.new(layout)
   end
@@ -20,7 +20,7 @@ class ThinReports::Layout::TestConfiguration < Minitest::Test
   end
 
   def test_properly_set_init_item_handler
-    list_format = flexmock('list_format').should_receive(:type => 's-list').once.mock
+    list_format = flexmock('list_format').should_receive(type: 's-list').once.mock
     list_config = flexmock('list_config').should_receive(:new).once.mock
 
     flexmock(ThinReports::Core::Shape).

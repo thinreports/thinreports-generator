@@ -28,10 +28,10 @@ module ThinReports
       # @option metadata [String] :Title
       def initialize(options = {}, metadata = {})
         @pdf = Prawn::Document.new(
-          :skip_page_creation => true,
-          :margin => [0, 0],
-          :info   => {:CreationDate => Time.now,
-                      :Creator      => 'ThinReports Generator for Ruby ' +
+          skip_page_creation: true,
+          margin: [0, 0],
+          info: {CreationDate: Time.now,
+                      Creator: 'ThinReports Generator for Ruby ' +
                                         ThinReports::VERSION}.merge(metadata)
         )
         # Setup to Prawn::Document.

@@ -5,22 +5,22 @@ module ThinReports
     
     # @private
     class List::Format < Basic::Format
-      config_reader :height => %w( content-height )
-      config_checker 'true', :auto_page_break => %w( page-break )
+      config_reader height: %w( content-height )
+      config_checker 'true', auto_page_break: %w( page-break )
       
       config_reader :header,
                     :detail,
                     :footer
-      config_reader :page_footer => %w( page-footer )
+      config_reader page_footer: %w( page-footer )
       
-      config_checker 'true', :has_header => %w( header-enabled )
-      config_checker 'true', :has_footer => %w( footer-enabled )
-      config_checker 'true', :has_page_footer => %w( page-footer-enabled )
+      config_checker 'true', has_header: %w( header-enabled )
+      config_checker 'true', has_footer: %w( footer-enabled )
+      config_checker 'true', has_page_footer: %w( page-footer-enabled )
       
-      config_reader :page_footer_height => %w( page-footer height )
-      config_reader :footer_height      => %w( footer height )
-      config_reader :header_height      => %w( header height )
-      config_reader :detail_height      => %w( detail height )
+      config_reader page_footer_height: %w( page-footer height )
+      config_reader footer_height: %w( footer height )
+      config_reader header_height: %w( header height )
+      config_reader detail_height: %w( detail height )
       
       config_accessor :sections
       

@@ -53,22 +53,22 @@ class ThinReports::Core::Shape::Manager::TestInternal < Minitest::Test
   
   def test_find_item_should_return_shape_when_passing_in_the_specified_only_filter
     internal = create_internal
-    assert_equal internal.find_item(:t1, :only => 's-tblock').id, 't1'
+    assert_equal internal.find_item(:t1, only: 's-tblock').id, 't1'
   end
   
   def test_find_item_should_return_nil_when_not_passing_in_the_specified_only_filter
     internal = create_internal
-    assert_nil internal.find_item(:t1, :only => 's-list')
+    assert_nil internal.find_item(:t1, only: 's-list')
   end
   
   def test_find_item_should_return_shape_when_passing_in_the_specified_except_filter
     internal = create_internal
-    assert_equal internal.find_item(:ls, :except => 's-tblock').id, 'ls'
+    assert_equal internal.find_item(:ls, except: 's-tblock').id, 'ls'
   end
   
   def test_find_item_should_return_shape_when_not_passing_in_the_specified_except_filter
     internal = create_internal
-    assert_nil internal.find_item(:ls, :except => 's-list')
+    assert_nil internal.find_item(:ls, except: 's-list')
   end
   
   def test_final_shape_should_return_nil_when_shape_is_not_found

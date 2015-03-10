@@ -43,8 +43,8 @@ module ThinReports
           posy = shape.format.position_y
           
           image_box(shape.src, x, y, w, h,
-                    :position_x => posx ? posx.to_sym : nil,
-                    :position_y => posy ? posy.to_sym : nil)
+                    position_x: posx ? posx.to_sym : nil,
+                    position_y: posy ? posy.to_sym : nil)
         end
       end
       

@@ -147,7 +147,7 @@ module ThinReports
       #   # Or, you can omit the type of generator
       #   report.generate
       # @example Create the PDF file (Since v0.8)
-      #   report.generate(:pdf, :filename => 'foo.pdf')
+      #   report.generate(:pdf, filename: 'foo.pdf')
       def generate(*args)
         options = args.last.is_a?(::Hash) ? args.pop : {}
         type = args.first || ThinReports.config.generator.default

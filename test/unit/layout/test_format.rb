@@ -58,7 +58,7 @@ class ThinReports::Layout::TestFormat < Minitest::Test
   end
   
   def test_build_should_properly_build_layout_format
-    build_format(:force => true)
+    build_format(force: true)
   rescue => e
     flunk exception_details(e, 'Faile to build.')
   end
@@ -68,7 +68,7 @@ class ThinReports::Layout::TestFormat < Minitest::Test
   end
   
   def test_config_attributes_of_built_format_should_not_have_unnecessary_attributes
-    format = build_format(:force => true)
+    format = build_format(force: true)
     config = format.instance_variable_get(:@config)
     
     refute %w( version finger-print state).any? {|a| config.key?(a)},
@@ -98,7 +98,7 @@ class ThinReports::Layout::TestFormat < Minitest::Test
     Layout::Version::REQUIRED_RULES.replace(['>= 0.6.0.pre3', '< 0.8.0'])
     
     assert_raises ThinReports::Errors::IncompatibleLayoutFormat do
-      build_format(:version => '0.6.0.pre2')
+      build_format(version: '0.6.0.pre2')
     end
   ensure
     Layout::Version::REQUIRED_RULES.replace(original_rules)
@@ -114,7 +114,7 @@ class ThinReports::Layout::TestFormat < Minitest::Test
       should_receive(:read_format_file).
       and_return(create_raw_format(options[:version]))
     
-    Layout::Format.build('dummy.tlf', :force => options[:force])
+    Layout::Format.build('dummy.tlf', force: options[:force])
   end
   
   def clear_building_cache

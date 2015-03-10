@@ -184,7 +184,7 @@ module ThinReports
           if auto_page_break? && overflow_with?(:footer)
             change_new_page do |new_list|
               footer = new_list.manager.insert_new_row(:footer)
-              new_list.manager.finalize_page(:ignore_page_footer => true)
+              new_list.manager.finalize_page(ignore_page_footer: true)
             end
           else
             footer = insert_new_row(:footer)

@@ -36,7 +36,7 @@ module ThinReports::TestHelper
   end
 
   def create_basic_report(file, &block)
-    report = ThinReports::Report.new :layout => data_file(file)
+    report = ThinReports::Report.new layout: data_file(file)
     block.call(report) if block_given?
     report
   end

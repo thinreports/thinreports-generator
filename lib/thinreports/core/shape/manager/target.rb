@@ -25,7 +25,7 @@ module ThinReports
       # @raise [ThinReports::Errors::UnknownItemId] If not found
       # @return [ThinReports::Core::Shape::Base::Interface]
       def item(id, &block)
-        shape = find_item(id, :except => Core::Shape::List::TYPE_NAME)
+        shape = find_item(id, except: Core::Shape::List::TYPE_NAME)
 
         unless shape
           raise ThinReports::Errors::UnknownItemId.new(id)
@@ -34,7 +34,7 @@ module ThinReports
         end
       end
 
-      # @param [Hash] item_values :id => value
+      # @param [Hash] item_values id: value
       def values(item_values)
         item_values.each {|id, val| item(id).value(val)}
       end
@@ -48,7 +48,7 @@ module ThinReports
 
       # @see #item
       def list(id = nil, &block)
-        shape = find_item(id ||= :default, :only => Core::Shape::List::TYPE_NAME)
+        shape = find_item(id ||= :default, only: Core::Shape::List::TYPE_NAME)
 
         unless shape
           raise ThinReports::Errors::UnknownItemId.new(id, 'List')

@@ -21,7 +21,7 @@ module ThinReports
 
         title = default_layout ? default_layout.format.report_title : nil
 
-        @pdf = Document.new(options, :Title => title)
+        @pdf = Document.new(options, Title: title)
         @drawers = {}
       end
 

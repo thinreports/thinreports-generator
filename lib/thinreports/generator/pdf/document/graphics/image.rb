@@ -14,7 +14,7 @@ module ThinReports
       # @param [Numeric, Strng] h
       def image(filename, x, y, w, h)
         w, h = s2f(w, h)
-        pdf.image(filename, :at => pos(x, y), :width  => w, :height => h)
+        pdf.image(filename, at: pos(x, y), width: w, height: h)
       end
       
       # @param [String] base64
@@ -37,10 +37,10 @@ module ThinReports
       # @option options [:top, :center, :bottom] :position_y (:top)
       def image_box(file, x, y, w, h, options = {})
         w, h = s2f(w, h)
-        pdf.bounding_box(pos(x, y), :width => w, :height => h) do
-          pdf.image(file, :position  => options[:position_x] || :left,
-                          :vposition => options[:position_y] || :top,
-                          :auto_fit  => [w, h])
+        pdf.bounding_box(pos(x, y), width: w, height: h) do
+          pdf.image(file, position: options[:position_x] || :left,
+                          vposition: options[:position_y] || :top,
+                          auto_fit: [w, h])
         end
       end
       

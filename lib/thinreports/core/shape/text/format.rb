@@ -6,9 +6,9 @@ module ThinReports
     # @private
     class Text::Format < Basic::Format
       config_reader :text, :box, :valign
-      config_reader :svg_content => %w( svg content ),
-                    :line_height => %w( line-height )
-      config_checker 'true', :inline_format_enabled => %w( inline-format )
+      config_reader svg_content: %w( svg content ),
+                    line_height: %w( line-height )
+      config_checker 'true', inline_format_enabled: %w( inline-format )
 
       class << self
       private

@@ -27,16 +27,16 @@ class ThinReports::Core::Shape::TextBlock::TestInterface < Minitest::Test
   
   def test_set_should_properly_set_a_value
     tblock = create_interface
-    tblock.set(1000, :visible => false)
+    tblock.set(1000, visible: false)
     
     assert_equal tblock.value, 1000
   end
   
   def test_set_should_properly_set_styles
     tblock = create_interface
-    tblock.set(1000, :color  => '#ff0000',
-                     :bold   => true,
-                     :italic => true)
+    tblock.set(1000, color: '#ff0000',
+                     bold: true,
+                     italic: true)
     
     assert_equal [tblock.style(:color),
                   tblock.style(:bold),

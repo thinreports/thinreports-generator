@@ -4,9 +4,9 @@ module ThinReports
   module Core::Shape
     
     class Style::Text < Style::Basic
-      TEXT_ALIGN_NAMES = {:left   => 'start',
-                          :center => 'middle',
-                          :right  => 'end'}
+      TEXT_ALIGN_NAMES = {left: 'start',
+                          center: 'middle',
+                          right: 'end'}
       
       style_accessible :bold, :italic, :underline, :linethrough,
                        :align, :valign, :color, :font_size

@@ -8,7 +8,7 @@ class ThinReports::Core::Shape::List::TestStore < Minitest::Test
   List = ThinReports::Core::Shape::List
   
   def test_new
-    klass = List::Store.new(:foo => 'foo', :hoge => 0)
+    klass = List::Store.new(foo: 'foo', hoge: 0)
     
     assert_instance_of ::Class, klass
     
@@ -21,7 +21,7 @@ class ThinReports::Core::Shape::List::TestStore < Minitest::Test
   end
   
   def test_init
-    store = List::Store.init(:foo => 0, :hoge => 'hoge')
+    store = List::Store.init(foo: 0, hoge: 'hoge')
     
     assert_respond_to store, :foo
     assert_respond_to store, :hoge
@@ -31,7 +31,7 @@ class ThinReports::Core::Shape::List::TestStore < Minitest::Test
   end
   
   def test_copy
-    store = List::Store.init(:foo => Time.now)
+    store = List::Store.init(foo: Time.now)
     
     copied = store.copy
     

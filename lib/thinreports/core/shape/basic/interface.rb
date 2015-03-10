@@ -50,7 +50,7 @@ module ThinReports
         end
       end
       
-      # @param [Hash] settings :style_name => value
+      # @param [Hash] settings style_name: value
       # @return [self]
       def styles(settings)
         settings.each{ |args| style(*args) }

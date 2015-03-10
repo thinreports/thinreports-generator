@@ -52,7 +52,7 @@ class ThinReports::Core::Shape::Basic::TestInternal < Minitest::Test
     basic = create_internal('id' => 'basic-id')
     assert_equal basic.identifier, 'basic-id'
 
-    flexmock(basic.style).should_receive(:identifier => 'style-identifier')
+    flexmock(basic.style).should_receive(identifier: 'style-identifier')
     assert_equal basic.identifier, 'basic-idstyle-identifier'
   end
 end

@@ -16,13 +16,13 @@ class ThinReports::Core::Shape::List::TestConfiguration < Minitest::Test
   def test_use_stores
     flexmock(List::Store).should_receive(:init).with(::Hash).once
     
-    @config.use_stores(:a => 0, :b => 0)
+    @config.use_stores(a: 0, b: 0)
   end
   
   def test_store
-    flexmock(List::Store).should_receive(:init => @store)
+    flexmock(List::Store).should_receive(init: @store)
     
-    @config.use_stores(:a => 0, :b => 0)
+    @config.use_stores(a: 0, b: 0)
     assert_same @config.store, @store
   end
   
@@ -37,16 +37,16 @@ class ThinReports::Core::Shape::List::TestConfiguration < Minitest::Test
   def test_copy
     copied_store = flexmock('copied store')
     
-    flexmock(@store, :copy => copied_store)
-    flexmock(List::Store).should_receive(:init => @store)
+    flexmock(@store, copy: copied_store)
+    flexmock(List::Store).should_receive(init: @store)
 
     copied_events = flexmock('copied events')
     
-    flexmock(@events, :copy => copied_events)
-    flexmock(List::Events).should_receive(:new => @events)
+    flexmock(@events, copy: copied_events)
+    flexmock(List::Events).should_receive(new: @events)
     
     @config = List::Configuration.new
-    @config.use_stores(:a => 1)
+    @config.use_stores(a: 1)
     
     copied_config = @config.copy
     

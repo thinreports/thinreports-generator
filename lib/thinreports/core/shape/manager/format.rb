@@ -8,7 +8,7 @@ module ThinReports
       # @return [Symbol, Integer]
       attr_reader :identifier
       
-      config_reader :layout => %w( svg )
+      config_reader layout: %w( svg )
       
       def initialize(config, id = nil, &block)
         super(config, &block)

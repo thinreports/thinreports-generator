@@ -77,10 +77,10 @@ class ThinReports::Core::Shape::Basic::TestInterface < Minitest::Test
   
   def test_styles_should_properly_set_the_specified_styles_as_Hash
     basic = create_interface
-    basic.styles(:fill_color   => '#ff0000',
-                 :border_color => '#000000',
-                 :border_width => 5,
-                 :visible      => false)
+    basic.styles(fill_color: '#ff0000',
+                 border_color: '#000000',
+                 border_width: 5,
+                 visible: false)
     
     assert_equal [basic.style(:fill_color),
                   basic.style(:border_color),
@@ -91,7 +91,7 @@ class ThinReports::Core::Shape::Basic::TestInterface < Minitest::Test
   
   def test_styles_should_return_self
     basic = create_interface
-    assert_instance_of Basic::Interface, basic.styles(:fill => '#ff0000')
+    assert_instance_of Basic::Interface, basic.styles(fill: '#ff0000')
   end
   
   def test_hide_should_properly_set_false_to_visibility

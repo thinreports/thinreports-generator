@@ -11,30 +11,30 @@ class ThinReports::Generator::PDF::Graphics::TestText < Minitest::Test
   end
   
   def exec_with_font_styles(attrs = nil, font = nil, &block)
-    attrs ||= {:styles => [:bold]}
-    font  ||= {:name => 'IPAMincho', :size => 18, :color => 'ff0000'}
+    attrs ||= {styles: [:bold]}
+    font  ||= {name: 'IPAMincho', size: 18, color: 'ff0000'}
     
     @pdf.send(:with_font_styles, attrs, font, &block)
   end
   
   def exec_with_text_styles(attrs = {}, &block)
-    default_attrs = {:font  => 'Helvetica',
-                     :color => 'ff0000',
-                     :size  => 18}
+    default_attrs = {font: 'Helvetica',
+                     color: 'ff0000',
+                     size: 18}
     @pdf.send(:with_text_styles, default_attrs.merge(attrs), &block)
   end
 
   def test_with_text_styles_should_not_operate_when_color_is_none
-    exec_with_text_styles(:color => 'none') do |attrs, styles|
+    exec_with_text_styles(color: 'none') do |attrs, styles|
       flunk
     end
   end
   
   def test_with_text_styles_should_set_leading_via_line_height_attribute
-    exec_with_text_styles(:line_height => 30) do |attrs, styles|
+    exec_with_text_styles(line_height: 30) do |attrs, styles|
       expected = @pdf.send(:text_line_leading,
                            @pdf.send(:s2f, 30),
-                           :name => 'Helvetica', :size => 18)
+                           name: 'Helvetica', size: 18)
       assert_equal attrs[:leading], expected
     end
   end
@@ -46,7 +46,7 @@ class ThinReports::Generator::PDF::Graphics::TestText < Minitest::Test
   end
   
   def test_with_text_styles_should_set_character_spacing_via_letter_spacing_attribute
-    exec_with_text_styles(:letter_spacing => 5) do |attrs, styles|
+    exec_with_text_styles(letter_spacing: 5) do |attrs, styles|
       assert_equal attrs[:character_spacing], @pdf.send(:s2f, 5)
     end
   end
@@ -58,7 +58,7 @@ class ThinReports::Generator::PDF::Graphics::TestText < Minitest::Test
   end
   
   def test_with_text_styles_should_parse_color
-    exec_with_text_styles(:color => '#ff0000') do |attrs, styles|
+    exec_with_text_styles(color: '#ff0000') do |attrs, styles|
       assert_equal @pdf.internal.fill_color, 'ff0000'
     end
   end
@@ -100,20 +100,20 @@ class ThinReports::Generator::PDF::Graphics::TestText < Minitest::Test
   end
   
   def test_with_font_styles_should_not_perform_a_manual_style_when_bold_style_can_be_applied
-    exec_with_font_styles(nil, :name => 'Helvetica', :size => 12, :color => '0000ff') do |attrs, styles|
+    exec_with_font_styles(nil, name: 'Helvetica', size: 12, color: '0000ff') do |attrs, styles|
       assert_includes styles, :bold
     end
   end
   
   def test_with_font_styles_should_not_perform_a_manual_style_when_italic_style_can_be_applied
-    exec_with_font_styles({:styles => [:italic]}, :name => 'Helvetica', :size => 12, :color => 'ff0000') do |attrs, styles|
+    exec_with_font_styles({styles: [:italic]}, name: 'Helvetica', size: 12, color: 'ff0000') do |attrs, styles|
       assert_includes styles, :italic
     end
   end
   
   def test_text_line_leading_should_return_a_specified_leading_value_minus_the_font_height
-    font = {:name => 'IPAMincho', :size => 36}
-    font_height = @pdf.internal.font(font[:name], :size => font[:size]).height
+    font = {name: 'IPAMincho', size: 36}
+    font_height = @pdf.internal.font(font[:name], size: font[:size]).height
     
     assert_equal @pdf.send(:text_line_leading, 100, font), 100 - font_height
   end
@@ -126,20 +126,20 @@ class ThinReports::Generator::PDF::Graphics::TestText < Minitest::Test
     contents = '<b>ThinReports</b> official site is <link href="http://www.thinreports.org">here</link>.'
 
     flexmock(::Prawn::Text::Formatted::Parser).should_receive(:to_array).with(contents).and_return([]).once
-    @pdf.text_box(contents, 1, 1, 200, 100, :inline_format => true, :font => 'IPAMincho', :size => 18, :color => '000000')
+    @pdf.text_box(contents, 1, 1, 200, 100, inline_format: true, font: 'IPAMincho', size: 18, color: '000000')
   end
 
   def test_text_box_without_inline_format
     contents = '<b>ThinReports</b> official site is <link href="http://www.thinreports.org">here</link>.'
 
     flexmock(::Prawn::Text::Formatted::Parser).should_receive(:to_array).times(0)
-    @pdf.text_box(contents, 1, 1, 200, 100, :inline_format => false, :font => 'IPAMincho', :size => 18, :color => '000000')
+    @pdf.text_box(contents, 1, 1, 200, 100, inline_format: false, font: 'IPAMincho', size: 18, color: '000000')
   end
 
   def test_text_box_should_not_raise_PrawnCannotFitError
-    @pdf.text_box('foo', 0, 0, 1, 1, :font => 'IPAMincho',
-                                     :size => 100,
-                                     :color => '000000')
+    @pdf.text_box('foo', 0, 0, 1, 1, font: 'IPAMincho',
+                                     size: 100,
+                                     color: '000000')
   rescue Prawn::Errors::CannotFit
     flunk('Raise Prawn::Errors::CannotFit.')
   end
@@ -152,17 +152,17 @@ class ThinReports::Generator::PDF::Graphics::TestText < Minitest::Test
   end
   
   def test_text_box_attrs_should_return_a_Hash_which_doesnt_contain_the_single_line_option_when_single_is_true_but_overflow_is_expand
-    attrs = @pdf.send(:text_box_attrs, 0, 0, 100, 100, :single => true, :overflow => :expand)
+    attrs = @pdf.send(:text_box_attrs, 0, 0, 100, 100, single: true, overflow: :expand)
     refute attrs.key?(:single_line)
   end
   
   def test_text_box_attrs_should_return_a_Hash_containing_a_single_line_option_when_single_is_true_and_overflow_isnot_expand
-    attrs = @pdf.send(:text_box_attrs, 0, 0, 100, 100, :single => true, :overflow => :truncate)
+    attrs = @pdf.send(:text_box_attrs, 0, 0, 100, 100, single: true, overflow: :truncate)
     assert_equal attrs[:single_line], true
   end
   
   def test_text_box_attrs_should_return_a_Hash_which_does_not_contain_a_height_option_when_single_is_true
-    attrs = @pdf.send(:text_box_attrs, 0, 0, 100, 100, :single => true)
+    attrs = @pdf.send(:text_box_attrs, 0, 0, 100, 100, single: true)
     refute attrs.key?(:height)
   end
   
@@ -179,7 +179,7 @@ class ThinReports::Generator::PDF::Graphics::TestText < Minitest::Test
   def test_text
     flexmock(@pdf).
       should_receive(:text_box).
-      with('contents', 100, 200, 150, 250, { :overflow => :shirink_to_fit }).once
+      with('contents', 100, 200, 150, 250, { overflow: :shirink_to_fit }).once
 
     @pdf.text('contents', 100, 200, 150, 250)
   end

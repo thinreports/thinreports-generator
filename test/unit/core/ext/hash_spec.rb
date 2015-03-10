@@ -10,7 +10,7 @@ describe 'Hash#simple_deep_copy' do
   end
   
   it 'should not immutable elements at fist node has been cloned' do
-    original = {:a => 'string', :b => Time.now}
+    original = {a: 'string', b: Time.now}
     copied   = original.simple_deep_copy
     
     original.each do |k, v|
@@ -19,7 +19,7 @@ describe 'Hash#simple_deep_copy' do
   end
   
   it 'should immutable objects at first node returns the raw' do
-    original = {:a => nil, :b => 1, :c => 100, :d => :symbol}
+    original = {a: nil, b: 1, c: 100, d: :symbol}
     copied   = original.simple_deep_copy
     
     original.each do |k, v|

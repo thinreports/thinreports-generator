@@ -49,7 +49,7 @@ module ThinReports
       end
       
       def copy_page
-        finalize_current_page(:at => :copy)
+        finalize_current_page(at: :copy)
         insert_page(page.copy)
       end
       
@@ -122,7 +122,7 @@ module ThinReports
       end
       
       def init_layout(filename, id = nil)
-        ThinReports::Layout.new(filename, :id => id)
+        ThinReports::Layout.new(filename, id: id)
       end
     end
     

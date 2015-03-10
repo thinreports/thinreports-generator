@@ -30,7 +30,7 @@ module ThinReports
       end
       
       def add_blank_page
-        pdf.start_new_page(pdf.page_count.zero? ? {:size => 'A4'} : {})
+        pdf.start_new_page(pdf.page_count.zero? ? {size: 'A4'} : {})
       end
       
     private
@@ -61,7 +61,7 @@ module ThinReports
       # @param [ThinReports::Layout::Format] format
       # @return [Hash]
       def new_basic_page_options(format)
-        options = {:layout => format.page_orientation.to_sym}
+        options = {layout: format.page_orientation.to_sym}
 
         options[:size] = if format.user_paper_type?
           [format.page_width.to_f, format.page_height.to_f]

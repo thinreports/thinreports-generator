@@ -59,7 +59,7 @@ class ThinReports::Core::Format::TestBuilder < Minitest::Test
     format.shapes = {}
 
     TestFormat.build_layout(format) do |type, f|
-      flexmock(:id => f['id'])
+      flexmock(id: f['id'])
     end
     
     assert_equal format.layout, clean_whitespaces(<<-'EOS')
@@ -108,6 +108,6 @@ class ThinReports::Core::Format::TestBuilder < Minitest::Test
   end
   
   def test_shape_tag
-    assert_equal TestFormat.shape_tag(flexmock(:id => :foo)), '<%= r(:"foo")%>'
+    assert_equal TestFormat.shape_tag(flexmock(id: :foo)), '<%= r(:"foo")%>'
   end
 end

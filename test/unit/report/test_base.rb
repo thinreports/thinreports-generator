@@ -13,7 +13,7 @@ class ThinReports::Report::TestBase < Minitest::Test
   end
 
   def test_initialize_should_register_layout_as_default_when_layout_is_specified_as_the_option
-    report = Report::Base.new :layout => data_file('basic_layout1.tlf')
+    report = Report::Base.new layout: data_file('basic_layout1.tlf')
     assert_equal report.default_layout.filename, data_file('basic_layout1.tlf')
   end
 
@@ -28,7 +28,7 @@ class ThinReports::Report::TestBase < Minitest::Test
   end
 
   def test_use_layout_should_register_default_layout_when_default_property_is_true
-    @report.use_layout(data_file('basic_layout2.tlf'), :default => true)
+    @report.use_layout(data_file('basic_layout2.tlf'), default: true)
 
     assert_equal @report.default_layout.filename, data_file('basic_layout2.tlf')
   end
@@ -41,36 +41,36 @@ class ThinReports::Report::TestBase < Minitest::Test
 
   def test_start_new_page_should_raise_when_the_layout_has_not_been_registered_yet
     assert_raises ThinReports::Errors::NoRegisteredLayoutFound do
-      @report.start_new_page(:layout => :unknown)
+      @report.start_new_page(layout: :unknown)
     end
   end
 
   def test_start_new_page_should_create_a_new_page_using_a_default_layout
-    @report.use_layout(data_file('basic_layout1.tlf'), :default => true)
+    @report.use_layout(data_file('basic_layout1.tlf'), default: true)
 
     assert_equal @report.start_new_page.layout.filename, data_file('basic_layout1.tlf')
   end
 
   def test_start_new_page_should_create_a_new_page_using_a_layout_with_specified_id
-    @report.use_layout(data_file('basic_layout1.tlf'), :id => :foo)
+    @report.use_layout(data_file('basic_layout1.tlf'), id: :foo)
 
-    assert_equal @report.start_new_page(:layout => :foo).layout.filename,
+    assert_equal @report.start_new_page(layout: :foo).layout.filename,
                  data_file('basic_layout1.tlf')
   end
 
   def test_start_new_page_should_create_a_new_page_using_a_specified_layoutfile
-    new_page = @report.start_new_page(:layout => data_file('basic_layout1.tlf'))
+    new_page = @report.start_new_page(layout: data_file('basic_layout1.tlf'))
     assert_equal new_page.layout.filename, data_file('basic_layout1.tlf')
   end
 
   def test_start_new_page_with_count_option
-    @report.use_layout data_file('basic_layout1.tlf'), :default => true
+    @report.use_layout data_file('basic_layout1.tlf'), default: true
 
-    new_page = @report.start_new_page :count => false
+    new_page = @report.start_new_page count: false
     assert_nil new_page.no
     assert_equal @report.page_count, 0
 
-    new_page = @report.start_new_page :count => true
+    new_page = @report.start_new_page count: true
     assert_equal new_page.no, 1
     assert_equal @report.page_count, 1
 
@@ -86,7 +86,7 @@ class ThinReports::Report::TestBase < Minitest::Test
   end
 
   def test_layout_should_return_the_default_layout_with_no_arguments
-    @report.use_layout(data_file('basic_layout1.tlf'), :default => true)
+    @report.use_layout(data_file('basic_layout1.tlf'), default: true)
 
     assert_equal @report.layout.filename, data_file('basic_layout1.tlf')
   end
@@ -98,7 +98,7 @@ class ThinReports::Report::TestBase < Minitest::Test
   end
 
   def test_layout_should_return_the_layout_with_specified_id
-    @report.use_layout(data_file('basic_layout2.tlf'), :id => :foo)
+    @report.use_layout(data_file('basic_layout2.tlf'), id: :foo)
 
     assert_equal @report.layout(:foo).filename, data_file('basic_layout2.tlf')
   end
@@ -106,28 +106,28 @@ class ThinReports::Report::TestBase < Minitest::Test
   def test_generate_should_properly_initialize_Generator_and_call_generate_method_when_type_is_specified
     flexmock(ThinReports::Generator).
       should_receive(:new).
-      with(:pdf, @report, {:option => :value}).
-      and_return(flexmock(:generate => 'Success')).once
+      with(:pdf, @report, {option: :value}).
+      and_return(flexmock(generate: 'Success')).once
 
-    assert_equal @report.generate(:pdf, :option => :value), 'Success'
+    assert_equal @report.generate(:pdf, option: :value), 'Success'
   end
 
   def test_generate_should_properly_initialize_Generator_and_call_generate_method_when_type_is_omitted
     flexmock(ThinReports::Generator).
       should_receive(:new).
-      with(:pdf, @report, {:option => :value}).
-      and_return(flexmock(:generate => 'Success')).once
+      with(:pdf, @report, {option: :value}).
+      and_return(flexmock(generate: 'Success')).once
 
-    assert_equal @report.generate(:option => :value), 'Success'
+    assert_equal @report.generate(option: :value), 'Success'
   end
 
   def test_generate_should_call_generate_method_with_filename_argument_when_filename_option_is_given
     flexmock(ThinReports::Generator).
       should_receive(:new).
       with(:pdf, @report, {}).
-      and_return(flexmock(:generate => 'Success')).once
+      and_return(flexmock(generate: 'Success')).once
 
-    assert_equal @report.generate(:filename => 'foo.pdf'), 'Success'
+    assert_equal @report.generate(filename: 'foo.pdf'), 'Success'
   end
 
   def test_events_should_return_Report_Events
@@ -208,15 +208,15 @@ class ThinReports::Report::TestBase < Minitest::Test
   def test_Base_generate_should_properly_generate_when_type_is_specified
     flexmock(Report::Base).new_instances.
       should_receive(:generate).
-      with(:pdf, :option => :value).once
+      with(:pdf, option: :value).once
 
     flexmock(Report::Base).
       should_receive(:create).
-      with({:layout => 'layout.tlf'}, Proc).
+      with({layout: 'layout.tlf'}, Proc).
       and_return(Report::Base.new).once
 
-    Report::Base.generate(:pdf, :report    => {:layout => 'layout.tlf'},
-                                :generator => {:option => :value}) {}
+    Report::Base.generate(:pdf, report: {layout: 'layout.tlf'},
+                                generator: {option: :value}) {}
   end
 
   def test_Base_generate_should_properly_generate_when_type_is_omitted
@@ -239,43 +239,43 @@ class ThinReports::Report::TestBase < Minitest::Test
   end
 
   def test_Base_extract_options_should_return_as_report_option_the_value_which_has_report_in_a_key
-    report, generator = Report::Base.send(:extract_options!, [{:report => {:layout => 'hoge.tlf'}}])
+    report, generator = Report::Base.send(:extract_options!, [{report: {layout: 'hoge.tlf'}}])
     assert_equal report[:layout], 'hoge.tlf'
   end
 
   def test_Base_extract_options_should_operate_an_argument_destructively
-    args = [:pdf, 'output.pdf', {:report => {:layout => 'foo.tlf'}}]
+    args = [:pdf, 'output.pdf', {report: {layout: 'foo.tlf'}}]
     Report::Base.send(:extract_options!, args)
     assert_equal args, [:pdf, 'output.pdf']
   end
 
   def test_Base_extract_options_should_include_the_layout_key_in_the_report_option
-    report, generator = Report::Base.send(:extract_options!, [{:layout => 'hoge.tlf'}])
+    report, generator = Report::Base.send(:extract_options!, [{layout: 'hoge.tlf'}])
     assert_equal report[:layout], 'hoge.tlf'
   end
 
   def test_Base_extract_options_should_give_priority_to_the_value_of_the_layout_key_over_in_the_report_option
     report, generator = Report::Base.send(:extract_options!,
-                                          [{:report => {:layout => 'foo.tlf'}, :layout => 'hoge.tlf'}])
+                                          [{report: {layout: 'foo.tlf'}, layout: 'hoge.tlf'}])
     assert_equal report[:layout], 'hoge.tlf'
   end
 
   def test_Base_extract_options_should_return_as_generator_option_the_value_which_has_generator_in_a_key
     report, generator = Report::Base.send(:extract_options!,
-                                          [{:generator => {:option => 'value'}}])
+                                          [{generator: {option: 'value'}}])
     assert_equal generator[:option], 'value'
   end
 
   def test_Base_extract_options_should_give_priority_to_the_value_of_other_keys_over_in_the_generator_option
     report, generator = Report::Base.send(:extract_options!,
-                                          [{:generator => {:option => 'value1'}, :option => 'value2'}])
+                                          [{generator: {option: 'value1'}, option: 'value2'}])
     assert_equal generator[:option], 'value2'
   end
 
   def test_Base_extract_options_should_return_all_the_values_except_the_report_option_as_a_generator_option
     report, generator = Report::Base.send(:extract_options!,
-                                          [{:report => {:layout => 'foo.tlf'}, :layout => 'hoge.tlf',
-                                            :generator_opt1 => 'value1', :generator_opt2 => 'value2'}])
+                                          [{report: {layout: 'foo.tlf'}, layout: 'hoge.tlf',
+                                            generator_opt1: 'value1', generator_opt2: 'value2'}])
     assert_equal generator.values_at(:generator_opt1, :generator_opt2),
                  ['value1', 'value2']
   end

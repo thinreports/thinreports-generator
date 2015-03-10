@@ -9,7 +9,7 @@ end
 
 module ThinReports
   module Core::Format
-    
+
     # @private
     module Builder
       def build(*args)
@@ -19,9 +19,9 @@ module ThinReports
       rescue => e
         raise ThinReports::Errors::InvalidLayoutFormat
       end
-      
+
     private
-      
+
       # @abstract
       def build_internal(*args)
         raise NotImplementedError
@@ -39,23 +39,23 @@ module ThinReports
         end
         format.layout.gsub!(pattern, '')
       end
-      
+
       # @param [String] svg
       def clean(svg)
         svg.gsub!(/<!--.*?-->/, '')
       end
-      
+
       # @param [String] svg
       def clean_with_attributes(svg)
         clean(svg)
         svg.gsub!(/ x\-[a-z\d\-]+?=".*?"/, '')
-        svg.gsub!(/ class=".*?"/, '')        
+        svg.gsub!(/ class=".*?"/, '')
       end
-      
+
       def shape_tag(format)
         %{<%= r(:"#{format.id}")%>}
       end
-      
+
       def parsed_format_and_shape_type(json_string)
         f = parse_json(json_string)
         [ f['type'], f ]
@@ -65,6 +65,6 @@ module ThinReports
         JSON.parse(json_string)
       end
     end
-    
+
   end
 end

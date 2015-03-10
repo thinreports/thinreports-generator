@@ -70,9 +70,9 @@ class ThinReports::Generator::PDF::Document::TestPage < Minitest::Test
   def test_new_basic_page_options_when_the_layout_has_customize_size
     format = flexmock('format').
       should_receive(:user_paper_type? => true,
-                     :page_width       => 100,
-                     :page_height      => 100,
-                     :page_orientation => 'portrait').mock
+                     page_width: 100,
+                     page_height: 100,
+                     page_orientation: 'portrait').mock
     
     options = create_pdf.send(:new_basic_page_options, format)
     assert_equal options[:size], [100, 100]
@@ -106,7 +106,7 @@ class ThinReports::Generator::PDF::Document::TestPage < Minitest::Test
 
   def test_add_blank_page_should_create_an_A4_size_page_in_first_page
     create_pdf
-    flexmock(@pdf.internal).should_receive(:start_new_page).with(:size => 'A4').once
+    flexmock(@pdf.internal).should_receive(:start_new_page).with(size: 'A4').once
     
     @pdf.add_blank_page
   end

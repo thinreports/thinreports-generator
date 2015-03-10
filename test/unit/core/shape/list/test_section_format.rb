@@ -19,7 +19,7 @@ class ThinReports::Core::Shape::List::TestSectionFormat < Minitest::Test
   Shape = ThinReports::Core::Shape
   
   def test_build
-    shape_format = flexmock(:id => 'mock')
+    shape_format = flexmock(id: 'mock')
     
     flexmock(Shape::TextBlock::Format).
         should_receive(:build).times(2).and_return(shape_format)

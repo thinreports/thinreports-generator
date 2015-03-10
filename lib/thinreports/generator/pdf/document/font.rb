@@ -8,10 +8,10 @@ module ThinReports
       FONT_STORE = File.join(ThinReports::ROOTDIR, 'fonts')
 
       BUILTIN_FONTS = {
-        'IPAMincho'  => {:normal => File.join(FONT_STORE, 'ipam.ttf')},
-        'IPAPMincho' => {:normal => File.join(FONT_STORE, 'ipamp.ttf')},
-        'IPAGothic'  => {:normal => File.join(FONT_STORE, 'ipag.ttf')},
-        'IPAPGothic' => {:normal => File.join(FONT_STORE, 'ipagp.ttf')}
+        'IPAMincho'  => {normal: File.join(FONT_STORE, 'ipam.ttf')},
+        'IPAPMincho' => {normal: File.join(FONT_STORE, 'ipamp.ttf')},
+        'IPAGothic'  => {normal: File.join(FONT_STORE, 'ipag.ttf')},
+        'IPAPGothic' => {normal: File.join(FONT_STORE, 'ipagp.ttf')}
       }
 
       DEFAULT_FALLBACK_FONTS = %w( Helvetica IPAMincho )
@@ -61,10 +61,10 @@ module ThinReports
       def install_font(name, file)
         raise Errors::FontFileNotFound unless File.exists?(file)
 
-        pdf.font_families[name] = {:normal      => file,
-                                   :bold        => file,
-                                   :italic      => file,
-                                   :bold_italic => file}
+        pdf.font_families[name] = {normal: file,
+                                   bold: file,
+                                   italic: file,
+                                   bold_italic: file}
         name
       end
 

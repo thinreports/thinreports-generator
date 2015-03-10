@@ -73,7 +73,7 @@ module ThinReports
         # Apply stroke-dashed.
         if stroke && stroke[:dash]
           length, space = stroke[:dash]
-          pdf.dash(length, :space => space)
+          pdf.dash(length, space: space)
         end
         
         case
@@ -110,9 +110,9 @@ module ThinReports
         width = styles[:stroke_width]
         
         if color && color != 'none' && width && width != 0
-          {:color => parse_color(color),
-           :width => s2f(width),
-           :dash  => s2f(*styles[:stroke_dash])}
+          {color: parse_color(color),
+           width: s2f(width),
+           dash: s2f(*styles[:stroke_dash])}
         end
       end
       
@@ -122,7 +122,7 @@ module ThinReports
         color = styles[:fill]
         
         if color && color != 'none'
-          {:color => parse_color(color)}
+          {color: parse_color(color)}
         end
       end      
       
