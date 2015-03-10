@@ -2,19 +2,19 @@
 
 module ThinReports
   module Layout
-    
+
     class Configuration
       include Core::Shape::Manager::Target
-      
-      undef_method :items, :values
-      
+
+      undef_method :values
+
       # @param [ThinReports::Layout::Base] layout
       def initialize(layout)
         initialize_manager(layout.format) do |f|
           Core::Shape::Configuration(f.type).new
         end
       end
-      
+
       # @param [String, Symbol] shape_id
       # @return [Object, nil]
       # @private
@@ -22,6 +22,6 @@ module ThinReports
         (config = manager.shapes[shape_id.to_sym]) && config.copy
       end
     end
-    
+
   end
 end
