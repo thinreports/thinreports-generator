@@ -2,21 +2,21 @@
 
 module ThinReports
   module Generator
-    
+
     # @private
     module PDF::Page
       # Add JIS-B4,B5 page geometry
-      Prawn::Document::PageGeometry::SIZES.update(
+      ::PDF::Core::PageGeometry::SIZES.update(
         'B4_JIS' => [728.5, 1031.8],
         'B5_JIS' => [515.9, 728.5]
       )
-      
+
       # @param [ThinReports::Layout::Format] format
       def start_new_page(format)
         format_id = if change_page_format?(format)
           pdf.start_new_page(new_basic_page_options(format))
           @current_page_format = format
-          
+
           unless format_stamp_registry.include?(format.identifier)
             create_format_stamp(format)
           end
@@ -25,16 +25,16 @@ module ThinReports
           pdf.start_new_page(new_basic_page_options(current_page_format))
           current_page_format.identifier
         end
-        
+
         stamp(format_id.to_s)
       end
-      
+
       def add_blank_page
         pdf.start_new_page(pdf.page_count.zero? ? {size: 'A4'} : {})
       end
-      
+
     private
-      
+
       # @return [ThinReports::Layout::Format]
       attr_reader :current_page_format
 
@@ -44,7 +44,7 @@ module ThinReports
         !current_page_format ||
           current_page_format.identifier != new_format.identifier
       end
-      
+
       # @param [ThinReports::Layout::Format] format
       def create_format_stamp(format)
         create_stamp(format.identifier.to_s) do
@@ -52,12 +52,12 @@ module ThinReports
         end
         format_stamp_registry << format.identifier
       end
-      
+
       # @return [Array]
       def format_stamp_registry
         @format_stamp_registry ||= []
       end
-      
+
       # @param [ThinReports::Layout::Format] format
       # @return [Hash]
       def new_basic_page_options(format)
@@ -80,6 +80,6 @@ module ThinReports
         options
       end
     end
-    
+
   end
 end

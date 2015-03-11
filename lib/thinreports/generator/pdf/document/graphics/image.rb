@@ -5,7 +5,7 @@ require 'base64'
 
 module ThinReports
   module Generator
-    
+
     module PDF::Graphics
       # @param [String] filename
       # @param [Numeric, Strng] x
@@ -16,7 +16,7 @@ module ThinReports
         w, h = s2f(w, h)
         pdf.image(filename, at: pos(x, y), width: w, height: h)
       end
-      
+
       # @param [String] base64
       # @param [Numeric, Strng] x
       # @param [Numeric, Strng] y
@@ -26,7 +26,7 @@ module ThinReports
         image = create_temp_imagefile(base64)
         image(image.path, x, y, w, h)
       end
-      
+
       # @param file (see Prawn#image)
       # @param [Numeric, Strng] x
       # @param [Numeric, Strng] y
@@ -43,17 +43,17 @@ module ThinReports
                           auto_fit: [w, h])
         end
       end
-      
+
     private
-      
+
       def clean_temp_images
         temp_image_registry.each {|tmp| tmp.unlink }
       end
-      
+
       def temp_image_registry
         @temp_image_registry ||= []
       end
-      
+
       # @param [String] base64
       # @return [Tempfile]
       def create_temp_imagefile(base64)
@@ -64,8 +64,8 @@ module ThinReports
         file
       ensure
         file.close
-      end      
+      end
     end
-    
+
   end
 end

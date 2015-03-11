@@ -34,7 +34,7 @@ module ThinReports
 
         with_text_styles(attrs) do |built_attrs, font_styles|
           contents = if inline_format
-            parsed_contents = ::Prawn::Text::Formatted::Parser.to_array(contents)
+            parsed_contents = ::Prawn::Text::Formatted::Parser.format(contents)
             parsed_contents.each {|c| c[:styles] |= font_styles }
           else
             [{ text: contents, styles: font_styles }]
