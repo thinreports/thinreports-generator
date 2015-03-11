@@ -1,6 +1,5 @@
 # coding: utf-8
 
-require 'rubygems'
 require 'minitest/autorun'
 require 'minitest/spec'
 require 'minitest/unit'
@@ -21,18 +20,6 @@ module ThinReports::TestHelper
   def teardown
     super
     clear_output
-  end
-
-  def skip_if_ruby19
-    if RUBY_VERSION > '1.9'
-      skip('This test is not required more than Ruby 1.9.')
-    end
-  end
-
-  def skip_if_ruby18
-    if RUBY_VERSION < '1.9'
-      skip('This test is not required Ruby 1.8 below.')
-    end
   end
 
   def create_basic_report(file, &block)

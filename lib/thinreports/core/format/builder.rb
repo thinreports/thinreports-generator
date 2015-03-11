@@ -1,11 +1,6 @@
 # coding: utf-8
 
-begin
-  require 'json'
-rescue LoadError
-  puts 'ThinReports requires json >= 1.4.6. ' +
-       'Please `gem install json` and try again.'
-end
+require 'json'
 
 module ThinReports
   module Core::Format
