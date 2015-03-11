@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.licenses    = ['MIT']
 
   s.platform              = Gem::Platform::RUBY
-  s.required_ruby_version = '>= 1.8.7'
+  s.required_ruby_version = '>= 1.9.3'
 
   s.rdoc_options     = ['--main', 'README.md']
   s.extra_rdoc_files = ['README.md']
