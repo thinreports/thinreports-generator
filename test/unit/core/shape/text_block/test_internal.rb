@@ -9,7 +9,7 @@ class ThinReports::Core::Shape::TextBlock::TestInternal < Minitest::Test
   TextBlock = ThinReports::Core::Shape::TextBlock
   
   def create_parent
-    report = create_basic_report('basic_layout1.tlf')
+    report = new_report('layout_text1.tlf')
     report.start_new_page do |page|
       # Add to force TextBlock shape.
       page.manager.format.shapes[:foo] = TextBlock::Format.new('type' => 's-tblock',

@@ -3,18 +3,14 @@
 require 'minitest/autorun'
 require 'minitest/spec'
 require 'minitest/unit'
-require 'flexmock/test_unit'
+require 'mocha/mini_test'
 
-require 'fileutils'
 require 'digest/sha1'
 require 'pathname'
 
 require 'thinreports'
 
-
 module ThinReports::TestHelper
-  include FlexMock::TestCase
-
   ROOT = Pathname.new(File.expand_path('..', __FILE__))
 
   def teardown
@@ -22,17 +18,17 @@ module ThinReports::TestHelper
     clear_output
   end
 
-  def create_basic_report(file, &block)
+  def new_report(file, &block)
     report = ThinReports::Report.new layout: data_file(file)
     block.call(report) if block_given?
     report
   end
 
-  def create_basic_layout(file)
+  def new_layout(file)
     ThinReports::Layout.new(data_file(file))
   end
 
-  def create_basic_layout_format(file)
+  def new_layout_format(file)
     ThinReports::Layout::Format.build(data_file(file))
   end
 

@@ -4,25 +4,25 @@ require 'test_helper'
 
 class ThinReports::Core::Shape::TextBlock::TestFormatter < Minitest::Test
   include ThinReports::TestHelper
-  
+
   # Alias
   Formatter = ThinReports::Core::Shape::TextBlock::Formatter
-  
+
   def test_initialize_formatter_by_type
     assert_instance_of Formatter::Basic,
-      Formatter.setup( flexmock(format_type: '') )
-    
+      Formatter.setup( stub(format_type: '') )
+
     assert_instance_of Formatter::Number,
-      Formatter.setup( flexmock(format_type: 'number') )
-      
+      Formatter.setup( stub(format_type: 'number') )
+
     assert_instance_of Formatter::Datetime,
-      Formatter.setup( flexmock(format_type: 'datetime') )
-    
+      Formatter.setup( stub(format_type: 'datetime') )
+
     assert_instance_of Formatter::Padding,
-      Formatter.setup( flexmock(format_type: 'padding') )
-      
+      Formatter.setup( stub(format_type: 'padding') )
+
     assert_raises ThinReports::Errors::UnknownFormatterType do
-      Formatter.setup( flexmock(format_type: 'unknown') )
+      Formatter.setup( stub(format_type: 'unknown') )
     end
   end
 end

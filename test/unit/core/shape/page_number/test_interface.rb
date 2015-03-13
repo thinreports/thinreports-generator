@@ -7,12 +7,15 @@ class ThinReports::Core::Shape::PageNumber::TestInterface < Minitest::Test
 
   PageNumber = ThinReports::Core::Shape::PageNumber
 
-  def init_pageno(format = {})
-    PageNumber::Interface.new(flexmock('parent'), PageNumber::Format.new(format))
+  def create_pageno(format = {})
+    report = new_report 'layout_text1'
+    parent = report.start_new_page
+
+    PageNumber::Interface.new parent, PageNumber::Format.new(format)
   end
 
   def test_format
-    pageno = init_pageno('format' => '{page}')
+    pageno = create_pageno 'format' => '{page}'
 
     assert_equal pageno.format, '{page}'
     pageno.format('{page} / {total}')
@@ -20,7 +23,7 @@ class ThinReports::Core::Shape::PageNumber::TestInterface < Minitest::Test
   end
 
   def test_reset_format
-    pageno = init_pageno('format' => '{page}')
+    pageno = create_pageno 'format' => '{page}'
 
     pageno.format('-- {page} --')
     pageno.reset_format

@@ -6,8 +6,6 @@ module ThinReports
     class Configuration
       include Core::Shape::Manager::Target
 
-      undef_method :values
-
       # @param [ThinReports::Layout::Base] layout
       def initialize(layout)
         initialize_manager(layout.format) do |f|
@@ -20,6 +18,10 @@ module ThinReports
       # @private
       def activate(shape_id)
         (config = manager.shapes[shape_id.to_sym]) && config.copy
+      end
+
+      def values
+        raise NoMethodError
       end
     end
 

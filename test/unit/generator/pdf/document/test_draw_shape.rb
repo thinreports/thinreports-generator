@@ -10,8 +10,11 @@ class ThinReports::Generator::PDF::TestDrawShape < Minitest::Test
   end
 
   def create_tblock_interface(format_config = {})
-    format = ThinReports::Core::Shape::TextBlock::Format.new(format_config)
-    ThinReports::Core::Shape::TextBlock::Interface.new(flexmock('parent'), format)
+    report = new_report 'layout_text1'
+    parent = report.start_new_page
+
+    format = ThinReports::Core::Shape::TextBlock::Format.new format_config
+    ThinReports::Core::Shape::TextBlock::Interface.new parent, format
   end
 
   def test_shape_text_attrs_should_return_attrs_containing_an_overflow_property
@@ -39,4 +42,3 @@ class ThinReports::Generator::PDF::TestDrawShape < Minitest::Test
     assert_includes @pdf.send(:shape_text_attrs, tblock.internal).keys, :word_wrap
   end
 end
-

@@ -17,7 +17,7 @@ module ThinReports
     def self.register(type, generator)
       registry[type] = generator
     end
-    
+
     # @private
     def self.registry
       @generators ||= {}

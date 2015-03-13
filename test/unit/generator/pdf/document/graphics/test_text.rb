@@ -125,14 +125,14 @@ class ThinReports::Generator::PDF::Graphics::TestText < Minitest::Test
   def test_text_box_with_inline_format
     contents = '<b>ThinReports</b> official site is <link href="http://www.thinreports.org">here</link>.'
 
-    flexmock(::Prawn::Text::Formatted::Parser).should_receive(:format).with(contents).and_return([]).once
+    ::Prawn::Text::Formatted::Parser.expects(:format).with(contents).returns([]).once
     @pdf.text_box(contents, 1, 1, 200, 100, inline_format: true, font: 'IPAMincho', size: 18, color: '000000')
   end
 
   def test_text_box_without_inline_format
     contents = '<b>ThinReports</b> official site is <link href="http://www.thinreports.org">here</link>.'
 
-    flexmock(::Prawn::Text::Formatted::Parser).should_receive(:format).times(0)
+    ::Prawn::Text::Formatted::Parser.expects(:format).never
     @pdf.text_box(contents, 1, 1, 200, 100, inline_format: false, font: 'IPAMincho', size: 18, color: '000000')
   end
 
@@ -177,8 +177,7 @@ class ThinReports::Generator::PDF::Graphics::TestText < Minitest::Test
   end
 
   def test_text
-    flexmock(@pdf).
-      should_receive(:text_box).
+    @pdf.expects(:text_box).
       with('contents', 100, 200, 150, 250, { overflow: :shirink_to_fit }).once
 
     @pdf.text('contents', 100, 200, 150, 250)

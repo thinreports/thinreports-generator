@@ -5,15 +5,19 @@ require 'test_helper'
 class ThinReports::Generator::TestPDF < Minitest::Test
   include ThinReports::TestHelper
 
-  # Alias
   PDF = ThinReports::Generator::PDF
 
   def test_new_should_set_title_as_metadata
-    report = create_basic_report('basic_layout1.tlf') {|r| r.start_new_page }
+    report = new_report('layout_text1.tlf') {|r| r.start_new_page }
 
-    flexmock(PDF::Document).should_receive(:new).
-      with(Hash, Title: 'Basic Layout').once
+    actual_pdf_title = nil
+    PDF::Document.define_singleton_method(:new) {|options, meta|
+      actual_pdf_title = meta[:Title]
+    }
+    PDF.new report, {}
 
-    PDF.new(report, {})
+    assert_equal 'Basic Layout', actual_pdf_title
+  ensure
+    PDF::Document.singleton_class.send(:remove_method, :new)
   end
 end

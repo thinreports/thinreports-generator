@@ -9,7 +9,7 @@ class ThinReports::Core::Shape::List::TestPage < Minitest::Test
   List = ThinReports::Core::Shape::List
   
   def create_report(&block)
-    create_basic_report('basic_list_layout.tlf', &block)
+    new_report('layout_list.tlf', &block)
   end
   
   def create_report_for_checking_dispatched_event(event)
@@ -66,7 +66,7 @@ class ThinReports::Core::Shape::List::TestPage < Minitest::Test
   end
   
   def test_copy_should_properly_work_when_list_has_not_header
-    report = create_basic_report('basic_list_noheader_layout.tlf')
+    report = new_report('layout_list_noheader.tlf')
     
     10.times {|t| report.list.add_row }
   rescue => e

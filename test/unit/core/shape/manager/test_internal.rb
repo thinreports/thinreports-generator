@@ -15,7 +15,7 @@ class ThinReports::Core::Shape::Manager::TestInternal < Minitest::Test
   end
   
   def create_internal(&block)
-    report = create_basic_report('basic_layout1.tlf')
+    report = new_report('layout_text1.tlf')
     format = report.layout.format
     
     # Add to default dummy shapes.

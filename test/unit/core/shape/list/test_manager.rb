@@ -9,7 +9,7 @@ class ThinReports::Core::Shape::List::TestManager < Minitest::Test
   List = ThinReports::Core::Shape::List
   
   def create_report(&block)
-    create_basic_report('basic_list_layout.tlf', &block)
+    new_report('layout_list.tlf', &block)
   end
   
   def list_manager

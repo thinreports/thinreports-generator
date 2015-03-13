@@ -28,7 +28,7 @@ class ThinReports::Core::Shape::Manager::TestTarget < Minitest::Test
   end
 
   def create_manager
-    report = create_basic_report('basic_layout1.tlf')
+    report = new_report('layout_text1.tlf')
     layout = report.layout
 
     # Add to dummy shapes.

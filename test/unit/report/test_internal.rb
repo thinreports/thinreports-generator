@@ -4,24 +4,24 @@ require 'test_helper'
 
 class ThinReports::Report::TestInternal < Minitest::Test
   include ThinReports::TestHelper
-  
+
   # Alias
   Report = ThinReports::Report
-  
+
   def report
     Report::Base.new
   end
 
   def sample_layout1
-    data_file('basic_layout1.tlf')
+    data_file('layout_text1.tlf')
   end
 
   def sample_layout2
-    data_file('basic_layout2.tlf')
+    data_file('layout_text2.tlf')
   end
 
   def sample_list_layout
-    data_file('basic_list_layout.tlf')
+    data_file('layout_list.tlf')
   end
 
   def test_layout_specified_in_new_method_should_be_defined_as_default_layout
@@ -35,41 +35,41 @@ class ThinReports::Report::TestInternal < Minitest::Test
 
     assert_equal internal.default_layout.filename, sample_layout1
   end
-  
+
   def test_register_layout_should_be_set_as_default_layout_when_default_option_is_true
     internal = Report::Internal.new(report, {})
     internal.register_layout(sample_layout1, default: true)
-    
+
     assert_equal internal.default_layout.filename, sample_layout1
   end
-  
+
   def test_register_layout_should_be_able_to_change_the_default_layout
     internal = Report::Internal.new(report, layout: sample_layout1)
     internal.register_layout(sample_layout2, default: true)
 
     assert_equal internal.default_layout.filename, sample_layout2
   end
-  
+
   def test_register_layout_should_be_set_as_with_id_when_id_option_is_set
     internal = Report::Internal.new(report, {})
     internal.register_layout(sample_layout1, id: :foo)
 
     assert_equal internal.layout_registry[:foo].filename, sample_layout1
   end
-  
+
   def test_register_layout_should_raise_an_error_when_id_is_already_registered
     internal = Report::Internal.new(report, {})
     internal.register_layout(sample_layout2, id: :foo)
-    
+
     assert_raises ArgumentError do
       internal.register_layout(sample_layout1, id: :foo)
     end
   end
-  
+
   def test_register_layout_should_return_the_instance_of_LayoutConfiguration
     internal = Report::Internal.new(report, {})
 
-    assert_instance_of ThinReports::Layout::Configuration, 
+    assert_instance_of ThinReports::Layout::Configuration,
                        internal.register_layout(sample_layout1)
   end
 
@@ -81,7 +81,7 @@ class ThinReports::Report::TestInternal < Minitest::Test
     end
     pass
   end
-  
+
   def test_add_page_should_finalize_the_current_page
     layout = ThinReports::Layout.new(sample_layout1)
 
@@ -113,13 +113,13 @@ class ThinReports::Report::TestInternal < Minitest::Test
 
   def test_add_page_should_count_up_the_total_page_count
     layout = ThinReports::Layout.new(sample_layout1)
-    
+
     internal = Report::Internal.new(report, layout: sample_layout1)
     internal.add_page(ThinReports::Core::Page.new(report, layout))
 
     assert_equal internal.page_count, 1
   end
-  
+
   def test_add_page_should_switch_to_a_reference_to_the_current_page
     layout = ThinReports::Layout.new(sample_layout1)
     new_pages = (1..2).inject([]) do |pages, i|
@@ -135,7 +135,7 @@ class ThinReports::Report::TestInternal < Minitest::Test
 
     assert_same internal.page, new_pages[1]
   end
-    
+
   def test_add_page_should_dispatch_the_event_page_creation
     dispatched = false
     layout = ThinReports::Layout.new(sample_layout1)
@@ -157,7 +157,7 @@ class ThinReports::Report::TestInternal < Minitest::Test
 
     refute dispatched
   end
-  
+
   def test_add_blank_page_should_not_count_up_the_total_page_count_when_count_is_disabled
     layout = ThinReports::Layout.new(sample_layout1)
 
@@ -175,7 +175,7 @@ class ThinReports::Report::TestInternal < Minitest::Test
 
     assert_equal internal.page_count, 1
   end
-  
+
   def test_finalize_should_dispatch_the_event_report_generation
     dispatched = false
 
@@ -195,11 +195,10 @@ class ThinReports::Report::TestInternal < Minitest::Test
 
   def test_finalize_should_not_work_when_report_is_already_finalized
     internal = Report::Internal.new(report, layout: sample_layout1)
-
-    flexmock(internal).
-      should_receive(:finalize_current_page).once
-
     internal.finalize
+
+    # #finalize_current_page must never be called
+    internal.expects(:finalize_current_page).never
     internal.finalize
   end
 
@@ -209,27 +208,27 @@ class ThinReports::Report::TestInternal < Minitest::Test
 
     assert internal.finalized?
   end
-  
+
   def test_load_layout_with_String
     internal = Report::Internal.new(report, layout: sample_layout1)
-    
-    assert_equal internal.load_layout(sample_layout2).filename, 
+
+    assert_equal internal.load_layout(sample_layout2).filename,
                  sample_layout2
   end
-  
+
   def test_load_layout_with_id
     internal = Report::Internal.new(report, {})
     internal.register_layout(sample_layout1, id: :sample)
 
-    assert_equal internal.load_layout(:sample).filename, 
+    assert_equal internal.load_layout(:sample).filename,
                  sample_layout1
   end
-  
+
   def test_load_layout_with_unknown_id
     internal = Report::Internal.new(report, {})
     assert_nil internal.load_layout(:unknown)
   end
-  
+
   def test_load_layout_should_set_default_layout_when_default_layout_is_nil
     internal = Report::Internal.new(report, {})
     internal.load_layout(sample_layout1)
@@ -245,7 +244,7 @@ class ThinReports::Report::TestInternal < Minitest::Test
       internal.load_layout('/path/to/unkown.tlf')
     end
   end
-  
+
   def test_copy_page_should_finalize_current_page
     layout = ThinReports::Layout.new(sample_layout1)
 
@@ -266,4 +265,3 @@ class ThinReports::Report::TestInternal < Minitest::Test
     assert_equal internal.page_count, 2
   end
 end
-

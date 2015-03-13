@@ -8,7 +8,7 @@ class ThinReports::Core::Shape::PageNumber::TestInternal < Minitest::Test
   PageNumber = ThinReports::Core::Shape::PageNumber
 
   def setup
-    @report = create_basic_report('basic_layout1.tlf')
+    @report = new_report('layout_text1.tlf')
     @report.start_new_page
   end
 

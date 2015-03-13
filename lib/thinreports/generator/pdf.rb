@@ -21,14 +21,14 @@ module ThinReports
 
         title = default_layout ? default_layout.format.report_title : nil
 
-        @pdf = Document.new(options, Title: title)
+        @document = Document.new(options, Title: title)
         @drawers = {}
       end
 
       # @see ThinReports::Generator::Base#generate
       def generate(filename = nil)
         draw_report
-        filename ? @pdf.render_file(filename) : @pdf.render
+        filename ? @document.render_file(filename) : @document.render
       end
 
     private
@@ -40,16 +40,16 @@ module ThinReports
       end
 
       def draw_page(page)
-        return @pdf.add_blank_page if page.blank?
+        return @document.add_blank_page if page.blank?
 
         format = page.layout.format
-        @pdf.start_new_page(format)
+        @document.start_new_page(format)
 
         drawer(format).draw(page)
       end
 
       def drawer(format)
-        @drawers[format.identifier] ||= Drawer::Page.new(@pdf, format)
+        @drawers[format.identifier] ||= Drawer::Page.new(@document, format)
       end
     end
 

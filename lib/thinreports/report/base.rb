@@ -49,8 +49,6 @@ module ThinReports
           report.generate(*args.push(generator_opts))
         end
 
-      private
-
         # @param [Array] args
         # @return [Array<Hash>]
         def extract_options!(args)
@@ -104,7 +102,7 @@ module ThinReports
           raise ThinReports::Errors::NoRegisteredLayoutFound
         end
 
-        page = internal.add_page(layout.init_new_page(self, options))
+        page = internal.add_page(layout.new_page(self, options))
         block_exec_on(page, &block)
       end
 
