@@ -102,7 +102,7 @@ module Thinreports
         @page = new_page
       end
 
-      # @param (see Thinreports::Core::Page#finalize)
+      # @param (see Thinreports::Report::Page#finalize)
       def finalize_current_page(options = {})
         page.finalize(options) unless page.nil? || page.blank?
       end

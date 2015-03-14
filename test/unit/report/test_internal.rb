@@ -86,15 +86,15 @@ class Thinreports::Report::TestInternal < Minitest::Test
     layout = Thinreports::Layout.new(sample_layout1)
 
     internal = Report::Internal.new(report, layout: sample_layout1)
-    page = internal.add_page(Thinreports::Core::Page.new(report, layout))
-    internal.add_page(Thinreports::Core::Page.new(report, layout))
+    page = internal.add_page(Thinreports::Report::Page.new(report, layout))
+    internal.add_page(Thinreports::Report::Page.new(report, layout))
 
     assert_equal page.finalized?, true
   end
 
   def test_add_page_should_return_the_current_page
     layout = Thinreports::Layout.new(sample_layout1)
-    new_page = Thinreports::Core::Page.new(report, layout)
+    new_page = Thinreports::Report::Page.new(report, layout)
 
     internal = Report::Internal.new(report, layout: sample_layout1)
 
@@ -103,7 +103,7 @@ class Thinreports::Report::TestInternal < Minitest::Test
 
   def test_add_page_should_add_the_initialized_page
     layout = Thinreports::Layout.new(sample_layout1)
-    new_page = Thinreports::Core::Page.new(report, layout)
+    new_page = Thinreports::Report::Page.new(report, layout)
 
     internal = Report::Internal.new(report, layout: sample_layout1)
     internal.add_page(new_page)
@@ -115,7 +115,7 @@ class Thinreports::Report::TestInternal < Minitest::Test
     layout = Thinreports::Layout.new(sample_layout1)
 
     internal = Report::Internal.new(report, layout: sample_layout1)
-    internal.add_page(Thinreports::Core::Page.new(report, layout))
+    internal.add_page(Thinreports::Report::Page.new(report, layout))
 
     assert_equal internal.page_count, 1
   end
@@ -123,7 +123,7 @@ class Thinreports::Report::TestInternal < Minitest::Test
   def test_add_page_should_switch_to_a_reference_to_the_current_page
     layout = Thinreports::Layout.new(sample_layout1)
     new_pages = (1..2).inject([]) do |pages, i|
-      pages << Thinreports::Core::Page.new(report, layout)
+      pages << Thinreports::Report::Page.new(report, layout)
     end
 
     internal = Report::Internal.new(report, layout: sample_layout1)
@@ -142,7 +142,7 @@ class Thinreports::Report::TestInternal < Minitest::Test
 
     internal = Report::Internal.new(report, layout: sample_layout1)
     internal.events.on(:page_create) {|e| dispatched = true }
-    internal.add_page(Thinreports::Core::Page.new(report, layout))
+    internal.add_page(Thinreports::Report::Page.new(report, layout))
 
     assert dispatched
   end
@@ -153,7 +153,7 @@ class Thinreports::Report::TestInternal < Minitest::Test
 
     internal = Report::Internal.new(report, layout: sample_layout1)
     internal.events.on(:page_create) {|e| dispatched = true }
-    internal.add_page(Thinreports::Core::BlankPage.new)
+    internal.add_page(Thinreports::Report::BlankPage.new)
 
     refute dispatched
   end
@@ -162,7 +162,7 @@ class Thinreports::Report::TestInternal < Minitest::Test
     layout = Thinreports::Layout.new(sample_layout1)
 
     internal = Report::Internal.new(report, layout: sample_layout1)
-    internal.add_page(Thinreports::Core::BlankPage.new(false))
+    internal.add_page(Thinreports::Report::BlankPage.new(false))
 
     assert_equal internal.page_count, 0
   end
@@ -171,7 +171,7 @@ class Thinreports::Report::TestInternal < Minitest::Test
     layout = Thinreports::Layout.new(sample_layout1)
 
     internal = Report::Internal.new(report, layout: sample_layout1)
-    internal.add_page(Thinreports::Core::BlankPage.new)
+    internal.add_page(Thinreports::Report::BlankPage.new)
 
     assert_equal internal.page_count, 1
   end
@@ -249,7 +249,7 @@ class Thinreports::Report::TestInternal < Minitest::Test
     layout = Thinreports::Layout.new(sample_layout1)
 
     internal = Report::Internal.new(report, layout: sample_layout1)
-    internal.add_page(page = Thinreports::Core::Page.new(report, layout))
+    internal.add_page(page = Thinreports::Report::Page.new(report, layout))
     internal.copy_page
 
     assert page.finalized?
@@ -259,7 +259,7 @@ class Thinreports::Report::TestInternal < Minitest::Test
     layout = Thinreports::Layout.new(sample_layout1)
 
     internal = Report::Internal.new(report, layout: sample_layout1)
-    internal.add_page(page = Thinreports::Core::Page.new(report, layout))
+    internal.add_page(page = Thinreports::Report::Page.new(report, layout))
     internal.copy_page
 
     assert_equal internal.page_count, 2

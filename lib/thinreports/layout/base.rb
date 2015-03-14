@@ -61,7 +61,7 @@ module Thinreports
       # @return [Page]
       # @private
       def new_page(parent, options = {})
-        Core::Page.new(parent, self, options)
+        Report::Page.new(parent, self, options)
       end
     end
 

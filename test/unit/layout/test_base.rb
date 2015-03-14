@@ -37,7 +37,7 @@ class Thinreports::Layout::TestBase < Minitest::Test
 
   def test_new_page
     report = new_report 'layout_text1'
-    assert_instance_of Thinreports::Core::Page,
+    assert_instance_of Thinreports::Report::Page,
                        create_layout.new_page(report)
   end
 

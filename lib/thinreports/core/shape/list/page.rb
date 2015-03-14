@@ -4,7 +4,7 @@ module Thinreports
   module Core::Shape
     
     class List::Page < Basic::Interface
-      # @param [Thinreports::Core::Page] parent
+      # @param [Thinreports::Report::Page] parent
       # @param [Thinreports::Core::Shape::Basic::Format] format
       # @param [Thinreports::Core::Shape::List::PageState] internal (nil)
       # @param [Thinreports::Core::Shape::List::Manager] manager (nil)
@@ -76,7 +76,7 @@ module Thinreports
         config.events
       end
       
-      # @param [Thinreports::Core::Page] new_parent
+      # @param [Thinreports::Report::Page] new_parent
       # @return [Thinreports::Core::Shape::List::Page]
       # @private
       def copy(new_parent)

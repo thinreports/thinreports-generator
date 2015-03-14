@@ -97,8 +97,8 @@ module Thinreports
       # @option options [String, Symbol] :layout (nil)
       # @option options [Boolean] :count (true)
       # @yield [page]
-      # @yieldparam [Thinreports::Core::Page] page
-      # @return [Thinreports::Core::Page]
+      # @yieldparam [Thinreports::Report::Page] page
+      # @return [Thinreports::Report::Page]
       def start_new_page(options = {}, &block)
         unless layout = internal.load_layout(options.delete(:layout))
           raise Thinreports::Errors::NoRegisteredLayoutFound
@@ -110,9 +110,9 @@ module Thinreports
 
       # @param [Hash] options
       # @option options [Boolean] :count (true)
-      # @return [Thinreports::Core::BlankPage]
+      # @return [Thinreports::Report::BlankPage]
       def add_blank_page(options = {})
-        internal.add_page(Core::BlankPage.new(options[:count]))
+        internal.add_page(Report::BlankPage.new(options[:count]))
       end
       alias_method :blank_page, :add_blank_page
 
@@ -168,7 +168,7 @@ module Thinreports
         internal.events
       end
 
-      # @return [Thinreports::Core::Page, nil]
+      # @return [Thinreports::Report::Page, nil]
       def page
         internal.page
       end

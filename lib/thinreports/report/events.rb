@@ -10,10 +10,10 @@ module Thinreports
       end
       
       class Event < Thinreports::Core::Events::Event
-        # @return [Thinreports::Core::Page, nil]
+        # @return [Thinreports::Report::Page, nil]
         attr_reader :page
         
-        # @return [Array<Thinreports::Core::Page>]
+        # @return [Array<Thinreports::Report::Page>]
         attr_reader :pages
         
         # @return [Thinreports::Report::Base]

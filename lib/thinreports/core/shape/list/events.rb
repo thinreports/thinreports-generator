@@ -11,12 +11,12 @@ module Thinreports
       end
       
       class PageEvent < Event
-        # @return [Thinreports::Core::Page]
+        # @return [Thinreports::Report::Page]
         attr_reader :page
         
         # @param type (see Thinreports::Core::Events::Event#initialize)
         # @param [Thinreports::Core::Shape::List::Page] target
-        # @param [Thinreports::Core::Page] page
+        # @param [Thinreports::Report::Page] page
         def initialize(type, target, page)
           super(type, target)
           @page = page
