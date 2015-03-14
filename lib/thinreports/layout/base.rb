@@ -5,6 +5,7 @@ module Thinreports
 
     class Base
       EXT_NAME = 'tlf'
+      include Utils
 
       class << self
         # @param [String] filename
@@ -51,7 +52,7 @@ module Thinreports
       # @return [List::Configuration]
       def config(&block)
         @config ||= Layout::Configuration.new(self)
-        block_exec_on(@config, &block)
+        call_block_in(@config, &block)
       end
 
       # @param [Thinreports::Report::Base] parent

@@ -2,13 +2,13 @@
 
 module Thinreports
   module Core::Shape::TextBlock
-    
+
     # @private
     module Formatter
       # @param [Thinreports::Core::Shape::TextBlock::Format] format
       # @return [Thinreports::Core::Shape::TextBlock::Formatter::Base]
       def self.setup(format)
-        klass = if format.format_type.blank?
+        klass = if Thinreports.blank_value?(format.format_type)
           Basic
         else
           case format.format_type
@@ -22,7 +22,7 @@ module Thinreports
         klass.new(format)
       end
     end
-    
+
   end
 end
 

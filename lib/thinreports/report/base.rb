@@ -4,6 +4,8 @@ module Thinreports
   module Report
 
     class Base
+      include Utils
+
       # @return [Thinreports::Report::Internal]
       # @private
       attr_reader :internal
@@ -22,7 +24,7 @@ module Thinreports
             raise ArgumentError, '#create requires a block'
           end
           report = new(options)
-          block_exec_on(report, &block)
+          call_block_in(report, &block)
           report.finalize
 
           report
@@ -103,7 +105,7 @@ module Thinreports
         end
 
         page = internal.add_page(layout.new_page(self, options))
-        block_exec_on(page, &block)
+        call_block_in(page, &block)
       end
 
       # @param [Hash] options

@@ -4,6 +4,8 @@ module Thinreports
   module Core::Shape
 
     module Manager::Target
+      include Utils
+
       # @private
       attr_reader :manager
 
@@ -30,7 +32,7 @@ module Thinreports
         unless shape
           raise Thinreports::Errors::UnknownItemId.new(id)
         else
-          block_exec_on(shape, &block)
+          call_block_in(shape, &block)
         end
       end
 
@@ -54,7 +56,7 @@ module Thinreports
           raise Thinreports::Errors::UnknownItemId.new(id, 'List')
         else
           manager.lists[id.to_sym] ||= shape
-          block_exec_on(shape, &block)
+          call_block_in(shape, &block)
         end
       end
 

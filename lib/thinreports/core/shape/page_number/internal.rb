@@ -19,7 +19,7 @@ module Thinreports
       end
 
       def build_format(page_no, page_count)
-        return '' if read_format.blank?
+        return '' if blank_value?(read_format)
 
         if start_page_number > 1
           page_no += start_page_number - 1
@@ -37,7 +37,7 @@ module Thinreports
       end
 
       def for_report?
-        format.target.blank?
+        blank_value?(format.target)
       end
 
       def type_of?(type_name)

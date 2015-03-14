@@ -10,7 +10,7 @@ module Thinreports
       def id
         unless @id
           @id = read('id')
-          @id = self.class.next_default_id if @id.blank?
+          @id = self.class.next_default_id if blank_value?(@id)
         end
         @id
       end

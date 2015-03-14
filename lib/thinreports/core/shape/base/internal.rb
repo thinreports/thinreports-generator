@@ -6,7 +6,8 @@ module Thinreports
     # @private
     # @abstract
     class Base::Internal
-      extend ::Forwardable
+      include Utils
+      extend  Forwardable
 
       def self.format_delegators(*args)
         def_delegators :format, *args
@@ -34,7 +35,7 @@ module Thinreports
       def copy(new_parent, &block)
         new_internal = self.class.new(new_parent, format)
         new_internal.style  = style.copy
-        new_internal.states = states.simple_deep_copy
+        new_internal.states = deep_copy(states)
 
         block.call(new_internal) if block_given?
         new_internal

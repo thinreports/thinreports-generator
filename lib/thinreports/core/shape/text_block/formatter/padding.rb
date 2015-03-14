@@ -15,7 +15,7 @@ module Thinreports
       end
 
       def applicable?(value)
-        !format.format_padding_char.blank? && format.format_padding_length > 0
+        !blank_value?(format.format_padding_char) && format.format_padding_length > 0
       end
     end
 

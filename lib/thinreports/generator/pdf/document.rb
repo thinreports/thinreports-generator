@@ -12,6 +12,8 @@ module Thinreports
 
     # @private
     class PDF::Document
+      include Utils
+
       include PDF::Font
       include PDF::ParseColor
       include PDF::Graphics

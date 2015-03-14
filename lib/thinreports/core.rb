@@ -9,9 +9,7 @@ module Thinreports
 
 end
 
-require 'thinreports/core/ext'
 require 'thinreports/core/utils'
-
 require 'thinreports/core/errors'
 require 'thinreports/core/events'
 require 'thinreports/core/format'
