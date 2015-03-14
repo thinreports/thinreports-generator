@@ -2,10 +2,10 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::PageNumber::TestInterface < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::PageNumber::TestInterface < Minitest::Test
+  include Thinreports::TestHelper
 
-  PageNumber = ThinReports::Core::Shape::PageNumber
+  PageNumber = Thinreports::Core::Shape::PageNumber
 
   def create_pageno(format = {})
     report = new_report 'layout_text1'

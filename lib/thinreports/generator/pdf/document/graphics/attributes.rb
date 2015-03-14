@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Generator
     
     module PDF::Graphics

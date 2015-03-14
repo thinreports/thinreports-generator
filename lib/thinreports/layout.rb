@@ -1,9 +1,9 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   
   module Layout
-    # @see ThinReports::Layout::Base#initialize
+    # @see Thinreports::Layout::Base#initialize
     def self.new(filename, options = {})
       Base.new(filename, options)
     end

@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Generator
 
     # @private
@@ -11,7 +11,7 @@ module ThinReports
         'B5_JIS' => [515.9, 728.5]
       )
 
-      # @param [ThinReports::Layout::Format] format
+      # @param [Thinreports::Layout::Format] format
       def start_new_page(format)
         format_id = if change_page_format?(format)
           pdf.start_new_page(new_basic_page_options(format))
@@ -35,17 +35,17 @@ module ThinReports
 
     private
 
-      # @return [ThinReports::Layout::Format]
+      # @return [Thinreports::Layout::Format]
       attr_reader :current_page_format
 
-      # @param [ThinReports::Layout::Format] new_format
+      # @param [Thinreports::Layout::Format] new_format
       # @return [Boolean]
       def change_page_format?(new_format)
         !current_page_format ||
           current_page_format.identifier != new_format.identifier
       end
 
-      # @param [ThinReports::Layout::Format] format
+      # @param [Thinreports::Layout::Format] format
       def create_format_stamp(format)
         create_stamp(format.identifier.to_s) do
           parse_svg(format.layout, '/svg/g')
@@ -58,7 +58,7 @@ module ThinReports
         @format_stamp_registry ||= []
       end
 
-      # @param [ThinReports::Layout::Format] format
+      # @param [Thinreports::Layout::Format] format
       # @return [Hash]
       def new_basic_page_options(format)
         options = {layout: format.page_orientation.to_sym}

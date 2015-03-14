@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Core
     
     class BlankPage
@@ -26,15 +26,15 @@ module ThinReports
     class Page < BlankPage
       include Core::Shape::Manager::Target
       
-      # @return [ThinReports::Report::Base]
+      # @return [Thinreports::Report::Base]
       # @private
       attr_reader :report
       
-      # @return [ThinReports::Layout::Base]
+      # @return [Thinreports::Layout::Base]
       attr_reader :layout
       
-      # @param [ThinReports::Report::Base] report
-      # @param [ThinReports::Layout::Base] layout
+      # @param [Thinreports::Report::Base] report
+      # @param [Thinreports::Layout::Base] layout
       # @param [Hash] options ({})
       # @option options [Boolean] :count (true)
       def initialize(report, layout, options = {})

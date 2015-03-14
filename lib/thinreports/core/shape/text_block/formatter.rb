@@ -1,12 +1,12 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Core::Shape::TextBlock
     
     # @private
     module Formatter
-      # @param [ThinReports::Core::Shape::TextBlock::Format] format
-      # @return [ThinReports::Core::Shape::TextBlock::Formatter::Base]
+      # @param [Thinreports::Core::Shape::TextBlock::Format] format
+      # @return [Thinreports::Core::Shape::TextBlock::Formatter::Base]
       def self.setup(format)
         klass = if format.format_type.blank?
           Basic
@@ -16,7 +16,7 @@ module ThinReports
           when 'datetime' then Datetime
           when 'padding'  then Padding
           else
-            raise ThinReports::Errors::UnknownFormatterType
+            raise Thinreports::Errors::UnknownFormatterType
           end
         end
         klass.new(format)

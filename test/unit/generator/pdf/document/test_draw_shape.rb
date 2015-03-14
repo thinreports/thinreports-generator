@@ -2,19 +2,19 @@
 
 require 'test_helper'
 
-class ThinReports::Generator::PDF::TestDrawShape < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Generator::PDF::TestDrawShape < Minitest::Test
+  include Thinreports::TestHelper
 
   def setup
-    @pdf = ThinReports::Generator::PDF::Document.new
+    @pdf = Thinreports::Generator::PDF::Document.new
   end
 
   def create_tblock_interface(format_config = {})
     report = new_report 'layout_text1'
     parent = report.start_new_page
 
-    format = ThinReports::Core::Shape::TextBlock::Format.new format_config
-    ThinReports::Core::Shape::TextBlock::Interface.new parent, format
+    format = Thinreports::Core::Shape::TextBlock::Format.new format_config
+    Thinreports::Core::Shape::TextBlock::Interface.new parent, format
   end
 
   def test_shape_text_attrs_should_return_attrs_containing_an_overflow_property

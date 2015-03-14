@@ -2,23 +2,23 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::TextBlock::Formatter::TestBasic < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::TextBlock::Formatter::TestBasic < Minitest::Test
+  include Thinreports::TestHelper
 
   # Alias
-  Formatter = ThinReports::Core::Shape::TextBlock::Formatter::Basic
+  Formatter = Thinreports::Core::Shape::TextBlock::Formatter::Basic
 
   def test_apply_simple_format
     format = stub(format_base: 'Hello {value}!')
 
-    assert_equal Formatter.new(format).apply('ThinReports'),
-                 'Hello ThinReports!'
+    assert_equal Formatter.new(format).apply('Thinreports'),
+                 'Hello Thinreports!'
   end
 
   def test_apply_multiple_format
     format = stub(format_base: 'Hello {value}! And good bye {value}.')
 
-    assert_equal Formatter.new(format).apply('ThinReports'),
-                 'Hello ThinReports! And good bye ThinReports.'
+    assert_equal Formatter.new(format).apply('Thinreports'),
+                 'Hello Thinreports! And good bye Thinreports.'
   end
 end

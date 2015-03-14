@@ -23,7 +23,7 @@ example :dynamic_style, 'Change styles of the object dynamically' do |t|
                 text_color2: '赤色')
   end
 
-  ThinReports::Report.generate(filename: t.output_filename,
+  Thinreports::Report.generate(filename: t.output_filename,
                                layout: t.layout_filename) do |r|
     # In case of using dynamic_style.tlf
 

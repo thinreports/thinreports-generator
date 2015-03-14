@@ -4,15 +4,15 @@ begin
   gem 'prawn', '1.3.0'
   require 'prawn'
 rescue LoadError
-  puts 'ThinReports requires Prawn = 1.3.0. ' +
+  puts 'Thinreports requires Prawn = 1.3.0. ' +
        'Please `gem install prawn -v 1.3.0` and try again.'
 end
 
-module ThinReports
+module Thinreports
   module Generator
 
     class PDF < Base
-      # @param report (see ThinReports::Generator::Base#initialize)
+      # @param report (see Thinreports::Generator::Base#initialize)
       # @param [Hash] options
       # @option options [Hash] :security (nil)
       #   See Prawn::Document#encrypt_document
@@ -25,7 +25,7 @@ module ThinReports
         @drawers = {}
       end
 
-      # @see ThinReports::Generator::Base#generate
+      # @see Thinreports::Generator::Base#generate
       def generate(filename = nil)
         draw_report
         filename ? @document.render_file(filename) : @document.render

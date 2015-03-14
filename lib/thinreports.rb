@@ -6,3 +6,6 @@ require 'thinreports/core'
 require 'thinreports/report'
 require 'thinreports/layout'
 require 'thinreports/generator'
+
+# Alias for Thinreports
+ThinReports = Thinreports

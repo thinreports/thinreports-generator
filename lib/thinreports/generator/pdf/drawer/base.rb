@@ -1,13 +1,13 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Generator::PDF::Drawer
     
     # @abstract
     # @private
     class Base
-      # @param [ThinReports::Generator::PDF::Document] pdf
-      # @param [ThinReports::Core::Shape::Manager::Format] format
+      # @param [Thinreports::Generator::PDF::Document] pdf
+      # @param [Thinreports::Core::Shape::Manager::Format] format
       def initialize(pdf, format)
         @pdf     = pdf
         @format  = format
@@ -22,7 +22,7 @@ module ThinReports
       
     private
       
-      # @param [ThinReports::Core::Shape::Base::Internal] shape
+      # @param [Thinreports::Core::Shape::Base::Internal] shape
       # @return [String]
       def pdf_stamp_id(shape)
         "#{@format.identifier}#{shape.identifier}"
@@ -31,7 +31,7 @@ module ThinReports
       # @overload pdf_stamp(shape_id)
       #   @param [String] shape_id
       # @overload pdf_stamp(shape)
-      #   @param [ThinReports::Core::Shape::Base::Internal] shape
+      #   @param [Thinreports::Core::Shape::Base::Internal] shape
       def pdf_stamp(shape)
         unless shape.is_a?(::String)
           shape = pdf_stamp_id(shape)
@@ -39,7 +39,7 @@ module ThinReports
         @pdf.stamp(shape, @draw_at)
       end
       
-      # @param [ThinReports::Core::Shape::Base::Internal] shape
+      # @param [Thinreports::Core::Shape::Base::Internal] shape
       def create_pdf_stamp(shape, &block)
         @pdf.create_stamp(pdf_stamp_id(shape), &block)
       end

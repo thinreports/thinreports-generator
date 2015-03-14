@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Core::Shape
     
     # @private
@@ -9,7 +9,7 @@ module ThinReports
       attr_reader :shapes
       attr_reader :lists
       
-      # @param [ThinReports::Core::Manager::Format] format
+      # @param [Thinreports::Core::Manager::Format] format
       # @param [Proc] init_item_handler
       def initialize(format, init_item_handler)
         @format = format
@@ -19,7 +19,7 @@ module ThinReports
       end
       
       # @param [String, Symbol] id
-      # @return [ThinReports::Core::Shape::Basic::Format]
+      # @return [Thinreports::Core::Shape::Basic::Format]
       def find_format(id)
         format.find_shape(id.to_sym)
       end
@@ -41,7 +41,7 @@ module ThinReports
       end
       
       # @param [String, Symbol] id
-      # @return [ThinReports::Core::Shape::Base::Interface, nil]
+      # @return [Thinreports::Core::Shape::Base::Interface, nil]
       def final_shape(id)
         # When shape was found in registry.
         if shape = shapes[id]
@@ -73,7 +73,7 @@ module ThinReports
         end
       end
       
-      # @param [ThinReports::Core::Shape::Basic::Format] format
+      # @param [Thinreports::Core::Shape::Basic::Format] format
       def init_item(format)
         @init_item_handler.call(format)
       end

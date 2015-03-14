@@ -2,11 +2,11 @@
 
 require 'test_helper'
 
-class ThinReports::Report::TestEvents < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Report::TestEvents < Minitest::Test
+  include Thinreports::TestHelper
   
   # Alias
-  Report = ThinReports::Report
+  Report = Thinreports::Report
   
   def test_event_types
     events = Report::Events.new

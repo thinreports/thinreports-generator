@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Core::Shape
 
     module Manager::Target
@@ -21,14 +21,14 @@ module ThinReports
       #   end
       # @param [String, Symbol] id
       # @yield [item,]
-      # @yieldparam [ThinReports::Core::Shape::Base::Interface] item
-      # @raise [ThinReports::Errors::UnknownItemId] If not found
-      # @return [ThinReports::Core::Shape::Base::Interface]
+      # @yieldparam [Thinreports::Core::Shape::Base::Interface] item
+      # @raise [Thinreports::Errors::UnknownItemId] If not found
+      # @return [Thinreports::Core::Shape::Base::Interface]
       def item(id, &block)
         shape = find_item(id, except: Core::Shape::List::TYPE_NAME)
 
         unless shape
-          raise ThinReports::Errors::UnknownItemId.new(id)
+          raise Thinreports::Errors::UnknownItemId.new(id)
         else
           block_exec_on(shape, &block)
         end
@@ -51,7 +51,7 @@ module ThinReports
         shape = find_item(id ||= :default, only: Core::Shape::List::TYPE_NAME)
 
         unless shape
-          raise ThinReports::Errors::UnknownItemId.new(id, 'List')
+          raise Thinreports::Errors::UnknownItemId.new(id, 'List')
         else
           manager.lists[id.to_sym] ||= shape
           block_exec_on(shape, &block)
@@ -60,14 +60,14 @@ module ThinReports
 
     private
 
-      # @param format (see ThinReports::Core::Shape::Manager::Internal#initialize)
+      # @param format (see Thinreports::Core::Shape::Manager::Internal#initialize)
       # @yield [format] Handler for initialize item.
-      # @yieldparam [ThinReports::Core::Shape::Basic::Format] format
+      # @yieldparam [Thinreports::Core::Shape::Basic::Format] format
       def initialize_manager(format, &block)
         @manager = Manager::Internal.new(format, block)
       end
 
-      # @see ThinReports::Core::Shape::Manager::Internal#find_item
+      # @see Thinreports::Core::Shape::Manager::Internal#find_item
       def find_item(id, limit = {})
         manager.find_item(id, limit)
       end

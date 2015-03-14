@@ -2,8 +2,8 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::List::TestSectionFormat < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::List::TestSectionFormat < Minitest::Test
+  include Thinreports::TestHelper
 
   TEST_LIST_SECTION_FORMAT = {
     "height" => 47.7,
@@ -16,7 +16,7 @@ class ThinReports::Core::Shape::List::TestSectionFormat < Minitest::Test
     }
   }
 
-  Shape = ThinReports::Core::Shape
+  Shape = Thinreports::Core::Shape
 
   def test_build
     shape_format = stub(id: 'mock')

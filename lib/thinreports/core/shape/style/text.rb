@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Core::Shape
     
     class Style::Text < Style::Basic

@@ -2,8 +2,8 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::TextBlock::TestFormat < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::TextBlock::TestFormat < Minitest::Test
+  include Thinreports::TestHelper
 
   TEST_TBLOCK_FORMAT = {
     "type" => "s-tblock",
@@ -175,10 +175,10 @@ class ThinReports::Core::Shape::TextBlock::TestFormat < Minitest::Test
   end
   
   def build_format
-    ThinReports::Core::Shape::TextBlock::Format.build(TEST_TBLOCK_FORMAT)
+    Thinreports::Core::Shape::TextBlock::Format.build(TEST_TBLOCK_FORMAT)
   end
   
   def format(data)
-    ThinReports::Core::Shape::TextBlock::Format.new(data)
+    Thinreports::Core::Shape::TextBlock::Format.new(data)
   end
 end

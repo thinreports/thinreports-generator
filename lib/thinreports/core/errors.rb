@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
 
   module Errors
     class Basic < ::StandardError
@@ -63,7 +63,7 @@ module ThinReports
 
     class IncompatibleLayoutFormat < Basic
       def initialize(filename, fileversion, required_rules)
-        super("Generator #{ThinReports::VERSION} can not be built this file, " +
+        super("Generator #{Thinreports::VERSION} can not be built this file, " +
               "'#{File.basename(filename)}'." +
               "This file is updated in the Editor of version '#{fileversion}', " +
               "but Generator requires version #{required_rules}.")

@@ -2,10 +2,10 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::Basic::TestBlockInternal < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::Basic::TestBlockInternal < Minitest::Test
+  include Thinreports::TestHelper
 
-  Basic = ThinReports::Core::Shape::Basic
+  Basic = Thinreports::Core::Shape::Basic
 
   def test_box_should_return_value_of_format
     internal = init_internal('box' => 'box of format')
@@ -50,7 +50,7 @@ class ThinReports::Core::Shape::Basic::TestBlockInternal < Minitest::Test
   end
 
   def init_internal(format = {})
-    report = ThinReports::Report.new layout: data_file('layout_text1')
+    report = Thinreports::Report.new layout: data_file('layout_text1')
     parent = report.start_new_page
 
     Basic::BlockInternal.new(parent, Basic::BlockFormat.new(format))

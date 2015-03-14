@@ -2,14 +2,14 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::Basic::TestInternal < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::Basic::TestInternal < Minitest::Test
+  include Thinreports::TestHelper
 
   # Alias
-  Basic = ThinReports::Core::Shape::Basic
+  Basic = Thinreports::Core::Shape::Basic
 
   def create_internal(format_config = {})
-    report = ThinReports::Report.new layout: data_file('layout_text1')
+    report = Thinreports::Report.new layout: data_file('layout_text1')
     parent = report.start_new_page
 
     Basic::Internal.new report.page, Basic::Format.new(format_config)
@@ -31,7 +31,7 @@ class ThinReports::Core::Shape::Basic::TestInternal < Minitest::Test
   end
 
   def test_style_should_return_instance_of_StyleGraphic
-    assert_instance_of ThinReports::Core::Shape::Style::Graphic,
+    assert_instance_of Thinreports::Core::Shape::Style::Graphic,
                        create_internal.style
   end
 

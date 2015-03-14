@@ -2,11 +2,11 @@
 
 require 'test_helper'
 
-class ThinReports::Generator::PDF::TestDocument < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Generator::PDF::TestDocument < Minitest::Test
+  include Thinreports::TestHelper
 
   # Alias
-  Document = ThinReports::Generator::PDF::Document
+  Document = Thinreports::Generator::PDF::Document
 
   def test_new_without_page_creation
     pdf = Document.new

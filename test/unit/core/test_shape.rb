@@ -2,11 +2,11 @@
 
 require 'test_helper'
 
-class ThinReports::Core::TestShape < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::TestShape < Minitest::Test
+  include Thinreports::TestHelper
   
   # Alias
-  ShapeModule = ThinReports::Core::Shape
+  ShapeModule = Thinreports::Core::Shape
   
   def test_find_by_type_should_return_PageNumber
     assert_same ShapeModule.find_by_type('s-pageno'), ShapeModule::PageNumber
@@ -45,7 +45,7 @@ class ThinReports::Core::TestShape < Minitest::Test
   end
   
   def test_find_by_type_should_raise
-    assert_raises ThinReports::Errors::UnknownShapeType do
+    assert_raises Thinreports::Errors::UnknownShapeType do
       ShapeModule.find_by_type('unknown')
     end
   end
@@ -57,7 +57,7 @@ class ThinReports::Core::TestShape < Minitest::Test
   
   def test_Configuration_should_raise
     # When shape don't have a Configuration
-    assert_raises ThinReports::Errors::NoConfigurationFound do
+    assert_raises Thinreports::Errors::NoConfigurationFound do
       ShapeModule::Configuration('s-line')
     end
   end

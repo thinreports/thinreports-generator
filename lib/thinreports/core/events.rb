@@ -1,12 +1,12 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Core
     
     class Events
       Event = ::Struct.new(:type, :target)
       
-      # @return [Hash<Symbol, ThinReports::Core::Events::Event>]
+      # @return [Hash<Symbol, Thinreports::Core::Events::Event>]
       # @private
       attr_accessor :events
       
@@ -18,7 +18,7 @@ module ThinReports
       
       # @param [Symbol] type
       # @yield [e]
-      # @yieldparam [ThinReports::Core::Events::Event] e
+      # @yieldparam [Thinreports::Core::Events::Event] e
       def listen(type, &block)
         verify_event_type(type)
         
@@ -62,7 +62,7 @@ module ThinReports
         return if @types.empty?
         
         unless @types.include?(type)
-          raise ThinReports::Errors::UnknownEventType
+          raise Thinreports::Errors::UnknownEventType
         end
       end
     end

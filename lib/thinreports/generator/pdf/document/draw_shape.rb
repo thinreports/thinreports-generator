@@ -1,11 +1,11 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Generator
     
     # @private
     module PDF::DrawShape
-      # @param [ThinReports::Core::Shape::TextBlock::Internal] shape
+      # @param [Thinreports::Core::Shape::TextBlock::Internal] shape
       def draw_shape_tblock(shape)
         x, y, w, h = shape.box.values_at('x', 'y', 'width', 'height')
         
@@ -28,14 +28,14 @@ module ThinReports
                  common_text_attrs(shape.style.svg_attrs))
       end
       
-      # @param [ThinReports::Core::Shape::Basic::Internal] shape
+      # @param [Thinreports::Core::Shape::Basic::Internal] shape
       def draw_shape_image(shape)
         x, y, w, h = shape.style.svg_attrs.values_at('x', 'y', 'width', 'height')
         base64image(extract_base64_string(shape.style.svg_attrs['xlink:href']),
                     x, y, w, h)
       end
       
-      # @param [ThinReports::Core::Shape::ImageBlock::Internal] shape
+      # @param [Thinreports::Core::Shape::ImageBlock::Internal] shape
       def draw_shape_iblock(shape)
         x, y, w, h = shape.box.values_at('x', 'y', 'width', 'height')
         unless shape.src.blank?
@@ -48,28 +48,28 @@ module ThinReports
         end
       end
       
-      # @param [ThinReports::Core::Shape::Text::Internal] shape
+      # @param [Thinreports::Core::Shape::Text::Internal] shape
       def draw_shape_text(shape)
         x, y, w, h = shape.box.values_at('x', 'y', 'width', 'height')
         text(shape.text.join("\n"), x, y, w, h, 
              shape_text_attrs(shape))
       end
       
-      # @param [ThinReports::Core::Shape::Basic::Internal] shape
+      # @param [Thinreports::Core::Shape::Basic::Internal] shape
       def draw_shape_ellipse(shape)
         args = shape.style.svg_attrs.values_at('cx', 'cy', 'rx', 'ry')
         args << common_graphic_attrs(shape.style.svg_attrs)
         ellipse(*args)
       end
       
-      # @param [ThinReports::Core::Shape::Basic::Internal] shape
+      # @param [Thinreports::Core::Shape::Basic::Internal] shape
       def draw_shape_line(shape)
         args = shape.style.svg_attrs.values_at('x1', 'y1', 'x2', 'y2')
         args << common_graphic_attrs(shape.style.svg_attrs)
         line(*args)
       end
       
-      # @param [ThinReports::Core::Shape::Basic::Internal] shape
+      # @param [Thinreports::Core::Shape::Basic::Internal] shape
       def draw_shape_rect(shape)
         args = shape.style.svg_attrs.values_at('x', 'y', 'width', 'height')
         args << common_graphic_attrs(shape.style.svg_attrs) do |attrs|
@@ -80,7 +80,7 @@ module ThinReports
     
     private
       
-      # @param [ThinReports::Core::Shape::Text::Internal, ThinReports::Core::Shape::TextBlock::Internal] shape
+      # @param [Thinreports::Core::Shape::Text::Internal, Thinreports::Core::Shape::TextBlock::Internal] shape
       # @return [Hash]
       def shape_text_attrs(shape)
         format = shape.format

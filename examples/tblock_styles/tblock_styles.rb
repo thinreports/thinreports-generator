@@ -1,7 +1,7 @@
 # coding: utf-8
 
 example :tblock_styles, 'Set the styles of Tblock in the Editor' do |t|
-  ThinReports::Report.generate :filename => t.output_filename do
+  Thinreports::Report.generate :filename => t.output_filename do
     use_layout t.layout_filename
     
     start_new_page
@@ -22,7 +22,7 @@ example :tblock_styles, 'Set the styles of Tblock in the Editor' do |t|
                 :right_center  => '右中央揃え',
                 :right_bottom  => '右下揃え')
     
-    page.item(:line_height).value("行間隔2.0\n日本語\nThinReports")
+    page.item(:line_height).value("行間隔2.0\n日本語\nThinreports")
 
     start_new_page :layout => t.resource('font_size.tlf')
 

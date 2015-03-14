@@ -2,10 +2,10 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::List::TestEvents < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::List::TestEvents < Minitest::Test
+  include Thinreports::TestHelper
   
-  List = ThinReports::Core::Shape::List
+  List = Thinreports::Core::Shape::List
   
   def setup
     @events = List::Events.new
@@ -13,19 +13,19 @@ class ThinReports::Core::Shape::List::TestEvents < Minitest::Test
   
   def test_page_footer_insert_event_should_be_able_to_be_used
     @events.send(:verify_event_type, :page_footer_insert)
-  rescue ThinReports::Errors::UnknownEventType
+  rescue Thinreports::Errors::UnknownEventType
     flunk ':page_footer_insert cannot be used.'
   end
   
   def test_footer_insert_event_should_be_able_to_be_used
     @events.send(:verify_event_type, :footer_insert)
-  rescue ThinReports::Errors::UnknownEventType
+  rescue Thinreports::Errors::UnknownEventType
     flunk ':footer_insert cannot be used.'
   end
   
   def test_page_finalize_event_should_be_able_to_be_used
     @events.send(:verify_event_type, :page_finalize)
-  rescue ThinReports::Errors::UnknownEventType
+  rescue Thinreports::Errors::UnknownEventType
     flunk ':page_finalize cannot be used.'
   end
   

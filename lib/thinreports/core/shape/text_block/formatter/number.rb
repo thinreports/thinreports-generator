@@ -2,7 +2,7 @@
 
 require 'bigdecimal'
 
-module ThinReports
+module Thinreports
   module Core::Shape::TextBlock
     
     # @private

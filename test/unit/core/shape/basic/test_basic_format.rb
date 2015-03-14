@@ -2,8 +2,8 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::Basic::TestBlockFormat < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::Basic::TestBlockFormat < Minitest::Test
+  include Thinreports::TestHelper
   
   TEST_BLOCK_FORMAT = {
     "value" => "default value",
@@ -25,6 +25,6 @@ class ThinReports::Core::Shape::Basic::TestBlockFormat < Minitest::Test
   end
   
   def format
-    ThinReports::Core::Shape::Basic::BlockFormat.new(TEST_BLOCK_FORMAT)
+    Thinreports::Core::Shape::Basic::BlockFormat.new(TEST_BLOCK_FORMAT)
   end
 end

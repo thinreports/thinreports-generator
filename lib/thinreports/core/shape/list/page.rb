@@ -1,13 +1,13 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Core::Shape
     
     class List::Page < Basic::Interface
-      # @param [ThinReports::Core::Page] parent
-      # @param [ThinReports::Core::Shape::Basic::Format] format
-      # @param [ThinReports::Core::Shape::List::PageState] internal (nil)
-      # @param [ThinReports::Core::Shape::List::Manager] manager (nil)
+      # @param [Thinreports::Core::Page] parent
+      # @param [Thinreports::Core::Shape::Basic::Format] format
+      # @param [Thinreports::Core::Shape::List::PageState] internal (nil)
+      # @param [Thinreports::Core::Shape::List::Manager] manager (nil)
       def initialize(parent, format, internal = nil, manager = nil)
         super(parent, format, internal)
         
@@ -23,16 +23,16 @@ module ThinReports
       
       # @param [Hash] values ({})
       # @yield [header,]
-      # @yieldparam [ThinReports::Core::Shape::List::SectionInterface] header
-      # @return [ThinReports::Core::Shape::List::SectionInterface]
-      # @raise [ThinReports::Errors::DisabledListSection]
+      # @yieldparam [Thinreports::Core::Shape::List::SectionInterface] header
+      # @return [Thinreports::Core::Shape::List::SectionInterface]
+      # @raise [Thinreports::Errors::DisabledListSection]
       def header(values = {}, &block)
         manager.header(values, &block)
       end
       
       # @param [Hash] values ({})
       # @yield [row,]
-      # @yieldparam [ThinReports::Core::Shape::List::SectionInterface] row
+      # @yieldparam [Thinreports::Core::Shape::List::SectionInterface] row
       # @return [Boolean]
       def add_row(values = {}, &block)
         manager.insert_new_detail(values, &block)
@@ -61,23 +61,23 @@ module ThinReports
         internal.finalized?
       end
       
-      # @return [ThinReports::Core::Shape::List::Configuration]
+      # @return [Thinreports::Core::Shape::List::Configuration]
       def config
         manager.config
       end
             
-      # @return [ThinReports::Core::Shape::List::Store]
+      # @return [Thinreports::Core::Shape::List::Store]
       def store
         config.store
       end
       
-      # @return [ThinReports::Core::Shape::List::Events]
+      # @return [Thinreports::Core::Shape::List::Events]
       def events
         config.events
       end
       
-      # @param [ThinReports::Core::Page] new_parent
-      # @return [ThinReports::Core::Shape::List::Page]
+      # @param [Thinreports::Core::Page] new_parent
+      # @return [Thinreports::Core::Shape::List::Page]
       # @private
       def copy(new_parent)
         if manager.auto_page_break?
@@ -107,14 +107,14 @@ module ThinReports
       
     private
       
-      # @see ThinReports::Core::Shape::Base::Interface#init_internal
+      # @see Thinreports::Core::Shape::Base::Interface#init_internal
       def init_internal(parent, format)
         List::PageState.new(parent, format)
       end
     end
     
     # Alias to List::Page.
-    # @see ThinReports::Core::Shape::List::Page
+    # @see Thinreports::Core::Shape::List::Page
     # @private
     List::Interface = List::Page
     

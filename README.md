@@ -56,7 +56,7 @@ Generator can dynamically:
 ```ruby
 require 'thinreports'
 
-report = ThinReports::Report.new layout: 'report.tlf'
+report = Thinreports::Report.new layout: 'report.tlf'
 # Page 1
 report.start_new_page do
   item(:title).value('Thinreports')
@@ -72,7 +72,7 @@ report.generate(filename: 'report.pdf')
 ```
 
 ```ruby
-ThinReports::Report.generate(filename: 'report.pdf', layout: 'report.tlf') do
+Thinreports::Report.generate(filename: 'report.pdf', layout: 'report.tlf') do
   start_new_page
 
   page.item(:title).value('Thinreports')
@@ -86,7 +86,7 @@ end
 ### List format
 
 ```ruby
-report = ThinReports::Report.new layout: 'list.tlf'
+report = Thinreports::Report.new layout: 'list.tlf'
 report.start_new_page
 
 10.times do |n|
@@ -118,7 +118,7 @@ end
 0.7.0 and earlier:
 
 ```ruby
-report = ThinReports::Report.new layout: 'list.tlf'
+report = Thinreports::Report.new layout: 'list.tlf'
 
 10.times do |n|
   report.page.list(:default).add_row do |row|

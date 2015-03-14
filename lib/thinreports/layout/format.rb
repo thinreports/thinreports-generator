@@ -2,7 +2,7 @@
 
 require 'digest/sha1'
 
-module ThinReports
+module Thinreports
   module Layout
     
     # @private
@@ -28,10 +28,10 @@ module ThinReports
             raw_format = parse_json(content)
             
             # Check the compatibility of specified layout file.
-            unless ThinReports::Layout::Version.compatible?(raw_format['version'])
+            unless Thinreports::Layout::Version.compatible?(raw_format['version'])
               info = [filename, raw_format['version'],
-                      ThinReports::Layout::Version.inspect_required_rules]
-              raise ThinReports::Errors::IncompatibleLayoutFormat.new(*info)
+                      Thinreports::Layout::Version.inspect_required_rules]
+              raise Thinreports::Errors::IncompatibleLayoutFormat.new(*info)
             end
             
             compact_format!(raw_format)

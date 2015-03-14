@@ -2,11 +2,11 @@
 
 require 'test_helper'
 
-class ThinReports::Report::TestBase < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Report::TestBase < Minitest::Test
+  include Thinreports::TestHelper
 
   # Alias
-  Report = ThinReports::Report
+  Report = Thinreports::Report
 
   def setup
     @report = Report::Base.new
@@ -36,11 +36,11 @@ class ThinReports::Report::TestBase < Minitest::Test
   def test_start_new_page_should_properly_create_a_new_Page_and_return
     @report.use_layout(data_file('layout_text1'))
 
-    assert_instance_of ThinReports::Core::Page, @report.start_new_page
+    assert_instance_of Thinreports::Core::Page, @report.start_new_page
   end
 
   def test_start_new_page_should_raise_when_the_layout_has_not_been_registered_yet
-    assert_raises ThinReports::Errors::NoRegisteredLayoutFound do
+    assert_raises Thinreports::Errors::NoRegisteredLayoutFound do
       @report.start_new_page(layout: :unknown)
     end
   end
@@ -82,7 +82,7 @@ class ThinReports::Report::TestBase < Minitest::Test
   def test_add_blank_page_should_properly_create_a_new_blank_page
     @report.use_layout(data_file('layout_text1'))
 
-    assert_instance_of ThinReports::Core::BlankPage, @report.add_blank_page
+    assert_instance_of Thinreports::Core::BlankPage, @report.add_blank_page
   end
 
   def test_layout_should_return_the_default_layout_with_no_arguments
@@ -92,7 +92,7 @@ class ThinReports::Report::TestBase < Minitest::Test
   end
 
   def test_layout_should_raise_when_the_specified_layout_is_not_found
-    assert_raises ThinReports::Errors::UnknownLayoutId do
+    assert_raises Thinreports::Errors::UnknownLayoutId do
       @report.layout(:unknown_layout_id)
     end
   end
@@ -125,14 +125,14 @@ class ThinReports::Report::TestBase < Minitest::Test
   end
 
   def test_events_should_return_Report_Events
-    assert_instance_of ThinReports::Report::Events, @report.events
+    assert_instance_of Thinreports::Report::Events, @report.events
   end
 
   def test_page_should_return_the_current_page
     @report.use_layout(data_file('layout_text1.tlf'))
     @report.start_new_page
 
-    assert_instance_of ThinReports::Core::Page, @report.page
+    assert_instance_of Thinreports::Core::Page, @report.page
   end
 
   def test_page_count_should_return_total_page_count

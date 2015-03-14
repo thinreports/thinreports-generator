@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
 
   ROOTDIR = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
 

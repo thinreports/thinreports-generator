@@ -2,11 +2,11 @@
 
 require 'test_helper'
 
-class ThinReports::Generator::PDF::Graphics::TestAttributes < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Generator::PDF::Graphics::TestAttributes < Minitest::Test
+  include Thinreports::TestHelper
   
   def setup
-    @pdf = ThinReports::Generator::PDF::Document.new
+    @pdf = Thinreports::Generator::PDF::Document.new
   end
   
   def test_common_graphic_attrs_should_return_converted_Hash_as_attributes

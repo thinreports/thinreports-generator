@@ -1,7 +1,7 @@
 # coding: utf-8
 
 example :tblock_overflow, 'Control overflowing the Tblock' do
-  report = ThinReports::Report.new :layout => layout_filename
+  report = Thinreports::Report.new :layout => layout_filename
   report.start_new_page do |page|
     page.values(:truncate => 'The string overflowing from the area will be truncated', 
                 :truncate_ja => '領域から溢れたテキストは切り捨てられます。', 

@@ -2,17 +2,17 @@
 
 require 'json'
 
-module ThinReports
+module Thinreports
   module Core::Format
 
     # @private
     module Builder
       def build(*args)
         build_internal(*args)
-      rescue ThinReports::Errors::Basic => e
+      rescue Thinreports::Errors::Basic => e
         raise
       rescue => e
-        raise ThinReports::Errors::InvalidLayoutFormat
+        raise Thinreports::Errors::InvalidLayoutFormat
       end
 
       # @abstract
@@ -21,7 +21,7 @@ module ThinReports
         raise NotImplementedError
       end
 
-      # @param [ThinReports::Core::Format::Base] format
+      # @param [Thinreports::Core::Format::Base] format
       # @param [Hash] options
       # @private
       def build_layout(format, options = {}, &block)

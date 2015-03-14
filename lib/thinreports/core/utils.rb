@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Core
 
     # @private
@@ -21,4 +21,4 @@ module ThinReports
 end
 
 # Include global methods.
-include ThinReports::Core::Utils
+include Thinreports::Core::Utils

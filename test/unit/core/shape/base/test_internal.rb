@@ -2,25 +2,25 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::Base::TestInternal < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::Base::TestInternal < Minitest::Test
+  include Thinreports::TestHelper
 
   def setup
-    @report = ThinReports::Report.new layout: data_file('layout_text1.tlf')
+    @report = Thinreports::Report.new layout: data_file('layout_text1.tlf')
     @report.start_new_page
   end
 
   def create_internal(format_config = {}, &block)
     format = unless format_config.empty?
-      format_klass = Class.new(ThinReports::Core::Shape::Basic::Format) {
+      format_klass = Class.new(Thinreports::Core::Shape::Basic::Format) {
         config_reader(*format_config.keys.map {|k| k.to_sym })
       }
       format_klass.new(format_config)
     else
-      ThinReports::Core::Shape::Basic::Format.new({})
+      Thinreports::Core::Shape::Basic::Format.new({})
     end
 
-    klass = Class.new(ThinReports::Core::Shape::Base::Internal, &block)
+    klass = Class.new(Thinreports::Core::Shape::Base::Internal, &block)
     klass.new(@report.page, format)
   end
 
@@ -42,7 +42,7 @@ class ThinReports::Core::Shape::Base::TestInternal < Minitest::Test
     new_page = @report.start_new_page
     internal = create_internal {
       def style
-        @style ||= ThinReports::Core::Shape::Style::Base.new(format)
+        @style ||= Thinreports::Core::Shape::Style::Base.new(format)
       end
     }
 
@@ -52,7 +52,7 @@ class ThinReports::Core::Shape::Base::TestInternal < Minitest::Test
   def test_copied_internal_should_have_style_copied_from_original
     internal = create_internal {
       def style
-        @style ||= ThinReports::Core::Shape::Style::Base.new(format)
+        @style ||= Thinreports::Core::Shape::Style::Base.new(format)
       end
     }
     internal.style.write_internal_style(:foo, 'bar')
@@ -64,7 +64,7 @@ class ThinReports::Core::Shape::Base::TestInternal < Minitest::Test
   def test_copied_internal_should_have_states_property_copied_from_original
     internal = create_internal {
       def style
-        @style ||= ThinReports::Core::Shape::Style::Base.new(format)
+        @style ||= Thinreports::Core::Shape::Style::Base.new(format)
       end
     }
     internal.states[:foo] = 'bar'
@@ -76,11 +76,11 @@ class ThinReports::Core::Shape::Base::TestInternal < Minitest::Test
   def test_copy_should_execute_block_with_new_internal_as_argument
     internal = create_internal {
       def style
-        @style ||= ThinReports::Core::Shape::Style::Base.new(format)
+        @style ||= Thinreports::Core::Shape::Style::Base.new(format)
       end
     }
     internal.copy(@report.start_new_page) do |new_internal|
-      assert_equal new_internal.is_a?(ThinReports::Core::Shape::Base::Internal), true
+      assert_equal new_internal.is_a?(Thinreports::Core::Shape::Base::Internal), true
     end
   end
 end

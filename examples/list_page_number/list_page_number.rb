@@ -1,7 +1,7 @@
 # coding: utf-8
 
 example :list_page_number, 'Draw page-number automatically each list' do |t|
-  report = ThinReports::Report.new :layout => t.layout_filename
+  report = Thinreports::Report.new :layout => t.layout_filename
 
   report.start_new_page
   report.page.item(:group_no).value('Group A')

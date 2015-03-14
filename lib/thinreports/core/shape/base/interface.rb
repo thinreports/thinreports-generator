@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Core::Shape
     
     # @private
@@ -25,9 +25,9 @@ module ThinReports
       
     private
     
-      # @param [ThinReports::Core::Page, ThinReports::Core::Shape::List::SectionInterface] parent
-      # @param [ThinReports::Core::Shape::Basic::Format] format
-      # @return [ThinReports::Core::Shape::Basic::Internal]
+      # @param [Thinreports::Core::Page, Thinreports::Core::Shape::List::SectionInterface] parent
+      # @param [Thinreports::Core::Shape::Basic::Format] format
+      # @return [Thinreports::Core::Shape::Basic::Internal]
       # @abstract
       def init_internal(parent, format)
         raise NotImplementedError

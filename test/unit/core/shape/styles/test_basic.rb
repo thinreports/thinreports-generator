@@ -2,12 +2,12 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::Style::TestBasic < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::Style::TestBasic < Minitest::Test
+  include Thinreports::TestHelper
   
   def create_basic_style(format_config = {})
-    format = ThinReports::Core::Shape::Basic::Format.new(format_config)
-    ThinReports::Core::Shape::Style::Basic.new(format)
+    format = Thinreports::Core::Shape::Basic::Format.new(format_config)
+    Thinreports::Core::Shape::Style::Basic.new(format)
   end
   
   def test_visible_should_return_visibility_of_format_as_default

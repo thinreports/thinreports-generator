@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Report
     
     # @private
@@ -12,8 +12,8 @@ module ThinReports
       attr_reader :layout_registry
       attr_reader :events
       
-      # @param [ThinReports::Report::Base] report
-      # @param options (see ThinReports::Report::Base#initialize)
+      # @param [Thinreports::Report::Base] report
+      # @param options (see Thinreports::Report::Base#initialize)
       def initialize(report, options)
         @report = report
         # Default layout
@@ -28,7 +28,7 @@ module ThinReports
         @events = Report::Events.new
       end
       
-      # @see ThinReports::Report::Base#use_layout
+      # @see Thinreports::Report::Base#use_layout
       def register_layout(layout, options = {}, &block)
         layout = if options.empty? || options[:default]
           @default_layout = init_layout(layout)
@@ -102,7 +102,7 @@ module ThinReports
         @page = new_page
       end
       
-      # @param (see ThinReports::Core::Page#finalize)
+      # @param (see Thinreports::Core::Page#finalize)
       def finalize_current_page(options = {})
         page.finalize(options) unless page.blank?        
       end
@@ -114,7 +114,7 @@ module ThinReports
         when String
           init_layout(layout)
         # @note Currently not used. Since 0.6.0?
-        when ThinReports::Layout::Base
+        when Thinreports::Layout::Base
           layout
         else
           raise ArgumentError, 'Invalid argument for layout.'
@@ -122,7 +122,7 @@ module ThinReports
       end
       
       def init_layout(filename, id = nil)
-        ThinReports::Layout.new(filename, id: id)
+        Thinreports::Layout.new(filename, id: id)
       end
     end
     

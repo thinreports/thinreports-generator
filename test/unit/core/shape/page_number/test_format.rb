@@ -2,8 +2,8 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::PageNumber::TestFormat < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::PageNumber::TestFormat < Minitest::Test
+  include Thinreports::TestHelper
 
   TEST_PAGENO_FORMAT = {
     "type" => "s-pageno", 
@@ -37,7 +37,7 @@ class ThinReports::Core::Shape::PageNumber::TestFormat < Minitest::Test
     }
   }
 
-  Format = ThinReports::Core::Shape::PageNumber::Format
+  Format = Thinreports::Core::Shape::PageNumber::Format
 
   def format(raw_format = nil)
     Format.new(raw_format || TEST_PAGENO_FORMAT)

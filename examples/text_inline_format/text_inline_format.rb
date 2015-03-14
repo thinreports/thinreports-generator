@@ -1,7 +1,7 @@
 # coding: utf-8
 
 example :text_inline_format, 'Inline formatting for Text' do |t|
-  ThinReports::Report.generate :filename => t.output_filename do
+  Thinreports::Report.generate :filename => t.output_filename do
     use_layout t.layout_filename
     start_new_page
 

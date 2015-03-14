@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Core::Shape
     
     # @private
@@ -39,7 +39,7 @@ module ThinReports
     end
     
     # Alias to List::PageState.
-    # @see ThinReports::Core::Shape::List::PageState
+    # @see Thinreports::Core::Shape::List::PageState
     # @private
     List::Internal = List::PageState
     

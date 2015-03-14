@@ -2,10 +2,10 @@
 
 require 'test_helper'
 
-class ThinReports::Generator::TestBase < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Generator::TestBase < Minitest::Test
+  include Thinreports::TestHelper
 
-  Generator = ThinReports::Generator
+  Generator = Thinreports::Generator
 
   class FooGenerator < Generator::Base; end
 

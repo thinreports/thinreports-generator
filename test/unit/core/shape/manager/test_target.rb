@@ -2,11 +2,11 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::Manager::TestTarget < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::Manager::TestTarget < Minitest::Test
+  include Thinreports::TestHelper
 
   # Alias
-  Shape = ThinReports::Core::Shape
+  Shape = Thinreports::Core::Shape
 
   class TestManager
     include Shape::Manager::Target
@@ -53,7 +53,7 @@ class ThinReports::Core::Shape::Manager::TestTarget < Minitest::Test
   end
 
   def test_item_should_raise_when_the_shape_with_the_specified_id_is_not_found
-    assert_raises ThinReports::Errors::UnknownItemId do
+    assert_raises Thinreports::Errors::UnknownItemId do
       create_manager.item(:unknown)
     end
   end
@@ -65,7 +65,7 @@ class ThinReports::Core::Shape::Manager::TestTarget < Minitest::Test
   end
 
   def test_item_should_raise_when_type_of_shape_with_the_specified_id_is_list
-    assert_raises ThinReports::Errors::UnknownItemId do
+    assert_raises Thinreports::Errors::UnknownItemId do
       create_manager.item(:ls)
     end
   end
@@ -79,7 +79,7 @@ class ThinReports::Core::Shape::Manager::TestTarget < Minitest::Test
   end
 
   def test_list_should_raise_when_type_of_shape_with_the_specified_id_is_not_list
-    assert_raises ThinReports::Errors::UnknownItemId do
+    assert_raises Thinreports::Errors::UnknownItemId do
       create_manager.list(:t1)
     end
   end

@@ -2,10 +2,10 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::PageNumber::TestInternal < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::PageNumber::TestInternal < Minitest::Test
+  include Thinreports::TestHelper
 
-  PageNumber = ThinReports::Core::Shape::PageNumber
+  PageNumber = Thinreports::Core::Shape::PageNumber
 
   def setup
     @report = new_report('layout_text1.tlf')

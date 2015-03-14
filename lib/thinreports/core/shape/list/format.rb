@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Core::Shape
     
     # @private
@@ -47,7 +47,7 @@ module ThinReports
       private
         
         # @param [Hash] raw_format
-        # @return [ThinReports::Core::Shape::List::Format]
+        # @return [Thinreports::Core::Shape::List::Format]
         def build_internal(raw_format)
           new(raw_format) do |f|
             f.sections = {}
@@ -59,8 +59,8 @@ module ThinReports
         end
         
         # @param [Symbol] section_name
-        # @param [ThinReports::Core::Shape::List::Format] list
-        # @return [ThinReports::Core::Shape::List::SectionFormat]
+        # @param [Thinreports::Core::Shape::List::Format] list
+        # @return [Thinreports::Core::Shape::List::SectionFormat]
         def build_section(section_name, list)
           list.sections[section_name] =
             List::SectionFormat.build(list.section(section_name))

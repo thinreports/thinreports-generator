@@ -2,12 +2,12 @@
 
 require 'test_helper'
 
-class ThinReports::Generator::PDF::TestGraphics < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Generator::PDF::TestGraphics < Minitest::Test
+  include Thinreports::TestHelper
 
   class TestGraphics
     attr_accessor :pdf
-    include ThinReports::Generator::PDF::Graphics
+    include Thinreports::Generator::PDF::Graphics
   end
 
   def setup

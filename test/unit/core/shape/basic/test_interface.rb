@@ -2,14 +2,14 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::Basic::TestInterface < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::Basic::TestInterface < Minitest::Test
+  include Thinreports::TestHelper
 
   # Alias
-  Basic = ThinReports::Core::Shape::Basic
+  Basic = Thinreports::Core::Shape::Basic
 
   def create_interface(format_config = {})
-    report = ThinReports::Report.new layout: data_file('layout_text1')
+    report = Thinreports::Report.new layout: data_file('layout_text1')
     parent = report.start_new_page
 
     Basic::Interface.new parent, Basic::Format.new(format_config)

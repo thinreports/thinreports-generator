@@ -2,11 +2,11 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::TextBlock::Formatter::TestNumber < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::TextBlock::Formatter::TestNumber < Minitest::Test
+  include Thinreports::TestHelper
 
   # Alias
-  Formatter = ThinReports::Core::Shape::TextBlock::Formatter::Number
+  Formatter = Thinreports::Core::Shape::TextBlock::Formatter::Number
 
   def init_formatter(expect_formats)
     format = stub({ format_base: '',

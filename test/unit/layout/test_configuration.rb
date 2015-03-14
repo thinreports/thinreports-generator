@@ -2,14 +2,14 @@
 
 require 'test_helper'
 
-class ThinReports::Layout::TestConfiguration < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Layout::TestConfiguration < Minitest::Test
+  include Thinreports::TestHelper
 
   # Alias
-  Configuration = ThinReports::Layout::Configuration
+  Configuration = Thinreports::Layout::Configuration
 
   def setup
-    layout = ThinReports::Layout.new data_file('layout_text1.tlf')
+    layout = Thinreports::Layout.new data_file('layout_text1.tlf')
     @config = Configuration.new(layout)
   end
 

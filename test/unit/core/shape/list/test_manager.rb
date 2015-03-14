@@ -2,11 +2,11 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::List::TestManager < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::List::TestManager < Minitest::Test
+  include Thinreports::TestHelper
   
   # Alias
-  List = ThinReports::Core::Shape::List
+  List = Thinreports::Core::Shape::List
   
   def create_report(&block)
     new_report('layout_list.tlf', &block)

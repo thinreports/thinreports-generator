@@ -2,7 +2,7 @@
 
 example :page_number, 'Draw page-number automatically each pages' do |t|
   # Basic PageNumber
-  report = ThinReports::Report.new :layout => t.layout_filename
+  report = Thinreports::Report.new :layout => t.layout_filename
 
   report.start_new_page do |page|
     # change visibility
@@ -24,7 +24,7 @@ example :page_number, 'Draw page-number automatically each pages' do |t|
   report.generate :filename => t.output_filename
 
   # PageNumber is started from 5
-  report = ThinReports::Report.new :layout => t.layout_filename
+  report = Thinreports::Report.new :layout => t.layout_filename
   report.start_page_number_from 5
 
   10.times { report.start_new_page }

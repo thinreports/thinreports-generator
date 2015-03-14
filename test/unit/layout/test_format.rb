@@ -2,8 +2,8 @@
 
 require 'test_helper'
 
-class ThinReports::Layout::TestFormat < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Layout::TestFormat < Minitest::Test
+  include Thinreports::TestHelper
 
   TEST_SIMPLE_FORMAT = <<-'EOF'
   {
@@ -34,8 +34,8 @@ class ThinReports::Layout::TestFormat < Minitest::Test
   EOF
 
   # Alias
-  Shape  = ThinReports::Core::Shape
-  Layout = ThinReports::Layout
+  Shape  = Thinreports::Core::Shape
+  Layout = Thinreports::Layout
 
   def test_report_title_should_return_the_value_of_config_title_key
     format = Layout::Format.new('config' => {'title' => 'Title'})
@@ -97,7 +97,7 @@ class ThinReports::Layout::TestFormat < Minitest::Test
     original_rules = Layout::Version::REQUIRED_RULES.dup
     Layout::Version::REQUIRED_RULES.replace(['>= 0.6.0.pre3', '< 0.8.0'])
 
-    assert_raises ThinReports::Errors::IncompatibleLayoutFormat do
+    assert_raises Thinreports::Errors::IncompatibleLayoutFormat do
       build_format(version: '0.6.0.pre2')
     end
   ensure
@@ -106,7 +106,7 @@ class ThinReports::Layout::TestFormat < Minitest::Test
   end
 
   def create_raw_format(version = nil)
-    clean_whitespaces(TEST_SIMPLE_FORMAT) % (version || ThinReports::VERSION)
+    clean_whitespaces(TEST_SIMPLE_FORMAT) % (version || Thinreports::VERSION)
   end
 
   def build_format(options = {})

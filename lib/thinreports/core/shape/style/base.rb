@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Core::Shape
     
     # @private
@@ -49,7 +49,7 @@ module ThinReports
       # @see .accessible_styles
       attr_reader :accessible_styles
       
-      # @param [ThinReports::Core::Format::Base] format
+      # @param [Thinreports::Core::Format::Base] format
       # @param [Hash] default_styles ({})
       def initialize(format, default_styles = {})
         @format = format
@@ -126,10 +126,10 @@ module ThinReports
       
       # @param [Symbol] style_method
       # @return [Boolean]
-      # @raise ThinReports::Errors::UnknownShapeStyleName
+      # @raise Thinreports::Errors::UnknownShapeStyleName
       def verify_style_method(style_method)
         unless has_style?(style_method)
-          raise ThinReports::Errors::UnknownShapeStyleName.new(style_method,
+          raise Thinreports::Errors::UnknownShapeStyleName.new(style_method,
                                                                accessible_styles)
         end
       end

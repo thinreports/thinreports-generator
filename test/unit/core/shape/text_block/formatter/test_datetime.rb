@@ -2,11 +2,11 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::TextBlock::Formatter::TestDatetime < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::TextBlock::Formatter::TestDatetime < Minitest::Test
+  include Thinreports::TestHelper
   
   # Aliases
-  TextBlock = ThinReports::Core::Shape::TextBlock
+  TextBlock = Thinreports::Core::Shape::TextBlock
   Formatter = TextBlock::Formatter::Datetime
   
   def setup

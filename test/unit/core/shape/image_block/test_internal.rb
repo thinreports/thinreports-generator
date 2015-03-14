@@ -2,10 +2,10 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::ImageBlock::TestInternal < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::ImageBlock::TestInternal < Minitest::Test
+  include Thinreports::TestHelper
 
-  ImageBlock = ThinReports::Core::Shape::ImageBlock
+  ImageBlock = Thinreports::Core::Shape::ImageBlock
 
   def test_src_should_return_the_same_value_as_value_method
     internal = create_internal

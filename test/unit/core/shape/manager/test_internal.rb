@@ -2,11 +2,11 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::Manager::TestInternal < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::Manager::TestInternal < Minitest::Test
+  include Thinreports::TestHelper
   
   # Alias
-  Shape = ThinReports::Core::Shape
+  Shape = Thinreports::Core::Shape
   
   def create_shape_format(type, id, other_config = {})
     Shape::Format(type).new({'id'      => id,

@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Core::Shape
     
     # @private
@@ -13,7 +13,7 @@ module ThinReports
       class << self
       private
         
-        # @see ThinReports::Core::Shape::Basic::Format#build_internal
+        # @see Thinreports::Core::Shape::Basic::Format#build_internal
         def build_internal(raw_format)
           new(raw_format) do |f|
             clean_with_attributes(f.svg_content)

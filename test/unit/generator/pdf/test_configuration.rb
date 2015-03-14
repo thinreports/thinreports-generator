@@ -2,11 +2,11 @@
 
 require 'test_helper'
 
-class ThinReports::Generator::PDF::TestConfiguration < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Generator::PDF::TestConfiguration < Minitest::Test
+  include Thinreports::TestHelper
 
   def setup
-    @config = ThinReports::Generator::PDF::Configuration.new
+    @config = Thinreports::Generator::PDF::Configuration.new
   end
 
   def test_eudc_fonts_is_deprecated

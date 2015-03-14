@@ -2,8 +2,8 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::ImageBlock::TestFormat < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::ImageBlock::TestFormat < Minitest::Test
+  include Thinreports::TestHelper
   
   TEST_IMAGE_BLOCK_FORMAT = {
     "type" => "s-iblock",
@@ -48,11 +48,11 @@ class ThinReports::Core::Shape::ImageBlock::TestFormat < Minitest::Test
   end
   
   def build_format
-    ThinReports::Core::Shape::ImageBlock::Format.build(TEST_IMAGE_BLOCK_FORMAT)
+    Thinreports::Core::Shape::ImageBlock::Format.build(TEST_IMAGE_BLOCK_FORMAT)
   end
   
   def format(data)
-    ThinReports::Core::Shape::ImageBlock::Format.new(data)
+    Thinreports::Core::Shape::ImageBlock::Format.new(data)
   end
 
 end

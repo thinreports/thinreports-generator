@@ -2,11 +2,11 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::List::TestPageState < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::List::TestPageState < Minitest::Test
+  include Thinreports::TestHelper
 
   # Alias
-  List = ThinReports::Core::Shape::List
+  List = Thinreports::Core::Shape::List
 
   def setup
     parent = mock('parent')

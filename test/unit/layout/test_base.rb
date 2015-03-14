@@ -2,10 +2,10 @@
 
 require 'test_helper'
 
-class ThinReports::Layout::TestBase < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Layout::TestBase < Minitest::Test
+  include Thinreports::TestHelper
 
-  Layout = ThinReports::Layout
+  Layout = Thinreports::Layout
 
   def test_load_format
     assert_instance_of Layout::Format,
@@ -13,7 +13,7 @@ class ThinReports::Layout::TestBase < Minitest::Test
     assert_instance_of Layout::Format,
                        Layout::Base.load_format(data_file('layout_text1'))
 
-    assert_raises ThinReports::Errors::LayoutFileNotFound do
+    assert_raises Thinreports::Errors::LayoutFileNotFound do
       Layout::Base.load_format 'unknown.tlf'
     end
   end
@@ -31,13 +31,13 @@ class ThinReports::Layout::TestBase < Minitest::Test
   end
 
   def test_config
-    assert_instance_of ThinReports::Layout::Configuration,
+    assert_instance_of Thinreports::Layout::Configuration,
                        create_layout.config
   end
 
   def test_new_page
     report = new_report 'layout_text1'
-    assert_instance_of ThinReports::Core::Page,
+    assert_instance_of Thinreports::Core::Page,
                        create_layout.new_page(report)
   end
 

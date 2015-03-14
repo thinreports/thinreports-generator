@@ -2,8 +2,8 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Format::TestBuilder < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Format::TestBuilder < Minitest::Test
+  include Thinreports::TestHelper
 
   TEST_RAW_FORMAT = <<-'EOS'
     {
@@ -20,8 +20,8 @@ class ThinReports::Core::Format::TestBuilder < Minitest::Test
     }
   EOS
 
-  class TestFormat < ThinReports::Core::Format::Base
-    extend ::ThinReports::Core::Format::Builder
+  class TestFormat < Thinreports::Core::Format::Base
+    extend ::Thinreports::Core::Format::Builder
     config_reader :layout
     config_accessor :shapes
   end
@@ -54,7 +54,7 @@ class ThinReports::Core::Format::TestBuilder < Minitest::Test
     format.shapes = {}
 
     TestFormat.build_layout(format) do |type, f|
-      ThinReports::Core::Shape::Format(type).build(f)
+      Thinreports::Core::Shape::Format(type).build(f)
     end
 
     assert_equal format.layout, clean_whitespaces(<<-'EOS')

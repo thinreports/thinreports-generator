@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-include ThinReports::TestHelper
+include Thinreports::TestHelper
 
 describe '#block_exec_on' do
   it 'should return raw context if not given a block' do

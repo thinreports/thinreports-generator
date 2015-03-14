@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Core
     
     # @private
@@ -15,5 +15,5 @@ end
 
 # @private
 class Array
-  include ThinReports::Core::ArrayExtensions
+  include Thinreports::Core::ArrayExtensions
 end

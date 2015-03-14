@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Format::BaseTest < Minitest::Test
+class Thinreports::Core::Format::BaseTest < Minitest::Test
   TEST_FORMAT_CONFIG = {
     'c1' => 'c1',
     'c2' => {
@@ -31,7 +31,7 @@ class ThinReports::Core::Format::BaseTest < Minitest::Test
     'c21' => 'c21'
   }
   
-  class TestFormat < ThinReports::Core::Format::Base
+  class TestFormat < Thinreports::Core::Format::Base
     # For testing
     attr_reader :config
     

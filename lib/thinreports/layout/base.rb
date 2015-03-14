@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Layout
 
     class Base
@@ -8,18 +8,18 @@ module ThinReports
 
       class << self
         # @param [String] filename
-        # @return [ThinReports::Layout::Format]
-        # @raise [ThinReports::Errors::InvalidLayoutFormat]
-        # @raise [ThinReports::Errors::IncompatibleLayoutFormat]
+        # @return [Thinreports::Layout::Format]
+        # @raise [Thinreports::Errors::InvalidLayoutFormat]
+        # @raise [Thinreports::Errors::IncompatibleLayoutFormat]
         # @private
         def load_format(filename)
           filename += ".#{EXT_NAME}" unless filename =~/\.#{EXT_NAME}$/
 
           unless File.exists?(filename)
-            raise ThinReports::Errors::LayoutFileNotFound
+            raise Thinreports::Errors::LayoutFileNotFound
           end
           # Build format.
-          ThinReports::Layout::Format.build(filename)
+          Thinreports::Layout::Format.build(filename)
         end
       end
 
@@ -54,7 +54,7 @@ module ThinReports
         block_exec_on(@config, &block)
       end
 
-      # @param [ThinReports::Report::Base] parent
+      # @param [Thinreports::Report::Base] parent
       # @param [Hash] options ({})
       # @option option [Boolean] :count (true)
       # @return [Page]

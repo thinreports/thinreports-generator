@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Generator
     
     # @private
@@ -41,7 +41,7 @@ module ThinReports
       
       def find_color_from_name(name)
         unless color = SUPPORTED_COLOR_NAMES[name]
-          raise ThinReports::Errors::UnsupportedColorName, name
+          raise Thinreports::Errors::UnsupportedColorName, name
         end
         color
       end

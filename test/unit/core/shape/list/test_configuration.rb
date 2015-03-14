@@ -2,10 +2,10 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::List::TestConfiguration < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::List::TestConfiguration < Minitest::Test
+  include Thinreports::TestHelper
 
-  List = ThinReports::Core::Shape::List
+  List = Thinreports::Core::Shape::List
 
   def setup
     @events = mock('events')

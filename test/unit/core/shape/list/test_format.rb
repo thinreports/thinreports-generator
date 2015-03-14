@@ -2,8 +2,8 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::List::TestFormat < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::List::TestFormat < Minitest::Test
+  include Thinreports::TestHelper
 
   TEST_LIST_FORMAT = {
     "type" => "s-list",
@@ -24,7 +24,7 @@ class ThinReports::Core::Shape::List::TestFormat < Minitest::Test
     }
   }
 
-  List = ThinReports::Core::Shape::List
+  List = Thinreports::Core::Shape::List
 
   def test_build_when_all_sections_enabled
     List::SectionFormat.expects(:build).returns({}).times(4)

@@ -1,14 +1,14 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
 
   module Generator
     # @param [Symbol] type
-    # @param report (see ThinReports::Generator::Base#initialize)
-    # @param options (see ThinReports::Generator::Base#initialize)
+    # @param report (see Thinreports::Generator::Base#initialize)
+    # @param options (see Thinreports::Generator::Base#initialize)
     def self.new(type, report, options = {})
       unless generator = registry[type]
-        raise ThinReports::Errors::UnknownGeneratorType.new(type)
+        raise Thinreports::Errors::UnknownGeneratorType.new(type)
       end
       generator.new(report, options)
     end

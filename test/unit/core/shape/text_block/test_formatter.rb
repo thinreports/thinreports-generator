@@ -2,11 +2,11 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::TextBlock::TestFormatter < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::TextBlock::TestFormatter < Minitest::Test
+  include Thinreports::TestHelper
 
   # Alias
-  Formatter = ThinReports::Core::Shape::TextBlock::Formatter
+  Formatter = Thinreports::Core::Shape::TextBlock::Formatter
 
   def test_initialize_formatter_by_type
     assert_instance_of Formatter::Basic,
@@ -21,7 +21,7 @@ class ThinReports::Core::Shape::TextBlock::TestFormatter < Minitest::Test
     assert_instance_of Formatter::Padding,
       Formatter.setup( stub(format_type: 'padding') )
 
-    assert_raises ThinReports::Errors::UnknownFormatterType do
+    assert_raises Thinreports::Errors::UnknownFormatterType do
       Formatter.setup( stub(format_type: 'unknown') )
     end
   end

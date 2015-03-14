@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Core::Shape
     
     class List::SectionInterface < Base::Interface
@@ -9,8 +9,8 @@ module ThinReports
       undef_method :list
       internal_delegators :height
       
-      # @param [ThinReports::Core::Shape::List::Page] parent
-      # @param [ThinReports::Core::Shape::List::SectionFormat] format
+      # @param [Thinreports::Core::Shape::List::Page] parent
+      # @param [Thinreports::Core::Shape::List::SectionFormat] format
       # @param [Symbol] section_name
       def initialize(parent, format, section_name)
         super(parent, format)
@@ -21,8 +21,8 @@ module ThinReports
         end
       end
       
-      # @param [ThinReports::Core::Shape::List::Page] parent
-      # @return [ThinReports::Core::Shape::List::SectionInterface]
+      # @param [Thinreports::Core::Shape::List::Page] parent
+      # @return [Thinreports::Core::Shape::List::SectionInterface]
       # @private
       def copy(parent)
         new_sec = super
@@ -38,7 +38,7 @@ module ThinReports
       
       # @param parent (see #initialize)
       # @param format (see #initialize)
-      # @return [ThinReports::Core::Shape::List::SectionInternal]
+      # @return [Thinreports::Core::Shape::List::SectionInternal]
       def init_internal(parent, format)
         List::SectionInternal.new(parent, format)
       end

@@ -7,7 +7,7 @@ require 'thinreports/generator/pdf/document/draw_shape'
 require 'thinreports/generator/pdf/document/parse_svg'
 require 'thinreports/generator/pdf/document/page'
 
-module ThinReports
+module Thinreports
   module Generator
 
     # @private
@@ -23,7 +23,7 @@ module ThinReports
       # @private
       attr_reader :pdf
 
-      # @param options (see ThinReports::Generator::PDF#initialize)
+      # @param options (see Thinreports::Generator::PDF#initialize)
       # @param [Hash] metadata
       # @option metadata [String] :Title
       def initialize(options = {}, metadata = {})
@@ -31,8 +31,8 @@ module ThinReports
           skip_page_creation: true,
           margin: [0, 0],
           info: {CreationDate: Time.now,
-                      Creator: 'ThinReports Generator for Ruby ' +
-                                        ThinReports::VERSION}.merge(metadata)
+                      Creator: 'Thinreports Generator for Ruby ' +
+                                        Thinreports::VERSION}.merge(metadata)
         )
         # Setup to Prawn::Document.
         setup_fonts

@@ -1,15 +1,15 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   # @yield [config]
-  # @yieldparam [ThinReports::Configuration] config
+  # @yieldparam [Thinreports::Configuration] config
   def self.configure(&block)
     block_exec_on(self.config, &block)
   end
 
-  # @return [ThinReports::Configuration]
+  # @return [Thinreports::Configuration]
   def self.config
-    @config ||= ThinReports::Configuration.new
+    @config ||= Thinreports::Configuration.new
   end
 
   class Configuration
@@ -33,9 +33,9 @@ module ThinReports
       @fallback_fonts = font_names.is_a?(Array) ? font_names : [font_names]
     end
 
-    # @return [ThinReports::Generator::Configuration]
+    # @return [Thinreports::Generator::Configuration]
     def generator
-      @generator ||= ThinReports::Generator::Configuration.new
+      @generator ||= Thinreports::Generator::Configuration.new
     end
   end
 end

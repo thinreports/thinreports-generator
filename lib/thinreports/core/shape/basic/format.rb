@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Core::Shape
     
     # @private
@@ -15,7 +15,7 @@ module ThinReports
       private
         
         # @param [Hash] raw_format
-        # @return [ThinReports::Core::Shape::Basic::Format]
+        # @return [Thinreports::Core::Shape::Basic::Format]
         def build_internal(raw_format)
           new(raw_format)
         end

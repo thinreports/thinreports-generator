@@ -1,7 +1,7 @@
 # coding: utf-8
 
 example :list_events, 'Basic list events' do |t|
-  ThinReports::Report.generate :filename => t.output_filename do
+  Thinreports::Report.generate :filename => t.output_filename do
     use_layout(t.layout_filename) do |config|
       config.list do
         events.on :page_footer_insert do |e|

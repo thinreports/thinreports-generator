@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   # The current version.
   VERSION = '0.7.7'
 end

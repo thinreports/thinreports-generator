@@ -2,11 +2,11 @@
 
 require 'test_helper'
 
-class ThinReports::TestReport < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::TestReport < Minitest::Test
+  include Thinreports::TestHelper
 
   # Alias
-  Report = ThinReports::Report
+  Report = Thinreports::Report
 
   def test_new
     assert_instance_of Report::Base, Report.new

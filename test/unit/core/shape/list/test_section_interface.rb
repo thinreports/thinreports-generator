@@ -2,11 +2,11 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::List::TestSectionInterface < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::List::TestSectionInterface < Minitest::Test
+  include Thinreports::TestHelper
 
   # Alias
-  List = ThinReports::Core::Shape::List
+  List = Thinreports::Core::Shape::List
 
   def setup
     @report = new_report 'layout_text1'
@@ -29,7 +29,7 @@ class ThinReports::Core::Shape::List::TestSectionInterface < Minitest::Test
   end
 
   def test_initialize_should_properly_initialize_manager
-    assert_instance_of ThinReports::Core::Shape::Manager::Internal,
+    assert_instance_of Thinreports::Core::Shape::Manager::Internal,
                        create_interface.manager
   end
 
@@ -54,7 +54,7 @@ class ThinReports::Core::Shape::List::TestSectionInterface < Minitest::Test
   end
 
   def copied_list(list, &block)
-    tblock     = ThinReports::Core::Shape::TextBlock
+    tblock     = Thinreports::Core::Shape::TextBlock
     new_parent = @report.start_new_page
 
     %w( foo bar hoge ).each do |id|

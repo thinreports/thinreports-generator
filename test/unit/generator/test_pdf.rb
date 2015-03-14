@@ -2,10 +2,10 @@
 
 require 'test_helper'
 
-class ThinReports::Generator::TestPDF < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Generator::TestPDF < Minitest::Test
+  include Thinreports::TestHelper
 
-  PDF = ThinReports::Generator::PDF
+  PDF = Thinreports::Generator::PDF
 
   def test_new_should_set_title_as_metadata
     report = new_report('layout_text1.tlf') {|r| r.start_new_page }

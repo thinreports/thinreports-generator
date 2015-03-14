@@ -2,11 +2,11 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::TextBlock::TestInterface < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::TextBlock::TestInterface < Minitest::Test
+  include Thinreports::TestHelper
 
   # Alias
-  TextBlock = ThinReports::Core::Shape::TextBlock
+  TextBlock = Thinreports::Core::Shape::TextBlock
 
   def create_interface(format_config = {})
     report = new_report 'layout_text1'

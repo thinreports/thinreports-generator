@@ -1,10 +1,10 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Report
 
     class Base
-      # @return [ThinReports::Report::Internal]
+      # @return [Thinreports::Report::Internal]
       # @private
       attr_reader :internal
 
@@ -15,8 +15,8 @@ module ThinReports
         # @param options (see #initialize)
         # @option options (see #initialize)
         # @yield [report]
-        # @yieldparam [ThinReports::Report::Base] report
-        # @return [ThinReports::Report::Base]
+        # @yieldparam [Thinreports::Report::Base] report
+        # @return [Thinreports::Report::Base]
         def create(options = {}, &block)
           unless block_given?
             raise ArgumentError, '#create requires a block'
@@ -85,7 +85,7 @@ module ThinReports
       # @option options [Boolean] :default (true)
       # @option options [Symbol] :id (nil)
       # @yield [config]
-      # @yieldparam [ThinReports::Layout::Configuration] config
+      # @yieldparam [Thinreports::Layout::Configuration] config
       # @return [void]
       def use_layout(layout, options = {}, &block)
         internal.register_layout(layout, options, &block)
@@ -95,11 +95,11 @@ module ThinReports
       # @option options [String, Symbol] :layout (nil)
       # @option options [Boolean] :count (true)
       # @yield [page]
-      # @yieldparam [ThinReports::Core::Page] page
-      # @return [ThinReports::Core::Page]
+      # @yieldparam [Thinreports::Core::Page] page
+      # @return [Thinreports::Core::Page]
       def start_new_page(options = {}, &block)
         unless layout = internal.load_layout(options.delete(:layout))
-          raise ThinReports::Errors::NoRegisteredLayoutFound
+          raise Thinreports::Errors::NoRegisteredLayoutFound
         end
 
         page = internal.add_page(layout.new_page(self, options))
@@ -108,7 +108,7 @@ module ThinReports
 
       # @param [Hash] options
       # @option options [Boolean] :count (true)
-      # @return [ThinReports::Core::BlankPage]
+      # @return [Thinreports::Core::BlankPage]
       def add_blank_page(options = {})
         internal.add_page(Core::BlankPage.new(options[:count]))
       end
@@ -116,17 +116,17 @@ module ThinReports
 
       # @param [Symbol, nil] id Return the default layout
       #   if nil (see #default_layout).
-      # @return [ThinReports::Layout::Base]
+      # @return [Thinreports::Layout::Base]
       def layout(id = nil)
         if id
           internal.layout_registry[id] ||
-            raise(ThinReports::Errors::UnknownLayoutId)
+            raise(Thinreports::Errors::UnknownLayoutId)
         else
           internal.default_layout
         end
       end
 
-      # @return [ThinReports::Layout::Base]
+      # @return [Thinreports::Layout::Base]
       def default_layout
         internal.default_layout
       end
@@ -148,25 +148,25 @@ module ThinReports
       #   report.generate(:pdf, filename: 'foo.pdf')
       def generate(*args)
         options = args.last.is_a?(::Hash) ? args.pop : {}
-        type = args.first || ThinReports.config.generator.default
+        type = args.first || Thinreports.config.generator.default
         filename = options.delete(:filename)
-        generator = ThinReports::Generator.new(type, self, options)
+        generator = Thinreports::Generator.new(type, self, options)
 
         generator.generate(filename)
       end
 
-      # @see ThinReports::Core::Shape::Manager::Target#list
+      # @see Thinreports::Core::Shape::Manager::Target#list
       def list(id = nil, &block)
         start_new_page if page.nil? || page.finalized?
         page.list(id, &block)
       end
 
-      # @return [ThinReports::Report::Events]
+      # @return [Thinreports::Report::Events]
       def events
         internal.events
       end
 
-      # @return [ThinReports::Core::Page, nil]
+      # @return [Thinreports::Core::Page, nil]
       def page
         internal.page
       end

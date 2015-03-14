@@ -5,7 +5,7 @@ require 'thinreports/version'
 
 Gem::Specification.new do |s|
   s.name        = 'thinreports'
-  s.version     = ThinReports::VERSION
+  s.version     = Thinreports::VERSION
   s.author      = 'Matsukei Co.,Ltd.'
   s.email       = 'thinreports@gmail.com'
   s.summary     = 'An open source report generating tool for Ruby.'

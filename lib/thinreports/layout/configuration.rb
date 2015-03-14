@@ -1,12 +1,12 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Layout
 
     class Configuration
       include Core::Shape::Manager::Target
 
-      # @param [ThinReports::Layout::Base] layout
+      # @param [Thinreports::Layout::Base] layout
       def initialize(layout)
         initialize_manager(layout.format) do |f|
           Core::Shape::Configuration(f.type).new

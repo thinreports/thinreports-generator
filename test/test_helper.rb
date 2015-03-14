@@ -10,7 +10,7 @@ require 'pathname'
 
 require 'thinreports'
 
-module ThinReports::TestHelper
+module Thinreports::TestHelper
   ROOT = Pathname.new(File.expand_path('..', __FILE__))
 
   def teardown
@@ -19,17 +19,17 @@ module ThinReports::TestHelper
   end
 
   def new_report(file, &block)
-    report = ThinReports::Report.new layout: data_file(file)
+    report = Thinreports::Report.new layout: data_file(file)
     block.call(report) if block_given?
     report
   end
 
   def new_layout(file)
-    ThinReports::Layout.new(data_file(file))
+    Thinreports::Layout.new(data_file(file))
   end
 
   def new_layout_format(file)
-    ThinReports::Layout::Format.build(data_file(file))
+    Thinreports::Layout::Format.build(data_file(file))
   end
 
   def clear_output

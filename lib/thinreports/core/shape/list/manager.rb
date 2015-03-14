@@ -1,23 +1,23 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Core::Shape
     
     # @private
     class List::Manager
-      # @return [ThinReports::Core::Shape::List::Configuration]
+      # @return [Thinreports::Core::Shape::List::Configuration]
       attr_reader :config
       
-      # @return [ThinReports::Core::Shape:::List::Page]
+      # @return [Thinreports::Core::Shape:::List::Page]
       attr_reader :current_page
       
-      # @return [ThinReports::Core::Shape::List::PageState]
+      # @return [Thinreports::Core::Shape::List::PageState]
       attr_reader :current_page_state
 
       # @return [Integer]
       attr_accessor :page_count
       
-      # @param [ThinReports::Core::Shape::List::Page] page
+      # @param [Thinreports::Core::Shape::List::Page] page
       def initialize(page)
         switch_current!(page)
 
@@ -26,8 +26,8 @@ module ThinReports
         @page_count = 0
       end
       
-      # @param [ThinReports::Core::Shape::List::Page] page
-      # @return [ThinReports::Core::Shape::List::Manager]
+      # @param [Thinreports::Core::Shape::List::Page] page
+      # @return [Thinreports::Core::Shape::List::Manager]
       def switch_current!(page)
         @current_page       = page
         @current_page_state = page.internal
@@ -35,7 +35,7 @@ module ThinReports
       end
       
       # @yield [new_list]
-      # @yieldparam [ThinReports::Core::Shape::List::Page] new_list
+      # @yieldparam [Thinreports::Core::Shape::List::Page] new_list
       def change_new_page(&block)
         finalize_page
         new_page = report.internal.copy_page
@@ -48,7 +48,7 @@ module ThinReports
       # @see List::Page#header
       def header(values = {}, &block)
         unless format.has_header?
-          raise ThinReports::Errors::DisabledListSection.new('header')
+          raise Thinreports::Errors::DisabledListSection.new('header')
         end        
         current_page_state.header ||= init_section(:header)
         build_section(current_page_state.header, values, &block)
@@ -86,18 +86,18 @@ module ThinReports
         row
       end
       
-      # @param [ThinReports::Core::Shape::List::SectionInterface] section
-      # @param values (see ThinReports::Core::Shape::Manager::Target#values)
+      # @param [Thinreports::Core::Shape::List::SectionInterface] section
+      # @param values (see Thinreports::Core::Shape::Manager::Target#values)
       # @yield [section,]
-      # @yieldparam [ThinReports::Core::Shape::List::SectionInterface] section
-      # @return [ThinReports::Core::Shape::List::SectionInterface]
+      # @yieldparam [Thinreports::Core::Shape::List::SectionInterface] section
+      # @return [Thinreports::Core::Shape::List::SectionInterface]
       def build_section(section, values = {}, &block)
         section.values(values)
         block_exec_on(section, &block)
       end
       
       # @param [Symbol] section_name
-      # @return [ThinReports::Core::Shape::List::SectionInterface]
+      # @return [Thinreports::Core::Shape::List::SectionInterface]
       def init_section(section_name)
         List::SectionInterface.new(current_page,
                                    format.sections[section_name],
@@ -128,12 +128,12 @@ module ThinReports
         @page_max_height
       end
       
-      # @return [ThinReports::Core::Shape::List::Store]
+      # @return [Thinreports::Core::Shape::List::Store]
       def store
         config.store
       end
       
-      # @return [ThinReports::Core::Shape::List::Events]
+      # @return [Thinreports::Core::Shape::List::Events]
       def events
         config.events
       end
@@ -204,22 +204,22 @@ module ThinReports
       
     private
       
-      # @return [ThinReports::Report::Base]
+      # @return [Thinreports::Report::Base]
       def report
         current_page_state.parent.report
       end
       
-      # @return [ThinReports::Layout::Base]
+      # @return [Thinreports::Layout::Base]
       def layout
         current_page_state.parent.layout
       end
       
-      # @return [ThinReports::Core::Shape::List::Format]
+      # @return [Thinreports::Core::Shape::List::Format]
       def format
         current_page_state.format
       end
       
-      # @return [ThinReports::Core::Shape::List::Configuration]
+      # @return [Thinreports::Core::Shape::List::Configuration]
       def init_config
         layout.config.activate(current_page.id) || List::Configuration.new
       end

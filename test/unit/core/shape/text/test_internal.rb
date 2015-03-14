@@ -2,10 +2,10 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::Text::TestInternal < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::Text::TestInternal < Minitest::Test
+  include Thinreports::TestHelper
   
-  Text = ThinReports::Core::Shape::Text
+  Text = Thinreports::Core::Shape::Text
   
   def create_internal(format_config = {})
     report = new_report('layout_text1.tlf')

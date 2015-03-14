@@ -1,19 +1,19 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
 
   module Report
-    # @see ThinReports::Report::Base#initialize
+    # @see Thinreports::Report::Base#initialize
     def self.new(*args)
       Base.new(*args)
     end
 
-    # @see ThinReports::Report::Base#create
+    # @see Thinreports::Report::Base#create
     def self.create(*args, &block)
       Base.create(*args, &block)
     end
 
-    # @see ThinReports::Report::Base#generate
+    # @see Thinreports::Report::Base#generate
     def self.generate(*args, &block)
       Base.generate(*args, &block)
     end

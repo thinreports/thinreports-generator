@@ -2,10 +2,10 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::List::TestStore < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::List::TestStore < Minitest::Test
+  include Thinreports::TestHelper
   
-  List = ThinReports::Core::Shape::List
+  List = Thinreports::Core::Shape::List
   
   def test_new
     klass = List::Store.new(foo: 'foo', hoge: 0)

@@ -3,7 +3,7 @@
 require 'pathname'
 require 'thinreports'
 
-class ThinReports::Example
+class Thinreports::Example
   ROOT = Pathname.new File.expand_path('..', __FILE__)
 
   attr_reader :name, :description
@@ -41,7 +41,7 @@ class ThinReports::Example
 end
 
 def example(name, description = nil, &block)
-  ex = ThinReports::Example.new(name, description)
+  ex = Thinreports::Example.new(name, description)
   ex.start
   block.arity == 1 ? block.call(ex) : ex.instance_eval(&block)
   ex.success

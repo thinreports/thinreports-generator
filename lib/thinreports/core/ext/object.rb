@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Core
     
     # @private
@@ -21,5 +21,5 @@ end
 
 # @private
 class Object
-  include ThinReports::Core::ObjectExtensions
+  include Thinreports::Core::ObjectExtensions
 end

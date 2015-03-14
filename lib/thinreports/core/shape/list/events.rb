@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Core::Shape
     
     class List::Events < Core::Events
@@ -11,34 +11,34 @@ module ThinReports
       end
       
       class PageEvent < Event
-        # @return [ThinReports::Core::Page]
+        # @return [Thinreports::Core::Page]
         attr_reader :page
         
-        # @param type (see ThinReports::Core::Events::Event#initialize)
-        # @param [ThinReports::Core::Shape::List::Page] target
-        # @param [ThinReports::Core::Page] page
+        # @param type (see Thinreports::Core::Events::Event#initialize)
+        # @param [Thinreports::Core::Shape::List::Page] target
+        # @param [Thinreports::Core::Page] page
         def initialize(type, target, page)
           super(type, target)
           @page = page
         end
         
-        # @return [ThinReports::Core::Shape::List::Page]
+        # @return [Thinreports::Core::Shape::List::Page]
         alias_method :list, :target
       end
       
       class SectionEvent < Event
-        # @return [ThinReports::Core::Shape::List::Store]
+        # @return [Thinreports::Core::Shape::List::Store]
         attr_reader :store
         
-        # @param type (see ThinReports::Core::Events::Event#initialize)
-        # @param [ThinReports::Core::Shape::List::SectionInterface] target
-        # @param [ThinReports::Core::Shape::List::Store] store
+        # @param type (see Thinreports::Core::Events::Event#initialize)
+        # @param [Thinreports::Core::Shape::List::SectionInterface] target
+        # @param [Thinreports::Core::Shape::List::Store] store
         def initialize(type, target, store)
           super(type, target)
           @store = store
         end
         
-        # @return [ThinReports::Core::Shape::List::SectionInterface]
+        # @return [Thinreports::Core::Shape::List::SectionInterface]
         alias_method :section, :target
       end
     end

@@ -2,10 +2,10 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::Manager::TestFormat < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::Manager::TestFormat < Minitest::Test
+  include Thinreports::TestHelper
 
-  class TestFormat < ThinReports::Core::Shape::Manager::Format; end
+  class TestFormat < Thinreports::Core::Shape::Manager::Format; end
 
   def test_identifier_should_return_the_same_as_object_id_when_id_is_not_given
     format = TestFormat.new({})
@@ -18,7 +18,7 @@ class ThinReports::Core::Shape::Manager::TestFormat < Minitest::Test
 
   def test_find_shape_should_return_format_of_shape_when_shape_is_found
     format = TestFormat.new({}) do |f|
-      f.shapes[:foo] = ThinReports::Core::Shape::TextBlock::Format.new('id'   => 'foo',
+      f.shapes[:foo] = Thinreports::Core::Shape::TextBlock::Format.new('id'   => 'foo',
                                                                        'type' => 's-tblock')
     end
     assert_equal format.find_shape(:foo).id, 'foo'

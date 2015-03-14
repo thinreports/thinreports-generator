@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Core
     
     # @private
@@ -15,5 +15,5 @@ end
 
 # @private
 class Hash
-  include ThinReports::Core::HashExtensions
+  include Thinreports::Core::HashExtensions
 end

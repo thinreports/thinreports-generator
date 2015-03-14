@@ -2,11 +2,11 @@
 
 require 'test_helper'
 
-class ThinReports::Generator::PDF::Graphics::TestText < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Generator::PDF::Graphics::TestText < Minitest::Test
+  include Thinreports::TestHelper
 
   def setup
-    @pdf = ThinReports::Generator::PDF::Document.new
+    @pdf = Thinreports::Generator::PDF::Document.new
     @pdf.internal.start_new_page
   end
 
@@ -123,14 +123,14 @@ class ThinReports::Generator::PDF::Graphics::TestText < Minitest::Test
   end
 
   def test_text_box_with_inline_format
-    contents = '<b>ThinReports</b> official site is <link href="http://www.thinreports.org">here</link>.'
+    contents = '<b>Thinreports</b> official site is <link href="http://www.thinreports.org">here</link>.'
 
     ::Prawn::Text::Formatted::Parser.expects(:format).with(contents).returns([]).once
     @pdf.text_box(contents, 1, 1, 200, 100, inline_format: true, font: 'IPAMincho', size: 18, color: '000000')
   end
 
   def test_text_box_without_inline_format
-    contents = '<b>ThinReports</b> official site is <link href="http://www.thinreports.org">here</link>.'
+    contents = '<b>Thinreports</b> official site is <link href="http://www.thinreports.org">here</link>.'
 
     ::Prawn::Text::Formatted::Parser.expects(:format).never
     @pdf.text_box(contents, 1, 1, 200, 100, inline_format: false, font: 'IPAMincho', size: 18, color: '000000')

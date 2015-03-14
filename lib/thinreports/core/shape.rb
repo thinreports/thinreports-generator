@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Core
     
     module Shape
@@ -18,7 +18,7 @@ module ThinReports
       def Configuration(type)
         klass = find_by_type(type)
         unless klass.const_defined?(:Configuration)
-          raise ThinReports::Errors::NoConfigurationFound, type
+          raise Thinreports::Errors::NoConfigurationFound, type
         end
         klass.const_get(:Configuration)
       end
@@ -35,7 +35,7 @@ module ThinReports
         when PageNumber::TYPE_NAME then PageNumber
         when *Basic::TYPE_NAMES    then Basic
         else
-          raise ThinReports::Errors::UnknownShapeType
+          raise Thinreports::Errors::UnknownShapeType
         end
       end
     end

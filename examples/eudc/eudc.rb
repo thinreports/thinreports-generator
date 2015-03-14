@@ -1,11 +1,11 @@
 # coding: utf-8
 
 example :eudc, 'Show External Characters' do |t|
-  ThinReports.configure do |config|
+  Thinreports.configure do |config|
     config.fallback_fonts = t.resource('eudc.ttf')
   end
 
-  ThinReports::Report.generate(:filename => t.output_filename) do
+  Thinreports::Report.generate(:filename => t.output_filename) do
     use_layout t.layout_filename
 
     start_new_page
@@ -16,5 +16,5 @@ example :eudc, 'Show External Characters' do |t|
                 :eudc_bold_italic => '太字斜体')
   end
 
-  ThinReports.config.fallback_fonts = []
+  Thinreports.config.fallback_fonts = []
 end

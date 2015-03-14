@@ -1,11 +1,11 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Generator
 
     # @abstract
     class Base
-      # @return [ThinReports::Report::Base]
+      # @return [Thinreports::Report::Base]
       # @private
       attr_reader :report
 
@@ -18,7 +18,7 @@ module ThinReports
         Generator.register(g.name.split('::').last.downcase.to_sym, g);
       end
 
-      # @param [ThinReports::Report::Base] report
+      # @param [Thinreports::Report::Base] report
       # @param [Hash] options
       def initialize(report, options = {})
         report.finalize

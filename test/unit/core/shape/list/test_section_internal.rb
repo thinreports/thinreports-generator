@@ -2,11 +2,11 @@
 
 require 'test_helper'
 
-class ThinReports::Core::Shape::List::TestSectionInternal < Minitest::Test
-  include ThinReports::TestHelper
+class Thinreports::Core::Shape::List::TestSectionInternal < Minitest::Test
+  include Thinreports::TestHelper
 
   # Alias
-  List = ThinReports::Core::Shape::List
+  List = Thinreports::Core::Shape::List
 
   def create_internal(format_config = {})
     report = new_report 'layout_text1'
