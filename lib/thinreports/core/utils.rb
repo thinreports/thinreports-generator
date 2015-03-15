@@ -6,10 +6,6 @@ module Thinreports
       klass.extend self
     end
 
-    def warn(message)
-      Kernel.warn message
-    end
-
     def deep_copy(src)
       case src
       when Hash

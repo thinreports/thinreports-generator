@@ -13,9 +13,13 @@ require 'thinreports'
 module Thinreports::TestHelper
   ROOT = Pathname.new(File.expand_path('..', __FILE__))
 
+  def setup
+    Thinreports::TestHelper.disable_output
+  end
+
   def teardown
     super
-    clear_output
+    clear_temp_files
   end
 
   def new_report(file, &block)
@@ -32,7 +36,7 @@ module Thinreports::TestHelper
     Thinreports::Layout::Format.build(data_file(file))
   end
 
-  def clear_output
+  def clear_temp_files
     FileUtils.rm Dir.glob(temp_path.join('*'))
   end
 
@@ -52,4 +56,20 @@ module Thinreports::TestHelper
   def temp_path
     ROOT.join('tmp')
   end
+
+  @@original_stdout = nil
+  @@original_stderr = nil
+
+  def self.disable_output
+    unless $stdout.is_a? StringIO
+      @@original_stdout, @@original_stderr = $stdout, $stderr
+      $stdout, $stderr = StringIO.new, StringIO.new
+    end
+  end
+
+  def self.enable_output
+    $stdout, $stderr = @@original_stdout, @@original_stderr
+  end
 end
+
+Minitest.after_run { Thinreports::TestHelper.enable_output }
