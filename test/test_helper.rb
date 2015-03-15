@@ -1,14 +1,13 @@
 # coding: utf-8
 
-require 'minitest/autorun'
+require 'digest/sha1'
+require 'pathname'
+require 'thinreports'
+
 require 'minitest/spec'
 require 'minitest/unit'
 require 'mocha/mini_test'
-
-require 'digest/sha1'
-require 'pathname'
-
-require 'thinreports'
+require 'minitest/autorun'
 
 module Thinreports::TestHelper
   ROOT = Pathname.new(File.expand_path('..', __FILE__))
