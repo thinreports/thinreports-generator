@@ -1,40 +1,41 @@
 # coding: utf-8
 
-module ThinReports
-  module Core
-    
-    # @private
-    module Utils
-      def block_exec_on(context, &block)
-        return context unless block_given?
-        
-        if block.arity == 1
-          block.call(context)
-        else
-          context.instance_eval(&block)
-        end
-        context
-      end
-      
-      if RUBY_VERSION < '1.9'
-        def ruby_18
-          yield
-        end
-        def ruby_19
-          false
-        end
+module Thinreports
+  module Utils
+    def self.included(klass)
+      klass.extend self
+    end
+
+    def deep_copy(src)
+      case src
+      when Hash
+        src.inject({}) {|h, (k, v)| h[k] = (v.dup rescue v); h }
+      when Array
+        src.map {|a| a.dup rescue a }
       else
-        def ruby_18
-          false
-        end
-        def ruby_19
-          yield
-        end
+        raise ArgumentError
       end
     end
-    
-  end
-end
 
-# Include global methods.
-include ThinReports::Core::Utils
+    def blank_value?(value)
+      case value
+      when String   then value.empty?
+      when NilClass then true
+      else false
+      end
+    end
+
+    def call_block_in(scope, &block)
+      return scope unless block_given?
+
+      if block.arity == 1
+        block.call(scope)
+      else
+        scope.instance_eval(&block)
+      end
+      scope
+    end
+  end
+
+  extend Utils
+end

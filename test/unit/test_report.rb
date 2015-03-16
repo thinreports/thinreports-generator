@@ -1,30 +1,18 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
-class ThinReports::TestReport < Minitest::Test
-  include ThinReports::TestHelpers
-  
+class Thinreports::TestReport < Minitest::Test
+  include Thinreports::TestHelper
+
   # Alias
-  Report = ThinReports::Report
-  
-  def test_new_should_delegate_to_Base_new
-    flexmock(Report::Base).should_receive(:new).once
-    Report.new
+  Report = Thinreports::Report
+
+  def test_new
+    assert_instance_of Report::Base, Report.new
   end
-  
-  def test_create_should_delegate_to_Base_create
-    flexmock(Report::Base).should_receive(:create).once
-    Report.create
-  end
-  
-  def test_generate_should_delegate_to_Base_generate
-    flexmock(Report::Base).should_receive(:generate).once
-    Report.generate
-  end
-  
-  def test_generate_file_should_delegate_to_Base_generate_file
-    flexmock(Report::Base).should_receive(:generate_file).once
-    Report.generate_file
+
+  def test_create
+    assert_instance_of Report::Base, Report.create {}
   end
 end

@@ -1,28 +1,28 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
-class ThinReports::Core::Shape::List::TestPageState < Minitest::Test
-  include ThinReports::TestHelpers
-  
+class Thinreports::Core::Shape::List::TestPageState < Minitest::Test
+  include Thinreports::TestHelper
+
   # Alias
-  List = ThinReports::Core::Shape::List
-  
+  List = Thinreports::Core::Shape::List
+
   def setup
-    parent = flexmock('parent')
-    format = flexmock('format')
-    
+    parent = mock('parent')
+    format = mock('format')
+
     @state = List::PageState.new(parent, format)
   end
-  
+
   def test_alias_class
     assert_same List::PageState, List::Internal
   end
-  
+
   def test_type_of?
     assert_equal @state.type_of?(:list), true
   end
-  
+
   def test_finalized!
     assert_equal @state.finalized?, false
     @state.finalized!

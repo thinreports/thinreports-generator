@@ -1,26 +1,26 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Core::Shape
     
     # @private
     class List::Format < Basic::Format
-      config_reader :height => %w( content-height )
-      config_checker 'true', :auto_page_break => %w( page-break )
+      config_reader height: %w( content-height )
+      config_checker 'true', auto_page_break: %w( page-break )
       
       config_reader :header,
                     :detail,
                     :footer
-      config_reader :page_footer => %w( page-footer )
+      config_reader page_footer: %w( page-footer )
       
-      config_checker 'true', :has_header => %w( header-enabled )
-      config_checker 'true', :has_footer => %w( footer-enabled )
-      config_checker 'true', :has_page_footer => %w( page-footer-enabled )
+      config_checker 'true', has_header: %w( header-enabled )
+      config_checker 'true', has_footer: %w( footer-enabled )
+      config_checker 'true', has_page_footer: %w( page-footer-enabled )
       
-      config_reader :page_footer_height => %w( page-footer height )
-      config_reader :footer_height      => %w( footer height )
-      config_reader :header_height      => %w( header height )
-      config_reader :detail_height      => %w( detail height )
+      config_reader page_footer_height: %w( page-footer height )
+      config_reader footer_height: %w( footer height )
+      config_reader header_height: %w( header height )
+      config_reader detail_height: %w( detail height )
       
       config_accessor :sections
       
@@ -47,7 +47,7 @@ module ThinReports
       private
         
         # @param [Hash] raw_format
-        # @return [ThinReports::Core::Shape::List::Format]
+        # @return [Thinreports::Core::Shape::List::Format]
         def build_internal(raw_format)
           new(raw_format) do |f|
             f.sections = {}
@@ -59,8 +59,8 @@ module ThinReports
         end
         
         # @param [Symbol] section_name
-        # @param [ThinReports::Core::Shape::List::Format] list
-        # @return [ThinReports::Core::Shape::List::SectionFormat]
+        # @param [Thinreports::Core::Shape::List::Format] list
+        # @return [Thinreports::Core::Shape::List::SectionFormat]
         def build_section(section_name, list)
           list.sections[section_name] =
             List::SectionFormat.build(list.section(section_name))

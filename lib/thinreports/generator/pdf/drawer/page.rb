@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Generator::PDF::Drawer
     
     # @private
@@ -11,7 +11,7 @@ module ThinReports
         @lists = {}
       end
       
-      # @param [ThinReports::Core::Page] page
+      # @param [Thinreports::Report::Page] page
       def draw(page)
         manager = page.manager
 
@@ -69,7 +69,7 @@ module ThinReports
         @pdf.draw_shape_iblock(shape)
       end
       
-      # @param [ThinReports::Core::Shape::Base::Internal] shape
+      # @param [Thinreports::Core::Shape::Base::Internal] shape
       def create_basic_shape_stamp(shape)
         case
         when shape.type_of?(:text)    then create_text_stamp(shape)

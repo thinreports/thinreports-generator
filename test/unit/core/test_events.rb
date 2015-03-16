@@ -1,12 +1,12 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
-class ThinReports::Core::TestEvents < Minitest::Test
-  include ThinReports::TestHelpers
+class Thinreports::Core::TestEvents < Minitest::Test
+  include Thinreports::TestHelper
   
   # Alias
-  Events = ThinReports::Core::Events
+  Events = Thinreports::Core::Events
   
   def setup
     @events = Events.new(:load, :change, :blur)
@@ -33,7 +33,7 @@ class ThinReports::Core::TestEvents < Minitest::Test
   end
   
   def test_listen_raise_error_when_unknown_event_type_is_set
-    assert_raises ThinReports::Errors::UnknownEventType do
+    assert_raises Thinreports::Errors::UnknownEventType do
       @events.listen(:unknown) {|e| e.type }
     end
   end

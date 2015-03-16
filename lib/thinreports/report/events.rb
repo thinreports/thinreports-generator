@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Report
     
     class Events < Core::Events
@@ -9,14 +9,14 @@ module ThinReports
               :generate)
       end
       
-      class Event < ThinReports::Core::Events::Event
-        # @return [ThinReports::Core::Page, nil]
+      class Event < Thinreports::Core::Events::Event
+        # @return [Thinreports::Report::Page, nil]
         attr_reader :page
         
-        # @return [Array<ThinReports::Core::Page>]
+        # @return [Array<Thinreports::Report::Page>]
         attr_reader :pages
         
-        # @return [ThinReports::Report::Base]
+        # @return [Thinreports::Report::Base]
         alias_method :report, :target
         
         def initialize(type, target, page = nil, pages = nil)

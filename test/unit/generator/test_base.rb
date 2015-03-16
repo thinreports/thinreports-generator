@@ -1,51 +1,40 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
-class ThinReports::Generator::TestBase < Minitest::Test
-  include ThinReports::TestHelpers
+class Thinreports::Generator::TestBase < Minitest::Test
+  include Thinreports::TestHelper
 
-  # Alias
-  Generator = ThinReports::Generator
+  Generator = Thinreports::Generator
 
-  class FooHoge < Generator::Base; end
+  class FooGenerator < Generator::Base; end
 
-  def test_subcclasses_are_registered_as_generator_when_inherited
-    assert_same FooHoge, Generator.registry.delete(:foohoge)
+  def test_registring_generator
+    assert_same FooGenerator, Generator.registry.delete(:foogenerator)
   end
 
-  def test_initialize_finalize_given_the_report
-    report = flexmock('report').
-               should_receive(:finalize).once.
-               should_receive(:internal).once.mock
+  def test_new
+    report = new_report 'layout_text1.tlf'
 
-    Generator::Base.new(report)
+    refute report.finalized?
+    Generator::Base.new report
+    assert report.finalized?
   end
 
-  def test_generate_is_abstract_method
+  def test_generate
+    report = new_report 'layout_text1.tlf'
+
+    generator = Generator::Base.new report
     assert_raises NotImplementedError do
-      new_generator.generate
-    end
-  end
-
-  def test_generate_file_is_abstract_method
-    assert_raises NotImplementedError do
-      new_generator.generate_file('output.pdf')
+      generator.generate
     end
   end
 
   def test_default_layout
-    generator = new_generator
-    flexmock(generator.report).
-      should_receive(:default_layout).and_return(flexmock('default_layout')).once
+    report = new_report 'layout_text1.tlf'
 
-    assert_equal generator.default_layout.flexmock_name, 'default_layout'
-  end
-
-  def new_generator
-    report = flexmock('report').
-              should_receive(:finalize).
-              should_receive(:internal).and_return(flexmock('report_internal')).mock
-    Generator::Base.new(report)
+    generator = Generator::Base.new report
+    assert_equal data_file('layout_text1.tlf'),
+                 generator.default_layout.filename
   end
 end

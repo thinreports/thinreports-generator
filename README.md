@@ -35,7 +35,7 @@ Generator can dynamically:
 
 ## Supported Versions
 
-  * Ruby 1.8.7,1.9.3, 2.0, 2.1, 2.2
+  * Ruby 1.8.7, 1.9.3, 2.0, 2.1, 2.2
   * JRuby 1.6, 1.7.0 (1.8 mode)
 
 ## Getting Started
@@ -56,7 +56,7 @@ Generator can dynamically:
 ```ruby
 require 'thinreports'
 
-report = ThinReports::Report.new :layout => 'report.tlf'
+report = Thinreports::Report.new layout: 'report.tlf'
 # Page 1
 report.start_new_page do
   item(:title).value('Thinreports')
@@ -68,11 +68,11 @@ report.start_new_page do |page|
   page.item(:title).style(:color, 'red')
 end
 
-report.generate(:filename => 'report.pdf')
+report.generate(filename: 'report.pdf')
 ```
 
 ```ruby
-ThinReports::Report.generate(:filename => 'report.pdf', :layout => 'report.tlf') do
+Thinreports::Report.generate(filename: 'report.pdf', layout: 'report.tlf') do
   start_new_page
 
   page.item(:title).value('Thinreports')
@@ -86,7 +86,7 @@ end
 ### List format
 
 ```ruby
-report = ThinReports::Report.new :layout => 'list.tlf'
+report = Thinreports::Report.new layout: 'list.tlf'
 report.start_new_page
 
 10.times do |n|
@@ -95,19 +95,19 @@ report.start_new_page
   end
 end
 
-report.generate(:filename => 'list.tlf')
+report.generate(filename: 'list.tlf')
 ```
 
 ```ruby
 10.times do |n|
-  report.list.add_row :no => n
+  report.list.add_row no: n
 end
 ```
 
 ```ruby
 report.list(:other_list_id) do |list|
   10.times do |n|
-    list.add_row :no => n
+    list.add_row no: n
   end
 end
 ```
@@ -118,7 +118,7 @@ end
 0.7.0 and earlier:
 
 ```ruby
-report = ThinReports::Report.new :layout => 'list.tlf'
+report = Thinreports::Report.new layout: 'list.tlf'
 
 10.times do |n|
   report.page.list(:default).add_row do |row|

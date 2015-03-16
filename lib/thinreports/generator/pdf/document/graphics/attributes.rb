@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Generator
     
     module PDF::Graphics
@@ -9,9 +9,9 @@ module ThinReports
       # @yieldparam [Hash] attrs
       # @return [Hash]
       def common_graphic_attrs(svg_attrs, &block)
-        attrs = {:stroke       => svg_attrs['stroke'],
-                 :stroke_width => svg_attrs['stroke-width'],
-                 :fill         => svg_attrs['fill']}
+        attrs = {stroke: svg_attrs['stroke'],
+                 stroke_width: svg_attrs['stroke-width'],
+                 fill: svg_attrs['fill']}
         
         # Set 0 to stroke_width if stroke_opacity is '0'.
         if svg_attrs['stroke-opacity'] == '0'
@@ -31,11 +31,11 @@ module ThinReports
       # @yieldparam [Hash] attrs
       # @return [Hash]
       def common_text_attrs(svg_attrs, &block)
-        attrs = {:font   => default_family_if_missing(svg_attrs['font-family']),
-                 :size   => svg_attrs['font-size'],
-                 :color  => svg_attrs['fill'],
-                 :align  => text_align(svg_attrs['text-anchor']),
-                 :styles => font_styles(svg_attrs)}
+        attrs = {font: default_family_if_missing(svg_attrs['font-family']),
+                 size: svg_attrs['font-size'],
+                 color: svg_attrs['fill'],
+                 align: text_align(svg_attrs['text-anchor']),
+                 styles: font_styles(svg_attrs)}
         
         # The Letter Spacing Property.
         # 

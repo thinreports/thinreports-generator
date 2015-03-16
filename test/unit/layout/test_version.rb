@@ -1,12 +1,12 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
-class ThinReports::Layout::TestVersion < Minitest::Test
-  include ThinReports::TestHelpers
+class Thinreports::Layout::TestVersion < Minitest::Test
+  include Thinreports::TestHelper
   
   # Alias
-  Version = ThinReports::Layout::Version
+  Version = Thinreports::Layout::Version
   
   def test_comparable_version_should_add_99_when_the_given_version_is_not_PRE
     assert_equal Version.comparable_version('0.7.0'), '0.7.0.99'

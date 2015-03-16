@@ -1,19 +1,19 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Generator::PDF::Drawer
     
     # @private
     class ListSection < Page
       # @param pdf (see PDF::Drawer::Page#initialize)
-      # @param section [ThinReports::Core::Shape::List::SectionInternal] section
+      # @param section [Thinreports::Core::Shape::List::SectionInternal] section
       def initialize(pdf, section)
         super(pdf, section.format)
         @section       = section
         @stamp_created = false
       end
       
-      # @param [ThinReports::Core::Shape::List::SectionInternal] section
+      # @param [Thinreports::Core::Shape::List::SectionInternal] section
       # @param [Array<Numeric>] at
       def draw(section, at)
         @draw_at = at
@@ -36,12 +36,12 @@ module ThinReports
         pdf_stamp(id)
       end
       
-      # @see ThinReports::Generator::PDF::Drawer::Page#draw_tblock_shape      
+      # @see Thinreports::Generator::PDF::Drawer::Page#draw_tblock_shape      
       def draw_tblock_shape(shape)
         @pdf.translate(*@draw_at) { super }
       end
       
-      # @see ThinReports::Generator::PDF::Drawer::Page#draw_iblock_shape      
+      # @see Thinreports::Generator::PDF::Drawer::Page#draw_iblock_shape      
       def draw_iblock_shape(shape)
         @pdf.translate(*@draw_at) { super }
       end

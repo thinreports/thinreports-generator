@@ -1,12 +1,12 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
-class ThinReports::Report::TestEvents < Minitest::Test
-  include ThinReports::TestHelpers
+class Thinreports::Report::TestEvents < Minitest::Test
+  include Thinreports::TestHelper
   
   # Alias
-  Report = ThinReports::Report
+  Report = Thinreports::Report
   
   def test_event_types
     events = Report::Events.new

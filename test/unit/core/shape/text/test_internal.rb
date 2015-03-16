@@ -1,14 +1,14 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
-class ThinReports::Core::Shape::Text::TestInternal < Minitest::Test
-  include ThinReports::TestHelpers
+class Thinreports::Core::Shape::Text::TestInternal < Minitest::Test
+  include Thinreports::TestHelper
   
-  Text = ThinReports::Core::Shape::Text
+  Text = Thinreports::Core::Shape::Text
   
   def create_internal(format_config = {})
-    report = create_basic_report('basic_layout1.tlf')
+    report = new_report('layout_text1.tlf')
     Text::Internal.new(report.start_new_page, Text::Format.new(format_config))
   end
   

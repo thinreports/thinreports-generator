@@ -1,14 +1,14 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
-class ThinReports::Core::Format::TestBuilder < Minitest::Test
-  include ThinReports::TestHelpers
-  
+class Thinreports::Core::Format::TestBuilder < Minitest::Test
+  include Thinreports::TestHelper
+
   TEST_RAW_FORMAT = <<-'EOS'
     {
-      "node1":"\u3042\u6f22\u5b57\uff20\u3231\u2160\u30ab\u30ca\uff76\uff85",
-      "node2":{"node2_child":"node2_child value"},
+      "node1": "あ漢字＠㈱Ⅰカナｶﾅ",
+      "node2": { "node2_child":"node2_child value" },
       "layout":
         "<svg width=\"595.2\" height=\"841.8\">
            <g class=\"canvas\">
@@ -19,22 +19,17 @@ class ThinReports::Core::Format::TestBuilder < Minitest::Test
          </svg>"
     }
   EOS
-  
-  class TestFormat < ThinReports::Core::Format::Base
-    extend ::ThinReports::Core::Format::Builder
-  
+
+  class TestFormat < Thinreports::Core::Format::Base
+    extend ::Thinreports::Core::Format::Builder
     config_reader :layout
     config_accessor :shapes
-    
-    # For test
-    public_class_method :parse_json, :build_layout, :clean,
-                        :clean_with_attributes, :shape_tag
   end
-  
+
   def setup
     @raw_format = clean_whitespaces(TEST_RAW_FORMAT)
   end
-  
+
   def test_parse_json
     expected_format = {
       "node1" => "あ漢字＠㈱Ⅰカナｶﾅ",
@@ -53,15 +48,15 @@ class ThinReports::Core::Format::TestBuilder < Minitest::Test
     }
     assert_equal TestFormat.parse_json(@raw_format), expected_format
   end
-  
+
   def test_build_layout
     format = TestFormat.new(TestFormat.parse_json(@raw_format))
     format.shapes = {}
 
     TestFormat.build_layout(format) do |type, f|
-      flexmock(:id => f['id'])
+      Thinreports::Core::Shape::Format(type).build(f)
     end
-    
+
     assert_equal format.layout, clean_whitespaces(<<-'EOS')
       <svg width="595.2" height="841.8">
         <g class="canvas">
@@ -72,7 +67,7 @@ class ThinReports::Core::Format::TestBuilder < Minitest::Test
     EOS
     assert_includes format.shapes.keys, :t1
   end
-  
+
   def test_clean
     source = clean_whitespaces(<<-'EOS')
       <svg width="595.2" height="841.8">
@@ -89,7 +84,7 @@ class ThinReports::Core::Format::TestBuilder < Minitest::Test
       </svg>
     EOS
   end
-  
+
   def test_clean_with_attributes
     source = clean_whitespaces(<<-'EOS')
       <svg width="595.2" height="841.8">
@@ -106,8 +101,9 @@ class ThinReports::Core::Format::TestBuilder < Minitest::Test
       </svg>
     EOS
   end
-  
+
   def test_shape_tag
-    assert_equal TestFormat.shape_tag(flexmock(:id => :foo)), '<%= r(:"foo")%>'
+    shape_format = stub(id: :foo)
+    assert_equal TestFormat.shape_tag(shape_format), '<%= r(:"foo")%>'
   end
 end

@@ -1,15 +1,15 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
-class ThinReports::Core::Shape::List::TestManager < Minitest::Test
-  include ThinReports::TestHelpers
+class Thinreports::Core::Shape::List::TestManager < Minitest::Test
+  include Thinreports::TestHelper
   
   # Alias
-  List = ThinReports::Core::Shape::List
+  List = Thinreports::Core::Shape::List
   
   def create_report(&block)
-    create_basic_report('basic_list_layout.tlf', &block)
+    new_report('layout_list.tlf', &block)
   end
   
   def list_manager

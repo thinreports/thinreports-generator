@@ -1,9 +1,9 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
-class ThinReports::Core::Shape::Basic::TestFormat < Minitest::Test
-  include ThinReports::TestHelpers
+class Thinreports::Core::Shape::Basic::TestFormat < Minitest::Test
+  include Thinreports::TestHelper
 
   TEST_BASIC_FORMAT = {
     "type" => "s-rect",
@@ -28,7 +28,7 @@ class ThinReports::Core::Shape::Basic::TestFormat < Minitest::Test
   }
 
   # Alias
-  Format = ThinReports::Core::Shape::Basic::Format
+  Format = Thinreports::Core::Shape::Basic::Format
 
   def test_build_basic_format
     build_basic_format

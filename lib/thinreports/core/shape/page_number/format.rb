@@ -1,16 +1,16 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Core::Shape
 
     class PageNumber::Format < Basic::Format
       config_reader :overflow, :target, :box
-      config_reader :default_format => %w( format )
+      config_reader default_format: %w( format )
 
       def id
         unless @id
           @id = read('id')
-          @id = self.class.next_default_id if @id.blank?
+          @id = self.class.next_default_id if blank_value?(@id)
         end
         @id
       end

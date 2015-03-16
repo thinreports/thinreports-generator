@@ -1,9 +1,9 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
-class ThinReports::Core::Shape::Text::TestFormat < Minitest::Test
-  include ThinReports::TestHelpers
+class Thinreports::Core::Shape::Text::TestFormat < Minitest::Test
+  include Thinreports::TestHelper
 
   TEST_TEXT_FORMAT = {
     "type" => "s-text",
@@ -45,7 +45,7 @@ class ThinReports::Core::Shape::Text::TestFormat < Minitest::Test
   }
 
   # Alias
-  Format = ThinReports::Core::Shape::Text::Format
+  Format = Thinreports::Core::Shape::Text::Format
 
   def test_build_format
     build_format

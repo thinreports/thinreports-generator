@@ -2,7 +2,7 @@
 
 require 'rexml/document'
 
-module ThinReports
+module Thinreports
   module Generator
     
     # @private

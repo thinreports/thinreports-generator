@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Core::Shape
 
     class PageNumber::Interface < Basic::Interface
@@ -17,7 +17,7 @@ module ThinReports
 
     private
     
-      # @see ThinReports::Core::Shape::Base::Interface#init_internal
+      # @see Thinreports::Core::Shape::Base::Interface#init_internal
       def init_internal(parent, format)
         PageNumber::Internal.new(parent, format)
       end

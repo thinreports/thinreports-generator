@@ -1,8 +1,8 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Report
-    
+
     # @private
     class Internal
       attr_reader :pages
@@ -11,9 +11,9 @@ module ThinReports
       attr_reader :default_layout
       attr_reader :layout_registry
       attr_reader :events
-      
-      # @param [ThinReports::Report::Base] report
-      # @param options (see ThinReports::Report::Base#initialize)
+
+      # @param [Thinreports::Report::Base] report
+      # @param options (see Thinreports::Report::Base#initialize)
       def initialize(report, options)
         @report = report
         # Default layout
@@ -24,17 +24,17 @@ module ThinReports
         @pages      = []
         @page       = nil
         @page_count = 0
-        
+
         @events = Report::Events.new
       end
-      
-      # @see ThinReports::Report::Base#use_layout
+
+      # @see Thinreports::Report::Base#use_layout
       def register_layout(layout, options = {}, &block)
         layout = if options.empty? || options[:default]
           @default_layout = init_layout(layout)
         else
           id = options[:id].to_sym
-          
+
           if layout_registry.key?(id)
             raise ArgumentError, "Id :#{id} is already in use."
           end
@@ -42,35 +42,35 @@ module ThinReports
         end
         layout.config(&block)
       end
-      
+
       def add_page(new_page)
         finalize_current_page
         insert_page(new_page)
       end
-      
+
       def copy_page
-        finalize_current_page(:at => :copy)
+        finalize_current_page(at: :copy)
         insert_page(page.copy)
       end
-      
+
       def finalize
         unless finalized?
           finalize_current_page
           @finalized = true
-          
+
           # Dispatch event on before generate.
           events.dispatch(Report::Events::Event.new(:generate,
                                                     @report, nil, pages))
         end
       end
-      
+
       def finalized?
         @finalized
       end
-      
+
       def load_layout(id_or_filename)
         return @default_layout if id_or_filename.nil?
-        
+
         layout = case id_or_filename
         when Symbol
           layout_registry[id_or_filename]
@@ -82,12 +82,12 @@ module ThinReports
         @default_layout = layout unless @default_layout
         layout
       end
-      
+
     private
-      
+
       def insert_page(new_page)
         @pages << new_page
-        
+
         if new_page.count?
           @page_count += 1
           new_page.no = @page_count
@@ -101,30 +101,30 @@ module ThinReports
         end
         @page = new_page
       end
-      
-      # @param (see ThinReports::Core::Page#finalize)
+
+      # @param (see Thinreports::Report::Page#finalize)
       def finalize_current_page(options = {})
-        page.finalize(options) unless page.blank?        
+        page.finalize(options) unless page.nil? || page.blank?
       end
-      
+
       def prepare_layout(layout)
         return nil if layout.nil?
-        
+
         case layout
         when String
           init_layout(layout)
         # @note Currently not used. Since 0.6.0?
-        when ThinReports::Layout::Base
+        when Thinreports::Layout::Base
           layout
         else
           raise ArgumentError, 'Invalid argument for layout.'
         end
       end
-      
+
       def init_layout(filename, id = nil)
-        ThinReports::Layout.new(filename, :id => id)
+        Thinreports::Layout.new(filename, id: id)
       end
     end
-    
+
   end
 end

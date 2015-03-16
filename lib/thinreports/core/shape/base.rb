@@ -2,7 +2,7 @@
 
 require 'forwardable'
 
-module ThinReports
+module Thinreports
   module Core::Shape
     
     # @private

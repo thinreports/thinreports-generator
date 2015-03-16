@@ -1,15 +1,15 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
-class ThinReports::Core::Shape::Style::TestBase < Minitest::Test
-  include ThinReports::TestHelpers
+class Thinreports::Core::Shape::Style::TestBase < Minitest::Test
+  include Thinreports::TestHelper
   
   # Alias
-  Style = ThinReports::Core::Shape::Style::Base
+  Style = Thinreports::Core::Shape::Style::Base
   
   def create_basic_format(attrs = {})
-    ThinReports::Core::Shape::Basic::Format.new('svg' => {'attrs' => attrs})
+    Thinreports::Core::Shape::Basic::Format.new('svg' => {'attrs' => attrs})
   end
   
   def create_style(base = {})
@@ -178,13 +178,13 @@ class ThinReports::Core::Shape::Style::TestBase < Minitest::Test
   end
   
   def test_reader_method_caller_should_raise_when_style_is_not_accessible
-    assert_raises ThinReports::Errors::UnknownShapeStyleName do
+    assert_raises Thinreports::Errors::UnknownShapeStyleName do
       create_new_style[:unknown]
     end
   end
   
   def test_writer_method_caller_should_raise_when_style_is_not_accessible
-    assert_raises ThinReports::Errors::UnknownShapeStyleName do
+    assert_raises Thinreports::Errors::UnknownShapeStyleName do
       create_new_style[:unknown] = 'value'
     end
   end

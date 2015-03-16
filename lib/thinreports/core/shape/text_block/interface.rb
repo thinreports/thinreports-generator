@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   module Core::Shape
     
     class TextBlock::Interface < Basic::BlockInterface
@@ -23,7 +23,7 @@ module ThinReports
     
     private
       
-      # @see ThinReports::Core::Shape::Base::Interface#init_internal
+      # @see Thinreports::Core::Shape::Base::Interface#init_internal
       def init_internal(parent, format)
         TextBlock::Internal.new(parent, format)
       end

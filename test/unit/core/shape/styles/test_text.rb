@@ -1,17 +1,17 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
-class ThinReports::Core::Shape::Style::TestText < Minitest::Test
-  include ThinReports::TestHelpers
+class Thinreports::Core::Shape::Style::TestText < Minitest::Test
+  include Thinreports::TestHelper
   
   def create_format(format = {})
-    ThinReports::Core::Shape::Text::Format.new(format)
+    Thinreports::Core::Shape::Text::Format.new(format)
   end
   
   def create_text_style(format = nil)
     format ||= create_format
-    ThinReports::Core::Shape::Style::Text.new(format)
+    Thinreports::Core::Shape::Style::Text.new(format)
   end
 
   def test_font_size
@@ -315,7 +315,7 @@ class ThinReports::Core::Shape::Style::TestText < Minitest::Test
   end
 
   def test_initialize
-    klass = Class.new(ThinReports::Core::Shape::Style::Text)
+    klass = Class.new(Thinreports::Core::Shape::Style::Text)
     klass.class_eval do
       accessible_styles.delete(:valign)
     end

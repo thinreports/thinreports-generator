@@ -1,21 +1,41 @@
 # coding: utf-8
 
-module ThinReports
+module Thinreports
   # @yield [config]
-  # @yieldparam [ThinReports::Configuration] config
+  # @yieldparam [Thinreports::Configuration] config
   def self.configure(&block)
-    block_exec_on(self.config, &block)
+    Thinreports.call_block_in(self.config, &block)
   end
-  
-  # @return [ThinReports::Configuration]
+
+  # @return [Thinreports::Configuration]
   def self.config
-    @config ||= ThinReports::Configuration.new
+    @config ||= Thinreports::Configuration.new
   end
-  
+
   class Configuration
-    # @return [ThinReports::Generator::Configuration]
+    def initialize
+      @fallback_fonts = []
+    end
+
+    # @return [Array<String>]
+    # @example
+    #   config.fallback_fonts # => ['Times New Roman', '/path/to/font.ttf']
+    def fallback_fonts
+      @fallback_fonts ||= []
+    end
+
+    # @param [Array<String>,String]
+    # @example
+    #   config.fallback_fonts = 'Times New Roman'
+    #   config.fallback_fonts = '/path/to/font.ttf'
+    #   config.fallback_fonts = ['/path/to/font.ttf', 'IPAGothic']
+    def fallback_fonts=(font_names)
+      @fallback_fonts = font_names.is_a?(Array) ? font_names : [font_names]
+    end
+
+    # @return [Thinreports::Generator::Configuration]
     def generator
-      @generator ||= ThinReports::Generator::Configuration.new
+      @generator ||= Thinreports::Generator::Configuration.new
     end
   end
 end

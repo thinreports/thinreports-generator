@@ -1,14 +1,14 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
-class ThinReports::Core::Shape::PageNumber::TestInternal < Minitest::Test
-  include ThinReports::TestHelpers
+class Thinreports::Core::Shape::PageNumber::TestInternal < Minitest::Test
+  include Thinreports::TestHelper
 
-  PageNumber = ThinReports::Core::Shape::PageNumber
+  PageNumber = Thinreports::Core::Shape::PageNumber
 
   def setup
-    @report = create_basic_report('basic_layout1.tlf')
+    @report = new_report('layout_text1.tlf')
     @report.start_new_page
   end
 

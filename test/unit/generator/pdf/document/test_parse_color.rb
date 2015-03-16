@@ -1,12 +1,12 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
-class ThinReports::Generator::PDF::TestParseColor < Minitest::Test
-  include ThinReports::TestHelpers
+class Thinreports::Generator::PDF::TestParseColor < Minitest::Test
+  include Thinreports::TestHelper
   
   class TestColorParser
-    include ThinReports::Generator::PDF::ParseColor
+    include Thinreports::Generator::PDF::ParseColor
   end
   
   def setup
@@ -23,7 +23,7 @@ class ThinReports::Generator::PDF::TestParseColor < Minitest::Test
   end
   
   def test_parse_color_with_colorname_raise_when_unknown_name_given
-    assert_raises ThinReports::Errors::UnsupportedColorName do
+    assert_raises Thinreports::Errors::UnsupportedColorName do
       @parser.parse_color('whitesmoke')
     end
   end

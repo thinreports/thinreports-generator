@@ -1,8 +1,8 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
-class ThinReports::Core::Format::BaseTest < Minitest::Test
+class Thinreports::Core::Format::BaseTest < Minitest::Test
   TEST_FORMAT_CONFIG = {
     'c1' => 'c1',
     'c2' => {
@@ -31,40 +31,40 @@ class ThinReports::Core::Format::BaseTest < Minitest::Test
     'c21' => 'c21'
   }
   
-  class TestFormat < ThinReports::Core::Format::Base
+  class TestFormat < Thinreports::Core::Format::Base
     # For testing
     attr_reader :config
     
     # Basic methods
     config_reader :c1
-    config_reader :c2_1       => %w( c2 c2_1 ), 
-                  :c3_1_1     => %w( c3 c3_1 c3_1_1 )
+    config_reader c2_1: %w( c2 c2_1 ), 
+                  c3_1_1: %w( c3 c3_1 c3_1_1 )
     config_reader :c4, :c5
     config_reader 'c6'
     
     # Alias methods
-    config_reader :c1_alias   => %w( c1 ),
-                  :c2_1_alias => %w( c2 c2_1 )
+    config_reader c1_alias: %w( c1 ),
+                  c2_1_alias: %w( c2 c2_1 )
     
     # Invalid methods
-    config_reader :c3_invalid => %w( c3 c3_1 not_exist_key )  
+    config_reader c3_invalid: %w( c3 c3_1 not_exist_key )  
     
     # Customized methods
-    config_reader :c2_1_customized => %w( c2 c2_1 ) do |val|
+    config_reader c2_1_customized: %w( c2 c2_1 ) do |val|
       "Customized #{val}"
     end
     
     # Checker methods
     config_checker 'true', :c7, :c8
-    config_checker 'true', :c9_1 => %w( c9 c9_1 ),
-                           :c9_2 => %w( c9 c9_2 )
+    config_checker 'true', c9_1: %w( c9 c9_1 ),
+                           c9_2: %w( c9 c9_2 )
     
     # Writer methods
     config_writer :c10
-    config_writer :c10_alias => %w( c10 )
-    config_writer :c11_1 => %w( c11 c11_1 )
+    config_writer c10_alias: %w( c10 )
+    config_writer c11_1: %w( c11 c11_1 )
     # Writer for not exist config on default
-    config_writer :c11_2 => %w( c11 c11_2 )
+    config_writer c11_2: %w( c11 c11_2 )
     
     # Accessor methods
     config_accessor :c20

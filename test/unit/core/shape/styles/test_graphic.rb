@@ -1,13 +1,13 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
-class ThinReports::Core::Shape::Style::TestGraphic < Minitest::Test
-  include ThinReports::TestHelpers
+class Thinreports::Core::Shape::Style::TestGraphic < Minitest::Test
+  include Thinreports::TestHelper
   
   def create_graphic_style
-    format = ThinReports::Core::Shape::Basic::Format.new({})
-    ThinReports::Core::Shape::Style::Graphic.new(format)
+    format = Thinreports::Core::Shape::Basic::Format.new({})
+    Thinreports::Core::Shape::Style::Graphic.new(format)
   end
   
   def test_border_color_should_properly_set_to_internal_styles_as_stroke_style

@@ -1,69 +1,90 @@
 # coding: utf-8
 
-require 'test/unit/helper'
+require 'test_helper'
 
-class ThinReports::Generator::PDF::TestFont < Minitest::Test
-  include ThinReports::TestHelpers
-  
-  # Alias
-  Font = ThinReports::Generator::PDF::Font
-  
-  def setup
-    @doc = ThinReports::Generator::PDF::Document.new
-  end
-  
-  def test_setup_fonts_install_builtin_fonts
-    Font::BUILTIN_FONTS.each_key do |font|
-      assert_includes @doc.internal.font_families.keys, font
+class Thinreports::Generator::PDF::TestFont < Minitest::Test
+  include Thinreports::TestHelper
+
+  Font = Thinreports::Generator::PDF::Font
+
+  def teardown
+    # Reset font settings
+    Thinreports.configure do |c|
+      c.fallback_fonts = []
+      c.generator.pdf.eudc_fonts = []
     end
   end
-  
-  def test_setup_fonts_install_fallback_font
-    assert_includes @doc.internal.font_families.keys, 'DefaultFont'
-    assert_includes @doc.internal.fallback_fonts, 'DefaultFont'
+
+  def test_setup_fonts
+    pdf = document.pdf
+
+    Font::BUILTIN_FONTS.each do |name, font|
+      assert_equal font, pdf.font_families[name]
+    end
+
+    Font::PRAWN_BUINTIN_FONT_ARIASES.each do |alias_font, original_font|
+      assert_equal pdf.font_families[alias_font],
+                   pdf.font_families[original_font]
+    end
+
+    assert_equal Font::DEFAULT_FALLBACK_FONTS, pdf.fallback_fonts[-2..-1]
   end
-  
-  def test_setup_fonts_install_eudc_fonts
-    ThinReports.config.generator.pdf.eudc_fonts = ['eudc1.ttf', 'eudc2.ttf']
-    setup
-    
-    assert_includes @doc.internal.font_families.keys, 'EUDC0'
-    assert_includes @doc.internal.font_families.keys, 'EUDC1'
+
+  def test_setup_fonts_with_custom_fallback_fonts
+    Thinreports.configure do |c|
+      c.fallback_fonts = []
+      c.generator.pdf.eudc_fonts = []
+    end
+    assert_equal Font::DEFAULT_FALLBACK_FONTS,
+                 document.pdf.fallback_fonts
+
+    Thinreports.configure do |c|
+      c.fallback_fonts = 'IPAGothic'
+      c.generator.pdf.eudc_fonts = []
+    end
+    assert_equal ['IPAGothic'] + Font::DEFAULT_FALLBACK_FONTS,
+                 document.pdf.fallback_fonts
+
+    Thinreports.configure do |c|
+      c.fallback_fonts = ['IPAMincho']
+      c.generator.pdf.eudc_fonts = [data_file('font.ttf')]
+    end
+    assert_equal ['Custom-fallback-font0', 'IPAMincho'] + Font::DEFAULT_FALLBACK_FONTS,
+                 document.pdf.fallback_fonts
+
+    Thinreports.configure do |c|
+      c.generator.pdf.eudc_fonts = [data_file('font.ttf')]
+      c.fallback_fonts = ['IPAMincho', 'IPAMincho', data_file('font.ttf')]
+    end
+    assert_equal ['Custom-fallback-font0', 'IPAMincho'] + Font::DEFAULT_FALLBACK_FONTS,
+                 document.pdf.fallback_fonts
   end
-  
-  def test_setup_fonts_install_fallback_fonts_as_eudc
-    ThinReports.config.generator.pdf.eudc_fonts = 'eudc.ttf'
-    setup
-    
-    assert_includes @doc.internal.fallback_fonts, 'EUDC0'
-  end
-  
-  def test_fallback_font_has_all_styles_as_normal_IPAMincho
-    ipam = Font::BUILTIN_FONTS['IPAMincho'][:normal]
-    [:normal, :bold, :italic, :bold_italic].each do |style|
-       assert_same @doc.internal.font_families['DefaultFont'][style], ipam
+
+  def test_setup_fonts_with_unknown_custom_fallback_fonts
+    Thinreports.configure do |c|
+      c.fallback_fonts = ['/path/to/unknown.ttf']
+      c.generator.pdf.eudc_fonts = []
+    end
+
+    assert_raises Thinreports::Errors::FontFileNotFound do
+      create_document
     end
   end
-  
-  def test_setup_fonts_install_alias_fonts_of_CourierNew_and_TimesNewRoman
-    assert_same @doc.internal.font_families['Courier New'],
-                @doc.internal.font_families['Courier']
-    assert_same @doc.internal.font_families['Times New Roman'],
-                @doc.internal.font_families['Times-Roman']
+
+  def test_font_helpers
+    doc = document
+
+    assert_equal 'Helvetica', doc.default_family
+
+    assert_equal 'Helvetica', doc.default_family_if_missing('unknown')
+    assert_equal 'IPAMincho', doc.default_family_if_missing('IPAMincho')
+
+    assert_equal false, doc.font_has_style?('IPAMincho', :bold)
+    assert_equal true, doc.font_has_style?('Courier New', :bold)
   end
-  
-  def test_default_family
-    assert_equal @doc.send(:default_family), 'Helvetica'
+
+  def document
+    Thinreports::Generator::PDF::Document.new
   end
-  
-  def test_default_family_if_missing
-    assert_equal @doc.send(:default_family_if_missing, 'unknown font'),
-                 @doc.send(:default_family)
-    assert_equal @doc.send(:default_family_if_missing, 'IPAMincho'), 'IPAMincho'
-  end
-  
-  def test_font_has_style?
-    assert_equal @doc.send(:font_has_style?, 'IPAMincho', :bold), false
-    assert_equal @doc.send(:font_has_style?, 'Courier New', :bold), true
-  end
+  alias_method :create_document, :document
 end

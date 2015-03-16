@@ -2,19 +2,19 @@
 
 require 'digest/sha1'
 
-module ThinReports
+module Thinreports
   module Layout
     
     # @private
     class Format < Core::Shape::Manager::Format
-      config_reader :last_version        => %w( version )
-      config_reader :report_title        => %w( config title )
-      config_reader :page_paper_type     => %w( config page paper-type ),
-                    :page_width          => %w( config page width ),
-                    :page_height         => %w( config page height ),
-                    :page_orientation    => %w( config page orientation )
+      config_reader last_version: %w( version )
+      config_reader report_title: %w( config title )
+      config_reader page_paper_type: %w( config page paper-type ),
+                    page_width: %w( config page width ),
+                    page_height: %w( config page height ),
+                    page_orientation: %w( config page orientation )
       
-      config_checker 'user', :user_paper_type => %w( config page paper-type )
+      config_checker 'user', user_paper_type: %w( config page paper-type )
       
       class << self
         
@@ -28,10 +28,10 @@ module ThinReports
             raw_format = parse_json(content)
             
             # Check the compatibility of specified layout file.
-            unless ThinReports::Layout::Version.compatible?(raw_format['version'])
+            unless Thinreports::Layout::Version.compatible?(raw_format['version'])
               info = [filename, raw_format['version'],
-                      ThinReports::Layout::Version.inspect_required_rules]
-              raise ThinReports::Errors::IncompatibleLayoutFormat.new(*info)
+                      Thinreports::Layout::Version.inspect_required_rules]
+              raise Thinreports::Errors::IncompatibleLayoutFormat.new(*info)
             end
             
             compact_format!(raw_format)
