@@ -1,9 +1,10 @@
 # coding: utf-8
 
+gem 'minitest' # for 1.9.3
+require 'minitest/autorun'
 require 'minitest/spec'
 require 'minitest/unit'
 require 'mocha/mini_test'
-require 'minitest/autorun'
 
 require 'digest/sha1'
 require 'pathname'
