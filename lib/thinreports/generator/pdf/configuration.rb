@@ -13,7 +13,7 @@ module Thinreports
 
       # @param [String, Array<String>] fonts
       # @deprecated
-      #   This method will be removed in the next major version.
+      #   `Configuration#eudc_font` will be removed in the next major version.
       #   Please use `Thinreports.config.fallback_fonts=` instead.
       def eudc_fonts=(fonts)
         warn '[DEPRECATION] `eudc_fonts=` is deprecated and will be removed in ' +

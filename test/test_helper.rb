@@ -14,7 +14,7 @@ module Thinreports::TestHelper
   ROOT = Pathname.new(File.expand_path('..', __FILE__))
 
   def setup
-    Thinreports::TestHelper.disable_output
+    Thinreports::TestHelper.disable_stderr
   end
 
   def teardown
@@ -57,19 +57,18 @@ module Thinreports::TestHelper
     ROOT.join('tmp')
   end
 
-  @@original_stdout = nil
   @@original_stderr = nil
 
-  def self.disable_output
+  def self.disable_stderr
     unless $stdout.is_a? StringIO
-      @@original_stdout, @@original_stderr = $stdout, $stderr
-      $stdout, $stderr = StringIO.new, StringIO.new
+      @@original_stderr = $stderr
+      $stderr = StringIO.new
     end
   end
 
-  def self.enable_output
-    $stdout, $stderr = @@original_stdout, @@original_stderr
+  def self.enable_stderr
+    $stderr = @@original_stderr
   end
 end
 
-Minitest.after_run { Thinreports::TestHelper.enable_output }
+Minitest.after_run { Thinreports::TestHelper.enable_stderr }

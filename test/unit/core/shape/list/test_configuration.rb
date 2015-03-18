@@ -19,6 +19,19 @@ class Thinreports::Core::Shape::List::TestConfiguration < Minitest::Test
     @config.use_stores(a: 0, b: 0)
   end
 
+  def test_events
+    assert_instance_of List::Events, @config.events
+
+    out, err = capture_io do
+      @config.events
+    end
+    assert_includes err, '[DEPRECATION]'
+  end
+
+  def test_internal_events
+    assert_same @config.events, @config.internal_events
+  end
+
   def test_store
     List::Store.expects(:init).returns(@store)
 

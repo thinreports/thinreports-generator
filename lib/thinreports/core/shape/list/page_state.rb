@@ -2,46 +2,48 @@
 
 module Thinreports
   module Core::Shape
-    
+
     # @private
     class List::PageState < Basic::Internal
       attr_reader :rows
 
       attr_accessor :height
-      attr_accessor :header
+      attr_accessor :header, :page_footer
       attr_accessor :no
       attr_accessor :manager
-      
+
       def initialize(*args)
         super(*args)
-        
-        @rows      = []
-        @header    = nil
-        @height    = 0
+
+        @rows = []
+        @height = 0
         @finalized = false
+
+        @header = nil
+        @page_footer = nil
       end
-      
+
       def style
         @style ||= Style::Basic.new(format)
       end
-      
+
       def finalized?
         @finalized
       end
-      
+
       def finalized!
         @finalized = true
       end
-      
+
       def type_of?(type_name)
         type_name == :list
       end
     end
-    
+
     # Alias to List::PageState.
     # @see Thinreports::Core::Shape::List::PageState
     # @private
     List::Internal = List::PageState
-    
+
   end
 end

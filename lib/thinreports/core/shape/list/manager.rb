@@ -19,13 +19,17 @@ module Thinreports
       # @return [Integer]
       attr_accessor :page_count
 
+      # @return [Thinreports::Core::Shape::List::SectionInterface]
+      attr_accessor :footer_section
+
       # @param [Thinreports::Core::Shape::List::Page] page
       def initialize(page)
         switch_current!(page)
 
-        @config     = init_config
-        @finalized  = false
+        @config = init_config
+        @finalized = false
         @page_count = 0
+        @footer_section = nil
       end
 
       # @param [Thinreports::Core::Shape::List::Page] page
@@ -48,17 +52,45 @@ module Thinreports
       end
 
       # @see List::Page#header
-      def header(values = {}, &block)
+      def build_header(values = {}, &block)
         unless format.has_header?
           raise Thinreports::Errors::DisabledListSection.new('header')
         end
         current_page_state.header ||= init_section(:header)
-        build_section(current_page_state.header, values, &block)
+        build_section(header_section, values, &block)
+      end
+
+      # @see List::Page#page_footer
+      def build_page_footer(values = {}, &block)
+        unless format.has_page_footer?
+          raise Thinreports::Errors::DisabledListSection.new('page footer')
+        end
+        current_page_state.page_footer ||= init_section(:page_footer)
+        build_section(page_footer_section, values, &block)
+      end
+
+      # @see List::Page#footer
+      def build_footer(values = {}, &block)
+        unless format.has_footer?
+          raise Thinreports::Errors::DisabledListSection.new('footer')
+        end
+        @footer_section ||= init_section(:footer)
+        build_section(footer_section, values, &block)
+      end
+
+      # @return [Thinreports::Core::Shape::List::SectionInterface]
+      def header_section
+        current_page_state.header
+      end
+
+      # @return [Thinreports::Core::Shape::List::SectionInterface]
+      def page_footer_section
+        current_page_state.page_footer
       end
 
       # @param (see #build_section)
       # @return [Boolean]
-      def insert_new_detail(values = {}, &block)
+      def add_detail(values = {}, &block)
         return false if current_page_state.finalized?
 
         successful = true
@@ -66,21 +98,30 @@ module Thinreports
         if overflow_with?(:detail)
           if auto_page_break?
             change_new_page do |new_list|
-              new_list.manager.insert_new_row(:detail, values, &block)
+              new_list.manager.insert_detail(values, &block)
             end
           else
             finalize
             successful = false
           end
         else
-          insert_new_row(:detail, values, &block)
+          insert_detail(values, &block)
         end
         successful
       end
 
-      # @see #build_section
-      def insert_new_row(section_name, values = {}, &block)
-        row = build_section(init_section(section_name), values, &block)
+      # @param values (see Thinreports::Core::Shape::Manager::Target#values)
+      # @yield [section,]
+      # @yieldparam [Thinreports::Core::Shape::List::SectionInterface] section
+      # @return [Thinreports::Core::Shape::List::SectionInterface]
+      def insert_detail(values = {}, &block)
+        detail = build_section(init_section(:detail), values, &block)
+        insert_row(detail)
+      end
+
+      # @param [Thinreports::Core::Shape::List::SectionInterface] row
+      # @return [Thinreports::Core::Shape::List::SectionInterface]
+      def insert_row(row)
         row.internal.move_top_to(current_page_state.height)
 
         current_page_state.rows << row
@@ -137,7 +178,7 @@ module Thinreports
 
       # @return [Thinreports::Core::Shape::List::Events]
       def events
-        config.events
+        config.internal_events
       end
 
       # @return [Boolean]
@@ -152,16 +193,16 @@ module Thinreports
       def finalize_page(options = {})
         return if current_page_state.finalized?
 
-        if format.has_header?
-          current_page_state.header ||= init_section(:header)
-        end
+        build_header if format.has_header?
 
         if !options[:ignore_page_footer] && format.has_page_footer?
-          footer = insert_new_row(:page_footer)
+          build_page_footer
+
+          insert_row(page_footer_section)
           # Dispatch page-footer insert event.
           events.
             dispatch(List::Events::SectionEvent.new(:page_footer_insert,
-                                                    footer, store))
+                                                    page_footer_section, store))
         end
         current_page_state.finalized!
 
@@ -177,23 +218,23 @@ module Thinreports
       # @private
       def finalize
         return if finalized?
-
         finalize_page
 
         if format.has_footer?
-          footer = nil
+          build_footer
+
+          # Dispatch footer insert event.
+          events.dispatch(List::Events::SectionEvent.new(:footer_insert,
+                                                         footer_section, store))
 
           if auto_page_break? && overflow_with?(:footer)
             change_new_page do |new_list|
-              footer = new_list.manager.insert_new_row(:footer)
+              new_list.manager.insert_row(footer_section)
               new_list.manager.finalize_page(ignore_page_footer: true)
             end
           else
-            footer = insert_new_row(:footer)
+            insert_row(footer_section)
           end
-          # Dispatch footer insert event.
-          events.dispatch(List::Events::SectionEvent.new(:footer_insert,
-                                                         footer, store))
         end
         @finalized = true
       end
@@ -203,8 +244,6 @@ module Thinreports
       def finalized?
         @finalized
       end
-
-    private
 
       # @return [Thinreports::Report::Base]
       def report
