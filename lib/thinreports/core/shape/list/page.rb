@@ -44,6 +44,13 @@ module Thinreports
       # @raise [Thinreports::Errors::DisabledListSection]
       def_delegator :manager, :build_footer, :footer
 
+      # @overload on_page_finalize(&block)
+      #   Sets callback
+      # @overload on_page_finalize
+      #   Gets callback
+      #   @return [Proc]
+      def_delegator :manager, :on_page_finalize
+
       # @param [Hash] values ({})
       # @yield [row,]
       # @yieldparam [Thinreports::Core::Shape::List::SectionInterface] row

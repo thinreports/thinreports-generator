@@ -30,6 +30,15 @@ module Thinreports
         @finalized = false
         @page_count = 0
         @footer_section = nil
+        @on_page_finalize = nil
+      end
+
+      def on_page_finalize(&block)
+        if block_given?
+          @on_page_finalize = block
+        else
+          @on_page_finalize
+        end
       end
 
       # @param [Thinreports::Core::Shape::List::Page] page
@@ -199,18 +208,22 @@ module Thinreports
           build_page_footer
 
           insert_row(page_footer_section)
-          # Dispatch page-footer insert event.
+          # [DEPRECATION] Dispatch page-footer insert event.
           events.
             dispatch(List::Events::SectionEvent.new(:page_footer_insert,
                                                     page_footer_section, store))
         end
         current_page_state.finalized!
 
-        # Dispatch page finalize event.
+        # [DEPRECATION] Dispatch page finalize event.
+        # In 0.7 or eariier
         events.
           dispatch(List::Events::PageEvent.new(:page_finalize,
                                                current_page,
                                                current_page_state.parent))
+        # In 0.8 or later
+        @on_page_finalize.call if @on_page_finalize
+
         @page_count += 1
         current_page_state.no = @page_count
       end
@@ -223,7 +236,7 @@ module Thinreports
         if format.has_footer?
           build_footer
 
-          # Dispatch footer insert event.
+          # [DEPRECATION] Dispatch footer insert event.
           events.dispatch(List::Events::SectionEvent.new(:footer_insert,
                                                          footer_section, store))
 

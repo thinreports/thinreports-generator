@@ -37,9 +37,7 @@ example :list_events, 'Basic list events' do |t|
       price_for = { :page => 0, :all => 0 }
 
       [100, 200, 250, 50, 100, 20, 30, 50, 100, 100].each do |price|
-        # `list.overflow?` returns true if list has overflowed
-        # when `list.add_row` is called at the next time
-        if list.overflow?
+        list.on_page_finalize do
           list.page_footer :price => price_for[:page]
 
           price_for[:all] += price_for[:page]
@@ -50,9 +48,6 @@ example :list_events, 'Basic list events' do |t|
         # Calculate sum price for each page of list
         price_for[:page] += price
       end
-
-      list.page_footer :price => price_for[:page]
-      price_for[:all] += price_for[:page]
 
       list.footer do |section|
         section.item(:price).value(price_for[:all])
