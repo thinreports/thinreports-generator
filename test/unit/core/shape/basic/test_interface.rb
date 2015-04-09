@@ -84,11 +84,6 @@ class Thinreports::Core::Shape::Basic::TestInterface < Minitest::Test
                  ['#ff0000', '#000000', 5, false]
   end
 
-  def test_styles_should_return_self
-    basic = create_interface
-    assert_instance_of Basic::Interface, basic.styles(fill: '#ff0000')
-  end
-
   def test_hide_should_properly_set_false_to_visibility
     basic = create_interface
     basic.hide

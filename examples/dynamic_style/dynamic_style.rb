@@ -48,8 +48,6 @@ example :dynamic_style, 'Change styles of the object dynamically' do |t|
     # The Graphic Style
     r.page.item(:graphic_bcolor1).style(:border_color, '#ff0000')
     r.page.item(:graphic_bcolor2).style(:border_color, 'red')
-    # [WARNING] :stroke is deprecated.
-    r.page.item(:graphic_bcolor3).style(:stroke, 'ff0000')
     # nil or 'none'.
     r.page.item(:graphic_bcolor4).style(:border_color, nil)
 
@@ -60,8 +58,6 @@ example :dynamic_style, 'Change styles of the object dynamically' do |t|
     r.page.item(:graphic_bwidth5).style(:border_width, 0)
 
     r.page.item(:graphic_fcolor1).style(:fill_color, '#ff0000')
-    # [WARNING] :fill is deprecated.
-    r.page.item(:graphic_fcolor2).style(:fill, 'red')
     # nil or 'none'
     r.page.item(:graphic_fcolor3).style(:fill_color, 'none')
     r.page.item(:graphic_fcolor4).style(:fill_color, 'ff0000')
