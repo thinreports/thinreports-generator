@@ -82,7 +82,7 @@ report.start_new_page do |page|
   page.item(:text_block).format_enabled(false)
 
   # Styles
-  page.item(:title).style(:color, 'red')
+  page.item(:text).style(:color, 'red')
   page.item(:rectangle).style(:border_color, '#ff0000')
                        .style(:border_width, 1)
                        .style(:fill_color, '#ffffff')
@@ -95,11 +95,11 @@ report.generate(filename: 'report.pdf')
 ```ruby
 Thinreports::Report.generate(filename: 'report.pdf', layout: 'report.tlf') do |report|
   report.start_new_page do |page|
-    page.item(:title).value('Thinreports')
+    page.item(:text_block).value('Thinreports')
   end
 
   page = start_new_page
-  page.item(:title).value('Pure Ruby').style(:color, '#ff0000')
+  page.item(:text_block).value('Pure Ruby').style(:color, '#ff0000')
 end
 ```
 
@@ -109,12 +109,12 @@ end
 report = Thinreports::Report.new layout: 'list.tlf'
 
 report.list.header do |header|
-  header.item(:title).value('Title')
+  header.item(:text_block).value('Title')
 end
 
 10.times do |n|
   report.list.add_row do |row|
-    row.item(:no).value(n)
+    row.item(:text_block).value(n)
   end
 end
 
@@ -145,6 +145,27 @@ report.list do |list|
     list.add_row price: price
     price_per_page += price
   end
+end
+```
+
+### Using multiple layouts
+
+```ruby
+report = Thinreports::Report.new
+
+report.use_layout '/path/to/default.tlf', default: true
+report.use_layout '/path/to/other1.tlf', id: :other
+
+report.start_new_page do |page|
+  # use '/path/to/default.tlf' layout
+end
+
+report.start_new_page layout: :other do
+  # use '/path/to/other1.tlf' layout
+end
+
+report.start_new_page layout: '/path/to/other2.tlf' do
+  # use '/path/to/other2.tlf' layout
 end
 ```
 
