@@ -22,25 +22,16 @@ module Thinreports
       # @option attrs [Boolean] :single (false)
       # @option attrs [:trancate, :shrink_to_fit, :expand] :overflow (:trancate)
       # @option attrs [:none, :break_word] :word_wrap (:none)
-      # @option attrs [Boolean] :inline_format (false)
-      def text_box(contents, x, y, w, h, attrs = {})
+      def text_box(content, x, y, w, h, attrs = {})
         w, h = s2f(w, h)
         box_attrs = text_box_attrs(x, y, w, h, single: attrs.delete(:single),
                                                overflow: attrs[:overflow])
         # Do not break by word unless :word_wrap is :break_word
-        contents = text_without_line_wrap(contents) if attrs[:word_wrap] == :none
-        # Inline format
-        inline_format = attrs.delete(:inline_format)
+        content = text_without_line_wrap(content) if attrs[:word_wrap] == :none
 
         with_text_styles(attrs) do |built_attrs, font_styles|
-          contents = if inline_format
-            parsed_contents = ::Prawn::Text::Formatted::Parser.format(contents)
-            parsed_contents.each {|c| c[:styles] |= font_styles }
-          else
-            [{ text: contents, styles: font_styles }]
-          end
-
-          pdf.formatted_text_box(contents, built_attrs.merge(box_attrs))
+          pdf.formatted_text_box([{ text: content, styles: font_styles }],
+            built_attrs.merge(box_attrs))
         end
       rescue Prawn::Errors::CannotFit => e
         # Nothing to do.
@@ -51,9 +42,9 @@ module Thinreports
       end
 
       # @see #text_box
-      def text(contents, x, y, w, h, attrs = {})
+      def text(content, x, y, w, h, attrs = {})
         # Set the :overflow property to :shirink_to_fit.
-        text_box(contents, x, y, w, h, { overflow: :shirink_to_fit }.merge(attrs))
+        text_box(content, x, y, w, h, { overflow: :shirink_to_fit }.merge(attrs))
       end
 
     private

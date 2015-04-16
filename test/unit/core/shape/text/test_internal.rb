@@ -17,9 +17,4 @@ class Thinreports::Core::Shape::Text::TestInternal < Minitest::Test
     refute create_internal.type_of?(:basic), false
   end
 
-  def test_inline_format_enabled?
-    assert create_internal('inline-format' => 'true').inline_format_enabled?
-    refute create_internal('inline-format' => 'false').inline_format_enabled?
-    refute create_internal.inline_format_enabled?
-  end
 end

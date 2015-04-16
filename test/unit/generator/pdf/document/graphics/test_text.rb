@@ -122,20 +122,6 @@ class Thinreports::Generator::PDF::Graphics::TestText < Minitest::Test
     assert_equal @pdf.send(:text_without_line_wrap, ' ' * 2), Prawn::Text::NBSP * 2
   end
 
-  def test_text_box_with_inline_format
-    contents = '<b>Thinreports</b> official site is <link href="http://www.thinreports.org">here</link>.'
-
-    ::Prawn::Text::Formatted::Parser.expects(:format).with(contents).returns([]).once
-    @pdf.text_box(contents, 1, 1, 200, 100, inline_format: true, font: 'IPAMincho', size: 18, color: '000000')
-  end
-
-  def test_text_box_without_inline_format
-    contents = '<b>Thinreports</b> official site is <link href="http://www.thinreports.org">here</link>.'
-
-    ::Prawn::Text::Formatted::Parser.expects(:format).never
-    @pdf.text_box(contents, 1, 1, 200, 100, inline_format: false, font: 'IPAMincho', size: 18, color: '000000')
-  end
-
   def test_text_box_should_not_raise_PrawnCannotFitError
     @pdf.text_box('foo', 0, 0, 1, 1, font: 'IPAMincho',
                                      size: 100,

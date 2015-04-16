@@ -21,12 +21,6 @@ module Thinreports
         'Times New Roman' => 'Times-Roman'
       }
 
-      # Register alias font names to Prawn::Font::AFM::BUILT_INS.
-      # This is for inline-formatting `<font name="font-name">`.
-      PRAWN_BUINTIN_FONT_ARIASES.keys.each do |alias_name|
-        Prawn::Font::AFM::BUILT_INS << alias_name
-      end
-
       def setup_fonts
         # Install built-in fonts.
         pdf.font_families.update(BUILTIN_FONTS)

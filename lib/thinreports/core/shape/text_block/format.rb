@@ -19,7 +19,6 @@ module Thinreports
 
       config_checker 'true', :multiple
       config_checker 'R', format_padding_rdir: %w( format padding direction )
-      config_checker 'true', inline_format_enabled: %w( inline-format )
 
       config_reader format_padding_length: %w( format padding length ) do |len|
         blank_value?(len) ? 0 : len.to_i

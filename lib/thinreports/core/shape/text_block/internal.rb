@@ -5,7 +5,7 @@ module Thinreports
 
     # @private
     class TextBlock::Internal < Basic::BlockInternal
-      format_delegators :multiple?, :inline_format_enabled?
+      format_delegators :multiple?
 
       def initialize(*args)
         super(*args)

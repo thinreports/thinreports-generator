@@ -23,12 +23,6 @@ class Thinreports::Core::Shape::TextBlock::TestInternal < Minitest::Test
     TextBlock::Internal.new(create_parent, TextBlock::Format.new(format_config))
   end
 
-  def test_inline_format_enabled?
-    assert create_internal('inline-format' => 'true').inline_format_enabled?
-    refute create_internal('inline-format' => 'false').inline_format_enabled?
-    refute create_internal.inline_format_enabled?
-  end
-
   def test_multiple_asker_should_operate_as_delegator_of_format
     tblock = create_internal('multiple' => 'true')
     assert_equal tblock.multiple?, tblock.format.multiple?

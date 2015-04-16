@@ -26,7 +26,6 @@ class Thinreports::Core::Shape::TextBlock::TestFormat < Minitest::Test
         "precision" => 1
       }
     },
-    "inline-format" => "true",
     "value" => "", 
     "ref-id" => "", 
     "svg" => {
@@ -52,19 +51,6 @@ class Thinreports::Core::Shape::TextBlock::TestFormat < Minitest::Test
     build_format
   rescue => e
     flunk exception_details(e, 'Building failed.')
-  end
-
-  def test_inline_format_config
-    tblock_format = TEST_TBLOCK_FORMAT.dup
-
-    tblock_format['inline-format'] = 'true'
-    assert_equal format(tblock_format).inline_format_enabled?, true
-
-    tblock_format['inline-format'] = 'false'
-    assert_equal format(tblock_format).inline_format_enabled?, false
-
-    tblock_format.delete('inline-format')
-    assert_equal format(tblock_format).inline_format_enabled?, false
   end
 
   def test_value_reader_via_TEST_TBLOCK_FORMAT

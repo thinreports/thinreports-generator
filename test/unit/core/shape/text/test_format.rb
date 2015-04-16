@@ -18,7 +18,6 @@ class Thinreports::Core::Shape::Text::TestFormat < Minitest::Test
       "width" => 100.0,
       "height" => 100.0
     },
-    "inline-format" => "true",
     "svg" => {
       "tag" => "g",
       "attrs" => {
@@ -51,19 +50,6 @@ class Thinreports::Core::Shape::Text::TestFormat < Minitest::Test
     build_format
   rescue => e
     flunk exception_details(e, 'Building failed.')
-  end
-
-  def test_inline_format_config
-    text_format = TEST_TEXT_FORMAT.dup
-
-    text_format['inline-format'] = 'true'
-    assert_equal Format.new(text_format).inline_format_enabled?, true
-
-    text_format['inline-format'] = 'false'
-    assert_equal Format.new(text_format).inline_format_enabled?, false
-
-    text_format.delete('inline-format')
-    assert_equal Format.new(text_format).inline_format_enabled?, false
   end
 
   def test_config_readers
