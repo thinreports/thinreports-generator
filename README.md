@@ -35,8 +35,8 @@ Generator can dynamically:
 
 ## Supported Versions
 
-  * Ruby 1.8.7, 1.9.3, 2.0, 2.1, 2.2
-  * JRuby 1.6, 1.7.0 (1.8 mode)
+  * Ruby 1.9.3, 2.0+
+  * JRuby 1.7.0+ (1.9 mode)
 
 ## Getting Started
 
@@ -49,45 +49,68 @@ Generator can dynamically:
 
 ## Quick Reference
 
-**Note:** In order to use, you must need create layout file `.tlf` using [Thinreports Editor](http://www.thinreports.org/features/editor/).
+**NOTE:** You need to create a layout file `.tlf` using [Thinreports Editor](http://www.thinreports.org/features/editor/).
 
-### Basic format
+### Basic
 
 ```ruby
 require 'thinreports'
 
 report = Thinreports::Report.new layout: 'report.tlf'
-# Page 1
+
 report.start_new_page do
   item(:title).value('Thinreports')
 end
 
-# Page 2
 report.start_new_page do |page|
-  page.item(:title).value('Pure Ruby')
+  # Text block
+  page.item(:text_block).value('Pure Ruby')
+
+  # Image block
+  page.item(:image_block).src('/path/to/image.png')
+  require 'open-uri'
+  page.item(:image_block).src(open('http://www.thinreports.org/assets/logos/thinreports-logo.png'))
+
+  # Attributes
+  page.item(:any).hide
+  page.item(:any).show
+  page.item(:any).visible(true)
+  page.item(:any).visible? #=> true
+  page.item(:any).id #=> "any"
+  # Text block only
+  page.item(:text_block).set('value', color: '#0000ff')
+  page.item(:text_block).format_enabled(false)
+
+  # Styles
   page.item(:title).style(:color, 'red')
+  page.item(:rectangle).style(:border_color, '#ff0000')
+                       .style(:border_width, 1)
+                       .style(:fill_color, '#ffffff')
+  page.item(:ellipse).styles(color: 'black', border_color: '#0000ff')
 end
 
 report.generate(filename: 'report.pdf')
 ```
 
 ```ruby
-Thinreports::Report.generate(filename: 'report.pdf', layout: 'report.tlf') do
-  start_new_page
+Thinreports::Report.generate(filename: 'report.pdf', layout: 'report.tlf') do |report|
+  report.start_new_page do |page|
+    page.item(:title).value('Thinreports')
+  end
 
-  page.item(:title).value('Thinreports')
-
-  start_new_page
-
+  page = start_new_page
   page.item(:title).value('Pure Ruby').style(:color, '#ff0000')
 end
 ```
 
-### List format
+### List
 
 ```ruby
 report = Thinreports::Report.new layout: 'list.tlf'
-report.start_new_page
+
+report.list.header do |header|
+  header.item(:title).value('Title')
+end
 
 10.times do |n|
   report.list.add_row do |row|
@@ -99,30 +122,28 @@ report.generate(filename: 'list.tlf')
 ```
 
 ```ruby
-10.times do |n|
-  report.list.add_row no: n
-end
-```
+report = Thinreports::Report.new layout: 'list_with_footer.tlf'
 
-```ruby
-report.list(:other_list_id) do |list|
-  10.times do |n|
-    list.add_row no: n
+report.list do |list|
+  total_price = 0
+  price_per_page = 0
+
+  list.on_page_finalize do
+    total_price += price_per_page
+    price_per_page = 0
   end
-end
-```
 
-  * `#start_new_page` can be omitted because it is created new page automatically when `#list` is called
-  * id argument of `#list` can be omitted if is `:default`
+  list.on_page_footer_insert do |footer|
+    footer.values price: price_per_page
+  end
 
-0.7.0 and earlier:
+  list.on_footer_insert do |footer|
+    footer.item(:price).value(total_price)
+  end
 
-```ruby
-report = Thinreports::Report.new layout: 'list.tlf'
-
-10.times do |n|
-  report.page.list(:default).add_row do |row|
-    row.item(:no).value(n)
+  [100, 200, 300].each do |price|
+    list.add_row price: price
+    price_per_page += price
   end
 end
 ```
@@ -148,8 +169,7 @@ If you find bugs or improvements for the Editor, please report it [here](https:/
 ## License
 
 Thinreports Generator is licensed under the [MIT-License](https://github.com/thinreports/thinreports-generator/blob/master/MIT-LICENSE).
-Please see [LICENSE](https://github.com/thinreports/thinreports-generator/blob/master/LICENSE) for further details.
 
 ## Copyright
 
-&copy; 2010-2015 Thinreports.org, sponsored by [Matsukei Corp](http://www.matsukei.co.jp).
+&copy; 2010-2015 [Matsukei Co.,Ltd](http://www.matsukei.co.jp).
