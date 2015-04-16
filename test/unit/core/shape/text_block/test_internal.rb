@@ -68,7 +68,7 @@ class Thinreports::Core::Shape::TextBlock::TestInternal < Minitest::Test
       tblock.write_value('value')
     end
     assert_equal err.chomp, 'The set value was not saved, ' +
-                            "Because 'bar' refers to 'foo'."
+                            "Because 'bar' has reference to 'foo'."
   end
 
   def test_real_value_should_return_the_formatted_value_when_tblock_has_any_format
