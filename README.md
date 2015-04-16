@@ -65,6 +65,8 @@ end
 report.start_new_page do |page|
   # Text block
   page.item(:text_block).value('Pure Ruby')
+  page.item('text_block').set('value', color: '#0000ff')
+  page.item(:text_block).format_enabled(false)
 
   # Image block
   page.item(:image_block).src('/path/to/image.png')
@@ -77,9 +79,6 @@ report.start_new_page do |page|
   page.item(:any).visible(true)
   page.item(:any).visible? #=> true
   page.item(:any).id #=> "any"
-  # Text block only
-  page.item(:text_block).set('value', color: '#0000ff')
-  page.item(:text_block).format_enabled(false)
 
   # Styles
   page.item(:text).style(:color, 'red')
@@ -87,6 +86,14 @@ report.start_new_page do |page|
                        .style(:border_width, 1)
                        .style(:fill_color, '#ffffff')
   page.item(:ellipse).styles(color: 'black', border_color: '#0000ff')
+
+  # Bulk setting of value
+  page.values text_block_a: 'value', text_block_b: 'value'
+
+  # Helpers
+  page.item_exists?(:existing_id)  #=> true
+  page.item_exists?('existing_id') #=> true
+  page.item_exists?(:unknown_id)   #=> false
 end
 
 report.generate(filename: 'report.pdf')
@@ -160,12 +167,30 @@ report.start_new_page do |page|
   # use '/path/to/default.tlf' layout
 end
 
-report.start_new_page layout: :other do
+report.start_new_page layout: :other do |page|
   # use '/path/to/other1.tlf' layout
 end
 
-report.start_new_page layout: '/path/to/other2.tlf' do
+report.start_new_page layout: '/path/to/other2.tlf' do |page|
   # use '/path/to/other2.tlf' layout
+end
+```
+
+### Callbacks
+
+```ruby
+report = Thinreports::Report.new layout: 'foo.tlf'
+
+# It will be called before each finalizing a page
+report.on_page_create do |page|
+  page.item(:text).value('Text for all pages')
+end
+
+# It will be called once before generating report
+report.on_generate do |pages|
+  pages.each do |page|
+    page.item(:text).value('any')
+  end
 end
 ```
 
