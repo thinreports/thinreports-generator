@@ -33,7 +33,7 @@ module Thinreports
       def write_value(val)
         if format.has_reference?
           warn 'The set value was not saved, ' +
-               "Because '#{format.id}' refers to '#{format.ref_id}'."
+               "Because '#{format.id}' has reference to '#{format.ref_id}'."
         else
           super
         end
