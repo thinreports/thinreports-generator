@@ -132,8 +132,6 @@ end
 report.generate(filename: 'list.tlf')
 ```
 
-See also  [examples/list_events](https://github.com/thinreports/thinreports-generator/tree/master/examples/list_events).
-
 ```ruby
 report = Thinreports::Report.new layout: 'list_with_footer.tlf'
 
@@ -161,6 +159,8 @@ report.list do |list|
 end
 ```
 
+See also  [examples/list_events](https://github.com/thinreports/thinreports-generator/tree/master/examples/list_events).
+
 ### Using multiple layouts
 
 ```ruby
@@ -184,8 +184,6 @@ end
 
 ### Callbacks
 
-See also [examples/report_callbacks](https://github.com/thinreports/thinreports-generator/tree/master/examples/report_callbacks).
-
 ```ruby
 report = Thinreports::Report.new layout: 'foo.tlf'
 
@@ -195,7 +193,7 @@ report.on_page_create do |page|
 end
 ```
 
-[Learn more](http://www.thinreports.org/documentation/getting-started/quickstart.html).
+See also [examples/report_callbacks](https://github.com/thinreports/thinreports-generator/tree/master/examples/report_callbacks).
 
 ## Contributing
 
