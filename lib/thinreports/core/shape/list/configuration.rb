@@ -7,8 +7,8 @@ module Thinreports
       # @return [Thinreports::Core::Shape::List::Store]
       # @deprecated
       #   `List#store` will be removed in the next major version.
-      #   Please create a manually list using `List#overflow?`. See below for further details.
-      #   https://github.com/thinreports/thinreports-generator/blob/master/examples/list_manual_generation/list_manual_generation.rb
+      #   You can create a list using #on_page_footer_insert, #on_footer_insert and #on_page_finalize callbacks instead.
+      #   See also https://github.com/thinreports/thinreports-generator/blob/master/examples/list_events/list_events.rb.
       attr_reader :store
 
       # @param [Thinreports::Core::Shape::List::Events, nil] events (nil)
@@ -21,11 +21,12 @@ module Thinreports
       # @return [Thinreports::Core::Shape::List::Events]
       # @deprecated
       #   `List#events` will be removed in the next major version.
-      #   Please create a manually list using `List#overflow?`. See below for further details.
-      #   https://github.com/thinreports/thinreports-generator/blob/master/examples/list_manual_generation/list_manual_generation.rb
+      #   Please use #on_page_footer_insert, #on_footer_insert and #on_page_finalize callbacks instead.
+      #   See also https://github.com/thinreports/thinreports-generator/blob/master/examples/list_events/list_events.rb.
       def events
-        warn '[DEPRECATION] `List#events` will be removed in the next major version.' +
-             'Please create a manually list using `List#overflow?`. See below for further details.'
+        warn '[DEPRECATION] `List#events` will be removed in the next major version. ' +
+             'Please use #on_page_footer_insert, #on_footer_insert and #on_page_finalize callbacks instead. ' +
+             'See also https://github.com/thinreports/thinreports-generator/blob/master/examples/list_events/list_events.rb.'
         @events
       end
 

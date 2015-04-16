@@ -19,8 +19,14 @@ module Thinreports
       # @return [Integer]
       attr_accessor :page_count
 
-      # @return [Thinreports::Core::Shape::List::SectionInterface]
-      attr_accessor :footer_section
+      # @return [Proc]
+      attr_accessor :page_finalize_handler
+
+      # @return [Proc]
+      attr_accessor :page_footer_handler
+
+      # @return [Proc]
+      attr_accessor :footer_handler
 
       # @param [Thinreports::Core::Shape::List::Page] page
       def initialize(page)
@@ -29,16 +35,10 @@ module Thinreports
         @config = init_config
         @finalized = false
         @page_count = 0
-        @footer_section = nil
-        @on_page_finalize = nil
-      end
 
-      def on_page_finalize(&block)
-        if block_given?
-          @on_page_finalize = block
-        else
-          @on_page_finalize
-        end
+        @page_finalize_handler = nil
+        @page_footer_handler = nil
+        @footer_handler = nil
       end
 
       # @param [Thinreports::Core::Shape::List::Page] page
@@ -69,32 +69,9 @@ module Thinreports
         build_section(header_section, values, &block)
       end
 
-      # @see List::Page#page_footer
-      def build_page_footer(values = {}, &block)
-        unless format.has_page_footer?
-          raise Thinreports::Errors::DisabledListSection.new('page footer')
-        end
-        current_page_state.page_footer ||= init_section(:page_footer)
-        build_section(page_footer_section, values, &block)
-      end
-
-      # @see List::Page#footer
-      def build_footer(values = {}, &block)
-        unless format.has_footer?
-          raise Thinreports::Errors::DisabledListSection.new('footer')
-        end
-        @footer_section ||= init_section(:footer)
-        build_section(footer_section, values, &block)
-      end
-
       # @return [Thinreports::Core::Shape::List::SectionInterface]
       def header_section
         current_page_state.header
-      end
-
-      # @return [Thinreports::Core::Shape::List::SectionInterface]
-      def page_footer_section
-        current_page_state.page_footer
       end
 
       # @param (see #build_section)
@@ -205,24 +182,24 @@ module Thinreports
         build_header if format.has_header?
 
         if !options[:ignore_page_footer] && format.has_page_footer?
-          build_page_footer
+          page_footer = insert_row(init_section(:page_footer))
 
-          insert_row(page_footer_section)
-          # [DEPRECATION] Dispatch page-footer insert event.
+          # [DEPRECATION] Use List::Interface#on_page_footer_insert instead.
           events.
             dispatch(List::Events::SectionEvent.new(:page_footer_insert,
-                                                    page_footer_section, store))
+                                                    page_footer, store))
+          # In 0.8 or later
+          @page_footer_handler.call(page_footer) if @page_footer_handler
         end
         current_page_state.finalized!
 
-        # [DEPRECATION] Dispatch page finalize event.
-        # In 0.7 or eariier
+        # [DEPRECATION] Use List::Interface#on_page_finalize instead.
         events.
           dispatch(List::Events::PageEvent.new(:page_finalize,
                                                current_page,
                                                current_page_state.parent))
         # In 0.8 or later
-        @on_page_finalize.call if @on_page_finalize
+        @page_finalize_handler.call if @page_finalize_handler
 
         @page_count += 1
         current_page_state.no = @page_count
@@ -234,19 +211,21 @@ module Thinreports
         finalize_page
 
         if format.has_footer?
-          build_footer
+          footer = init_section(:footer)
 
-          # [DEPRECATION] Dispatch footer insert event.
-          events.dispatch(List::Events::SectionEvent.new(:footer_insert,
-                                                         footer_section, store))
+          # [DEPRECATION] Use List::Interface#on_footer_insert instead.
+          events.dispatch(List::Events::SectionEvent.new(:footer_insert, footer, store))
+
+          # In 0.8 or later
+          @footer_handler.call(footer) if @footer_handler
 
           if auto_page_break? && overflow_with?(:footer)
             change_new_page do |new_list|
-              new_list.manager.insert_row(footer_section)
+              new_list.manager.insert_row(footer)
               new_list.manager.finalize_page(ignore_page_footer: true)
             end
           else
-            insert_row(footer_section)
+            insert_row(footer)
           end
         end
         @finalized = true

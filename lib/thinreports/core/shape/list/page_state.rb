@@ -8,7 +8,7 @@ module Thinreports
       attr_reader :rows
 
       attr_accessor :height
-      attr_accessor :header, :page_footer
+      attr_accessor :header
       attr_accessor :no
       attr_accessor :manager
 
@@ -20,7 +20,6 @@ module Thinreports
         @finalized = false
 
         @header = nil
-        @page_footer = nil
       end
 
       def style

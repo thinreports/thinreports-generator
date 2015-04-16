@@ -30,26 +30,22 @@ module Thinreports
       # @raise [Thinreports::Errors::DisabledListSection]
       def_delegator :manager, :build_header, :header
 
-      # @param [Hash] values ({})
-      # @yield [page_footer,]
-      # @yieldparam [Thinreports::Core::Shape::List::SectionInterface] page_footer
-      # @return [Thinreports::Core::Shape::List::SectionInterface]
-      # @raise [Thinreports::Errors::DisabledListSection]
-      def_delegator :manager, :build_page_footer, :page_footer
+      def on_page_finalize(&block)
+        manager.page_finalize_handler = block
+      end
 
-      # @param [Hash] values ({})
-      # @yield [footer,]
+      # @yield [page_footer]
+      # @yieldparam [Thinreports::Core::Shape::List::SectionInterface] page_footer
+      def on_page_footer_insert(&block)
+        manager.page_footer_handler = block
+      end
+
+      # @yield [footer]
       # @yieldparam [Thinreports::Core::Shape::List::SectionInterface] footer
       # @return [Thinreports::Core::Shape::List::SectionInterface]
-      # @raise [Thinreports::Errors::DisabledListSection]
-      def_delegator :manager, :build_footer, :footer
-
-      # @overload on_page_finalize(&block)
-      #   Sets callback
-      # @overload on_page_finalize
-      #   Gets callback
-      #   @return [Proc]
-      def_delegator :manager, :on_page_finalize
+      def on_footer_insert(&block)
+        manager.footer_handler = block
+      end
 
       # @param [Hash] values ({})
       # @yield [row,]

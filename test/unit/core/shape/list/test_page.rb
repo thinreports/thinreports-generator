@@ -36,15 +36,53 @@ class Thinreports::Core::Shape::List::TestPage < Minitest::Test
 
     list.on_page_finalize(&callback)
 
-    assert_same callback, list.on_page_finalize
-
-    # It should be called for finalizing 1st page once.
     5.times { list.add_row }
     assert_equal 1, counter
 
-    # It should be called for fianlizing 2nd page once.
     report.generate
     assert_equal 2, counter
+  end
+
+  def test_on_page_footer_insert_callback
+    report = create_report
+    list = report.list(:list)
+
+    tester = 0
+    callback = -> (footer) {
+      assert_instance_of List::SectionInterface, footer
+      assert_equal footer.internal.section_name, :page_footer
+
+      tester += 1
+    }
+
+    list.on_page_footer_insert(&callback)
+
+    5.times { list.add_row }
+    assert_equal 1, tester
+
+    report.generate
+    assert_equal 2, tester
+  end
+
+  def test_on_footer_insert_callback
+    report = create_report
+    list = report.list(:list)
+
+    tester = 0
+    callback = -> (footer) {
+      assert_instance_of List::SectionInterface, footer
+      assert_equal footer.internal.section_name, :footer
+
+      tester += 1
+    }
+
+    list.on_footer_insert(&callback)
+
+    5.times { list.add_row }
+    assert_equal 0, tester
+
+    report.generate
+    assert_equal 1, tester
   end
 
   def test_page_finalize_event_should_be_dispatched_when_page_break_is_called
