@@ -48,7 +48,7 @@ class Thinreports::Core::Shape::List::TestPage < Minitest::Test
     list = report.list(:list)
 
     tester = 0
-    callback = -> (footer) {
+    callback = -> footer {
       assert_instance_of List::SectionInterface, footer
       assert_equal footer.internal.section_name, :page_footer
 
@@ -69,7 +69,7 @@ class Thinreports::Core::Shape::List::TestPage < Minitest::Test
     list = report.list(:list)
 
     tester = 0
-    callback = -> (footer) {
+    callback = -> footer {
       assert_instance_of List::SectionInterface, footer
       assert_equal footer.internal.section_name, :footer
 
