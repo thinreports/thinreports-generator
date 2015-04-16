@@ -96,6 +96,10 @@ report.start_new_page do |page|
   page.item_exists?(:unknown_id)   #=> false
 end
 
+# Helpers of report
+report.page_count #=> 1
+report.pages #=> [<Report::Page>]
+
 report.generate(filename: 'report.pdf')
 ```
 
@@ -127,6 +131,8 @@ end
 
 report.generate(filename: 'list.tlf')
 ```
+
+See also  [examples/list_events](https://github.com/thinreports/thinreports-generator/tree/master/examples/list_events).
 
 ```ruby
 report = Thinreports::Report.new layout: 'list_with_footer.tlf'
@@ -178,19 +184,14 @@ end
 
 ### Callbacks
 
+See also [examples/report_callbacks](https://github.com/thinreports/thinreports-generator/tree/master/examples/report_callbacks).
+
 ```ruby
 report = Thinreports::Report.new layout: 'foo.tlf'
 
-# It will be called before each finalizing a page
+# It will be called before finalizing each page
 report.on_page_create do |page|
   page.item(:text).value('Text for all pages')
-end
-
-# It will be called once before generating report
-report.on_generate do |pages|
-  pages.each do |page|
-    page.item(:text).value('any')
-  end
 end
 ```
 
