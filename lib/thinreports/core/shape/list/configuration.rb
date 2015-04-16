@@ -6,7 +6,7 @@ module Thinreports
     class List::Configuration
       # @return [Thinreports::Core::Shape::List::Store]
       # @deprecated
-      #   `List#store` will be removed in the next major version.
+      #   `List::Page#store` will be removed in the next major version.
       #   You can create a list using #on_page_footer_insert, #on_footer_insert and #on_page_finalize callbacks instead.
       #   See also https://github.com/thinreports/thinreports-generator/blob/master/examples/list_events/list_events.rb.
       attr_reader :store
@@ -20,7 +20,7 @@ module Thinreports
 
       # @return [Thinreports::Core::Shape::List::Events]
       # @deprecated
-      #   `List#events` will be removed in the next major version.
+      #   `List::Page#events` will be removed in the next major version.
       #   Please use #on_page_footer_insert, #on_footer_insert and #on_page_finalize callbacks instead.
       #   See also https://github.com/thinreports/thinreports-generator/blob/master/examples/list_events/list_events.rb.
       def events

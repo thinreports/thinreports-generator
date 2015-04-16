@@ -12,6 +12,9 @@ module Thinreports
       attr_reader :layout_registry
       attr_reader :events
 
+      attr_accessor :page_create_handler
+      attr_accessor :generate_handler
+
       # @param [Thinreports::Report::Base] report
       # @param options (see Thinreports::Report::Base#initialize)
       def initialize(report, options)
@@ -24,6 +27,9 @@ module Thinreports
         @pages      = []
         @page       = nil
         @page_count = 0
+
+        @page_create_handler = nil
+        @generate_handler = nil
 
         @events = Report::Events.new
       end
@@ -58,9 +64,11 @@ module Thinreports
           finalize_current_page
           @finalized = true
 
-          # Dispatch event on before generate.
+          # [DEPRECATION] Please use Report::Base#on_generate callback instead.
           events.dispatch(Report::Events::Event.new(:generate,
                                                     @report, nil, pages))
+
+          @generate_handler.call(pages) if @generate_handler
         end
       end
 
@@ -92,12 +100,13 @@ module Thinreports
           @page_count += 1
           new_page.no = @page_count
         end
-        # Dispatch event on +before+ page create.
-        # But do not dispatch if page is blank-page.
+
         unless new_page.blank?
+          # [DEPRECATION] Please use #on_page_create callback instead.
           events.dispatch(Report::Events::Event.new(:page_create,
                                                     @report,
                                                     new_page))
+          @page_create_handler.call(new_page) if @page_create_handler
         end
         @page = new_page
       end

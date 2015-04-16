@@ -4,14 +4,8 @@ module Thinreports
   module Report
 
     class Base
+      extend  Forwardable
       include Utils
-
-      # @return [Thinreports::Report::Internal]
-      # @private
-      attr_reader :internal
-
-      # @return [Integer]
-      attr_reader :start_page_number
 
       class << self
         # @param options (see #initialize)
@@ -70,11 +64,38 @@ module Thinreports
         end
       end
 
+      # @return [Thinreports::Report::Internal]
+      # @private
+      attr_reader :internal
+
+      # @return [Integer]
+      attr_reader :start_page_number
+
+      # @return [Thinreports::Report::Page]
+      def_delegator :internal, :page
+
+      # @return [Integer]
+      def_delegator :internal, :page_count
+
+      # @return [Array<Thinreports::Report::Page>]
+      def_delegator :internal, :pages
+
       # @param [Hash] options
       # @option options [String, nil] :layout (nil)
       def initialize(options = {})
         @internal = Report::Internal.new(self, options)
         @start_page_number = 1
+
+        @page_create_handler = nil
+        @generate_handler = nil
+      end
+
+      def on_page_create(&block)
+        internal.page_create_handler = block
+      end
+
+      def on_generate(&block)
+        internal.generate_handler = block
       end
 
       # @param [Integer] page_number
@@ -164,31 +185,19 @@ module Thinreports
       end
 
       # @return [Thinreports::Report::Events]
+      # @deprecated
+      #   `Report::Base#events` will be removed in the next major version.
+      #   Please use #on_page_create callbacks instead.
+      #   See also https://github.com/thinreports/thinreports-generator/blob/master/examples/report_callbacks/report_callbacks.rb.
       def events
+        warn '[DEPRECATION] `Report::Base#events` will be removed in the next major version. ' +
+             'Please use #on_page_create callbacks instead. ' +
+             'See also https://github.com/thinreports/thinreports-generator/blob/master/examples/report_callbacks/report_callbacks.rb.'
         internal.events
       end
 
-      # @return [Thinreports::Report::Page, nil]
-      def page
-        internal.page
-      end
-
-      # @return [Integer]
-      def page_count
-        internal.page_count
-      end
-
-      # @return [void]
       # @private
-      def finalize
-        internal.finalize
-      end
-
-      # @return [Boolean]
-      # @private
-      def finalized?
-        internal.finalized?
-      end
+      def_delegators :internal, :finalize, :finalized?
     end
 
   end

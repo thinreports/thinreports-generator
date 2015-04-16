@@ -12,6 +12,21 @@ class Thinreports::Report::TestBase < Minitest::Test
     @report = Report::Base.new
   end
 
+  def test_on_page_create_callback
+    report = Report::Base.new layout: data_file('layout_text1.tlf')
+
+    counter = 0
+    callback = -> page {
+      assert_instance_of Report::Page, page
+      counter += 1
+    }
+
+    report.on_page_create(&callback)
+
+    2.times { report.start_new_page }
+    assert_equal counter, 2
+  end
+
   def test_initialize_should_register_layout_as_default_when_layout_is_specified_as_the_option
     report = Report::Base.new layout: data_file('layout_text1.tlf')
     assert_equal report.default_layout.filename, data_file('layout_text1.tlf')
@@ -126,6 +141,13 @@ class Thinreports::Report::TestBase < Minitest::Test
 
   def test_events_should_return_Report_Events
     assert_instance_of Thinreports::Report::Events, @report.events
+  end
+
+  def test_events_should_deprecated
+    out, err = capture_io do
+      @report.events
+    end
+    assert_includes err, '[DEPRECATION]'
   end
 
   def test_page_should_return_the_current_page

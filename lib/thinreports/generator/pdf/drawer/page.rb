@@ -2,7 +2,7 @@
 
 module Thinreports
   module Generator::PDF::Drawer
-    
+
     # @private
     class Page < Base
       # @param (see PDF::Drawer::Base#initialize)
@@ -10,7 +10,7 @@ module Thinreports
         super
         @lists = {}
       end
-      
+
       # @param [Thinreports::Report::Page] page
       def draw(page)
         manager = page.manager
@@ -28,7 +28,7 @@ module Thinreports
           end
         end
       end
-      
+
     private
 
       def draw_shape(shape)
@@ -48,7 +48,7 @@ module Thinreports
           pdf_stamp(shape)
         end
       end
-      
+
       def draw_pageno_shape(shape, page)
         @pdf.draw_shape_pageno(shape, page.no, page.report.page_count)
       end
@@ -58,17 +58,17 @@ module Thinreports
         drawer = @lists[shape.id] ||= List.new(@pdf, shape.format)
         drawer.draw(shape)
       end
-      
+
       # @see #draw_shape
       def draw_tblock_shape(shape)
         @pdf.draw_shape_tblock(shape)
       end
-      
+
       # @see #draw_shape
       def draw_iblock_shape(shape)
         @pdf.draw_shape_iblock(shape)
       end
-      
+
       # @param [Thinreports::Core::Shape::Base::Internal] shape
       def create_basic_shape_stamp(shape)
         case
@@ -79,35 +79,35 @@ module Thinreports
         when shape.type_of?(:line)    then create_line_stamp(shape)
         end
       end
-      
+
       # @see #create_basic_shape_stamp
       def create_image_stamp(shape)
         create_pdf_stamp(shape) do
           @pdf.draw_shape_image(shape)
         end
       end
-      
+
       # @see #create_basic_shape_stamp
       def create_rect_stamp(shape)
         create_pdf_stamp(shape) do
           @pdf.draw_shape_rect(shape)
         end
       end
-      
+
       # @see #create_basic_shape_stamp
       def create_ellipse_stamp(shape)
         create_pdf_stamp(shape) do
           @pdf.draw_shape_ellipse(shape)
         end
       end
-      
+
       # @see #create_basic_shape_stamp
       def create_line_stamp(shape)
         create_pdf_stamp(shape) do
           @pdf.draw_shape_line(shape)
         end
       end
-      
+
       # @see #create_basic_shape_stamp
       def create_text_stamp(shape)
         create_pdf_stamp(shape) do
@@ -115,6 +115,6 @@ module Thinreports
         end
       end
     end
-    
+
   end
 end

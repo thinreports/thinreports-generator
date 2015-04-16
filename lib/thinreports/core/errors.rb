@@ -64,7 +64,7 @@ module Thinreports
     class IncompatibleLayoutFormat < Basic
       def initialize(filename, fileversion, required_rules)
         super("Generator #{Thinreports::VERSION} can not be built this file, " +
-              "'#{File.basename(filename)}'." +
+              "'#{File.basename(filename)}'. " +
               "This file is updated in the Editor of version '#{fileversion}', " +
               "but Generator requires version #{required_rules}.")
       end
