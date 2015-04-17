@@ -10,34 +10,6 @@
   * Thinreports Editor (GUI Designer)
   * Thinreports Generator (Report Generator for Ruby)
 
-## Features
-
-Features of Editor is [here](http://www.thinreports.org/features/editor/).
-
-### Easy to generate PDF
-
-Design layout using Editor, then embed values to text field in layout.
-
-### Simple runtime environment
-
-Ruby, RubyGems, Prawn and Generator.
-
-### Dynamic operation
-
-Generator can dynamically:
-
-  * change value of TextBlock and ImageBlock
-  * change style (border, fill, visibility, position, color, font) of Shape
-
-### Others
-
-  * External characters (Gaiji) for Japanese
-
-## Supported Versions
-
-  * Ruby 1.9.3, 2.0+
-  * JRuby 1.7.0+ (1.9 mode)
-
 ## Getting Started
 
   * [Installation Guide](http://www.thinreports.org/documentation/getting-started/installation.html)
@@ -47,11 +19,16 @@ Generator can dynamically:
   * [Discussion Group](https://groups.google.com/forum/#!forum/thinreports)
   * [![Join the chat at https://gitter.im/thinreports/thinreports-generator](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/thinreports/thinreports-generator?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+## Supported versions
+
+  * Ruby 1.9.3, 2.0+
+  * JRuby 1.7.0+ (1.9 mode)
+
 ## Quick Reference
 
 **NOTE:** You need to create a layout file `.tlf` using [Thinreports Editor](http://www.thinreports.org/features/editor/).
 
-### Basic
+### Basic Objects, Basic Usage
 
 ```ruby
 require 'thinreports'
@@ -77,28 +54,34 @@ report.start_new_page do |page|
   page.item(:any).hide
   page.item(:any).show
   page.item(:any).visible(true)
-  page.item(:any).visible? #=> true
-  page.item(:any).id #=> "any"
+  page.item(:any).visible? # => true
+  page.item(:any).id # => "any"
 
   # Styles
   page.item(:text).style(:color, 'red')
+  page.item(:text).style(:bold, true)
+  page.item(:text).style(:italic, true)
+  page.item(:text).style(:linethrough, true)
+  page.item(:text).style(:underline, true)
+
+  page.item(:text).style(:align, :left or :center or :right)
+  page.item(:text).style(:valign, :top or :center or :bottom)
+
   page.item(:rectangle).style(:border_color, '#ff0000')
                        .style(:border_width, 1)
                        .style(:fill_color, '#ffffff')
-  page.item(:ellipse).styles(color: 'black', border_color: '#0000ff')
 
-  # Bulk setting of value
+  # Bulk setting of styles
+  page.item(:text).styles(color: '#00000', align: :right)
+
+  # Bulk setting of values
   page.values text_block_a: 'value', text_block_b: 'value'
 
   # Helpers
-  page.item_exists?(:existing_id)  #=> true
-  page.item_exists?('existing_id') #=> true
-  page.item_exists?(:unknown_id)   #=> false
+  page.item_exists?(:existing_id)  # => true
+  page.item_exists?('existing_id') # => true
+  page.item_exists?(:unknown_id)   # => false
 end
-
-# Helpers of report
-report.page_count #=> 1
-report.pages #=> [<Report::Page>]
 
 report.generate(filename: 'report.pdf')
 ```
@@ -106,15 +89,64 @@ report.generate(filename: 'report.pdf')
 ```ruby
 Thinreports::Report.generate(filename: 'report.pdf', layout: 'report.tlf') do |report|
   report.start_new_page do |page|
-    page.item(:text_block).value('Thinreports')
+    # :
   end
-
-  page = start_new_page
-  page.item(:text_block).value('Pure Ruby').style(:color, '#ff0000')
 end
 ```
 
-### List
+### Report and Page
+
+```ruby
+report = Thinreports::Report.new layout: 'foo.tlf'
+
+3.times { report.start_new_page }
+
+# Returns all pages
+report.pages # => [<Report::Page>, <Report::Page>, <Report::Page>]
+# Returns number of pages
+report.page_count # => 3
+
+# Add a blank page
+report.add_blank_page
+
+report.pages.last # => Report::BlankPage
+```
+
+### Using multiple layouts
+
+```ruby
+report = Thinreports::Report.new
+
+report.use_layout '/path/to/default.tlf', default: true
+report.use_layout '/path/to/other1.tlf', id: :other
+
+report.start_new_page do |page|
+  # use '/path/to/default.tlf' layout
+end
+
+report.start_new_page layout: :other do |page|
+  # use '/path/to/other1.tlf' layout
+end
+
+report.start_new_page layout: '/path/to/other2.tlf' do |page|
+  # use '/path/to/other2.tlf' layout
+end
+```
+
+### Callbacks
+
+```ruby
+report = Thinreports::Report.new layout: 'foo.tlf'
+
+# It will be called before finalizing each page
+report.on_page_create do |page|
+  page.item(:text).value('Text for all pages')
+end
+```
+
+See also [examples/report_callbacks](https://github.com/thinreports/thinreports-generator/tree/master/examples/report_callbacks).
+
+### List Object
 
 ```ruby
 report = Thinreports::Report.new layout: 'list.tlf'
@@ -161,39 +193,61 @@ end
 
 See also  [examples/list_events](https://github.com/thinreports/thinreports-generator/tree/master/examples/list_events).
 
-### Using multiple layouts
+### Page Number Object
 
 ```ruby
-report = Thinreports::Report.new
+# Setting starting number of page
+report.start_page_number_from 5
 
-report.use_layout '/path/to/default.tlf', default: true
-report.use_layout '/path/to/other1.tlf', id: :other
+# Setting whether to count new page
+report.start_new_page count: true # default
+report.start_new_page count: false
 
+# Change styles
 report.start_new_page do |page|
-  # use '/path/to/default.tlf' layout
-end
-
-report.start_new_page layout: :other do |page|
-  # use '/path/to/other1.tlf' layout
-end
-
-report.start_new_page layout: '/path/to/other2.tlf' do |page|
-  # use '/path/to/other2.tlf' layout
+  page.item(:pageno).hide
+  page.item(:pageno).show
+  page.item(:pageno).visible(false)
+  page.item(:pageno).styles(color: 'red', bold: true)
 end
 ```
 
-### Callbacks
+See also [examples/page_number](https://github.com/thinreports/thinreports-generator/blob/master/examples/page_number) and [examples/list_page_number](https://github.com/thinreports/thinreports-generator/blob/master/examples/list_page_number).
+
+### Configuring fallback fonts
 
 ```ruby
-report = Thinreports::Report.new layout: 'foo.tlf'
-
-# It will be called before finalizing each page
-report.on_page_create do |page|
-  page.item(:text).value('Text for all pages')
+Thinreports.configure do |config|
+  config.fallback_fonts = '/path/to/fallback.ttf'
 end
+
+Thinreports.config.fallback_fonts = ['/path/to/font_a.ttf', '/path/to/font_b.ttf']
 ```
 
-See also [examples/report_callbacks](https://github.com/thinreports/thinreports-generator/tree/master/examples/report_callbacks).
+See also [examples/eudc](https://github.com/thinreports/thinreports-generator/blob/master/examples/eudc).
+
+## Features
+
+Features of Editor is [here](http://www.thinreports.org/features/editor/).
+
+### Easy to generate PDF
+
+Design layout using Editor, then embed values to text field in layout.
+
+### Simple runtime environment
+
+Ruby, RubyGems, Prawn and Generator.
+
+### Dynamic operation
+
+Generator can dynamically:
+
+  * change value of TextBlock and ImageBlock
+  * change style (border, fill, visibility, position, color, font) of Shape
+
+### Others
+
+  * External characters (Gaiji) for Japanese
 
 ## Contributing
 
