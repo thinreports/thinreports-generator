@@ -18,7 +18,9 @@ example :report_callbacks, 'Callbacks of Report' do |t|
 
   # A handler called before finalizing report in 0.7.7 or lower
   report.events.on :generate do |e|
-    e.pages.each {|page| page.item(:text3).value('A handler called before finalizing report in 0.7.7 or lower')
+    e.pages.each do |page|
+      page.item(:text3).value('A handler called before finalizing report in 0.7.7 or lower')
+    end
   end
 
   report.pages.each do |page|
