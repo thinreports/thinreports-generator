@@ -16,6 +16,7 @@
   * [Quick Start Guide](http://www.thinreports.org/documentation/getting-started/quickstart.html)
   * [Examples](https://github.com/thinreports/thinreports-examples)
   * [Rails4 Example](https://github.com/thinreports/thinreports-rails4-example)
+  * [Changelog](https://github.com/thinreports/thinreports-generator/blob/master/CHANGELOG.md)
   * [Discussion Group](https://groups.google.com/forum/#!forum/thinreports)
   * [![Join the chat at https://gitter.im/thinreports/thinreports-generator](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/thinreports/thinreports-generator?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
