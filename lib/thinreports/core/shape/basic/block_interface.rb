@@ -2,7 +2,7 @@
 
 module Thinreports
   module Core::Shape
-    
+
     class Basic::BlockInterface < Basic::Interface
       # @overload value(val)
       #   Set a val
@@ -19,7 +19,12 @@ module Thinreports
           self
         end
       end
+
+      # @param [Object] val
+      def value=(val)
+        value(val)
+      end
     end
-    
+
   end
 end

@@ -45,4 +45,19 @@ class Thinreports::Core::Shape::TextBlock::TestInterface < Minitest::Test
                   tblock.style(:italic)],
                  ['#ff0000', true, true]
   end
+
+  def test_value=
+    report = new_report 'layout_block.tlf'
+    page = report.start_new_page
+
+    page.item(:text_block1).value = 'foo'
+    assert_equal 'foo', page.item(:text_block1).value
+
+    page.item(:text_block1).value += 'bar'
+    assert_equal 'foobar', page.item(:text_block1).value
+
+    page.item(:text_block1).value = 1000
+    page.item(:text_block1).value += 999
+    assert_equal 1999, page.item(:text_block1).value
+  end
 end
