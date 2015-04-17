@@ -1,3 +1,125 @@
+## 0.8.0
+
+This release is a stepping stone to next major version 1.0.0 release.
+
+  * Upgrade to Prawn 1.3 and drop support for Ruby 1.8.7 (#11)
+  * Change name of root module to Thinreports from ThinReports (#15)
+  * Implement `Item#value=` method (#20)
+  * Implement new list callbacks (#19)
+  * Support for setting the default fallback font (#7)
+  * Remove `Report#generate_file` method (#13)
+  * Deprecate `Report#events`, and implement new callbacks (#18)
+  * Deprecate `List#events`, recommend to use `List#on_page_finalize` callback or create manually (#9)
+
+### Upgrade to Prawn 1.3 and drop support for Ruby 1.8.7
+
+We have dropped support for MRI 1.8.7 and 1.8 mode JRuby by upgrading to Prawn 1.3.
+Currently supported versions are MRI 1.9.3 and 2.0.0 or higher, JRuby(1.9 mode) 1.7 or higher.
+
+### Change name of root module to Thinreports from ThinReports
+
+We have changed name of root module to `Thinreports` from `ThinReports`.
+Old name `ThinReports` has been enabling as alias, but it will be removed
+in the next major release.
+
+### Implement `Item#value=` method
+
+```ruby
+page.item(:text_block).value('value')
+page.item(:text_block).value = 'value'
+page.item(:image_block).src('/path/to/image.tlf')
+page.item(:image_block).src = '/path/to/image.tlf'
+```
+
+See [Issue #20](https://github.com/thinreports/thinreports-generator/issues/20) for further details.
+
+### Deprecate `List#events` and `List#store`
+
+`List#events` and `List#store` have been deprecated.
+
+```ruby
+report.layout.config.list do |list|
+  list.events.on :page_footer_insert do |e|
+    # ...
+  end
+  # => warn: "[DEPRECATION] ..."
+
+  list.events.on :footer_insert do |e|
+    # ...
+  end
+  # => warn: "[DEPRECATION] ..."
+
+  list.events.on :page_finalize do |e|
+    # ...
+  end
+  # => warn: "[DEPRECATION] ..."
+end
+
+list.store.price += 0 # => warn: "[DEPRECATION] ..."
+```
+
+Please use new callbacks instead:
+
+```ruby
+report.list do |list|
+  price = 0
+
+  list.on_page_footer_insert do |footer|
+    footer.item(:price).value = price
+  end
+
+  list.on_footer_insert do |footer|
+    # ...
+  end
+
+  list.on_page_finalize do
+    # ...
+  end
+end
+```
+
+See [Issue #9](https://github.com/thinreports/thinreports-generator/issues/9) and [examples/list_events](https://github.com/thinreports/thinreports-generator/tree/master/examples/list_events) for further details.
+
+### Deprecate `Report#events`, and implement new callbacks
+
+`Report#events` has been deprecated:
+
+```ruby
+report.events.on :page_create do |e|
+  e.page.item(:text1).value('Text1')
+end
+# => warn: "[DEPRECATION] ..."
+
+report.events.on :generate do |e|
+  e.pages.each do |page|
+    page.item(:text2).value('Text2')
+  end
+end
+# => warn: "[DEPRECATION] ..."
+```
+
+Please use `Report#on_page_create` callback instead.
+However `Report#on_generate` callback has not been implemented,
+but you can do the same things using `Report#pages` method.
+
+```ruby
+report.on_page_create do |page|
+  page.item(:text1).value('Text1')
+end
+
+report.pages.each do |page|
+  page.item(:text2).value('Text2')
+end
+
+report.generate filename: 'foo.pdf'
+```
+
+See [Issue #18](https://github.com/thinreports/thinreports-generator/issues/18) for further details.
+
+### Support for setting the default fallback font
+
+Please see [Issue #7](https://github.com/thinreports/thinreports-generator/issues/7) for further details.
+
 ## 0.7.7.1
 
   * No release for generator
