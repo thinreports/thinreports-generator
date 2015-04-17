@@ -1,6 +1,7 @@
 # coding: utf-8
 
 require 'rake/testtask'
+require 'yard'
 
 Rake::TestTask.new do |t|
   t.libs << 'test'
@@ -32,3 +33,8 @@ end
 
 desc 'Run all examples'
 task examples: :'examples:all'
+
+YARD::Rake::YardocTask.new :doc do |yard|
+  yard.files = Dir['lib/**/*.rb']
+  yard.options = ['--readme', 'README.md']
+end
