@@ -118,14 +118,6 @@ class Thinreports::Report::TestBase < Minitest::Test
     assert_equal @report.layout(:foo).filename, data_file('layout_text2.tlf')
   end
 
-  def test_generate
-    report = Report::Base.new layout: data_file('layout_text1.tlf')
-
-    refute_empty report.generate(:pdf)
-    refute_empty report.generate
-    assert_equal report.generate(:pdf), report.generate
-  end
-
   def test_generate_with_filename
     report = Report::Base.new layout: data_file('layout_text1.tlf')
 
