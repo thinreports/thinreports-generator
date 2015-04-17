@@ -42,11 +42,13 @@ end
 report.start_new_page do |page|
   # Text block
   page.item(:text_block).value('Pure Ruby')
+  page.item(:text_block).value = 'Pure Ruby'
   page.item('text_block').set('value', color: '#0000ff')
   page.item(:text_block).format_enabled(false)
 
   # Image block
   page.item(:image_block).src('/path/to/image.png')
+  page.item(:image_block).src = '/path/to/image.png'
   require 'open-uri'
   page.item(:image_block).src(open('http://www.thinreports.org/assets/logos/thinreports-logo.png'))
 
