@@ -59,4 +59,7 @@ end
 require 'thinreports/generator/pdf/configuration'
 require 'thinreports/generator/pdf/prawn_ext'
 require 'thinreports/generator/pdf/document'
-require 'thinreports/generator/pdf/drawer'
+require 'thinreports/generator/pdf/drawer/base'
+require 'thinreports/generator/pdf/drawer/page'
+require 'thinreports/generator/pdf/drawer/list'
+require 'thinreports/generator/pdf/drawer/list_section'

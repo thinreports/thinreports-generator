@@ -3,7 +3,6 @@
 module Thinreports
   module Core::Shape
 
-    # @private
     class TextBlock::Internal < Basic::BlockInternal
       format_delegators :multiple?
 

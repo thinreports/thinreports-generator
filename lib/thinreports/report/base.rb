@@ -65,7 +65,6 @@ module Thinreports
       end
 
       # @return [Thinreports::Report::Internal]
-      # @private
       attr_reader :internal
 
       # @return [Integer]
@@ -196,7 +195,6 @@ module Thinreports
         internal.events
       end
 
-      # @private
       def_delegators :internal, :finalize, :finalized?
     end
 

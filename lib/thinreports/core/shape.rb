@@ -2,19 +2,16 @@
 
 module Thinreports
   module Core
-    
+
     module Shape
-      # @private
       def Interface(parent, format)
         find_by_type(format.type)::Interface.new(parent, format)
       end
-      
-      # @private
+
       def Format(type)
         find_by_type(type)::Format
       end
-      
-      # @private
+
       def Configuration(type)
         klass = find_by_type(type)
         unless klass.const_defined?(:Configuration)
@@ -22,10 +19,9 @@ module Thinreports
         end
         klass.const_get(:Configuration)
       end
-      
+
       module_function :Interface, :Format, :Configuration
-      
-      # @private
+
       def self.find_by_type(type)
         case type
         when TextBlock::TYPE_NAME  then TextBlock
@@ -39,7 +35,7 @@ module Thinreports
         end
       end
     end
-  
+
   end
 end
 

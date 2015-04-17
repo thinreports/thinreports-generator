@@ -3,7 +3,6 @@
 module Thinreports
   module Core::Shape
 
-    # @private
     class List::PageState < Basic::Internal
       attr_reader :rows
 
@@ -41,7 +40,6 @@ module Thinreports
 
     # Alias to List::PageState.
     # @see Thinreports::Core::Shape::List::PageState
-    # @private
     List::Internal = List::PageState
 
   end

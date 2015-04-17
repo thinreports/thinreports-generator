@@ -2,9 +2,8 @@
 
 module Thinreports
   module Generator::PDF::Drawer
-    
+
     # @abstract
-    # @private
     class Base
       # @param [Thinreports::Generator::PDF::Document] pdf
       # @param [Thinreports::Core::Shape::Manager::Format] format
@@ -14,20 +13,20 @@ module Thinreports
         @stamps  = []
         @draw_at = nil
       end
-      
+
       # @abstract
       def draw
         raise NotImplementedError
       end
-      
+
     private
-      
+
       # @param [Thinreports::Core::Shape::Base::Internal] shape
       # @return [String]
       def pdf_stamp_id(shape)
         "#{@format.identifier}#{shape.identifier}"
       end
-      
+
       # @overload pdf_stamp(shape_id)
       #   @param [String] shape_id
       # @overload pdf_stamp(shape)
@@ -38,12 +37,12 @@ module Thinreports
         end
         @pdf.stamp(shape, @draw_at)
       end
-      
+
       # @param [Thinreports::Core::Shape::Base::Internal] shape
       def create_pdf_stamp(shape, &block)
         @pdf.create_stamp(pdf_stamp_id(shape), &block)
       end
     end
-    
+
   end
 end

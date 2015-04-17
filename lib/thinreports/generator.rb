@@ -12,13 +12,11 @@ module Thinreports
       end
       generator.new(report, options)
     end
-    
-    # @private
+
     def self.register(type, generator)
       registry[type] = generator
     end
 
-    # @private
     def self.registry
       @generators ||= {}
     end

@@ -9,7 +9,6 @@ module Thinreports
       Event = ::Struct.new(:type, :target)
 
       # @return [Hash<Symbol, Thinreports::Core::Events::Event>]
-      # @private
       attr_accessor :events
 
       # @param [Symbol] types
@@ -38,7 +37,6 @@ module Thinreports
       end
       alias_method :un, :unlisten
 
-      # @private
       def dispatch(e)
         unless e.type
           raise ArgumentError, 'Event#type attribute is required'
@@ -50,7 +48,6 @@ module Thinreports
         end
       end
 
-      # @private
       def copy
         new_events = self.dup
         new_events.events = deep_copy(events)

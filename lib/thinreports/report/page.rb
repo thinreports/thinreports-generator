@@ -27,7 +27,6 @@ module Thinreports
       include Core::Shape::Manager::Target
 
       # @return [Thinreports::Report::Base]
-      # @private
       attr_reader :report
 
       # @return [Thinreports::Layout::Base]
@@ -54,7 +53,6 @@ module Thinreports
         false
       end
 
-      # @private
       def copy
         new_page = self.class.new(report, layout, count: count?)
 
@@ -71,7 +69,6 @@ module Thinreports
 
       # @param [Hash] options
       # @option options [:create, :copy] :at (:create)
-      # @private
       def finalize(options = {})
         at = options[:at] || :create
 
@@ -83,7 +80,6 @@ module Thinreports
         @finalized = true
       end
 
-      # @private
       def finalized?
         @finalized
       end

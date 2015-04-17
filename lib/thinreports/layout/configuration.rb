@@ -3,6 +3,7 @@
 module Thinreports
   module Layout
 
+    # @deprecated This class will be removed in the next major version.
     class Configuration
       include Core::Shape::Manager::Target
 
@@ -15,7 +16,6 @@ module Thinreports
 
       # @param [String, Symbol] shape_id
       # @return [Object, nil]
-      # @private
       def activate(shape_id)
         (config = manager.shapes[shape_id.to_sym]) && config.copy
       end

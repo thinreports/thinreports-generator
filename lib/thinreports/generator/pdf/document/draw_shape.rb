@@ -3,7 +3,6 @@
 module Thinreports
   module Generator
 
-    # @private
     module PDF::DrawShape
       # @param [Thinreports::Core::Shape::TextBlock::Internal] shape
       def draw_shape_tblock(shape)

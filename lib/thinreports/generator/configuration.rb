@@ -3,6 +3,7 @@
 module Thinreports
   module Generator
 
+    # @deprecated This class will be removed in the next major version.
     class Configuration
       # @return [Symbol]
       attr_reader :default

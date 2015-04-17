@@ -3,7 +3,6 @@
 module Thinreports
   module Report
 
-    # @private
     class Internal
       attr_reader :pages
       attr_reader :page

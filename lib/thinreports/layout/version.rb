@@ -3,7 +3,6 @@
 module Thinreports
   module Layout
 
-    # @private
     module Version
       REQUIRED_RULES = ['>= 0.7.7.0', '< 1.0.0']
 

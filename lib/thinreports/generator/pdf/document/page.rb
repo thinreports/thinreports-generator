@@ -3,7 +3,6 @@
 module Thinreports
   module Generator
 
-    # @private
     module PDF::Page
       # Add JIS-B4,B5 page geometry
       ::PDF::Core::PageGeometry::SIZES.update(

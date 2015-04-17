@@ -2,8 +2,7 @@
 
 module Thinreports
   module Core::Shape
-    
-    # @private
+
     class Text::Format < Basic::Format
       config_reader :text, :box, :valign
       config_reader svg_content: %w( svg content ),
@@ -11,7 +10,7 @@ module Thinreports
 
       class << self
       private
-        
+
         # @see Thinreports::Core::Shape::Basic::Format#build_internal
         def build_internal(raw_format)
           new(raw_format) do |f|
@@ -20,6 +19,6 @@ module Thinreports
         end
       end
     end
-    
+
   end
 end

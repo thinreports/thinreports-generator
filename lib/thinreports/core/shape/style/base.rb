@@ -3,7 +3,6 @@
 module Thinreports
   module Core::Shape
 
-    # @private
     class Style::Base
       include Utils
 
@@ -40,7 +39,6 @@ module Thinreports
           @accessible_styles ||= []
         end
 
-        # @private
         def inherited(s)
           s.accessible_styles.concat(accessible_styles.dup)
         end

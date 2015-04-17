@@ -28,7 +28,7 @@
 
 **NOTE:** You need to create a layout file `.tlf` using [Thinreports Editor](http://www.thinreports.org/features/editor/).
 
-### Basic Objects, Basic Usage
+### Basic Objects and Basic Usage
 
 ```ruby
 require 'thinreports'

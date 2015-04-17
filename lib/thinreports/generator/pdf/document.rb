@@ -10,7 +10,6 @@ require 'thinreports/generator/pdf/document/page'
 module Thinreports
   module Generator
 
-    # @private
     class PDF::Document
       include Utils
 
@@ -22,7 +21,6 @@ module Thinreports
       include PDF::Page
 
       # @return [Prawn::Document]
-      # @private
       attr_reader :pdf
 
       # @param options (see Thinreports::Generator::PDF#initialize)
@@ -85,7 +83,6 @@ module Thinreports
         pdf.create_stamp(id, &block)
       end
 
-      # @private
       # @see #pdf
       def internal
         @pdf

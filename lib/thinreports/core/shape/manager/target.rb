@@ -6,7 +6,6 @@ module Thinreports
     module Manager::Target
       include Utils
 
-      # @private
       attr_reader :manager
 
       # @example

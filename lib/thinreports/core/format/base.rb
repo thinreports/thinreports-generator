@@ -1,12 +1,12 @@
 # coding: utf-8
+require 'thinreports/core/format/builder'
 
-module Thinreports
-  module Core::Format
+module Thinreports::Core
+  module Format
 
     # @abstract
-    # @private
     class Base
-      extend Core::Format::Builder
+      extend Format::Builder
 
       class << self
         def config_reader(*configs, &block)

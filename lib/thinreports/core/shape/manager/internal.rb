@@ -3,7 +3,6 @@
 module Thinreports
   module Core::Shape
 
-    # @private
     class Manager::Internal
       include Utils
 
@@ -82,8 +81,8 @@ module Thinreports
 
       # @param [String] type
       # @param [Hash] limit
-      # @option [String] :only
-      # @option [String] :except
+      # @option limit [String] :only
+      # @option limit [String] :except
       # @return [Booldan]
       def valid_type?(type, limit = {})
         return true if limit.empty?

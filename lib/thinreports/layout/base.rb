@@ -12,7 +12,6 @@ module Thinreports
         # @return [Thinreports::Layout::Format]
         # @raise [Thinreports::Errors::InvalidLayoutFormat]
         # @raise [Thinreports::Errors::IncompatibleLayoutFormat]
-        # @private
         def load_format(filename)
           filename += ".#{EXT_NAME}" unless filename =~/\.#{EXT_NAME}$/
 
@@ -24,7 +23,6 @@ module Thinreports
         end
       end
 
-      # @private
       attr_reader :format
 
       # @return [String]
@@ -59,7 +57,6 @@ module Thinreports
       # @param [Hash] options ({})
       # @option option [Boolean] :count (true)
       # @return [Page]
-      # @private
       def new_page(parent, options = {})
         Report::Page.new(parent, self, options)
       end

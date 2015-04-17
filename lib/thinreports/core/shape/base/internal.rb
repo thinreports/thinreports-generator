@@ -3,7 +3,6 @@
 module Thinreports
   module Core::Shape
 
-    # @private
     # @abstract
     class Base::Internal
       include Utils

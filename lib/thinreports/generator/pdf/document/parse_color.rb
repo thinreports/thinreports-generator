@@ -2,23 +2,22 @@
 
 module Thinreports
   module Generator
-    
-    # @private
+
     module PDF::ParseColor
       # @param [String] color
       # @return [String]
       def parse_color(color)
         color = color.downcase
-        
+
         unless color =~ /^#?[\da-f]{6}$/
           find_color_from_name(color)
         else
           color.delete('#')
         end
       end
-    
+
     private
-      
+
       # Supported only SAFE COLORS.
       SUPPORTED_COLOR_NAMES = {
         'red'     => 'ff0000',
@@ -38,7 +37,7 @@ module Thinreports
         'silver'  => 'c0c0c0',
         'white'   => 'ffffff'
       }
-      
+
       def find_color_from_name(name)
         unless color = SUPPORTED_COLOR_NAMES[name]
           raise Thinreports::Errors::UnsupportedColorName, name
@@ -46,6 +45,6 @@ module Thinreports
         color
       end
     end
-    
+
   end
 end

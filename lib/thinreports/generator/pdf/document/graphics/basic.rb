@@ -2,7 +2,7 @@
 
 module Thinreports
   module Generator
-    
+
     module PDF::Graphics
       # @param [Numeric, String] x1
       # @param [Numeric, String] y1
@@ -17,7 +17,7 @@ module Thinreports
           pdf.line(pos(x1, y1), pos(x2, y2))
         end
       end
-      
+
       # @param [Numeric, String] x
       # @param [Numeric, String] y
       # @param [Numeric, String] w width
@@ -31,7 +31,7 @@ module Thinreports
       def rect(x, y, w, h, attrs = {})
         w, h   = s2f(w, h)
         radius = s2f(attrs[:radius])
-        
+
         with_graphic_styles(attrs) do
           if radius && !radius.zero?
             pdf.rounded_rectangle(pos(x, y), w, h, radius)
@@ -40,7 +40,7 @@ module Thinreports
           end
         end
       end
-      
+
       # @param [Numeric, String] x center-x
       # @param [Numeric, String] y center-y
       # @param [Numeric, String] rx
@@ -52,22 +52,22 @@ module Thinreports
       # @option attrs [String] :fill
       def ellipse(x, y, rx, ry, attrs = {})
         rx, ry = s2f(rx, ry)
-        
+
         with_graphic_styles(attrs) do
           pdf.ellipse(pos(x, y), rx, ry)
         end
       end
-      
+
     private
-      
+
       # @param [Hash] attrs
       def with_graphic_styles(attrs, &block)
         stroke = build_stroke_styles(attrs)
         fill   = build_fill_styles(attrs)
-        
+
         # Do not draw if no colors given.
         return unless fill || stroke
-        
+
         save_graphics_state
 
         # Apply stroke-dashed.
@@ -75,7 +75,7 @@ module Thinreports
           length, space = stroke[:dash]
           pdf.dash(length, space: space)
         end
-        
+
         case
         # Draw with fill and stroke.
         when fill && stroke
@@ -99,34 +99,34 @@ module Thinreports
             block.call
           }
         end
-        
+
         restore_graphics_state
-      end      
-      
+      end
+
       # @param [Hash] styles
       # @return [Hash, nil]
       def build_stroke_styles(styles)
         color = styles[:stroke]
         width = styles[:stroke_width]
-        
+
         if color && color != 'none' && width && width != 0
           {color: parse_color(color),
            width: s2f(width),
            dash: s2f(*styles[:stroke_dash])}
         end
       end
-      
+
       # @param [Hash] styles
       # @return [Hash, nil]
       def build_fill_styles(styles)
         color = styles[:fill]
-        
+
         if color && color != 'none'
           {color: parse_color(color)}
         end
-      end      
-      
+      end
+
     end
-    
+
   end
 end

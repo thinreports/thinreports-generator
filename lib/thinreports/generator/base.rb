@@ -6,14 +6,11 @@ module Thinreports
     # @abstract
     class Base
       # @return [Thinreports::Report::Base]
-      # @private
       attr_reader :report
 
       # @return [Hash]
-      # @private
       attr_reader :options
 
-      # @private
       def self.inherited(g)
         Generator.register(g.name.split('::').last.downcase.to_sym, g);
       end
@@ -34,7 +31,6 @@ module Thinreports
         raise NotImplementedError
       end
 
-      # @private
       def default_layout
         report.default_layout
       end

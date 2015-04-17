@@ -2,10 +2,9 @@
 
 require 'json'
 
-module Thinreports
-  module Core::Format
+module Thinreports::Core
+  module Format
 
-    # @private
     module Builder
       def build(*args)
         build_internal(*args)
@@ -16,14 +15,12 @@ module Thinreports
       end
 
       # @abstract
-      # @private
       def build_internal(*args)
         raise NotImplementedError
       end
 
       # @param [Thinreports::Core::Format::Base] format
       # @param [Hash] options
-      # @private
       def build_layout(format, options = {}, &block)
         level = '-' * ((options[:level] || 1 ) - 1)
         pattern = /<!--#{level}SHAPE(.*?)SHAPE#{level}-->/
@@ -36,31 +33,26 @@ module Thinreports
       end
 
       # @param [String] svg
-      # @private
       def clean(svg)
         svg.gsub!(/<!--.*?-->/, '')
       end
 
       # @param [String] svg
-      # @private
       def clean_with_attributes(svg)
         clean(svg)
         svg.gsub!(/ x\-[a-z\d\-]+?=".*?"/, '')
         svg.gsub!(/ class=".*?"/, '')
       end
 
-      # @private
       def shape_tag(format)
         %{<%= r(:"#{format.id}")%>}
       end
 
-      # @private
       def parsed_format_and_shape_type(json_string)
         f = parse_json(json_string)
         [ f['type'], f ]
       end
 
-      # @private
       def parse_json(json_string)
         JSON.parse(json_string)
       end

@@ -3,12 +3,11 @@
 module Thinreports
   module Core::Shape
 
-    # @private
     # @abstract
     class Base::Interface
       include Utils
       extend  Forwardable
-      
+
       def self.internal_delegators(*args)
         def_delegators :internal, *args
       end

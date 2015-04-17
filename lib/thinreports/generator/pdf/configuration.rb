@@ -3,6 +3,7 @@
 module Thinreports
   module Generator
 
+    # @deprecated This class will be removed in the next major version.
     class PDF::Configuration
       # @return [Array]
       attr_reader :eudc_fonts
@@ -12,9 +13,6 @@ module Thinreports
       end
 
       # @param [String, Array<String>] fonts
-      # @deprecated
-      #   `Configuration#eudc_font` will be removed in the next major version.
-      #   Please use `Thinreports.config.fallback_fonts=` instead.
       def eudc_fonts=(fonts)
         warn '[DEPRECATION] `eudc_fonts=` is deprecated and will be removed in ' +
              'the next major version of thinreports. ' +

@@ -3,7 +3,6 @@
 module Thinreports
   module Core::Shape::TextBlock
 
-    # @private
     module Formatter
       # @param [Thinreports::Core::Shape::TextBlock::Format] format
       # @return [Thinreports::Core::Shape::TextBlock::Formatter::Base]

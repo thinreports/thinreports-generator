@@ -3,7 +3,6 @@
 module Thinreports
   module Core::Shape::TextBlock
 
-    # @private
     class Formatter::Padding < Formatter::Basic
 
       private

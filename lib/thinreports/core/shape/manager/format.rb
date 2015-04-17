@@ -3,7 +3,6 @@
 module Thinreports
   module Core::Shape
 
-    # @private
     class Manager::Format < Core::Format::Base
       # @return [Symbol, Integer]
       attr_reader :identifier

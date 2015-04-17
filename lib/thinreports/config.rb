@@ -24,7 +24,7 @@ module Thinreports
       @fallback_fonts ||= []
     end
 
-    # @param [Array<String>,String]
+    # @param [Array<String>,String] font_names
     # @example
     #   config.fallback_fonts = 'Times New Roman'
     #   config.fallback_fonts = '/path/to/font.ttf'

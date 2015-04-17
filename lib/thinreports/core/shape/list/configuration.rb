@@ -30,7 +30,6 @@ module Thinreports
         @events
       end
 
-      # @private
       def internal_events
         @events
       end
@@ -41,7 +40,6 @@ module Thinreports
       end
 
       # @return [Thinreports::Core::Shape::List::Configuration]
-      # @private
       def copy
         self.class.new(@events.copy, @store && @store.copy)
       end

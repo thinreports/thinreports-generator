@@ -5,7 +5,6 @@ require 'bigdecimal'
 module Thinreports
   module Core::Shape::TextBlock
 
-    # @private
     class Formatter::Number < Formatter::Basic
 
     private

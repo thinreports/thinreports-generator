@@ -23,11 +23,7 @@ module Thinreports
         self.internal.manager = self.manager
       end
 
-      # @param [Hash] values ({})
-      # @yield [header,]
-      # @yieldparam [Thinreports::Core::Shape::List::SectionInterface] header
-      # @return [Thinreports::Core::Shape::List::SectionInterface]
-      # @raise [Thinreports::Errors::DisabledListSection]
+      # @see Thinreports::Core::Shape::List::Manager#build_header
       def_delegator :manager, :build_header, :header
 
       def on_page_finalize(&block)
@@ -89,7 +85,6 @@ module Thinreports
 
       # @param [Thinreports::Report::Page] new_parent
       # @return [Thinreports::Core::Shape::List::Page]
-      # @private
       def copy(new_parent)
         if manager.auto_page_break?
           new_list = self.class.new(new_parent, internal.format,
@@ -111,7 +106,6 @@ module Thinreports
         new_list
       end
 
-      # @private
       def manager
         @manager
       end
@@ -126,7 +120,6 @@ module Thinreports
 
     # Alias to List::Page.
     # @see Thinreports::Core::Shape::List::Page
-    # @private
     List::Interface = List::Page
 
   end

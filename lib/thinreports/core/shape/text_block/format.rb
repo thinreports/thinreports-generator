@@ -3,7 +3,6 @@
 module Thinreports
   module Core::Shape
 
-    # @private
     class TextBlock::Format < Basic::BlockFormat
       config_reader ref_id: %w( ref-id )
       config_reader :valign, :overflow

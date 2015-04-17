@@ -6,12 +6,10 @@ module Thinreports
     class List::Store < ::Struct
       include Utils
 
-      # @private
       def self.init(attrs)
         new(attrs).new
       end
 
-      # @private
       def self.new(attrs)
         super(*attrs.keys) do
           @default_values = attrs.values
@@ -26,7 +24,6 @@ module Thinreports
         super(*self.class.default_values)
       end
 
-      # @private
       def copy
         self.class.new
       end

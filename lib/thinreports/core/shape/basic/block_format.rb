@@ -2,11 +2,10 @@
 
 module Thinreports
   module Core::Shape
-    
-    # @private
+
     class Basic::BlockFormat < Basic::Format
       config_reader :value, :box
     end
-    
+
   end
 end

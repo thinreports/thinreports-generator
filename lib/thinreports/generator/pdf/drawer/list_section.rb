@@ -2,8 +2,7 @@
 
 module Thinreports
   module Generator::PDF::Drawer
-    
-    # @private
+
     class ListSection < Page
       # @param pdf (see PDF::Drawer::Page#initialize)
       # @param section [Thinreports::Core::Shape::List::SectionInternal] section
@@ -12,7 +11,7 @@ module Thinreports
         @section       = section
         @stamp_created = false
       end
-      
+
       # @param [Thinreports::Core::Shape::List::SectionInternal] section
       # @param [Array<Numeric>] at
       def draw(section, at)
@@ -20,12 +19,12 @@ module Thinreports
         draw_section
         super(section)
       end
-      
+
     private
-      
+
       def draw_section
         id = @format.identifier.to_s
-        
+
         unless @stamp_created
           @pdf.create_stamp(id) do
             @pdf.parse_svg('<svg xmlns:xlink="http://www.w3.org/1999/xlink">' +
@@ -35,17 +34,17 @@ module Thinreports
         end
         pdf_stamp(id)
       end
-      
-      # @see Thinreports::Generator::PDF::Drawer::Page#draw_tblock_shape      
+
+      # @see Thinreports::Generator::PDF::Drawer::Page#draw_tblock_shape
       def draw_tblock_shape(shape)
         @pdf.translate(*@draw_at) { super }
       end
-      
-      # @see Thinreports::Generator::PDF::Drawer::Page#draw_iblock_shape      
+
+      # @see Thinreports::Generator::PDF::Drawer::Page#draw_iblock_shape
       def draw_iblock_shape(shape)
         @pdf.translate(*@draw_at) { super }
       end
     end
-    
+
   end
 end

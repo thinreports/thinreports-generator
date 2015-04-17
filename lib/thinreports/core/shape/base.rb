@@ -4,11 +4,10 @@ require 'forwardable'
 
 module Thinreports
   module Core::Shape
-    
-    # @private
+
     module Base
     end
-    
+
   end
 end
 
