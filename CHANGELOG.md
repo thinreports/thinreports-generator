@@ -5,7 +5,8 @@ This release is a stepping stone to next major version 1.0.0 release.
   * Upgrade to Prawn 1.3 and drop support for Ruby 1.8.7 (#11)
   * Change name of root module to Thinreports from ThinReports (#15)
   * Implement `Item#value=` method (#20)
-  * Implement new list callbacks (#19)
+  * Implement new list callbacks (#17)
+  * Implement `page[:item_id]=` as alias for `page.item(:item_id).value=` (#22)
   * Support for setting the default fallback font (#7)
   * Remove `Report#generate_file` method (#13)
   * Deprecate `Report#events`, and implement new callbacks (#18)
@@ -21,6 +22,21 @@ Currently supported versions are MRI 1.9.3 and 2.0.0 or higher, JRuby(1.9 mode) 
 We have changed name of root module to `Thinreports` from `ThinReports`.
 Old name `ThinReports` has been enabling as alias, but it will be removed
 in the next major release.
+
+### Implement `page[:item_id]=` as alias for `page.item(:item_id).value=` (#22)
+
+```ruby
+# New setter, same as `page.item(:text_block).value = 'tblock value'`
+page[:text_block] = 'tblock value'
+# New getter, same as `page.item(:text_block).value`
+page[:text_block] # => "tblock value"
+page.item(:text_block).value # => "tblock value"
+
+page[:image_block] = '/path/to/image.png'
+page[:image_block] # => "/path/to/image.png"
+```
+
+See [Issue #22](https://github.com/thinreports/thinreports-generator/issues/22) for further details.
 
 ### Implement `Item#value=` method
 

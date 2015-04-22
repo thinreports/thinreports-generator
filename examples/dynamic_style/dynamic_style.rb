@@ -47,7 +47,7 @@ example :dynamic_style, 'Change styles of the object dynamically' do |t|
 
     # The Graphic Style
     r.page.item(:graphic_bcolor1).style(:border_color, '#ff0000')
-    r.page.item(:graphic_bcolor2).style(:border_color, 'red')
+    r.page[:graphic_bcolor2].style(:border_color, 'red')
     # nil or 'none'.
     r.page.item(:graphic_bcolor4).style(:border_color, nil)
 
@@ -64,7 +64,7 @@ example :dynamic_style, 'Change styles of the object dynamically' do |t|
 
     # The Text Style
     [1, 3].each do |i|
-      r.page.item("text_b#{i}").style(:bold, true)
+      r.page["text_b#{i}"].style(:bold, true)
       r.page.item("text_i#{i}").style(:italic, true)
       r.page.item("text_u#{i}").style(:underline, true)
       r.page.item("text_l#{i}").style(:linethrough, true)
@@ -84,7 +84,7 @@ example :dynamic_style, 'Change styles of the object dynamically' do |t|
     end
 
     2.times do |i|
-      r.page.item("text_color#{i + 1}").style(:color, 'ff0000')
+      r.page["text_color#{i + 1}"].style(:color, 'ff0000')
     end
 
     # In case of using "dynamic_style_in_list.tlf"
@@ -97,10 +97,10 @@ example :dynamic_style, 'Change styles of the object dynamically' do |t|
       header.item(:text).styles(align: :center,
                                 valign: :center,
                                 bold: true)
-      header.item(:tblock).styles(align: :center,
-                                  valign: :center,
-                                  color: 'red',
-                                  linethrough: true)
+      header[:tblock].styles(align: :center,
+                             valign: :center,
+                             color: 'red',
+                             linethrough: true)
     end
 
     1.step(10, 1) do |i|

@@ -20,6 +20,8 @@ module Thinreports
       #     t.value('Title')
       #     t.style(:fill, 'red')
       #   end
+      #   item(:list)       # => Error: UnknownItemId
+      #   item(:unknown_id) # => Error: UnknownItemId
       # @param [String, Symbol] id
       # @yield [item,]
       # @yieldparam [Thinreports::Core::Shape::Base::Interface] item
@@ -34,6 +36,30 @@ module Thinreports
           call_block_in(shape, &block)
         end
       end
+
+       # @example
+       #   page[:text_block].style(:bold, true)
+       #   page[:rect].style(:border_color, 'red')
+       #
+       #   page[:list]       # => Error: UnknownItemId
+       #   page[:unknown_id] # => Error: UnknownItemId
+       # @param [String, Symbol] id
+       # @return [Thinreports::Core::Shape::Base::Interface]
+       def [](id)
+         item(id)
+       end
+
+       # @example
+       #   page[:text_block]  = 'Title'
+       #   page[:image_block] = '/path/to/image.png'
+       #   page[:list]        = 'value' # => Error: UnknownItemId
+       #   page[:ellipse]     = 'value' # => Error: NoMethodError #value
+       #   page[:unknown_id]  = 'value' # => Error: UnknownItemId
+       # @param [String, Symbol] id
+       # @param [Object] value
+       def []=(id, value)
+         item(id).value = value
+       end
 
       # @param [Hash] item_values id: value
       def values(item_values)

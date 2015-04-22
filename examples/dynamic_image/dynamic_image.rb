@@ -21,8 +21,8 @@ example :dynamic_image, 'Show images dynamically' do
                   pos_bottom_center:   image50x50,
                   pos_bottom_right:    image50x50)
 
-    r.page.item(:overflow).src(image200x100)
-    r.page.item(:thinreports_logo).src(open('http://www.thinreports.org/assets/logos/thinreports-logo.png'))
+    r.page.item(:overflow).src = image200x100
+    r.page[:thinreports_logo] = open('http://www.thinreports.org/assets/logos/thinreports-logo.png')
 
     r.page.list(:list) do |list|
       3.times { list.add_row in_list: image50x50 }
