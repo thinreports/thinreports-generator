@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.version     = Thinreports::VERSION
   s.author      = 'Matsukei Co.,Ltd.'
   s.email       = 'thinreports@gmail.com'
-  s.summary     = 'An open source report generating tool for Ruby.'
-  s.description = 'Thinreports is an open source report generating tool for Ruby.'
+  s.summary     = 'An open source report tool for Ruby.'
+  s.description = 'Thinreports is an open source report tool for Ruby.'
   s.homepage    = 'http://www.thinreports.org'
   s.licenses    = ['MIT']
 
