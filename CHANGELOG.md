@@ -23,32 +23,6 @@ We have changed name of root module to `Thinreports` from `ThinReports`.
 Old name `ThinReports` has been enabling as alias, but it will be removed
 in the next major release.
 
-### Implement `page[:item_id]=` as alias for `page.item(:item_id).value=` (#22)
-
-```ruby
-# New setter, same as `page.item(:text_block).value = 'tblock value'`
-page[:text_block] = 'tblock value'
-# New getter, same as `page.item(:text_block).value`
-page[:text_block] # => "tblock value"
-page.item(:text_block).value # => "tblock value"
-
-page[:image_block] = '/path/to/image.png'
-page[:image_block] # => "/path/to/image.png"
-```
-
-See [Issue #22](https://github.com/thinreports/thinreports-generator/issues/22) for further details.
-
-### Implement `Item#value=` method
-
-```ruby
-page.item(:text_block).value('value')
-page.item(:text_block).value = 'value'
-page.item(:image_block).src('/path/to/image.tlf')
-page.item(:image_block).src = '/path/to/image.tlf'
-```
-
-See [Issue #20](https://github.com/thinreports/thinreports-generator/issues/20) for further details.
-
 ### Deprecate `List#events` and `List#store`
 
 `List#events` and `List#store` have been deprecated.
@@ -94,7 +68,7 @@ report.list do |list|
 end
 ```
 
-See [Issue #9](https://github.com/thinreports/thinreports-generator/issues/9) and [examples/list_events](https://github.com/thinreports/thinreports-generator/tree/master/examples/list_events) for further details.
+See [Issue #17](https://github.com/thinreports/thinreports-generator/issues/17), [Issue #9](https://github.com/thinreports/thinreports-generator/issues/9) and [examples/list_events](https://github.com/thinreports/thinreports-generator/tree/master/examples/list_events) for further details.
 
 ### Deprecate `Report#events`, and implement new callbacks
 
@@ -131,6 +105,32 @@ report.generate filename: 'foo.pdf'
 ```
 
 See [Issue #18](https://github.com/thinreports/thinreports-generator/issues/18) for further details.
+
+### Implement `page[:item_id]=` as alias for `page.item(:item_id).value=` (#22)
+
+```ruby
+# New setter, same as `page.item(:text_block).value = 'tblock value'`
+page[:text_block] = 'tblock value'
+# New getter, same as `page.item(:text_block).value`
+page[:text_block] # => "tblock value"
+page.item(:text_block).value # => "tblock value"
+
+page[:image_block] = '/path/to/image.png'
+page[:image_block] # => "/path/to/image.png"
+```
+
+See [Issue #22](https://github.com/thinreports/thinreports-generator/issues/22) for further details.
+
+### Implement `Item#value=` method
+
+```ruby
+page.item(:text_block).value('value')
+page.item(:text_block).value = 'value'
+page.item(:image_block).src('/path/to/image.tlf')
+page.item(:image_block).src = '/path/to/image.tlf'
+```
+
+See [Issue #20](https://github.com/thinreports/thinreports-generator/issues/20) for further details.
 
 ### Support for setting the default fallback font
 
