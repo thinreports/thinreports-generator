@@ -7,6 +7,7 @@ This release is a stepping stone to next major version 1.0.0 release.
   * Implement `Item#value=` method (#20)
   * Implement new list callbacks (#17)
   * Implement `page[:item_id]=` as alias for `page.item(:item_id).value=` (#22)
+  * Support font-size style for Text and TextBlock (#23)
   * Support for setting the default fallback font (#7)
   * Remove `Report#generate_file` method (#13)
   * Deprecate `Report#events`, and implement new callbacks (#18)
@@ -131,6 +132,16 @@ page.item(:image_block).src = '/path/to/image.tlf'
 ```
 
 See [Issue #20](https://github.com/thinreports/thinreports-generator/issues/20) for further details.
+
+### Support font-size style for Text and TextBlock
+
+```ruby
+page.item(:text).style(:font_size, 20)
+page.item(:text_block).style(:font_size, 20)
+page.item(:text_block).style(:font_size) # => 20
+```
+
+See [Issue #23](https://github.com/thinreports/thinreports-generator/issues/23) for further details.
 
 ### Support for setting the default fallback font
 
