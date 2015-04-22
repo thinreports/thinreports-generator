@@ -4,6 +4,12 @@ module Thinreports
   module Report
 
     class BlankPage
+      # @example
+      #   3.times do
+      #     page = report.start_new_page
+      #     puts page.no
+      #   end
+      #   # => 1, 2, 3
       # @return [Integer]
       attr_accessor :no
 
@@ -12,6 +18,12 @@ module Thinreports
         @count = count.nil? ? true : count
       end
 
+      # @example
+      #   page = report.start_new_page
+      #   page.count? # => true
+      #
+      #   page = report.start_new_page count: false
+      #   page.count? # => false
       # @return [Boolean]
       def count?
         @count

@@ -79,6 +79,9 @@ module Thinreports
       # @return [Array<Thinreports::Report::Page>]
       def_delegator :internal, :pages
 
+      # @return [Thinreports::Layout::Base]
+      def_delegator :internal, :default_layout
+
       # @param [Hash] options
       # @option options [String, nil] :layout (nil)
       def initialize(options = {})
@@ -89,12 +92,14 @@ module Thinreports
         @generate_handler = nil
       end
 
+      # @yield [page]
+      # @yieldparam [Thinreports::Report::Page] page
+      # @example
+      #   report.on_page_create do |page|
+      #     page.item(:header_title).value = 'Title'
+      #   end
       def on_page_create(&block)
         internal.page_create_handler = block
-      end
-
-      def on_generate(&block)
-        internal.generate_handler = block
       end
 
       # @param [Integer] page_number
@@ -102,17 +107,33 @@ module Thinreports
         @start_page_number = page_number
       end
 
-      # @param [String] layout path to layout-file.
+      # @param [String] layout filename of layout file
       # @param [Hash] options
       # @option options [Boolean] :default (true)
       # @option options [Symbol] :id (nil)
       # @yield [config]
       # @yieldparam [Thinreports::Layout::Configuration] config
-      # @return [void]
+      # @example
+      #   report.use_layout '/path/to/default_layout.tlf' # Default layout
+      #   report.use_layout '/path/to/default_layout.tlf', default: true
+      #   report.use_layout '/path/to/other_layout', id: :other_layout
       def use_layout(layout, options = {}, &block)
         internal.register_layout(layout, options, &block)
       end
 
+      # @example
+      #   page = report.start_new_page
+      #
+      #   report.start_new_page do |page|
+      #     page.item(:text).value = 'value'
+      #   end
+      #
+      #   report.use_layout 'foo.tlf', default: true
+      #   report.use_layout 'bar.tlf', id: :bar
+      #
+      #   report.start_new_page                   # => Use 'foo.tlf'
+      #   report.start_new_page layout: :bar      # => 'bar.tlf'
+      #   report.start_new_page layout: 'boo.tlf' # => 'boo.tlf'
       # @param [Hash] options
       # @option options [String, Symbol] :layout (nil)
       # @option options [Boolean] :count (true)
@@ -136,8 +157,7 @@ module Thinreports
       end
       alias_method :blank_page, :add_blank_page
 
-      # @param [Symbol, nil] id Return the default layout
-      #   if nil (see #default_layout).
+      # @param [Symbol, nil] id
       # @return [Thinreports::Layout::Base]
       def layout(id = nil)
         if id
@@ -148,26 +168,17 @@ module Thinreports
         end
       end
 
-      # @return [Thinreports::Layout::Base]
-      def default_layout
-        internal.default_layout
-      end
-
-      # @overload generate(type, options = {})
-      #   Specify the generator type.
-      #   @param [Symbol] type
-      #   @return [String]
       # @overload generate(options = {})
-      #   Using the default generator type.
       #   @param [Hash] options ({})
       #   @return [String]
-      # @example Generate the PDF data
-      #   report.generate(:pdf) #=> "%PDF-1.4...."
-      #
-      #   # Or, you can omit the type of generator
-      #   report.generate
-      # @example Create the PDF file (Since v0.8)
-      #   report.generate(:pdf, filename: 'foo.pdf')
+      # @overload generate(type, options = {})
+      #   This way has been DEPRECATED. Use instead #generate(options = {}).
+      #   @param [Symbol] type
+      #   @return [String]
+      # @example Generate PDF data
+      #   report.generate # => "%PDF-1.4...."
+      # @example Create a PDF file
+      #   report.generate(filename: 'foo.pdf')
       def generate(*args)
         options = args.last.is_a?(::Hash) ? args.pop : {}
         type = args.first || Thinreports.config.generator.default

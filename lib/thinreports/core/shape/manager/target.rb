@@ -25,7 +25,7 @@ module Thinreports
       # @param [String, Symbol] id
       # @yield [item,]
       # @yieldparam [Thinreports::Core::Shape::Base::Interface] item
-      # @raise [Thinreports::Errors::UnknownItemId] If not found
+      # @raise [Thinreports::Errors::UnknownItemId]
       # @return [Thinreports::Core::Shape::Base::Interface]
       def item(id, &block)
         shape = find_item(id, except: Core::Shape::List::TYPE_NAME)
@@ -37,31 +37,34 @@ module Thinreports
         end
       end
 
-       # @example
-       #   page[:text_block].style(:bold, true)
-       #   page[:rect].style(:border_color, 'red')
-       #
-       #   page[:list]       # => Error: UnknownItemId
-       #   page[:unknown_id] # => Error: UnknownItemId
-       # @param [String, Symbol] id
-       # @return [Thinreports::Core::Shape::Base::Interface]
-       def [](id)
-         item(id)
-       end
+      # @example
+      #   page[:text_block].style(:bold, true)
+      #   page[:rect].style(:border_color, 'red')
+      #
+      #   page[:list]       # => Error: UnknownItemId
+      #   page[:unknown_id] # => Error: UnknownItemId
+      # @param [String, Symbol] id
+      # @return [Thinreports::Core::Shape::Base::Interface]
+      def [](id)
+       item(id)
+      end
 
-       # @example
-       #   page[:text_block]  = 'Title'
-       #   page[:image_block] = '/path/to/image.png'
-       #   page[:list]        = 'value' # => Error: UnknownItemId
-       #   page[:ellipse]     = 'value' # => Error: NoMethodError #value
-       #   page[:unknown_id]  = 'value' # => Error: UnknownItemId
-       # @param [String, Symbol] id
-       # @param [Object] value
-       def []=(id, value)
-         item(id).value = value
-       end
+      # @example
+      #   page[:text_block]  = 'Title'
+      #   page[:image_block] = '/path/to/image.png'
+      #   page[:list]        = 'value' # => Error: UnknownItemId
+      #   page[:ellipse]     = 'value' # => Error: NoMethodError #value
+      #   page[:unknown_id]  = 'value' # => Error: UnknownItemId
+      # @param [String, Symbol] id
+      # @param [Object] value
+      def []=(id, value)
+       item(id).value = value
+      end
 
-      # @param [Hash] item_values id: value
+      # @example
+      #   page.values text_block: 'value',
+      #               image_block: '/path/to/image.png'
+      # @param [Hash] item_values
       def values(item_values)
         item_values.each {|id, val| item(id).value(val)}
       end
@@ -73,6 +76,13 @@ module Thinreports
       end
       alias_method :exists?, :item_exists?
 
+      # @example
+      #   report.list.add_row do |row|
+      #     row.item(:price).value(1000)
+      #   end
+      #
+      #   report.list(:list_id) # => List
+      #   report.list(:text_block_id) # => raises UnknownItemId
       # @see #item
       def list(id = nil, &block)
         shape = find_item(id ||= :default, only: Core::Shape::List::TYPE_NAME)
