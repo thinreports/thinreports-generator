@@ -131,9 +131,9 @@ module Thinreports
       #   report.use_layout 'foo.tlf', default: true
       #   report.use_layout 'bar.tlf', id: :bar
       #
-      #   report.start_new_page                   # => Use 'foo.tlf'
-      #   report.start_new_page layout: :bar      # => 'bar.tlf'
-      #   report.start_new_page layout: 'boo.tlf' # => 'boo.tlf'
+      #   report.start_new_page                   # Use 'foo.tlf'
+      #   report.start_new_page layout: :bar      # Use 'bar.tlf'
+      #   report.start_new_page layout: 'boo.tlf' # Use 'boo.tlf'
       # @param [Hash] options
       # @option options [String, Symbol] :layout (nil)
       # @option options [Boolean] :count (true)
