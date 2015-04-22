@@ -41,15 +41,21 @@ report.start_new_page do
 end
 
 report.start_new_page do |page|
+  # Item Finder
+  page.item(:item_id) # => Item object
+  page[:item_id]      # => Item object
+
   # Text block
   page.item(:text_block).value('Pure Ruby')
   page.item(:text_block).value = 'Pure Ruby'
+  page[:text_block] = 'Pure Ruby'
   page.item('text_block').set('value', color: '#0000ff')
   page.item(:text_block).format_enabled(false)
 
   # Image block
   page.item(:image_block).src('/path/to/image.png')
   page.item(:image_block).src = '/path/to/image.png'
+  page[:image_block] = '/path/to/image.png'
   require 'open-uri'
   page.item(:image_block).src(open('http://www.thinreports.org/assets/logos/thinreports-logo.png'))
 
@@ -66,6 +72,7 @@ report.start_new_page do |page|
   page.item(:text).style(:italic, true)
   page.item(:text).style(:linethrough, true)
   page.item(:text).style(:underline, true)
+  page.item(:text).style(:font_size, 20)
 
   page.item(:text).style(:align, :left or :center or :right)
   page.item(:text).style(:valign, :top or :center or :bottom)
@@ -149,7 +156,7 @@ end
 
 See also [examples/report_callbacks](https://github.com/thinreports/thinreports-generator/tree/master/examples/report_callbacks).
 
-### List Object
+### List
 
 ```ruby
 report = Thinreports::Report.new layout: 'list.tlf'
@@ -188,7 +195,9 @@ report.list do |list|
   end
 
   [100, 200, 300].each do |price|
-    list.add_row price: price
+    list.add_row do |row|
+      row[:price] = price
+    end
     price_per_page += price
   end
 end
@@ -196,7 +205,7 @@ end
 
 See also  [examples/list_events](https://github.com/thinreports/thinreports-generator/tree/master/examples/list_events).
 
-### Page Number Object
+### Page Number
 
 ```ruby
 # Setting starting number of page
