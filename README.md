@@ -22,7 +22,7 @@
 
 ## Supported versions
 
-  * Ruby 1.9.3, 2.0+
+  * Ruby 1.9.3, 2.0, 2.1, 2.2
   * JRuby 1.7.0+ (1.9 mode)
 
 ## Quick Reference
