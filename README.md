@@ -171,7 +171,7 @@ end
   end
 end
 
-report.generate(filename: 'list.tlf')
+report.generate(filename: 'list.pdf')
 ```
 
 ```ruby
