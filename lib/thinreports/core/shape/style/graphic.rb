@@ -4,8 +4,7 @@ module Thinreports
   module Core::Shape
 
     class Style::Graphic < Style::Basic
-      style_accessible :border_color, :border_width, :fill_color, :border,
-                       :fill, :stroke
+      style_accessible :border_color, :border_width, :fill_color, :border
 
       # @method border_color
       #   @return [String]
