@@ -113,11 +113,13 @@ See [Issue #18](https://github.com/thinreports/thinreports-generator/issues/18) 
 # New setter, same as `page.item(:text_block).value = 'tblock value'`
 page[:text_block] = 'tblock value'
 # New getter, same as `page.item(:text_block).value`
-page[:text_block] # => "tblock value"
+page[:text_block] # => <Tblock>
+page[:text_block].value # => "tblock value"
 page.item(:text_block).value # => "tblock value"
 
 page[:image_block] = '/path/to/image.png'
-page[:image_block] # => "/path/to/image.png"
+page[:image_block].src # => "/path/to/image.png"
+page.item(:image_block).src # => "/path/to/image.png"
 ```
 
 See [Issue #22](https://github.com/thinreports/thinreports-generator/issues/22) for further details.
