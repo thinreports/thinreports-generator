@@ -12,7 +12,6 @@ module Thinreports
       attr_reader :events
 
       attr_accessor :page_create_handler
-      attr_accessor :generate_handler
 
       # @param [Thinreports::Report::Base] report
       # @param options (see Thinreports::Report::Base#initialize)
@@ -28,7 +27,6 @@ module Thinreports
         @page_count = 0
 
         @page_create_handler = nil
-        @generate_handler = nil
 
         @events = Report::Events.new
       end
@@ -63,11 +61,22 @@ module Thinreports
           finalize_current_page
           @finalized = true
 
-          # [DEPRECATION] Please use Report::Base#on_generate callback instead.
+          # [DEPRECATION] You can do the same implements as the :generate Event
+          #   with the following code:
+          #
+          #   report = Thinreports::Report.new layout: 'foo.tlf'
+          #   report.start_new_page do |page|
+          #     page.item(:price).value = 100000
+          #   end
+          #
+          #   report.pages.each do |page|
+          #     page[:title] = 'Common Title'
+          #   end
+          #
+          #   report.generate filename: 'foo.pdf'
+          #
           events.dispatch(Report::Events::Event.new(:generate,
                                                     @report, nil, pages))
-
-          @generate_handler.call(pages) if @generate_handler
         end
       end
 
