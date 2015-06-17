@@ -87,9 +87,6 @@ module Thinreports
       def initialize(options = {})
         @internal = Report::Internal.new(self, options)
         @start_page_number = 1
-
-        @page_create_handler = nil
-        @generate_handler = nil
       end
 
       # @yield [page]
