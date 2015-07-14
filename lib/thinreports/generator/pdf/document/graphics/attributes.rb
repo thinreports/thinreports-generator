@@ -116,9 +116,10 @@ module Thinreports
       end
 
       # @param [String] xlink
-      # @return [String]
+      # @return [Array<string>] returns ['image/png', '<base64 data>']
       def extract_base64_string(xlink)
-        xlink.sub(%r{^data:image/[a-z]+?;base64,}, '')
+        _, type, data = xlink.match(%r|^data:(image/[a-z]+?);base64,(.+)|).to_a
+        [type, data]
       end
     end
 

@@ -30,8 +30,9 @@ module Thinreports
       # @param [Thinreports::Core::Shape::Basic::Internal] shape
       def draw_shape_image(shape)
         x, y, w, h = shape.style.svg_attrs.values_at('x', 'y', 'width', 'height')
-        base64image(extract_base64_string(shape.style.svg_attrs['xlink:href']),
-                    x, y, w, h)
+
+        image_type, image_data = extract_base64_string(shape.style.svg_attrs['xlink:href'])
+        base64image(image_type, image_data, x, y, w, h)
       end
 
       # @param [Thinreports::Core::Shape::ImageBlock::Internal] shape
