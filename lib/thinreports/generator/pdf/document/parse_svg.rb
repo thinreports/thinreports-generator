@@ -78,8 +78,9 @@ module Thinreports
       # @see #draw_svg_rect
       def draw_svg_image(elm)
         x, y, w, h = element_attributes_values_at(elm, 'x', 'y', 'width', 'height')
-        base64image(extract_base64_string(elm.attributes['xlink:href']),
-                    x, y, w, h)
+
+        image_type, image_data = extract_base64_string(elm.attributes['xlink:href'])
+        base64image(image_type, image_data, x, y, w, h)
       end
 
       # @param [Hash] attributes
