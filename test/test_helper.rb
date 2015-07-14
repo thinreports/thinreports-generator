@@ -8,6 +8,7 @@ require 'mocha/mini_test'
 
 require 'digest/sha1'
 require 'pathname'
+require 'chunky_png'
 require 'thinreports'
 
 module Thinreports::TestHelper
@@ -46,6 +47,10 @@ module Thinreports::TestHelper
 
   def data_file(filename)
     ROOT.join('data', filename).to_s
+  end
+
+  def read_data_file(filename)
+    File.read(data_file(filename))
   end
 
   def temp_file(extname = 'pdf')
