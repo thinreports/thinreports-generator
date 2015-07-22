@@ -1,3 +1,9 @@
+## 0.8.1
+
+### Add OPTIONAL feature for converting a palette-based PNG w. transparency
+
+This feature is **DISABLED** by default. Please see [PR#32](https://github.com/thinreports/thinreports-generator/pull/32) for further details.
+
 ## 0.8.0
 
 This release is a stepping stone to next major version 1.0.0 release.
