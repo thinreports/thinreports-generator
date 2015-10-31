@@ -14,7 +14,7 @@
 
 ## [Feature concepts of the next major version 1.0.0](https://github.com/thinreports/thinreports/labels/CONCEPT)
 
-**We are now developing the next major version 0.8.0.
+**We are now developing the next major version 1.0.0.
 And, we are publishing concept of the new features.**
 
 ---
