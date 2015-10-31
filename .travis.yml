@@ -7,5 +7,7 @@ rvm:
   - 2.1.6
   - 2.2.2
   - jruby
-
 script: rake test
+
+notifications:
+  slack: thinreports:2ckH2daU7QbXMiUlI6wOWEHW
