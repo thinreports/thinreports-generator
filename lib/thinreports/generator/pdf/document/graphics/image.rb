@@ -152,7 +152,7 @@ module Thinreports
         private
 
         def pallete_based?
-          color_mode, depth = @image.palette.best_color_settings
+          color_mode, _depth = @image.palette.best_color_settings
           color_mode == ChunkyPNG::COLOR_INDEXED
         end
 

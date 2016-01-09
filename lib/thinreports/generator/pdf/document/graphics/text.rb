@@ -33,7 +33,7 @@ module Thinreports
           pdf.formatted_text_box([{ text: content, styles: font_styles }],
             built_attrs.merge(box_attrs))
         end
-      rescue Prawn::Errors::CannotFit => e
+      rescue Prawn::Errors::CannotFit
         # Nothing to do.
         #
         # When the area is too small compared
