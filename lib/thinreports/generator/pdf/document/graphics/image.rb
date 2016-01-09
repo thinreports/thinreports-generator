@@ -90,7 +90,7 @@ module Thinreports
 
       def clean_temp_images
         temp_image_registry.each_value do |image_path|
-          File.delete(image_path) if File.exists?(image_path)
+          File.delete(image_path) if File.exist?(image_path)
         end
       end
 

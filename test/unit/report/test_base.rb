@@ -124,8 +124,8 @@ class Thinreports::Report::TestBase < Minitest::Test
     report.generate :pdf, filename: temp_path.join('result1.pdf')
     report.generate filename: temp_path.join('result2.pdf')
 
-    assert File.exists?(temp_path.join('result1.pdf'))
-    assert File.exists?(temp_path.join('result2.pdf'))
+    assert File.exist?(temp_path.join('result1.pdf'))
+    assert File.exist?(temp_path.join('result2.pdf'))
 
     assert_equal File.read(temp_path.join('result1.pdf')),
                  File.read(temp_path.join('result2.pdf'))
