@@ -86,14 +86,12 @@ module Thinreports
 
       # @return [Hash]
       def finalized_svg_attributes
-        if @finalized_svg_attributes.nil?
-          @finalized_svg_attributes = if @styles.empty?
+        @finalized_svg_attributes ||=
+          if @styles.empty?
             @base_styles.dup
           else
             @base_styles.merge(@styles)
           end
-        end
-        @finalized_svg_attributes
       end
       alias_method :svg_attrs, :finalized_svg_attributes
 
