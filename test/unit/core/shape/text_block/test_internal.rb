@@ -58,7 +58,7 @@ class Thinreports::Core::Shape::TextBlock::TestInternal < Minitest::Test
 
   def test_write_value_should_show_warnings_when_tblock_has_reference
     tblock = create_internal('id' => 'bar', 'ref-id' => 'foo')
-    out, err = capture_io do
+    _out, err = capture_io do
       tblock.write_value('value')
     end
     assert_equal err.chomp, 'The set value was not saved, ' +

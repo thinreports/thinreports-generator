@@ -10,7 +10,6 @@ class Thinreports::Core::Shape::List::TestSectionInternal < Minitest::Test
 
   def create_internal(format_config = {})
     report = new_report 'layout_text1'
-    parent = report.start_new_page
 
     List::SectionInternal.new report, List::SectionFormat.new(format_config)
   end

@@ -18,6 +18,10 @@ module Thinreports
         shapes[id]
       end
 
+      def has_shape?(id)
+        shapes.include?(id)
+      end
+
       def shapes
         @shapes ||= {}
       end

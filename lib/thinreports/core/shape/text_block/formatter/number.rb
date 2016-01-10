@@ -25,12 +25,13 @@ module Thinreports
       end
 
       def if_applicable(value, &block)
-        val = case value
-          when Numeric then value
-          when String
-            (Integer(value) rescue nil) || (Float(value) rescue nil)
-          else nil
-        end
+        val =
+          case value
+            when Numeric then value
+            when String
+              (Integer(value) rescue nil) || (Float(value) rescue nil)
+            else nil
+          end
         val.nil? ? value : block.call(val)
       end
 

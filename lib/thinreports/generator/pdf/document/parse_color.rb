@@ -39,9 +39,8 @@ module Thinreports
       }
 
       def find_color_from_name(name)
-        unless color = SUPPORTED_COLOR_NAMES[name]
-          raise Thinreports::Errors::UnsupportedColorName, name
-        end
+        color = SUPPORTED_COLOR_NAMES[name]
+        raise Thinreports::Errors::UnsupportedColorName, name unless color
         color
       end
     end

@@ -18,7 +18,7 @@ class Thinreports::Core::Shape::List::TestPage < Minitest::Test
 
     create_report do |r|
       r.layout.config.list(:list) do |list|
-        list.events.on(event) {|e| @is_dispatched = true }
+        list.events.on(event) { @is_dispatched = true }
       end
     end
   end
@@ -126,7 +126,7 @@ class Thinreports::Core::Shape::List::TestPage < Minitest::Test
   def test_copy_should_properly_work_when_list_has_not_header
     report = new_report('layout_list_noheader.tlf')
 
-    10.times {|t| report.list.add_row }
+    10.times { report.list.add_row }
   rescue => e
     flunk exception_details(e, 'Not worked when list has not header')
   end

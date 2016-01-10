@@ -12,18 +12,19 @@ module Thinreports
 
       # @param [Thinreports::Layout::Format] format
       def start_new_page(format)
-        format_id = if change_page_format?(format)
-          pdf.start_new_page(new_basic_page_options(format))
-          @current_page_format = format
+        format_id =
+          if change_page_format?(format)
+            pdf.start_new_page(new_basic_page_options(format))
+            @current_page_format = format
 
-          unless format_stamp_registry.include?(format.identifier)
-            create_format_stamp(format)
+            unless format_stamp_registry.include?(format.identifier)
+              create_format_stamp(format)
+            end
+            format.identifier
+          else
+            pdf.start_new_page(new_basic_page_options(current_page_format))
+            current_page_format.identifier
           end
-          format.identifier
-        else
-          pdf.start_new_page(new_basic_page_options(current_page_format))
-          current_page_format.identifier
-        end
 
         stamp(format_id.to_s)
       end
@@ -62,20 +63,21 @@ module Thinreports
       def new_basic_page_options(format)
         options = {layout: format.page_orientation.to_sym}
 
-        options[:size] = if format.user_paper_type?
-          [format.page_width.to_f, format.page_height.to_f]
-        else
-          case format.page_paper_type
-          # Convert B4(5)_ISO to B4(5)
-          when 'B4_ISO', 'B5_ISO'
-            format.page_paper_type.delete('_ISO')
-          # Convert B4(5) to B4(5)_JIS
-          when 'B4', 'B5'
-            "#{format.page_paper_type}_JIS"
+        options[:size] =
+          if format.user_paper_type?
+            [format.page_width.to_f, format.page_height.to_f]
           else
-            format.page_paper_type
+            case format.page_paper_type
+            # Convert B4(5)_ISO to B4(5)
+            when 'B4_ISO', 'B5_ISO'
+              format.page_paper_type.delete('_ISO')
+            # Convert B4(5) to B4(5)_JIS
+            when 'B4', 'B5'
+              "#{format.page_paper_type}_JIS"
+            else
+              format.page_paper_type
+            end
           end
-        end
         options
       end
     end

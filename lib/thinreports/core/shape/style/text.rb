@@ -128,16 +128,17 @@ module Thinreports
       # @param [Boolean] u
       # @param [Boolean] s
       def text_decoration(u, s)
-        deco = case
-        when u && s
-          'underline line-through'
-        when u && !s
-          'underline'
-        when !u && s
-          'line-through'
-        else
-          'none'
-        end
+        deco =
+          case
+          when u && s
+            'underline line-through'
+          when u && !s
+            'underline'
+          when !u && s
+            'line-through'
+          else
+            'none'
+          end
         write_internal_style('text-decoration', deco)
       end
     end

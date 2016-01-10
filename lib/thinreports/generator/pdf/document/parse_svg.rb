@@ -20,7 +20,6 @@ module Thinreports
           when 's-line'    then draw_svg_line(elm)
           end
         end
-        svg = nil
       end
 
     private
@@ -88,9 +87,12 @@ module Thinreports
       def svg_text_attrs(attributes)
         common_text_attrs(attributes) do |attrs|
           # Set the :line_height option.
-          if height = attributes['x-line-height']
-            attrs[:line_height] = height unless height == 'normal'
+          line_height = attributes['x-line-height']
+
+          if line_height && line_height != 'normal'
+            attrs[:line_height] = line_height
           end
+
           # Set the :valign option.
           attrs[:valign] = text_valign(attributes['x-valign'])
         end

@@ -11,7 +11,7 @@ class Thinreports::Generator::TestPDF < Minitest::Test
     report = new_report('layout_text1.tlf') {|r| r.start_new_page }
 
     actual_pdf_title = nil
-    PDF::Document.define_singleton_method(:new) {|options, meta|
+    PDF::Document.define_singleton_method(:new) {|_options, meta|
       actual_pdf_title = meta[:Title]
     }
     PDF.new report, {}

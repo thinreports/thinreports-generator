@@ -33,16 +33,17 @@ module Thinreports
 
       # @see Thinreports::Report::Base#use_layout
       def register_layout(layout, options = {}, &block)
-        layout = if options.empty? || options[:default]
-          @default_layout = init_layout(layout)
-        else
-          id = options[:id].to_sym
+        layout =
+          if options.empty? || options[:default]
+            @default_layout = init_layout(layout)
+          else
+            id = options[:id].to_sym
 
-          if layout_registry.key?(id)
-            raise ArgumentError, "Id :#{id} is already in use."
+            if layout_registry.key?(id)
+              raise ArgumentError, "Id :#{id} is already in use."
+            end
+            layout_registry[id] = init_layout(layout, id)
           end
-          layout_registry[id] = init_layout(layout, id)
-        end
         layout.config(&block)
       end
 
@@ -87,14 +88,15 @@ module Thinreports
       def load_layout(id_or_filename)
         return @default_layout if id_or_filename.nil?
 
-        layout = case id_or_filename
-        when Symbol
-          layout_registry[id_or_filename]
-        when String
-          prepare_layout(id_or_filename)
-        else
-          raise ArgumentError, 'Invalid argument for layout.'
-        end
+        layout =
+          case id_or_filename
+          when Symbol
+            layout_registry[id_or_filename]
+          when String
+            prepare_layout(id_or_filename)
+          else
+            raise ArgumentError, 'Invalid argument for layout.'
+          end
         @default_layout = layout unless @default_layout
         layout
       end

@@ -82,16 +82,16 @@ module Thinreports
                     size: s2f(attrs.delete(:size))}
 
         # Add the specified value to :leading option.
-        if line_height = attrs.delete(:line_height)
+        line_height = attrs.delete(:line_height)
+        if line_height
           attrs[:leading] = text_line_leading(s2f(line_height),
                                               name: fontinfo[:name],
                                               size: fontinfo[:size])
         end
 
         # Set the :character_spacing option.
-        if space = attrs.delete(:letter_spacing)
-          attrs[:character_spacing] = s2f(space)
-        end
+        spacing = attrs.delete(:letter_spacing)
+        attrs[:character_spacing] = s2f(spacing) if spacing
 
         # Or... with_font_styles(attrs, fontinfo, &block)
         with_font_styles(attrs, fontinfo) do |modified_attrs, styles|
@@ -126,7 +126,9 @@ module Thinreports
       # @yieldparam [Array] styles
       def with_font_styles(attrs, font, &block)
         # Building font styles.
-        if styles = attrs.delete(:styles)
+        styles = attrs.delete(:styles)
+
+        if styles
           manual, styles = styles.partition do |style|
             [:bold, :italic].include?(style) && !font_has_style?(font[:name], style)
           end

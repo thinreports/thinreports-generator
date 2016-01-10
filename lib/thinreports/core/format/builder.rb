@@ -8,14 +8,14 @@ module Thinreports::Core
     module Builder
       def build(*args)
         build_internal(*args)
-      rescue Thinreports::Errors::Basic => e
+      rescue Thinreports::Errors::Basic
         raise
-      rescue => e
+      rescue
         raise Thinreports::Errors::InvalidLayoutFormat
       end
 
       # @abstract
-      def build_internal(*args)
+      def build_internal
         raise NotImplementedError
       end
 

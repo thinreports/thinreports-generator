@@ -15,7 +15,8 @@ module Thinreports
         manager = page.manager
 
         manager.format.shapes.each_key do |id|
-          next unless shape = manager.final_shape(id)
+          shape = manager.final_shape(id)
+          next unless shape
 
           shape = shape.internal
 

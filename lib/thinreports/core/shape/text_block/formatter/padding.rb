@@ -13,7 +13,7 @@ module Thinreports
                         format.format_padding_char)
       end
 
-      def applicable?(value)
+      def applicable?(_value)
         !blank_value?(format.format_padding_char) && format.format_padding_length > 0
       end
     end

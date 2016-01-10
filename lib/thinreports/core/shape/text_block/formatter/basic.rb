@@ -30,7 +30,7 @@ module Thinreports
         value
       end
 
-      def applicable?(value)
+      def applicable?(_value)
         true
       end
     end

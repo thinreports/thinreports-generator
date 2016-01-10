@@ -44,8 +44,10 @@ module Thinreports
       # @param [String, Symbol] id
       # @return [Thinreports::Core::Shape::Base::Interface, nil]
       def final_shape(id)
+        shape = shapes[id]
+
         # When shape was found in registry.
-        if shape = shapes[id]
+        if shape
           return nil unless shape.visible?
 
           # In the case of TextBlock or ImageBlock.
@@ -55,18 +57,19 @@ module Thinreports
             shape
           end
         # When shape was not found in registry.
-        elsif f = find_format(id)
-          return nil unless f.display?
+      elsif format.has_shape?(id)
+          shape_format = find_format(id)
+          return nil unless shape_format.display?
 
-          case f.type
+          case shape_format.type
           # In the case of TextBlock.
           when TextBlock::TYPE_NAME
-            f.has_reference? || !blank_value?(f.value) ? init_item(f) : nil
+            shape_format.has_reference? || !blank_value?(shape_format.value) ? init_item(shape_format) : nil
           # In the case of ImageBlock, Return the nil constantly.
           when ImageBlock::TYPE_NAME
             nil
           else
-            init_item(f)
+            init_item(shape_format)
           end
         # In the case of other, Return the nil constantly.
         else

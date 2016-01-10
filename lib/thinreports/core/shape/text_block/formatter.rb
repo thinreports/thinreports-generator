@@ -7,17 +7,18 @@ module Thinreports
       # @param [Thinreports::Core::Shape::TextBlock::Format] format
       # @return [Thinreports::Core::Shape::TextBlock::Formatter::Base]
       def self.setup(format)
-        klass = if Thinreports.blank_value?(format.format_type)
-          Basic
-        else
-          case format.format_type
-          when 'number'   then Number
-          when 'datetime' then Datetime
-          when 'padding'  then Padding
+        klass =
+          if Thinreports.blank_value?(format.format_type)
+            Basic
           else
-            raise Thinreports::Errors::UnknownFormatterType
+            case format.format_type
+            when 'number'   then Number
+            when 'datetime' then Datetime
+            when 'padding'  then Padding
+            else
+              raise Thinreports::Errors::UnknownFormatterType
+            end
           end
-        end
         klass.new(format)
       end
     end

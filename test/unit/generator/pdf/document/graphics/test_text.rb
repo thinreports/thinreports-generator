@@ -25,13 +25,13 @@ class Thinreports::Generator::PDF::Graphics::TestText < Minitest::Test
   end
 
   def test_with_text_styles_should_not_operate_when_color_is_none
-    exec_with_text_styles(color: 'none') do |attrs, styles|
+    exec_with_text_styles(color: 'none') do |_attrs, _styles|
       flunk
     end
   end
 
   def test_with_text_styles_should_set_leading_via_line_height_attribute
-    exec_with_text_styles(line_height: 30) do |attrs, styles|
+    exec_with_text_styles(line_height: 30) do |attrs, _styles|
       expected = @pdf.send(:text_line_leading,
                            @pdf.send(:s2f, 30),
                            name: 'Helvetica', size: 18)
@@ -40,73 +40,73 @@ class Thinreports::Generator::PDF::Graphics::TestText < Minitest::Test
   end
 
   def test_with_text_styles_should_not_set_leading_when_line_height_is_not_specified
-    exec_with_text_styles do |attrs, styles|
+    exec_with_text_styles do |attrs, _styles|
       refute_includes attrs.keys, :leading
     end
   end
 
   def test_with_text_styles_should_set_character_spacing_via_letter_spacing_attribute
-    exec_with_text_styles(letter_spacing: 5) do |attrs, styles|
+    exec_with_text_styles(letter_spacing: 5) do |attrs, _styles|
       assert_equal attrs[:character_spacing], @pdf.send(:s2f, 5)
     end
   end
 
   def test_with_text_styles_should_not_set_character_spacing_when_letter_spacing_is_not_specified
-    exec_with_text_styles do |attrs, styles|
+    exec_with_text_styles do |attrs, _styles|
       refute_includes attrs.keys, :character_spacing
     end
   end
 
   def test_with_text_styles_should_parse_color
-    exec_with_text_styles(color: '#ff0000') do |attrs, styles|
+    exec_with_text_styles(color: '#ff0000') do |_attrs, _styles|
       assert_equal @pdf.internal.fill_color, 'ff0000'
     end
   end
 
   def test_with_font_styles_should_set_fill_color_using_color_of_font
-    exec_with_font_styles do |attrs, styles|
+    exec_with_font_styles do |_attrs, _styles|
       assert_equal @pdf.internal.fill_color, 'ff0000'
     end
   end
 
   def test_with_font_styles_should_perform_manual_style_when_bold_style_cannot_be_applied
-    exec_with_font_styles do |attrs, styles|
+    exec_with_font_styles do |_attrs, styles|
       assert_empty styles
     end
   end
 
   def test_with_font_styles_should_perform_manual_style_when_italic_style_cannot_be_applied
-    exec_with_font_styles do |attrs, styles|
+    exec_with_font_styles do |_attrs, styles|
       assert_empty styles
     end
   end
 
   def test_with_font_styles_should_set_stroke_color_using_color_of_font_when_bold_style_cannot_be_applied
-    exec_with_font_styles do |attrs, styles|
+    exec_with_font_styles do |_attrs, _styles|
       assert_equal @pdf.internal.stroke_color, 'ff0000'
     end
   end
 
   def test_with_font_styles_should_set_line_width_calculated_from_font_size_when_bold_style_cannot_be_applied
-    exec_with_font_styles do |attrs, styles|
+    exec_with_font_styles do |_attrs, _styles|
       assert_equal @pdf.internal.line_width, 18 * 0.025
     end
   end
 
   def test_with_font_styles_should_set_mode_to_fill_stroke_when_bold_style_cannot_be_applied
-    exec_with_font_styles do |attrs, styles|
+    exec_with_font_styles do |attrs, _styles|
       assert_equal attrs[:mode], :fill_stroke
     end
   end
 
   def test_with_font_styles_should_not_perform_a_manual_style_when_bold_style_can_be_applied
-    exec_with_font_styles(nil, name: 'Helvetica', size: 12, color: '0000ff') do |attrs, styles|
+    exec_with_font_styles(nil, name: 'Helvetica', size: 12, color: '0000ff') do |_attrs, styles|
       assert_includes styles, :bold
     end
   end
 
   def test_with_font_styles_should_not_perform_a_manual_style_when_italic_style_can_be_applied
-    exec_with_font_styles({styles: [:italic]}, name: 'Helvetica', size: 12, color: 'ff0000') do |attrs, styles|
+    exec_with_font_styles({styles: [:italic]}, name: 'Helvetica', size: 12, color: 'ff0000') do |_attrs, styles|
       assert_includes styles, :italic
     end
   end
