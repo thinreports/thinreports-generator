@@ -16,6 +16,14 @@ class Thinreports::Core::Shape::Manager::TestFormat < Minitest::Test
     assert_equal TestFormat.new({}, :any_id).identifier, :any_id
   end
 
+  def test_has_shape
+    format = TestFormat.new({}) do |f|
+      f.shapes[:foo] = 1
+    end
+    assert format.has_shape?(:foo)
+    refute format.has_shape?(:unknown)
+  end
+
   def test_find_shape_should_return_format_of_shape_when_shape_is_found
     format = TestFormat.new({}) do |f|
       f.shapes[:foo] = Thinreports::Core::Shape::TextBlock::Format.new('id'   => 'foo',
