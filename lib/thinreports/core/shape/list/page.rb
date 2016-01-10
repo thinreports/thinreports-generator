@@ -13,11 +13,12 @@ module Thinreports
       def initialize(parent, format, internal = nil, manager = nil)
         super(parent, format, internal)
 
-        @manager = if manager
-          manager.switch_current!(self)
-        else
-          List::Manager.new(self)
-        end
+        @manager =
+          if manager
+            manager.switch_current!(self)
+          else
+            List::Manager.new(self)
+          end
 
         # Set a reference to List::PageState List::Manager
         self.internal.manager = self.manager

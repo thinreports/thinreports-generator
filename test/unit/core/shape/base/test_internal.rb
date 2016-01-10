@@ -11,14 +11,15 @@ class Thinreports::Core::Shape::Base::TestInternal < Minitest::Test
   end
 
   def create_internal(format_config = {}, &block)
-    format = unless format_config.empty?
-      format_klass = Class.new(Thinreports::Core::Shape::Basic::Format) {
-        config_reader(*format_config.keys.map {|k| k.to_sym })
-      }
-      format_klass.new(format_config)
-    else
-      Thinreports::Core::Shape::Basic::Format.new({})
-    end
+    format =
+      unless format_config.empty?
+        format_klass = Class.new(Thinreports::Core::Shape::Basic::Format) {
+          config_reader(*format_config.keys.map {|k| k.to_sym })
+        }
+        format_klass.new(format_config)
+      else
+        Thinreports::Core::Shape::Basic::Format.new({})
+      end
 
     klass = Class.new(Thinreports::Core::Shape::Base::Internal, &block)
     klass.new(@report.page, format)

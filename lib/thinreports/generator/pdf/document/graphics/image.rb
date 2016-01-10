@@ -52,17 +52,18 @@ module Thinreports
       def normalize_image_from_base64(image_type, base64_string)
         raw_image_data = Base64.decode64(base64_string)
 
-        image_data = if png_conversion_enabled? && image_type == 'image/png'
-          png_normalizer = PNGNormalizer.load_blob(raw_image_data)
+        image_data =
+          if png_conversion_enabled? && image_type == 'image/png'
+            png_normalizer = PNGNormalizer.load_blob(raw_image_data)
 
-          if png_normalizer.need_normalize?
-            png_normalizer.normalize
+            if png_normalizer.need_normalize?
+              png_normalizer.normalize
+            else
+              raw_image_data
+            end
           else
             raw_image_data
           end
-        else
-          raw_image_data
-        end
 
         image_id = Digest::MD5.hexdigest(base64_string)
         create_temp_imagefile(image_id, image_data)
