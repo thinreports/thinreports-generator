@@ -122,7 +122,7 @@ class Thinreports::Report::TestInternal < Minitest::Test
 
   def test_add_page_should_switch_to_a_reference_to_the_current_page
     layout = Thinreports::Layout.new(sample_layout1)
-    new_pages = (1..2).inject([]) do |pages, i|
+    new_pages = (1..2).inject([]) do |pages|
       pages << Thinreports::Report::Page.new(report, layout)
     end
 
@@ -141,7 +141,7 @@ class Thinreports::Report::TestInternal < Minitest::Test
     layout = Thinreports::Layout.new(sample_layout1)
 
     internal = Report::Internal.new(report, layout: sample_layout1)
-    internal.events.on(:page_create) {|e| dispatched = true }
+    internal.events.on(:page_create) { dispatched = true }
     internal.add_page(Thinreports::Report::Page.new(report, layout))
 
     assert dispatched
@@ -151,7 +151,7 @@ class Thinreports::Report::TestInternal < Minitest::Test
     dispatched = false
 
     internal = Report::Internal.new(report, layout: sample_layout1)
-    internal.events.on(:page_create) {|e| dispatched = true }
+    internal.events.on(:page_create) { dispatched = true }
     internal.add_page(Thinreports::Report::BlankPage.new)
 
     refute dispatched
@@ -175,7 +175,7 @@ class Thinreports::Report::TestInternal < Minitest::Test
     dispatched = false
 
     internal = Report::Internal.new(report, layout: sample_layout1)
-    internal.events.on(:generate) {|e| dispatched = true }
+    internal.events.on(:generate) { dispatched = true }
     internal.finalize
 
     assert dispatched
