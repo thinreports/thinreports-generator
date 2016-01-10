@@ -27,7 +27,7 @@ module Thinreports
       # @param [String, nil] filename
       # @return [String, nil]
       # @abstract
-      def generate(filename = nil)
+      def generate
         raise NotImplementedError
       end
 

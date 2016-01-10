@@ -15,7 +15,7 @@ module Thinreports::Core
       end
 
       # @abstract
-      def build_internal(*args)
+      def build_internal
         raise NotImplementedError
       end
 

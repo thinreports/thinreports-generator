@@ -40,7 +40,7 @@ module Thinreports
         new_internal
       end
 
-      def type_of?(type_name)
+      def type_of?
         raise NotImplementedError
       end
     end
