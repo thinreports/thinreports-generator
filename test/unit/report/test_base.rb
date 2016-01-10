@@ -136,7 +136,7 @@ class Thinreports::Report::TestBase < Minitest::Test
   end
 
   def test_events_should_deprecated
-    out, err = capture_io do
+    _out, err = capture_io do
       @report.events
     end
     assert_includes err, '[DEPRECATION]'
@@ -232,7 +232,7 @@ class Thinreports::Report::TestBase < Minitest::Test
   end
 
   def test_Base_extract_options_should_return_as_report_option_the_value_which_has_report_in_a_key
-    report, generator = Report::Base.send(:extract_options!, [{report: {layout: 'hoge.tlf'}}])
+    report, _generator = Report::Base.send(:extract_options!, [{report: {layout: 'hoge.tlf'}}])
     assert_equal report[:layout], 'hoge.tlf'
   end
 
@@ -243,30 +243,30 @@ class Thinreports::Report::TestBase < Minitest::Test
   end
 
   def test_Base_extract_options_should_include_the_layout_key_in_the_report_option
-    report, generator = Report::Base.send(:extract_options!, [{layout: 'hoge.tlf'}])
+    report, _generator = Report::Base.send(:extract_options!, [{layout: 'hoge.tlf'}])
     assert_equal report[:layout], 'hoge.tlf'
   end
 
   def test_Base_extract_options_should_give_priority_to_the_value_of_the_layout_key_over_in_the_report_option
-    report, generator = Report::Base.send(:extract_options!,
+    report, _generator = Report::Base.send(:extract_options!,
                                           [{report: {layout: 'foo.tlf'}, layout: 'hoge.tlf'}])
     assert_equal report[:layout], 'hoge.tlf'
   end
 
   def test_Base_extract_options_should_return_as_generator_option_the_value_which_has_generator_in_a_key
-    report, generator = Report::Base.send(:extract_options!,
+    _report, generator = Report::Base.send(:extract_options!,
                                           [{generator: {option: 'value'}}])
     assert_equal generator[:option], 'value'
   end
 
   def test_Base_extract_options_should_give_priority_to_the_value_of_other_keys_over_in_the_generator_option
-    report, generator = Report::Base.send(:extract_options!,
+    _report, generator = Report::Base.send(:extract_options!,
                                           [{generator: {option: 'value1'}, option: 'value2'}])
     assert_equal generator[:option], 'value2'
   end
 
   def test_Base_extract_options_should_return_all_the_values_except_the_report_option_as_a_generator_option
-    report, generator = Report::Base.send(:extract_options!,
+    _report, generator = Report::Base.send(:extract_options!,
                                           [{report: {layout: 'foo.tlf'}, layout: 'hoge.tlf',
                                             generator_opt1: 'value1', generator_opt2: 'value2'}])
     assert_equal generator.values_at(:generator_opt1, :generator_opt2),

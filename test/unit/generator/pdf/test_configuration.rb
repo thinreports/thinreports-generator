@@ -10,7 +10,7 @@ class Thinreports::Generator::PDF::TestConfiguration < Minitest::Test
   end
 
   def test_eudc_fonts_is_deprecated
-    out, err = capture_io do
+    _out, err = capture_io do
       @config.eudc_fonts = []
     end
     assert_includes err, '[DEPRECATION]'

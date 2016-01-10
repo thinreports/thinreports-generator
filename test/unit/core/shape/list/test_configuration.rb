@@ -22,7 +22,7 @@ class Thinreports::Core::Shape::List::TestConfiguration < Minitest::Test
   def test_events
     assert_instance_of List::Events, @config.events
 
-    out, err = capture_io do
+    _out, err = capture_io do
       @config.events
     end
     assert_includes err, '[DEPRECATION]'

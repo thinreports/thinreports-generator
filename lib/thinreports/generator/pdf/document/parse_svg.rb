@@ -20,7 +20,6 @@ module Thinreports
           when 's-line'    then draw_svg_line(elm)
           end
         end
-        svg = nil
       end
 
     private

@@ -10,7 +10,6 @@ class Thinreports::Core::Shape::Basic::TestInternal < Minitest::Test
 
   def create_internal(format_config = {})
     report = Thinreports::Report.new layout: data_file('layout_text1')
-    parent = report.start_new_page
 
     Basic::Internal.new report.page, Basic::Format.new(format_config)
   end
