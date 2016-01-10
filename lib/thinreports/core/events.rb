@@ -43,9 +43,8 @@ module Thinreports
         end
         verify_event_type(e.type)
 
-        if event = events[e.type]
-          event.call(e)
-        end
+        event = events[e.type]
+        event.call(e) if event
       end
 
       def copy

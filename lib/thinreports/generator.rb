@@ -7,9 +7,10 @@ module Thinreports
     # @param report (see Thinreports::Generator::Base#initialize)
     # @param options (see Thinreports::Generator::Base#initialize)
     def self.new(type, report, options = {})
-      unless generator = registry[type]
-        raise Thinreports::Errors::UnknownGeneratorType.new(type)
-      end
+      generator = registry[type]
+
+      raise Thinreports::Errors::UnknownGeneratorType.new(type) unless generator
+
       generator.new(report, options)
     end
 

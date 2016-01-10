@@ -100,9 +100,9 @@ module Thinreports
         return nil if values.empty?
 
         if values.size == 1
-          if value = values.first
-            value.is_a?(::Numeric) ? value : value.to_f
-          end
+          value = values.first
+          return nil unless value
+          value.is_a?(::Numeric) ? value : value.to_f
         else
           values.map {|v| s2f(v) }
         end

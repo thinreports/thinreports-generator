@@ -138,9 +138,9 @@ module Thinreports
       # @yieldparam [Thinreports::Report::Page] page
       # @return [Thinreports::Report::Page]
       def start_new_page(options = {}, &block)
-        unless layout = internal.load_layout(options.delete(:layout))
-          raise Thinreports::Errors::NoRegisteredLayoutFound
-        end
+        layout = internal.load_layout(options.delete(:layout))
+
+        raise Thinreports::Errors::NoRegisteredLayoutFound unless layout
 
         page = internal.add_page(layout.new_page(self, options))
         call_block_in(page, &block)

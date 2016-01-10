@@ -45,9 +45,9 @@ module Thinreports
         #   0.6.0 or more:
         #     Use kerning attribute (auto is none).
         #
-        if space = text_letter_spacing(svg_attrs['kerning'] || svg_attrs['letter-spacing'])
-          attrs[:letter_spacing] = space
-        end
+        spacing = text_letter_spacing(svg_attrs['kerning'] || svg_attrs['letter-spacing'])
+        attrs[:letter_spacing] = spacing if spacing
+
         block.call(attrs) if block_given?
         attrs
       end
