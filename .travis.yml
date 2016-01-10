@@ -9,6 +9,11 @@ rvm:
   - jruby
 script: rake test
 
+branches:
+  only:
+    - master
+    - /stable$/
+
 notifications:
   slack:
     secure: XubYKuE3+6VJNDvjgVE2P0cp3Km/We1RlhkeHBGI+r0wYqAg6tab33IYFo+3BgE0xwl1RX3SwX1pbPt3LVDi8zLA5mkmmmDiNIqqYa1vICDgRgu8OTCRcCCTaWB5DhVY11iZaYFyQEoQ+aUHp9QoYeH7Qmp+M2//+DYG9wka6kA=
