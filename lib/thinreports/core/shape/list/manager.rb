@@ -151,13 +151,12 @@ module Thinreports
 
       # @return [Numeric]
       def page_max_height
-        unless @page_max_height
+        @page_max_height ||= begin
           h  = format.height
           h -= format.section_height(:page_footer)
           h -= format.section_height(:footer) unless auto_page_break?
-          @page_max_height = h
+          h
         end
-        @page_max_height
       end
 
       # @return [Thinreports::Core::Shape::List::Store]

@@ -52,7 +52,7 @@ module Thinreports
       # @param [String] file
       # @return [String] installed font name
       def install_font(name, file)
-        raise Errors::FontFileNotFound unless File.exists?(file)
+        raise Errors::FontFileNotFound unless File.exist?(file)
 
         pdf.font_families[name] = {normal: file,
                                    bold: file,
