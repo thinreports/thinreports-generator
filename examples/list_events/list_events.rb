@@ -20,11 +20,11 @@ example :list_events, 'Basic list events' do |t|
 
     report.start_new_page layout: :for_0_7_7
     report.list.header event_name: 'Header A'
-    2.times {|t| report.list.add_row row_name: t + 1 }
+    2.times {|row_index| report.list.add_row row_name: row_index + 1 }
 
     report.start_new_page layout: :for_0_7_7
     report.list.header event_name: 'Header B'
-    8.times {|t| report.list.add_row row_name: t + 1 }
+    8.times {|row_index| report.list.add_row row_name: row_index + 1 }
 
 
     # For 0.8 or higher
