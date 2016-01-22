@@ -19,7 +19,7 @@ module Thinreports
       end
 
       def has_shape?(id)
-        shapes.include?(id)
+        shapes.key?(id)
       end
 
       def shapes
