@@ -1,3 +1,8 @@
+## 0.8.2
+
+  * Refactor for disabling some Ruby warnings (#40, #41, #43)
+  * Some code improvements
+
 ## 0.8.1
 
 ### Add OPTIONAL feature for converting a palette-based PNG w. transparency
