@@ -1,6 +1,6 @@
 ## 0.8.2
 
-  * Refactor for disabling some Ruby warnings (#40, #41, #43) [Akira Matsuda, Katsuya Hidaka]
+  * Fixed: some Ruby warnings (#40, #41, #43) [Akira Matsuda, Katsuya Hidaka]
   * Some code improvements
 
 ## 0.8.1
