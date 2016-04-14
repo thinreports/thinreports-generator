@@ -22,7 +22,7 @@ class Thinreports::Generator::PDF::TestFont < Minitest::Test
       assert_equal font, pdf.font_families[name]
     end
 
-    Font::PRAWN_BUINTIN_FONT_ARIASES.each do |alias_font, original_font|
+    Font::PRAWN_BUINTIN_FONT_ALIASES.each do |alias_font, original_font|
       assert_equal pdf.font_families[alias_font],
                    pdf.font_families[original_font]
     end

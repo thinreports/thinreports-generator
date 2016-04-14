@@ -15,7 +15,7 @@ module Thinreports
 
       DEFAULT_FALLBACK_FONTS = %w( Helvetica IPAMincho )
 
-      PRAWN_BUINTIN_FONT_ARIASES = {
+      PRAWN_BUINTIN_FONT_ALIASES = {
         'Courier New' => 'Courier',
         'Times New Roman' => 'Times-Roman'
       }
@@ -25,7 +25,7 @@ module Thinreports
         pdf.font_families.update(BUILTIN_FONTS)
 
         # Create aliases from the font list provided by Prawn.
-        PRAWN_BUINTIN_FONT_ARIASES.each do |alias_name, name|
+        PRAWN_BUINTIN_FONT_ALIASES.each do |alias_name, name|
           pdf.font_families[alias_name] = pdf.font_families[name]
         end
 
