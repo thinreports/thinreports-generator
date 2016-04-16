@@ -1,13 +1,9 @@
 # coding: utf-8
-require 'thinreports/core/format/builder'
-
 module Thinreports::Core
   module Format
 
     # @abstract
     class Base
-      extend Format::Builder
-
       class << self
         def config_reader(*configs, &block)
           each_configs(*configs) do |m, location|
