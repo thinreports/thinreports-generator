@@ -4,6 +4,11 @@ module Thinreports
   module Generator
 
     module PDF::Graphics
+      STROKE_DASH = {
+        dashed: [2, 2],
+        dotted: [1, 2]
+      }
+
       # @param [Numeric, String] x1
       # @param [Numeric, String] y1
       # @param [Numeric, String] x2
@@ -11,7 +16,7 @@ module Thinreports
       # @param [Hash] attrs ({})
       # @option attrs [String] :stroke
       # @option attrs [Numeric, String] :stroke_width
-      # @option attrs [Array<Integer, String>] :stroke_dash
+      # @option attrs ["solid", "dashed", "dotted"] :stroke_type
       def line(x1, y1, x2, y2, attrs = {})
         with_graphic_styles(attrs) do
           pdf.line(pos(x1, y1), pos(x2, y2))
@@ -26,7 +31,7 @@ module Thinreports
       # @option attrs [Integer, String] :radius
       # @option attrs [String] :stroke
       # @option attrs [Numeric, String] :stroke_width
-      # @option attrs [Array<Integer, String>] :stroke_dash
+      # @option attrs ["solid", "dashed", "dotted"] :stroke_type
       # @option attrs [String] :fill
       def rect(x, y, w, h, attrs = {})
         w, h   = s2f(w, h)
@@ -49,6 +54,7 @@ module Thinreports
       # @option attrs [String] :stroke
       # @option attrs [Numeric, String] :stroke_width
       # @option attrs [Array<Integer, String>] :stroke_dash
+      # @option attrs ["solid", "dashed", "dotted"] :stroke_type
       # @option attrs [String] :fill
       def ellipse(x, y, rx, ry, attrs = {})
         rx, ry = s2f(rx, ry)
@@ -57,8 +63,6 @@ module Thinreports
           pdf.ellipse(pos(x, y), rx, ry)
         end
       end
-
-    private
 
       # @param [Hash] attrs
       def with_graphic_styles(attrs, &block)
@@ -108,22 +112,23 @@ module Thinreports
       def build_stroke_styles(styles)
         color = styles[:stroke]
         width = styles[:stroke_width]
+        return nil unless color && color != 'none'
+        return nil unless width && width != 0
 
-        if color && color != 'none' && width && width != 0
-          {color: parse_color(color),
-           width: s2f(width),
-           dash: s2f(*styles[:stroke_dash])}
-        end
+        {
+          color: parse_color(color),
+          width: s2f(width),
+          dash: STROKE_DASH[styles[:stroke_type].to_sym]
+        }
       end
 
       # @param [Hash] styles
       # @return [Hash, nil]
       def build_fill_styles(styles)
         color = styles[:fill]
+        return nil unless color && color != 'none'
 
-        if color && color != 'none'
-          {color: parse_color(color)}
-        end
+        { color: parse_color(color) }
       end
 
     end

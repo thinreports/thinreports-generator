@@ -5,15 +5,15 @@ require 'test_helper'
 class Thinreports::Report::TestBase < Minitest::Test
   include Thinreports::TestHelper
 
-  # Alias
   Report = Thinreports::Report
 
   def setup
     @report = Report::Base.new
+    @layout_file = layout_file
   end
 
   def test_on_page_create_callback
-    report = Report::Base.new layout: data_file('layout_text1.tlf')
+    report = Report::Base.new layout: @layout_file.path
 
     counter = 0
     callback = -> page {
@@ -28,8 +28,8 @@ class Thinreports::Report::TestBase < Minitest::Test
   end
 
   def test_initialize_should_register_layout_as_default_when_layout_is_specified_as_the_option
-    report = Report::Base.new layout: data_file('layout_text1.tlf')
-    assert_equal report.default_layout.filename, data_file('layout_text1.tlf')
+    report = Report::Base.new layout: @layout_file.path
+    assert_equal report.default_layout.filename, @layout_file.path
   end
 
   def test_initialize_should_initialize_new_Report_without_default_layout
@@ -37,19 +37,19 @@ class Thinreports::Report::TestBase < Minitest::Test
   end
 
   def test_use_layout_should_register_default_layout_when_default_property_is_omitted
-    @report.use_layout(data_file('layout_text1.tlf'))
+    @report.use_layout(@layout_file.path)
 
-    assert_equal @report.default_layout.filename, data_file('layout_text1.tlf')
+    assert_equal @report.default_layout.filename, @layout_file.path
   end
 
   def test_use_layout_should_register_default_layout_when_default_property_is_true
-    @report.use_layout(data_file('layout_text2.tlf'), default: true)
+    @report.use_layout(@layout_file.path, default: true)
 
-    assert_equal @report.default_layout.filename, data_file('layout_text2.tlf')
+    assert_equal @report.default_layout.filename, @layout_file.path
   end
 
   def test_start_new_page_should_properly_create_a_new_Page_and_return
-    @report.use_layout(data_file('layout_text1'))
+    @report.use_layout(@layout_file.path)
 
     assert_instance_of Thinreports::Report::Page, @report.start_new_page
   end
@@ -61,25 +61,25 @@ class Thinreports::Report::TestBase < Minitest::Test
   end
 
   def test_start_new_page_should_create_a_new_page_using_a_default_layout
-    @report.use_layout(data_file('layout_text1.tlf'), default: true)
+    @report.use_layout(@layout_file.path, default: true)
 
-    assert_equal @report.start_new_page.layout.filename, data_file('layout_text1.tlf')
+    assert_equal @report.start_new_page.layout.filename, @layout_file.path
   end
 
   def test_start_new_page_should_create_a_new_page_using_a_layout_with_specified_id
-    @report.use_layout(data_file('layout_text1.tlf'), id: :foo)
+    @report.use_layout(@layout_file.path, id: :foo)
 
     assert_equal @report.start_new_page(layout: :foo).layout.filename,
-                 data_file('layout_text1.tlf')
+                 @layout_file.path
   end
 
   def test_start_new_page_should_create_a_new_page_using_a_specified_layoutfile
-    new_page = @report.start_new_page(layout: data_file('layout_text1.tlf'))
-    assert_equal new_page.layout.filename, data_file('layout_text1.tlf')
+    new_page = @report.start_new_page(layout: @layout_file.path)
+    assert_equal new_page.layout.filename, @layout_file.path
   end
 
   def test_start_new_page_with_count_option
-    @report.use_layout data_file('layout_text1.tlf'), default: true
+    @report.use_layout @layout_file.path, default: true
 
     new_page = @report.start_new_page count: false
     assert_nil new_page.no
@@ -95,15 +95,15 @@ class Thinreports::Report::TestBase < Minitest::Test
   end
 
   def test_add_blank_page_should_properly_create_a_new_blank_page
-    @report.use_layout(data_file('layout_text1'))
+    @report.use_layout(@layout_file.path)
 
     assert_instance_of Thinreports::Report::BlankPage, @report.add_blank_page
   end
 
   def test_layout_should_return_the_default_layout_with_no_arguments
-    @report.use_layout(data_file('layout_text1.tlf'), default: true)
+    @report.use_layout(@layout_file.path, default: true)
 
-    assert_equal @report.layout.filename, data_file('layout_text1.tlf')
+    assert_equal @report.layout.filename, @layout_file.path
   end
 
   def test_layout_should_raise_when_the_specified_layout_is_not_found
@@ -113,13 +113,13 @@ class Thinreports::Report::TestBase < Minitest::Test
   end
 
   def test_layout_should_return_the_layout_with_specified_id
-    @report.use_layout(data_file('layout_text2.tlf'), id: :foo)
+    @report.use_layout(@layout_file.path, id: :foo)
 
-    assert_equal @report.layout(:foo).filename, data_file('layout_text2.tlf')
+    assert_equal @report.layout(:foo).filename, @layout_file.path
   end
 
   def test_generate_with_filename
-    report = Report::Base.new layout: data_file('layout_text1.tlf')
+    report = Report::Base.new layout: @layout_file.path
 
     report.generate :pdf, filename: temp_path.join('result1.pdf')
     report.generate filename: temp_path.join('result2.pdf')
@@ -143,14 +143,14 @@ class Thinreports::Report::TestBase < Minitest::Test
   end
 
   def test_page_should_return_the_current_page
-    @report.use_layout(data_file('layout_text1.tlf'))
+    @report.use_layout(@layout_file.path)
     @report.start_new_page
 
     assert_instance_of Thinreports::Report::Page, @report.page
   end
 
   def test_page_count_should_return_total_page_count
-    @report.use_layout(data_file('layout_text1.tlf'))
+    @report.use_layout(@layout_file.path)
     2.times { @report.start_new_page }
 
     assert_equal @report.page_count, 2
@@ -171,27 +171,27 @@ class Thinreports::Report::TestBase < Minitest::Test
   end
 
   def test_list_should_create_new_page_when_page_is_not_created
-    @report.use_layout(data_file('layout_list.tlf'))
-    @report.list(:list)
+    @report.use_layout(@layout_file.path)
+    @report.list
 
     refute_nil @report.page
   end
 
   def test_list_should_create_new_page_when_page_is_finalized
     @report.tap do |r|
-      r.use_layout(data_file('layout_list.tlf'))
+      r.use_layout(@layout_file.path)
       r.start_new_page
       r.page.finalize
     end
-    @report.list(:list)
+    @report.list
 
     assert_equal @report.page.finalized?, false
   end
 
   def test_list_should_properly_return_shape_with_the_specified_id
-    @report.use_layout(data_file('layout_list.tlf'))
+    @report.use_layout(@layout_file.path)
 
-    assert_equal @report.list(:list).id, 'list'
+    assert_equal @report.list.id, 'default'
   end
 
   def test_start_page_number
@@ -214,11 +214,9 @@ class Thinreports::Report::TestBase < Minitest::Test
   end
 
   def test_Base_generate_with_filename
-    layout_file = data_file 'layout_text1.tlf'
-
-    Report::Base.generate(:pdf, report: { layout: layout_file },
+    Report::Base.generate(:pdf, report: { layout: @layout_file.path },
                           generator: { filename: temp_path.join('result1.pdf') }) {}
-    Report::Base.generate(report: { layout: layout_file },
+    Report::Base.generate(report: { layout: @layout_file.path },
                           generator: { filename: temp_path.join('result2.pdf') }) {}
 
     assert_equal temp_path.join('result1.pdf').read,

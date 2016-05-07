@@ -5,7 +5,7 @@ module Thinreports
 
     class Basic::Internal < Base::Internal
       # Delegate to Format's methods
-      format_delegators :id, :svg_tag, :type
+      format_delegators :id, :type
 
       def style
         @style ||= Style::Graphic.new(format)

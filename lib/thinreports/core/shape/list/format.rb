@@ -5,26 +5,34 @@ module Thinreports
 
     class List::Format < Basic::Format
       config_reader height: %w( content-height )
-      config_checker 'true', auto_page_break: %w( page-break )
+      config_checker true, auto_page_break: %w( auto-page-break )
 
+      # @deprecated
       config_reader :header,
                     :detail,
                     :footer
+      # @deprecated
       config_reader page_footer: %w( page-footer )
 
-      config_checker 'true', has_header: %w( header-enabled )
-      config_checker 'true', has_footer: %w( footer-enabled )
-      config_checker 'true', has_page_footer: %w( page-footer-enabled )
+      config_checker true, has_header: %w( header enabled )
+      config_checker true, has_footer: %w( footer enabled )
+      config_checker true, has_page_footer: %w( page-footer enabled )
 
       config_reader page_footer_height: %w( page-footer height )
       config_reader footer_height: %w( footer height )
       config_reader header_height: %w( header height )
       config_reader detail_height: %w( detail height )
 
-      config_accessor :sections
+      attr_reader :sections
+
+      def initialize(*)
+        super
+        initialize_sections
+      end
 
       # @param [Symbol] section_name
       # @return [Hash]
+      # @deprecated
       def section(section_name)
         __send__(section_name)
       end
@@ -41,29 +49,16 @@ module Thinreports
         has_section?(section_name) ? __send__(:"#{section_name}_height") : 0
       end
 
-      class << self
-
       private
 
-        # @param [Hash] raw_format
-        # @return [Thinreports::Core::Shape::List::Format]
-        def build_internal(raw_format)
-          new(raw_format) do |f|
-            f.sections = {}
-            build_section(:detail, f)
-            build_section(:header, f) if f.has_header?
-            build_section(:footer, f) if f.has_footer?
-            build_section(:page_footer, f) if f.has_page_footer?
-          end
-        end
+      def initialize_sections
+        @sections = {
+          detail: List::SectionFormat.new(attributes['detail'])
+        }
 
-        # @param [Symbol] section_name
-        # @param [Thinreports::Core::Shape::List::Format] list
-        # @return [Thinreports::Core::Shape::List::SectionFormat]
-        def build_section(section_name, list)
-          list.sections[section_name] =
-            List::SectionFormat.build(list.section(section_name))
-        end
+        @sections[:header] = List::SectionFormat.new(attributes['header']) if has_section?(:header)
+        @sections[:page_footer] = List::SectionFormat.new(attributes['page-footer']) if has_section?(:page_footer)
+        @sections[:footer] = List::SectionFormat.new(attributes['footer']) if has_section?(:footer)
       end
     end
 

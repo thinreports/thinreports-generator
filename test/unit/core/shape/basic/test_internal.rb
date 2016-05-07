@@ -9,7 +9,7 @@ class Thinreports::Core::Shape::Basic::TestInternal < Minitest::Test
   Basic = Thinreports::Core::Shape::Basic
 
   def create_internal(format_config = {})
-    report = Thinreports::Report.new layout: data_file('layout_text1')
+    report = Thinreports::Report.new layout: layout_file.path
 
     Basic::Internal.new report.page, Basic::Format.new(format_config)
   end
@@ -17,11 +17,6 @@ class Thinreports::Core::Shape::Basic::TestInternal < Minitest::Test
   def test_id_should_operate_as_delegator_of_format
     basic = create_internal('id' => 'basic-id')
     assert_same basic.id, basic.format.id
-  end
-
-  def test_svg_tag_should_operate_as_delegator_of_format
-    basic = create_internal('svg' => {'tag' => 'rect'})
-    assert_same basic.svg_tag, basic.format.svg_tag
   end
 
   def test_type_should_operate_as_delegator_of_format

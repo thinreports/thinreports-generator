@@ -5,41 +5,32 @@ require 'test_helper'
 class Thinreports::Core::Shape::List::TestSectionFormat < Minitest::Test
   include Thinreports::TestHelper
 
-  TEST_LIST_SECTION_FORMAT = {
-    "height" => 47.7,
-    "translate" => {"x" => 0, "y" => -64.2},
-    "svg" => {
-      "tag" => "g",
-      "content" => "<!---SHAPE{\"type\":\"s-tblock\",\"id\":\"t1\"}SHAPE--->" +
-                   "<!---SHAPE{\"type\":\"s-rect\",\"id\":\"r1\"}SHAPE--->" +
-                   "<!---SHAPE{\"type\":\"s-tblock\",\"id\":\"t2\"}SHAPE--->"
-    }
+  LIST_SECTION_FORMAT = {
+    'enabled' => true,
+    'height' => 47.7,
+    'translate' => { 'x' => 0, 'y' => -64.2 },
+    'items' => [
+      { 'type' => 's-rect', 'id' => '' },
+      { 'type' => 's-tblock', 'id' => 'text_block' }
+    ]
   }
 
   Shape = Thinreports::Core::Shape
+  List = Thinreports::Core::Shape::List
 
-  def test_build
-    shape_format = stub(id: 'mock')
+  def test_attribute_readers
+    format = List::SectionFormat.new(LIST_SECTION_FORMAT)
 
-    Shape::TextBlock::Format.expects(:build).returns(shape_format).times(2)
-    Shape::Basic::Format.expects(:build).returns(shape_format).times(1)
-
-    begin
-      build_format
-    rescue => e
-      flunk exception_details(e, 'Building failed.')
-    end
+    assert_equal 47.7, format.height
+    assert_equal 0, format.relative_left
+    assert_equal -64.2, format.relative_top
+    assert_equal true, format.display?
   end
 
-  def test_config_readers
-    format = Shape::List::SectionFormat.new(TEST_LIST_SECTION_FORMAT)
+  def test_initialize_items
+    format = List::SectionFormat.new(LIST_SECTION_FORMAT)
 
-    assert_equal format.height, 47.7
-    assert_equal format.relative_left, 0
-    assert_equal format.relative_top, -64.2
-  end
-
-  def build_format
-    Shape::List::SectionFormat.build(TEST_LIST_SECTION_FORMAT.dup)
+    assert_equal 1, format.shapes.count
+    assert_instance_of Shape::TextBlock::Format, format.shapes[:text_block]
   end
 end

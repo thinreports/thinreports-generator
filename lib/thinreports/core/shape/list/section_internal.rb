@@ -6,8 +6,7 @@ module Thinreports
     class List::SectionInternal < Base::Internal
       format_delegators :height,
                         :relative_left,
-                        :relative_top,
-                        :svg_tag
+                        :relative_top
 
       # @return [Symbol]
       attr_accessor :section_name

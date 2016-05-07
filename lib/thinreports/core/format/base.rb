@@ -56,6 +56,10 @@ module Thinreports::Core
         block.call(self) if ::Kernel.block_given?
       end
 
+      def attributes
+        @config
+      end
+
       private
 
       def find(*keys)

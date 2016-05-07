@@ -5,13 +5,22 @@ require 'test_helper'
 class Thinreports::Core::Shape::List::TestSectionInternal < Minitest::Test
   include Thinreports::TestHelper
 
+  BASIC_SECTION_SCHEMA = {
+    'height' => 1.0,
+    'enabled' => true,
+    'items' => []
+  }
+
   # Alias
   List = Thinreports::Core::Shape::List
 
-  def create_internal(format_config = {})
-    report = new_report 'layout_text1'
+  def create_internal(extra_section_schema = {})
+    report = Thinreports::Report.new layout: layout_file.path
 
-    List::SectionInternal.new report, List::SectionFormat.new(format_config)
+    List::SectionInternal.new(
+      report,
+      List::SectionFormat.new(BASIC_SECTION_SCHEMA.merge(extra_section_schema))
+    )
   end
 
   def test_height_should_operate_as_delegator_of_format
@@ -27,11 +36,6 @@ class Thinreports::Core::Shape::List::TestSectionInternal < Minitest::Test
   def test_relative_top_should_operate_as_delegator_of_format
     list = create_internal('translate' => {'y' => 10})
     assert_same list.relative_top, list.format.relative_top
-  end
-
-  def test_svg_tag_should_operate_as_delegator_of_format
-    list = create_internal('svg' => {'tag' => 'g'})
-    assert_same list.svg_tag, list.format.svg_tag
   end
 
   def test_move_top_to_should_properly_set_value_to_states_as_relative_top

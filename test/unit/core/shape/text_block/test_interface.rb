@@ -9,7 +9,7 @@ class Thinreports::Core::Shape::TextBlock::TestInterface < Minitest::Test
   TextBlock = Thinreports::Core::Shape::TextBlock
 
   def create_interface(format_config = {})
-    report = new_report 'layout_text1'
+    report = Thinreports::Report.new layout: layout_file.path
     parent = report.start_new_page
 
     TextBlock::Interface.new parent, TextBlock::Format.new(format_config)
@@ -47,17 +47,17 @@ class Thinreports::Core::Shape::TextBlock::TestInterface < Minitest::Test
   end
 
   def test_value=
-    report = new_report 'layout_block.tlf'
+    report = Thinreports::Report.new layout: layout_file.path
     page = report.start_new_page
 
-    page.item(:text_block1).value = 'foo'
-    assert_equal 'foo', page.item(:text_block1).value
+    page.item(:text_block).value = 'foo'
+    assert_equal 'foo', page.item(:text_block).value
 
-    page.item(:text_block1).value += 'bar'
-    assert_equal 'foobar', page.item(:text_block1).value
+    page.item(:text_block).value += 'bar'
+    assert_equal 'foobar', page.item(:text_block).value
 
-    page.item(:text_block1).value = 1000
-    page.item(:text_block1).value += 999
-    assert_equal 1999, page.item(:text_block1).value
+    page.item(:text_block).value = 1000
+    page.item(:text_block).value += 999
+    assert_equal 1999, page.item(:text_block).value
   end
 end

@@ -14,7 +14,7 @@ class Thinreports::Generator::TestBase < Minitest::Test
   end
 
   def test_new
-    report = new_report 'layout_text1.tlf'
+    report = Thinreports::Report.new layout: layout_file.path
 
     refute report.finalized?
     Generator::Base.new report
@@ -22,7 +22,7 @@ class Thinreports::Generator::TestBase < Minitest::Test
   end
 
   def test_generate
-    report = new_report 'layout_text1.tlf'
+    report = Thinreports::Report.new layout: layout_file.path
 
     generator = Generator::Base.new report
     assert_raises NotImplementedError do
@@ -31,10 +31,10 @@ class Thinreports::Generator::TestBase < Minitest::Test
   end
 
   def test_default_layout
-    report = new_report 'layout_text1.tlf'
+    layout_filename = layout_file.path
+    report = Thinreports::Report.new layout: layout_filename
 
     generator = Generator::Base.new report
-    assert_equal data_file('layout_text1.tlf'),
-                 generator.default_layout.filename
+    assert_equal layout_filename, generator.default_layout.filename
   end
 end

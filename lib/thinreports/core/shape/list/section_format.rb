@@ -7,24 +7,26 @@ module Thinreports
       config_reader :height
       config_reader relative_left: %w( translate x ),
                     relative_top: %w( translate y )
+      config_reader :style
 
-      config_reader layout: %w( svg content ),
-                    svg_tag: %w( svg tag ),
-                    svg_attrs: %w( svg attrs )
+      # For compatible 0.8.x format API
+      config_checker true, display: %w( enabled )
 
-      class << self
-      private
-
-        def build_internal(raw_format)
-          new(raw_format) do |f|
-            build_layout(f, level: 2) do |type, shape_format|
-              Core::Shape::Format(type).build(shape_format)
-            end
-            clean(f.layout)
-          end
-        end
+      def initialize(*)
+        super
+        initialize_items(attributes['items'])
       end
 
+      private
+
+      def initialize_items(item_schemas)
+        item_schemas.each do |item_schema|
+          id, type = item_schema.values_at 'id', 'type'
+          next if id.empty?
+
+          self.shapes[id.to_sym] = Core::Shape::Format(type).new(item_schema)
+        end
+      end
     end
 
   end

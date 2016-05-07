@@ -8,17 +8,17 @@ class Thinreports::Core::Shape::Style::TestBase < Minitest::Test
   # Alias
   Style = Thinreports::Core::Shape::Style::Base
 
-  def create_basic_format(attrs = {})
-    Thinreports::Core::Shape::Basic::Format.new('svg' => {'attrs' => attrs})
+  def create_basic_format(base_style = {})
+    Thinreports::Core::Shape::Basic::Format.new('style' => base_style)
   end
 
-  def create_style(base = {})
-    Style.new(create_basic_format(base))
+  def create_style(base_style = {})
+    Style.new(create_basic_format(base_style))
   end
 
-  def create_new_style(base = {}, &block)
+  def create_new_style(base_style = {}, &block)
     klass = ::Class.new(Style, &block)
-    klass.new(create_basic_format(base))
+    klass.new(create_basic_format(base_style))
   end
 
   def test_self_style_reader_should_properly_define_a_reading_method
@@ -94,41 +94,6 @@ class Thinreports::Core::Shape::Style::TestBase < Minitest::Test
     style.write_internal_style('hoge', 'hoge_style')
 
     assert_equal style.styles['hoge'], 'hoge_style'
-  end
-
-  def test_finalized_svg_attributes_should_return_the_Hash_of_having_combined_styles_and_base
-    style = create_style('hoge' => 'base_hoge_style',
-                         'foo'  => 'base_foo_style')
-    style.write_internal_style('hoge', 'modified_hoge_style')
-
-    assert_equal style.finalized_svg_attributes.values_at('hoge', 'foo'),
-                 ['modified_hoge_style', 'base_foo_style']
-  end
-
-  def test_finalized_svg_attributes_should_return_a_base_when_styles_is_empty
-    style = create_style
-    assert_equal style.finalized_svg_attributes, style.instance_variable_get(:@base_styles)
-  end
-
-  def test_finalized_svg_attributes_should_return_a_cloned_base_when_styles_is_empty
-    style = create_style
-    refute_same style.finalized_svg_attributes, style.instance_variable_get(:@base_styles)
-  end
-
-  def test_finalized_svg_attributes_should_return_same_value_constantly
-    style = create_style('hoge' => 'hoge_style')
-    style.write_internal_style('foo', 'foo_style')
-
-    assert_same style.finalized_svg_attributes,
-                style.finalized_svg_attributes
-  end
-
-  def test_svg_attrs_should_operate_like_a_finalized_svg_attributes
-    style = create_style('hoge' => 'hoge_style',
-                         'foo'  => 'foo_style')
-    style.write_internal_style('foo', 'overwrite_foo_style')
-
-    assert_same style.finalized_svg_attributes, style.svg_attrs
   end
 
   def test_has_style_asker_should_return_true_when_specified_style_method_is_accessible
@@ -212,5 +177,15 @@ class Thinreports::Core::Shape::Style::TestBase < Minitest::Test
     style.write_internal_style('foo', 'foo_value')
 
     assert_equal style.identifier, style.styles.hash.to_s
+  end
+
+  def test_finalized_styles
+    base_styles = { 'foo' => 'default foo', 'bar' => 'default bar' }
+
+    style = create_style(base_styles)
+    style.write_internal_style('foo', 'new foo')
+
+    assert_equal({ 'foo' => 'new foo', 'bar' => 'default bar' }, style.finalized_styles)
+    assert_same style.finalized_styles, style.finalized_styles
   end
 end

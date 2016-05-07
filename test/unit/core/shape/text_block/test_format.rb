@@ -5,166 +5,165 @@ require 'test_helper'
 class Thinreports::Core::Shape::TextBlock::TestFormat < Minitest::Test
   include Thinreports::TestHelper
 
-  TEST_TBLOCK_FORMAT = {
-    "type" => "s-tblock",
-    "id" => "block_1", 
-    "display" => "true", 
-    "multiple" => "false",
-    "overflow" => "truncate",
-    "word-wrap" => "break-word",
-    "box" => {
-      "x" => 100.0,
-      "y" => 100.0,
-      "width" => 100.0,
-      "height" => 100.0
-    },
-    "format" => {
-      "base" => "￥{value}", 
-      "type" => "number", 
-      "number" => {
-        "delimiter" => ",", 
-        "precision" => 1
+  TEXT_BLOCK_FORMAT = {
+    'id' => 'text_block',
+    'reference-id' => 'referenced_text_block',
+    'type' => 'text-block',
+    'display' => true,
+    'multiple-line' => false,
+    'x' => 100.0,
+    'y' => 200.0,
+    'width' => 300.0,
+    'height' => 400.0,
+    'value' => 'default value',
+    'format' => {
+      'base' => 'Price: {value}',
+      'type' => 'number',
+      'number' => {
+        'delimiter' => ',',
+        'precision' => 1
       }
     },
-    "value" => "", 
-    "ref-id" => "", 
-    "svg" => {
-      "tag" => "text", 
-      "attrs" => {
-        "x" => 200.1, 
-        "y" => 65.6, 
-        "text-anchor" => "end", 
-        "xml:space" => "preserve", 
-        "fill" => "#000000", 
-        "fill-opacity" => "1", 
-        "font-size" => "12", 
-        "font-family" => "Helvetica", 
-        "font-weight" => "bold", 
-        "font-style" => "normal", 
-        "text-decoration" => "none", 
-        "clip-path" => "url(#_svgdef_0)"
-      }
+    'description' => 'Description for item',
+    'style' => {
+      'word-wrap' => 'break-word',
+      'overflow' => 'truncate',
+      'text-align' => 'right',
+      'vertical-align' => 'middle',
+      'color' => '#000000',
+      'font-size' => 12,
+      'font-family' => ['Helvetica'],
+      'font-style' => ['bold', 'italic', 'linethrough', 'underline'],
+      'letter-spacing' => 'normal',
+      'line-height' => 30,
+      'line-height-ratio' => 1.5
     }
   }
 
-  def test_build
-    build_format
-  rescue => e
-    flunk exception_details(e, 'Building failed.')
+  TextBlock = Thinreports::Core::Shape::TextBlock
+
+  def test_attribute_readers
+    format = TextBlock::Format.new(TEXT_BLOCK_FORMAT)
+
+    assert_equal 'referenced_text_block', format.ref_id
+    assert_equal 'middle', format.valign
+    assert_equal 'truncate', format.overflow
+    assert_equal 30, format.line_height
+    assert_equal false, format.multiple?
+    assert_equal 'Price: {value}', format.format_base
+    assert_equal 'number', format.format_type
   end
 
-  def test_value_reader_via_TEST_TBLOCK_FORMAT
-    assert_equal format(TEST_TBLOCK_FORMAT).value, ''
+  def test_has_reference?
+    format_has_reference = TextBlock::Format.new(TEXT_BLOCK_FORMAT.merge('reference-id' => 'other'))
+    assert_equal true, format_has_reference.has_reference?
+
+    format_has_no_reference = TextBlock::Format.new(TEXT_BLOCK_FORMAT.merge('reference-id' => ''))
+    assert_equal false, format_has_no_reference.has_reference?
   end
 
-  def test_word_wrap_reader_via_TEST_TBLOCK_FORMAT
-    assert_equal format(TEST_TBLOCK_FORMAT).word_wrap, 'break-word'
-  end
-  
-  def test_ref_id_reader_via_TEST_TBLOCK_FORMAT
-    assert_equal format(TEST_TBLOCK_FORMAT).ref_id, ''
-  end
-  
-  def test_format_base_reader_via_TEST_TBLOCK_FORMAT
-    assert_equal format(TEST_TBLOCK_FORMAT).format_base, '￥{value}'
-  end
-  
-  def test_format_type_reader_via_TEST_TBLOCK_FORMAT
-    assert_equal format(TEST_TBLOCK_FORMAT).format_type, 'number'
-  end
-  
-  def test_box_reader_via_TEST_TBLOCK_FORMAT
-    assert_equal format(TEST_TBLOCK_FORMAT).box.values_at('x', 'y', 'width', 'height'),
-                 [100.0, 100.0, 100.0, 100.0]
-  end
-  
-  def test_format_datetime_format_reader_via_TEST_TBLOCK_FORMAT
-    assert_nil format(TEST_TBLOCK_FORMAT).format_datetime_format
-  end
-  
-  def test_format_padding_char_reader_via_TEST_TBLOCK_FORMAT
-    assert_nil format(TEST_TBLOCK_FORMAT).format_padding_char
-  end
-  
-  def test_format_padding_dir_reader_via_TEST_TBLOCK_FORMAT
-    assert_nil format(TEST_TBLOCK_FORMAT).format_padding_dir
-  end
-  
-  def test_format_padding_length_via_TEST_TBLOCK_FORMAT
-    assert_equal format(TEST_TBLOCK_FORMAT).format_padding_length, 0
-  end
-  
-  def test_format_padding_rdir_checker_via_TEST_TBLOCK_FORMAT
-    assert_equal format(TEST_TBLOCK_FORMAT).format_padding_rdir?, false
-  end
-  
-  def test_format_has_format_asker_via_TEST_TBLOCK_FORMAT
-    assert_equal format(TEST_TBLOCK_FORMAT).has_format?, true
-  end
-  
-  def test_format_has_reference_asker_via_TEST_TBLOCK_FORMAT
-    assert_equal format(TEST_TBLOCK_FORMAT).has_reference?, false
-  end
-  
-  def test_format_multiple_checker_via_TEST_TBLOCK_FORMAT
-    assert_equal format(TEST_TBLOCK_FORMAT).multiple?, false
-  end
-  
-  def test_overflow_via_TEST_TBLOCK_FORMAT
-    assert_equal format(TEST_TBLOCK_FORMAT).overflow, 'truncate'
-  end
-  
-  def test_multiple_checker_should_return_true
-    assert format('multiple' => 'true').multiple?
-  end
-  
-  def test_multiple_checker_should_return_false
-    refute format('multiple' => 'false').multiple?
-  end
-  
-  def test_format_padding_rdir_checker_should_return_false
-    data = {'format' => {'padding' => {'direction' => 'L'}}}
-    refute format(data).format_padding_rdir?
-  end
-  
-  def test_format_padding_rdir_checker_should_return_true
-    data = {'format' => {'padding' => {'direction' => 'R'}}}
-    assert format(data).format_padding_rdir?
-  end
-  
-  def test_format_padding_length_should_return_Numeric
-    data = {'format' => {'padding' => {'length' => '999'}}}
-    assert_kind_of ::Numeric, format(data).format_padding_length
+  def test_has_format?
+    format_has_text_format = TextBlock::Format.new(TEXT_BLOCK_FORMAT.merge(
+      'format' => { 'type' => 'datetime' }
+    ))
+    assert_equal true, format_has_text_format.has_format?
+
+    format_has_no_text_format = TextBlock::Format.new(TEXT_BLOCK_FORMAT.merge(
+      'format' => { 'type' => '' }
+    ))
+    assert_equal false, format_has_no_text_format.has_format?
   end
 
-  def test_has_format_asker_should_return_false_with_empty_value
-    data = {'format' => {'type' => ''}}
-    refute format(data).has_format?
+  def test_number_format_attribute_readers
+    format = TextBlock::Format.new(TEXT_BLOCK_FORMAT.merge(
+      'format' => {
+        'type' => 'number',
+        'number' => {
+          'delimiter' => ',',
+          'precision' => 1
+        }
+      }
+    ))
+    assert_equal ',', format.format_number_delimiter
+    assert_equal 1, format.format_number_precision
   end
-  
-  def test_has_format_asker_should_return_false_with_unknown_type
-    data = {'format' => {'type' => 'unknown'}}
-    refute format(data).has_format?
+
+  def test_datetime_format_attribute_readers
+    format = TextBlock::Format.new(TEXT_BLOCK_FORMAT.merge(
+      'format' => {
+        'type' => 'datetime',
+        'datetime' => {
+          'format' => '%Y-%m-%d'
+        }
+      }
+    ))
+    assert_equal '%Y-%m-%d', format.format_datetime_format
   end
-  
-  def test_has_format_asker_should_return_true
-    data = {'format' => {'type' => 'number'}}
-    assert format(data).has_format?
+
+  def test_padding_format_attribute_readers
+    format = TextBlock::Format.new(TEXT_BLOCK_FORMAT.merge(
+      'format' => {
+        'type' => 'padding',
+        'padding' => {
+          'char' => '0',
+          'length' => 10,
+          'direction' => 'L'
+        }
+      }
+    ))
+    assert_equal '0', format.format_padding_char
+    assert_equal 'L', format.format_padding_dir
   end
-  
-  def test_has_reference_asker_should_return_false
-    refute format('ref-id' => '').has_reference?
+
+  def test_format_padding_length
+    format = TextBlock::Format.new(TEXT_BLOCK_FORMAT.merge(
+      'format' => {
+        'type' => 'padding',
+        'padding' => {
+          'char' => '0',
+          'length' => 10,
+          'direction' => 'L'
+        }
+      }
+    ))
+    assert_equal 10, format.format_padding_length
+
+    format = TextBlock::Format.new(TEXT_BLOCK_FORMAT.merge(
+      'format' => {
+        'type' => 'padding',
+        'padding' => {
+          'char' => '0',
+          'length' => '',
+          'direction' => 'L'
+        }
+      }
+    ))
+    assert_equal 0, format.format_padding_length
   end
-  
-  def test_has_reference_asker_should_return_true
-    assert format('ref-id' => 'ref_tblock_1').has_reference?
-  end
-  
-  def build_format
-    Thinreports::Core::Shape::TextBlock::Format.build(TEST_TBLOCK_FORMAT)
-  end
-  
-  def format(data)
-    Thinreports::Core::Shape::TextBlock::Format.new(data)
+
+  def test_format_padding_rdir?
+    format_direction_left = TextBlock::Format.new(TEXT_BLOCK_FORMAT.merge(
+      'format' => {
+        'type' => 'padding',
+        'padding' => {
+          'char' => '0',
+          'length' => 10,
+          'direction' => 'L'
+        }
+      }
+    ))
+    assert_equal false, format_direction_left.format_padding_rdir?
+
+    format_direction_right = TextBlock::Format.new(TEXT_BLOCK_FORMAT.merge(
+      'format' => {
+        'type' => 'padding',
+        'padding' => {
+          'char' => '0',
+          'length' => 10,
+          'direction' => 'R'
+        }
+      }
+    ))
+    assert_equal true, format_direction_right.format_padding_rdir?
   end
 end

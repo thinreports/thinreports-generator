@@ -6,11 +6,11 @@ module Thinreports
     module PDF::DrawShape
       # @param [Thinreports::Core::Shape::TextBlock::Internal] shape
       def draw_shape_tblock(shape)
-        x, y, w, h = shape.box.values_at('x', 'y', 'width', 'height')
+        x, y, w, h = shape.format.attributes.values_at('x', 'y', 'width', 'height')
 
         content = shape.real_value.to_s
         unless content.empty?
-          attrs = shape_text_attrs(shape)
+          attrs = build_text_attributes(shape.style.finalized_styles)
 
           unless shape.multiple?
             content = content.gsub(/\n/, ' ')
@@ -21,83 +21,55 @@ module Thinreports
       end
 
       def draw_shape_pageno(shape, page_no, page_count)
-        x, y, w, h = shape.box.values_at('x', 'y', 'width', 'height')
+        x, y, w, h = shape.format.attributes.values_at('x', 'y', 'width', 'height')
 
         text_box(shape.build_format(page_no, page_count), x, y, w, h,
-                 common_text_attrs(shape.style.svg_attrs))
+          build_text_attributes(shape.style.finalized_styles))
       end
 
       # @param [Thinreports::Core::Shape::Basic::Internal] shape
       def draw_shape_image(shape)
-        x, y, w, h = shape.style.svg_attrs.values_at('x', 'y', 'width', 'height')
+        x, y, w, h = shape.format.attributes.values_at('x', 'y', 'width', 'height')
 
-        image_type, image_data = extract_base64_string(shape.style.svg_attrs['xlink:href'])
-        base64image(image_type, image_data, x, y, w, h)
+        image_data = shape.format.attributes['data']
+        base64image(image_data['mime-type'], image_data['base64'], x, y, w, h)
       end
 
       # @param [Thinreports::Core::Shape::ImageBlock::Internal] shape
       def draw_shape_iblock(shape)
-        x, y, w, h = shape.box.values_at('x', 'y', 'width', 'height')
-        unless blank_value?(shape.src)
-          posx = shape.format.position_x
-          posy = shape.format.position_y
+        return if blank_value?(shape.src)
 
-          image_box(shape.src, x, y, w, h,
-                    position_x: posx ? posx.to_sym : nil,
-                    position_y: posy ? posy.to_sym : nil)
-        end
+        x, y, w, h = shape.format.attributes.values_at('x', 'y', 'width', 'height')
+        style = shape.style.finalized_styles
+
+        image_box(shape.src, x, y, w, h, image_position_x(style['position-x']), image_position_y(style['position-y']))
       end
 
       # @param [Thinreports::Core::Shape::Text::Internal] shape
       def draw_shape_text(shape)
-        x, y, w, h = shape.box.values_at('x', 'y', 'width', 'height')
-        text(shape.text.join("\n"), x, y, w, h,
-             shape_text_attrs(shape))
+        x, y, w, h = shape.format.attributes.values_at('x', 'y', 'width', 'height')
+        text(shape.texts.join("\n"), x, y, w, h, build_text_attributes(shape.style.finalized_styles))
       end
 
       # @param [Thinreports::Core::Shape::Basic::Internal] shape
       def draw_shape_ellipse(shape)
-        args = shape.style.svg_attrs.values_at('cx', 'cy', 'rx', 'ry')
-        args << common_graphic_attrs(shape.style.svg_attrs)
-        ellipse(*args)
+        cx, cy, rx, ry = shape.format.attributes.values_at('cx', 'cy', 'rx', 'ry')
+        ellipse(cx, cy, rx, ry, build_graphic_attributes(shape.style.finalized_styles))
       end
 
       # @param [Thinreports::Core::Shape::Basic::Internal] shape
       def draw_shape_line(shape)
-        args = shape.style.svg_attrs.values_at('x1', 'y1', 'x2', 'y2')
-        args << common_graphic_attrs(shape.style.svg_attrs)
-        line(*args)
+        x1, y1, x2, y2 = shape.format.attributes.values_at('x1', 'y1', 'x2', 'y2')
+        line(x1, y1, x2, y2, build_graphic_attributes(shape.style.finalized_styles))
       end
 
       # @param [Thinreports::Core::Shape::Basic::Internal] shape
       def draw_shape_rect(shape)
-        args = shape.style.svg_attrs.values_at('x', 'y', 'width', 'height')
-        args << common_graphic_attrs(shape.style.svg_attrs) do |attrs|
-          attrs[:radius] = shape.style.svg_attrs['rx']
+        x, y, w, h = shape.format.attributes.values_at('x', 'y', 'width', 'height')
+        rect_attributes = build_graphic_attributes(shape.style.finalized_styles) do |attrs|
+          attrs[:radius] = shape.format.attributes['rx']
         end
-        rect(*args)
-      end
-
-    private
-
-      # @param [Thinreports::Core::Shape::Text::Internal, Thinreports::Core::Shape::TextBlock::Internal] shape
-      # @return [Hash]
-      def shape_text_attrs(shape)
-        format = shape.format
-
-        common_text_attrs(shape.style.svg_attrs) do |attrs|
-          # Set the :line_height option.
-          attrs[:line_height] = format.line_height unless blank_value?(format.line_height)
-          # Set the :valign option.
-          attrs[:valign]      = shape.style.valign
-
-          if shape.type_of?(:tblock)
-            # Set the :overflow option.
-            attrs[:overflow] = text_overflow(format.overflow)
-            # Set the :word_wrap option
-            attrs[:word_wrap] = text_word_wrap(format.word_wrap)
-          end
-        end
+        rect(x, y, w, h, rect_attributes)
       end
     end
 

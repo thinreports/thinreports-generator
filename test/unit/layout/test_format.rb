@@ -5,116 +5,75 @@ require 'test_helper'
 class Thinreports::Layout::TestFormat < Minitest::Test
   include Thinreports::TestHelper
 
-  TEST_SIMPLE_FORMAT = <<-'EOF'
-  {
-    "version":"%s",
-    "finger-print":-860627816,
-    "config":{
-      "title":"Sample Layout",
-      "page":{
-        "paper-type":"A4",
-        "width":null,
-        "height":null,
-        "orientation":"portrait",
-        "margin-top":"20",
-        "margin-bottom":"20",
-        "margin-left":"20",
-        "margin-right":"20"
-      },
-      "option":{}
+  LAYOUT_SCHEMA = {
+    'version' => '0.9.0',
+    'title' => 'Report Title',
+    'report' => {
+      'paper-type' => 'A4',
+      'width' => 100.0,
+      'height' => 200.0,
+      'orientation' => 'landscape',
+      'margin' => [100.0, 200.0, 300.0, 999.9]
     },
-    "svg":"<!--SHAPE{\"type\":\"s-rect\",\"id\":\"rect1\"}SHAPE-->
-           <!--SHAPE{\"type\":\"s-image\",\"id\":\"image1\"}SHAPE-->
-           <!--SHAPE{\"type\":\"s-tblock\",\"id\":\"tblock1\"}SHAPE-->
-           <!--SHAPE{\"type\":\"s-tblock\",\"id\":\"tblock2\"}SHAPE-->",
-    "state":{
-      "layout-guides": [{"type":"x", "position":100}]
-    }
+    'state' => {
+      'layout-guides' => [
+        { 'type' => 'x', 'position' => 0.1 }
+      ]
+    },
+    'items' => [
+      { 'type'=> 's-rect', 'id'=> '', 'x'=> 100.0, 'y'=> 100.0, 'width'=> 100.0, 'height'=> 100.0, 'style'=> {'stroke-width'=> 1}},
+      { 'type'=> 's-tblock', 'id'=> 'text_block', 'x'=> 100.0, 'y'=> 100.0 }
+    ]
   }
-  EOF
 
-  # Alias
   Shape  = Thinreports::Core::Shape
   Layout = Thinreports::Layout
 
-  def test_report_title_should_return_the_value_of_config_title_key
-    format = Layout::Format.new('config' => {'title' => 'Title'})
-    assert_equal format.report_title, 'Title'
+  def test_attribute_readers
+    format = Layout::Format.new(layout_schema)
+
+    assert_equal 'Report Title', format.report_title
+    assert_equal Thinreports::VERSION, format.last_version
+    assert_equal 'A4', format.page_paper_type
+    assert_equal 100.0, format.page_width
+    assert_equal 200.0, format.page_height
+    assert_equal 'landscape', format.page_orientation
   end
 
-  def test_user_paper_type_asker_should_return_true_when_paper_type_is_user
-    format = Layout::Format.new('config' => {'page' => {'paper-type' => 'user'}})
-    assert_equal format.user_paper_type?, true
+  def test_user_paper_type?
+    format_paper_type_is_not_user = Layout::Format.new(layout_schema)
+    assert_equal false, format_paper_type_is_not_user.user_paper_type?
+
+    format_paper_type_is_user = Layout::Format.new(layout_schema.merge(
+      {
+        'report' => {
+          'paper-type' => 'user'
+        }
+      }
+    ))
+    assert_equal true, format_paper_type_is_user.user_paper_type?
   end
 
-  def test_user_paper_type_asker_should_return_false_when_paper_type_is_not_user
-    format = Layout::Format.new('config' => {'page' => {'paper-type' => 'A4'}})
-    assert_equal format.user_paper_type?, false
-  end
+  def test_build
+    compatible_layout_file = layout_file
+    assert_instance_of Layout::Format, Layout::Format.build(compatible_layout_file.path)
 
-  def test_last_version_should_return_the_value_of_version_key
-    format = Layout::Format.new('version' => '1.0')
-    assert_equal format.last_version, '1.0'
-  end
-
-  def test_build_should_properly_build_layout_format
-    build_format(force: true)
-  rescue => e
-    flunk exception_details(e, 'Faile to build.')
-  end
-
-  def test_build_should_properly_set_built_shapes_to_shapes_attributes_of_format
-    assert_equal build_format.shapes.size, 4
-  end
-
-  def test_config_attributes_of_built_format_should_not_have_unnecessary_attributes
-    format = build_format(force: true)
-    config = format.instance_variable_get(:@config)
-
-    refute %w( version finger-print state).any? {|a| config.key?(a)},
-           'A config attributes of built format have unnecessary attributes.'
-  end
-
-  def test_identifier_should_return_the_digest_value_of_the_raw_layout_using_sha1
-    format = build_format
-    expect = Digest::SHA1.hexdigest(create_raw_format)
-
-    assert_equal format.identifier, expect.to_sym
-  ensure
-    clear_cache_for_building
-  end
-
-  def test_build_should_always_return_the_same_result_in_cache_mode
-    result1 = build_format
-    result2 = build_format
-
-    assert_same result1, result2
-  ensure
-    clear_cache_for_building
-  end
-
-  def test_build_should_raise_when_layout_file_is_incompatible
-    original_rules = Layout::Version::REQUIRED_RULES.dup
-    Layout::Version::REQUIRED_RULES.replace(['>= 0.6.0.pre3', '< 0.8.0'])
-
+    incompatible_layout_file = layout_file(version: '0.0.1')
     assert_raises Thinreports::Errors::IncompatibleLayoutFormat do
-      build_format(version: '0.6.0.pre2')
+      Layout::Format.build(incompatible_layout_file.path)
     end
-  ensure
-    Layout::Version::REQUIRED_RULES.replace(original_rules)
-    clear_cache_for_building
   end
 
-  def create_raw_format(version = nil)
-    clean_whitespaces(TEST_SIMPLE_FORMAT) % (version || Thinreports::VERSION)
+  def test_initialize_items
+    format = Layout::Format.new(layout_schema)
+
+    assert_equal 1, format.shapes.count
+    assert_instance_of Shape::TextBlock::Format, format.shapes[:text_block]
   end
 
-  def build_format(options = {})
-    Layout::Format.stubs(read_format_file: create_raw_format(options[:version]))
-    Layout::Format.build('dummy.tlf', force: options[:force])
-  end
+  private
 
-  def clear_cache_for_building
-    Layout::Format.send(:built_format_registry).clear
+  def layout_schema(version = Thinreports::VERSION)
+    LAYOUT_SCHEMA.merge('version' => version)
   end
 end

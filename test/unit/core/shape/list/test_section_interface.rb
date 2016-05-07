@@ -5,19 +5,27 @@ require 'test_helper'
 class Thinreports::Core::Shape::List::TestSectionInterface < Minitest::Test
   include Thinreports::TestHelper
 
+  BASIC_SECTION_SCHEMA = {
+    'height' => 1.0,
+    'enabled' => true,
+    'items' => []
+  }
+
   # Alias
   List = Thinreports::Core::Shape::List
 
   def setup
-    @report = new_report 'layout_text1'
+    @report = Thinreports::Report.new layout: layout_file.path
   end
 
-  def create_interface(format_config = {})
+  def create_interface(extra_section_schema = {})
     parent = @report.start_new_page
 
-    List::SectionInterface.new parent,
-                               List::SectionFormat.new(format_config),
-                               :section
+    List::SectionInterface.new(
+      parent,
+      List::SectionFormat.new(BASIC_SECTION_SCHEMA.merge(extra_section_schema)),
+      :section
+    )
   end
 
   def test_internal_should_return_instance_of_SectionInternal

@@ -17,11 +17,11 @@ class Thinreports::Core::Format::BaseTest < Minitest::Test
     'c4' => 'c4',
     'c5' => 'c5',
     'c6' => 9999,
-    'c7' => 'true',
-    'c8' => 'false',
+    'c7' => true,
+    'c8' => false,
     'c9' => {
-      'c9_1' => 'true',
-      'c9_2' => 'false'
+      'c9_1' => true,
+      'c9_2' => false
     },
     'c10' => 'c10',
     'c11' => {
@@ -55,9 +55,9 @@ class Thinreports::Core::Format::BaseTest < Minitest::Test
     end
 
     # Checker methods
-    config_checker 'true', :c7, :c8
-    config_checker 'true', c9_1: %w( c9 c9_1 ),
-                           c9_2: %w( c9 c9_2 )
+    config_checker true, :c7, :c8
+    config_checker true, c9_1: %w( c9 c9_1 ),
+                         c9_2: %w( c9 c9_2 )
 
     # Writer methods
     config_writer :c10
@@ -144,5 +144,9 @@ class Thinreports::Core::Format::BaseTest < Minitest::Test
 
     @format.c21 = 'c21_changed'
     assert_equal @format.c21, 'Customized c21_changed'
+  end
+
+  def test_attributes
+    assert_same @format.config, @format.attributes
   end
 end

@@ -8,7 +8,8 @@ class Thinreports::Generator::TestPDF < Minitest::Test
   PDF = Thinreports::Generator::PDF
 
   def test_new_should_set_title_as_metadata
-    report = new_report('layout_text1.tlf') {|r| r.start_new_page }
+    report = Thinreports::Report.new layout: layout_file.path
+    report.start_new_page
 
     actual_pdf_title = nil
     PDF::Document.define_singleton_method(:new) {|_options, meta|
@@ -16,7 +17,7 @@ class Thinreports::Generator::TestPDF < Minitest::Test
     }
     PDF.new report, {}
 
-    assert_equal 'Basic Layout', actual_pdf_title
+    assert_equal 'Report Title', actual_pdf_title
   ensure
     PDF::Document.singleton_class.send(:remove_method, :new)
   end

@@ -9,137 +9,124 @@ class Thinreports::Generator::PDF::Graphics::TestAttributes < Minitest::Test
     @pdf = Thinreports::Generator::PDF::Document.new
   end
 
-  def test_common_graphic_attrs_should_return_converted_Hash_as_attributes
-    result = @pdf.common_graphic_attrs('stroke'       => '#ff0000',
-                                       'stroke-width' => '1',
-                                       'fill'         => '#0000ff')
-    assert_equal result.values_at(:stroke, :stroke_width, :fill),
-                 ['#ff0000', '1', '#0000ff']
+  def test_build_graphic_attributes
+    graphic_styles = {
+      'border-color' => '#ff0000',
+      'border-width' => 2.0,
+      'border-style' => 'solid',
+      'fill-color' => '#000000'
+    }
+
+    assert_equal(
+      {
+        stroke: '#ff0000',
+        stroke_width: 2.0,
+        stroke_type: 'solid',
+        fill: '#000000'
+      },
+      @pdf.build_graphic_attributes(graphic_styles)
+    )
+
+    customized_attributes = @pdf.build_graphic_attributes(graphic_styles) { |attrs| attrs[:stroke] = 'blue' }
+    assert_equal 'blue', customized_attributes[:stroke]
   end
 
-  def test_common_graphic_attrs_should_return_the_stroke_dash_attribute_into_an_array
-    result = @pdf.common_graphic_attrs('stroke-dasharray' => '3,5')
-    assert_equal result[:stroke_dash], %w( 3 5 )
+  def test_build_text_attributes
+    text_styles = {
+      'font-family' => %w( Helvetica IPAMincho ),
+      'font-size' => 18.0,
+      'color' => 'red',
+      'text-align' => 'right',
+      'vertical-align' => 'bottom',
+      'font-style' => %w( bold italic ),
+      'letter-spacing' => 2.0,
+      'line-height' => 20.0,
+      'overflow' => 'expand',
+      'word-wrap' => 'break-word'
+    }
+
+    assert_equal(
+      {
+        font: 'Helvetica',
+        size: 18.0,
+        color: 'red',
+        align: :right,
+        valign: :bottom,
+        styles: [:bold, :italic],
+        letter_spacing: 2.0,
+        line_height: 20.0,
+        overflow: :expand,
+        word_wrap: :break_word
+      },
+      @pdf.build_text_attributes(text_styles)
+    )
+
+    customized_attributes = @pdf.build_text_attributes(text_styles) { |attrs| attrs[:color] = 'blue' }
+    assert_equal 'blue', customized_attributes[:color]
   end
 
-  def test_common_graphic_attrs_should_return_nil_as_a_value_of_stroke_dash_attribute_when_value_is_none
-    result = @pdf.common_graphic_attrs('stroke-dasharray' => 'none')
-    assert_nil result[:stroke_dash]
+  def test_font_family
+    assert_equal 'IPAGothic', @pdf.font_family(%w( IPAGothic Helvetica ))
+    assert_equal 'Helvetica', @pdf.font_family(%w( Unknown IPAMincho ))
   end
 
-  def test_common_graphic_attrs_should_return_nil_as_a_value_of_stroke_dash_attribute_when_value_is_empty
-    result = @pdf.common_graphic_attrs({})
-    assert_nil result[:stroke_dash]
+  def test_font_styles
+    assert_equal [:bold, :italic, :underline, :strikethrough],
+      @pdf.font_styles(%w( bold italic underline linethrough ))
   end
 
-  def test_common_graphic_attrs_should_set_0_as_a_value_of_stroke_width_attribute_when_opacity_is_0
-    result = @pdf.common_graphic_attrs('stroke-width'   => '1',
-                                       'stroke-opacity' => '0')
-    assert_equal result[:stroke_width], 0
+  def test_letter_spacing
+    assert_equal 2.0, @pdf.letter_spacing(2.0)
+    assert_nil @pdf.letter_spacing('')
+    assert_nil @pdf.letter_spacing(nil)
   end
 
-  def test_common_graphic_attrs_with_block
-    result = @pdf.common_graphic_attrs('stroke' => '#ff0000') do |attrs|
-      attrs[:stroke].gsub!(/0/, 'f')
-    end
-    assert_equal result[:stroke], '#ffffff'
+  def test_text_align
+    assert_equal :left, @pdf.text_align('left')
+    assert_equal :center, @pdf.text_align('center')
+    assert_equal :right, @pdf.text_align('right')
+    assert_equal :left, @pdf.text_align('')
   end
 
-  def test_text_align_should_return_converted_value_type_of_Symbol
-    aligns = ['start', 'middle', 'end', nil]
-    assert_equal aligns.map {|a| @pdf.text_align(a) },
-                 [:left, :center, :right, :left]
-  end
-
-  def test_text_valign_should_return_converted_value_type_of_Symbol
-    valigns = ['top', 'center', 'bottom', nil]
-    assert_equal valigns.map {|a| @pdf.text_valign(a) },
-                 [:top, :center, :bottom, :top]
-  end
-
-  def test_text_word_wrap
-    assert_equal @pdf.text_word_wrap('break-word'), :break_word
-    assert_equal @pdf.text_word_wrap('none'), :none
-    assert_equal @pdf.text_word_wrap(''), :none
-  end
-
-  def test_extract_base64_string
-    base64 = 'data:image/png;base64,iVBORw0KGg1+/AAy/plYlzil'
-    assert_equal @pdf.extract_base64_string(base64),
-                 ['image/png', 'iVBORw0KGg1+/AAy/plYlzil']
-  end
-
-  def test_font_styles_should_return_bold_style_when_font_weight_is_bold
-    assert_equal @pdf.font_styles('font-weight' => 'bold'), [:bold]
-  end
-
-  def test_font_styles_should_return_italic_style_when_font_style_is_italic
-    assert_equal @pdf.font_styles('font-style' => 'italic'), [:italic]
-  end
-
-  def test_font_styles_should_return_underline_and_strikethrough_style_via_text_decoration
-    assert_equal @pdf.font_styles('text-decoration' => 'underline line-through'),
-                 [:underline, :strikethrough]
-  end
-
-  def test_common_text_attrs_should_return_the_value_of_font_family_as_font
-    result = @pdf.common_text_attrs('font-family' => 'IPAMincho')
-    assert_equal result[:font], 'IPAMincho'
-  end
-
-  def test_common_text_attrs_should_return_the_value_of_font_size_as_size
-    result = @pdf.common_text_attrs('font-size' => '12')
-    assert_equal result[:size], '12'
-  end
-
-  def test_common_text_attrs_should_return_the_value_of_fill_color_as_color
-    result = @pdf.common_text_attrs('fill' => '#000000')
-    assert_equal result[:color], '#000000'
-  end
-
-  def test_common_text_attrs_should_return_the_value_of_text_anchor_as_align
-    result = @pdf.common_text_attrs('text-anchor' => 'middle')
-    assert_equal result[:align], :center
-  end
-
-  def test_common_text_attrs_should_return_the_value_of_text_styles_as_styles
-    result = @pdf.common_text_attrs('font-weight' => 'bold')
-    assert_equal result[:styles], [:bold]
-  end
-
-  def test_common_text_attrs_should_return_the_value_of_letter_spacing_as_letter_spacing
-    result = @pdf.common_text_attrs('letter-spacing' => '5')
-    assert_equal result[:letter_spacing], '5'
-  end
-
-  def test_common_text_attrs_should_return_the_value_of_kerning_as_letter_spacing
-    result = @pdf.common_text_attrs('kerning' => '10')
-    assert_equal result[:letter_spacing], '10'
-  end
-
-  def test_common_text_attrs_with_block
-    result = @pdf.common_text_attrs('fill' => '#000000') do |attrs|
-      attrs[:color].gsub!(/0/, 'f')
-    end
-    assert_equal result[:color], '#ffffff'
-  end
-
-  def test_text_letter_spacing_should_return_raw_value
-    assert_equal @pdf.text_letter_spacing('10'), '10'
-  end
-
-  def test_text_letter_spacing_should_return_nil_when_value_is_normal
-    assert_nil @pdf.text_letter_spacing('normal')
-  end
-
-  def test_text_letter_spacing_should_return_nil_when_value_is_auto
-    assert_nil @pdf.text_letter_spacing('auto')
+  def test_text_valign
+    assert_equal :top, @pdf.text_valign('top')
+    assert_equal :center, @pdf.text_valign('middle')
+    assert_equal :bottom, @pdf.text_valign('bottom')
+    assert_equal :top, @pdf.text_valign('')
+    assert_nil @pdf.text_valign(nil)
   end
 
   def test_text_overflow
-    assert_equal @pdf.text_overflow('truncate'), :truncate
-    assert_equal @pdf.text_overflow('fit'), :shrink_to_fit
-    assert_equal @pdf.text_overflow('expand'), :expand
-    assert_equal @pdf.text_overflow(''), :truncate
+    assert_equal :truncate, @pdf.text_overflow('truncate')
+    assert_equal :shrink_to_fit, @pdf.text_overflow('fit')
+    assert_equal :expand, @pdf.text_overflow('expand')
+    assert_equal :truncate, @pdf.text_overflow('')
+    assert_nil @pdf.text_overflow(nil)
+  end
+
+  def test_word_wrap
+    assert_equal :break_word, @pdf.word_wrap('break-word')
+    assert_equal :none, @pdf.word_wrap('')
+    assert_nil @pdf.word_wrap(nil)
+  end
+
+  def test_line_height
+    assert_equal 20.9, @pdf.line_height(20.9)
+    assert_nil @pdf.line_height('')
+    assert_nil @pdf.line_height(nil)
+  end
+
+  def test_image_position_x
+    assert_equal :left, @pdf.image_position_x('left')
+    assert_equal :center, @pdf.image_position_x('center')
+    assert_equal :right, @pdf.image_position_x('right')
+    assert_equal :left, @pdf.image_position_x('')
+  end
+
+  def test_image_position_y
+    assert_equal :top, @pdf.image_position_y('top')
+    assert_equal :center, @pdf.image_position_y('middle')
+    assert_equal :bottom, @pdf.image_position_y('bottom')
+    assert_equal :top, @pdf.image_position_y('')
   end
 end

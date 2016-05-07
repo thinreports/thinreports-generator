@@ -5,7 +5,7 @@ module Thinreports
 
     class Text::Internal < Basic::Internal
       # Delegate to Format's methods
-      format_delegators :svg_content, :text, :box
+      format_delegators :texts, :box
 
       def style
         @style ||= Style::Text.new(format)
