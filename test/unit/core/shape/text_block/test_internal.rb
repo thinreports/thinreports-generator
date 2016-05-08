@@ -12,7 +12,7 @@ class Thinreports::Core::Shape::TextBlock::TestInternal < Minitest::Test
     report = Thinreports::Report.new layout: layout_file.path
     report.start_new_page do |page|
       # Add to force TextBlock shape.
-      page.manager.format.shapes[:foo] = TextBlock::Format.new('type' => 's-tblock',
+      page.manager.format.shapes[:foo] = TextBlock::Format.new('type' => 'text-block',
                                                                'id'   => 'foo')
       # Set value to TextBlock.
       page.item(:foo).value('foo value')
@@ -113,7 +113,7 @@ class Thinreports::Core::Shape::TextBlock::TestInternal < Minitest::Test
   end
 
   def test_type_of_asker_should_return_true_when_value_is_tblock
-    assert_equal create_internal.type_of?(:tblock), true
+    assert_equal create_internal.type_of?('text-block'), true
   end
 
   def test_type_of_asker_should_return_true_when_value_is_block

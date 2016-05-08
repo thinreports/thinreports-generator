@@ -41,7 +41,7 @@ class Thinreports::Core::Shape::Basic::TestBlockInternal < Minitest::Test
   end
 
   def test_type_of_asker_should_return_false_otherwise
-    assert_equal [:iblock, :tblock, :text, :list].all? {|t| !init_internal.type_of?(t)}, true
+    assert_equal %w( image-block text-block text list ).all? {|t| !init_internal.type_of?(t)}, true
   end
 
   private

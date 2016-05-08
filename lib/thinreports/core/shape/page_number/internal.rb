@@ -41,7 +41,7 @@ module Thinreports
       end
 
       def type_of?(type_name)
-        type_name == :pageno
+        type_name == PageNumber::TYPE_NAME
       end
 
       def start_page_number

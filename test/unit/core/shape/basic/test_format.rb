@@ -7,7 +7,7 @@ class Thinreports::Core::Shape::Basic::TestFormat < Minitest::Test
 
   RECT_FORMAT = {
     "id" => "",
-    "type" => "s-rect",
+    "type" => "rect",
     "x" => 100.0,
     "y" => 200.0,
     "width" => 300.0,
@@ -30,7 +30,7 @@ class Thinreports::Core::Shape::Basic::TestFormat < Minitest::Test
     format = Basic::Format.new(RECT_FORMAT)
 
     assert_equal '', format.id
-    assert_equal 's-rect', format.type
+    assert_equal 'rect', format.type
     assert_equal RECT_FORMAT['style'], format.style
     assert_equal true, format.display?
   end

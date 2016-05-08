@@ -20,7 +20,7 @@ module Thinreports
 
           shape = shape.internal
 
-          if shape.type_of?(:pageno)
+          if shape.type_of?(Core::Shape::PageNumber::TYPE_NAME)
             # Do not draw pageno if is not for Report
             draw_pageno_shape(shape, page) if page.count? && shape.for_report?
           else
@@ -33,11 +33,11 @@ module Thinreports
 
       def draw_shape(shape)
         case
-        when shape.type_of?(:tblock)
+        when shape.type_of?(Core::Shape::TextBlock::TYPE_NAME)
           draw_tblock_shape(shape)
-        when shape.type_of?(:list)
+        when shape.type_of?(Core::Shape::List::TYPE_NAME)
           draw_list_shape(shape)
-        when shape.type_of?(:iblock)
+        when shape.type_of?(Core::Shape::ImageBlock::TYPE_NAME)
           draw_iblock_shape(shape)
         else
           id = shape.identifier
@@ -72,11 +72,11 @@ module Thinreports
       # @param [Thinreports::Core::Shape::Base::Internal] shape
       def create_basic_shape_stamp(shape)
         case
-        when shape.type_of?(:text)    then create_text_stamp(shape)
-        when shape.type_of?(:image)   then create_image_stamp(shape)
-        when shape.type_of?(:ellipse) then create_ellipse_stamp(shape)
-        when shape.type_of?(:rect)    then create_rect_stamp(shape)
-        when shape.type_of?(:line)    then create_line_stamp(shape)
+        when shape.type_of?('text')    then create_text_stamp(shape)
+        when shape.type_of?('image')   then create_image_stamp(shape)
+        when shape.type_of?('ellipse') then create_ellipse_stamp(shape)
+        when shape.type_of?('rect')    then create_rect_stamp(shape)
+        when shape.type_of?('line')    then create_line_stamp(shape)
         end
       end
 

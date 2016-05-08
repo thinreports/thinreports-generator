@@ -48,22 +48,22 @@ class Thinreports::Core::Shape::Manager::TestInternal < Minitest::Test
 
   def test_find_item_should_return_shape_when_passing_in_the_specified_only_filter
     internal = create_internal
-    assert_equal internal.find_item(:text_block, only: 's-tblock').id, 'text_block'
+    assert_equal internal.find_item(:text_block, only: 'text-block').id, 'text_block'
   end
 
   def test_find_item_should_return_nil_when_not_passing_in_the_specified_only_filter
     internal = create_internal
-    assert_nil internal.find_item(:text_block, only: 's-list')
+    assert_nil internal.find_item(:text_block, only: 'list')
   end
 
   def test_find_item_should_return_shape_when_passing_in_the_specified_except_filter
     internal = create_internal
-    assert_equal internal.find_item(:default, except: 's-tblock').id, 'default'
+    assert_equal internal.find_item(:default, except: 'text-block').id, 'default'
   end
 
   def test_find_item_should_return_shape_when_not_passing_in_the_specified_except_filter
     internal = create_internal
-    assert_nil internal.find_item(:default, except: 's-list')
+    assert_nil internal.find_item(:default, except: 'list')
   end
 
   def test_final_shape_should_return_nil_when_shape_is_not_found
@@ -114,7 +114,7 @@ class Thinreports::Core::Shape::Manager::TestInternal < Minitest::Test
 
   def test_final_shape_should_return_nil_when_shape_isnot_stored_in_shapes_and_ImageBlock
     internal = create_internal do |f|
-      f.shapes[:iblock] = create_shape_format('s-iblock', 'iblock')
+      f.shapes[:iblock] = create_shape_format('image-block', 'iblock')
     end
 
     assert_nil internal.final_shape(:iblock)

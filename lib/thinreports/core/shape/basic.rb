@@ -2,11 +2,11 @@
 
 module Thinreports
   module Core::Shape
-    
+
     module Basic
-      TYPE_NAMES = %w( s-line s-rect s-ellipse s-image )
+      TYPE_NAMES = %w( line rect ellipse image )
     end
-    
+
   end
 end
 

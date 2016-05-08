@@ -10,8 +10,8 @@ class Thinreports::Core::Shape::List::TestSectionFormat < Minitest::Test
     'height' => 47.7,
     'translate' => { 'x' => 0, 'y' => -64.2 },
     'items' => [
-      { 'type' => 's-rect', 'id' => '' },
-      { 'type' => 's-tblock', 'id' => 'text_block' }
+      { 'type' => 'rect', 'id' => '' },
+      { 'type' => 'text-block', 'id' => 'text_block' }
     ]
   }
 

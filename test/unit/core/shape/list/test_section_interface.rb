@@ -66,7 +66,7 @@ class Thinreports::Core::Shape::List::TestSectionInterface < Minitest::Test
     new_parent = @report.start_new_page
 
     %w( foo bar hoge ).each do |id|
-      list.manager.format.shapes[id.to_sym] = tblock::Format.new('type' => 's-tblock', 'id' => id)
+      list.manager.format.shapes[id.to_sym] = tblock::Format.new('type' => 'text-block', 'id' => id)
       list.item(id).value(10)
     end
 

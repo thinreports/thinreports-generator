@@ -20,7 +20,7 @@ class Thinreports::Core::Shape::List::TestPageState < Minitest::Test
   end
 
   def test_type_of?
-    assert_equal @state.type_of?(:list), true
+    assert_equal @state.type_of?('list'), true
   end
 
   def test_finalized!

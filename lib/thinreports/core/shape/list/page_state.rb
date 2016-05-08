@@ -34,7 +34,7 @@ module Thinreports
       end
 
       def type_of?(type_name)
-        type_name == :list
+        type_name == List::TYPE_NAME
       end
     end
 

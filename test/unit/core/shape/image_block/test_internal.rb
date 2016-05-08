@@ -15,7 +15,7 @@ class Thinreports::Core::Shape::ImageBlock::TestInternal < Minitest::Test
   end
 
   def test_type_of_asker_should_return_true_when_iblock_value_is_given
-    assert_equal create_internal.type_of?(:iblock), true
+    assert_equal create_internal.type_of?('image-block'), true
   end
 
   def test_type_of_asker_should_return_true_when_block_value_is_given

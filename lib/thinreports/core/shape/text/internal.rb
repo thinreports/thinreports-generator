@@ -12,7 +12,7 @@ module Thinreports
       end
 
       def type_of?(type_name)
-        type_name == :text
+        type_name == Text::TYPE_NAME
       end
     end
 

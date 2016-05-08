@@ -7,7 +7,7 @@ class Thinreports::Core::Shape::Text::TestFormat < Minitest::Test
 
   TEXT_FORMAT = {
     'id' => 'text_1',
-    'type' => 's-text',
+    'type' => 'text',
     'x' => 100.0,
     'y' => 200.0,
     'width' => 300.0,

@@ -6,7 +6,7 @@ class Thinreports::Core::Shape::List::TestFormat < Minitest::Test
   include Thinreports::TestHelper
 
   LIST_FORMAT = {
-    'type' => 's-list',
+    'type' => 'list',
     'id' => 'list',
     'display' => true,
     'x' => 10.0,

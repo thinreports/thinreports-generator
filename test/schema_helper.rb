@@ -17,13 +17,13 @@ module Thinreports
         ]
       },
       "items": [
-        { "type": "s-rect", "id": "rect_with_id", "display": true },
-        { "type": "s-tblock", "id": "text_block", "x": 100.0, "y": 100.0, "value": "", "display": true },
-        { "type": "s-tblock", "id": "text_block_referenced", "x": 100.0, "y": 100.0, "value": "", "display": true, "reference-id": "text_block" },
-        { "type": "s-tblock", "id": "text_block_hidden", "x": 100.0, "y": 100.0, "value": "default value", "display": false },
-        { "type": "s-iblock", "id": "image_block", "x": 200.0, "y": 200.0, "width": 150.0, "height": 150.0, "value": "", "display": true },
+        { "type": "rect", "id": "rect_with_id", "display": true },
+        { "type": "text-block", "id": "text_block", "x": 100.0, "y": 100.0, "value": "", "display": true },
+        { "type": "text-block", "id": "text_block_referenced", "x": 100.0, "y": 100.0, "value": "", "display": true, "reference-id": "text_block" },
+        { "type": "text-block", "id": "text_block_hidden", "x": 100.0, "y": 100.0, "value": "default value", "display": false },
+        { "type": "image-block", "id": "image_block", "x": 200.0, "y": 200.0, "width": 150.0, "height": 150.0, "value": "", "display": true },
         {
-          "type": "s-list",
+          "type": "list",
           "id": "default",
           "x": 1.0,
           "y": 2.0,
@@ -39,7 +39,7 @@ module Thinreports
           "detail": {
             "height": 70.0,
             "items": [
-              { "type": "s-tblock", "id": "name", "value": "" }
+              { "type": "text-block", "id": "name", "value": "" }
             ]
           },
           "page-footer": {
@@ -73,7 +73,7 @@ EOF
     },
     "items": [
       {
-        "type": "s-list",
+        "type": "list",
         "id": "default",
         "x": 1.0,
         "y": 2.0,
@@ -89,7 +89,7 @@ EOF
         "detail": {
           "height": 20.0,
           "items": [
-            { "type": "s-tblock", "id": "name", "value": "" }
+            { "type": "text-block", "id": "name", "value": "" }
           ]
         },
         "page-footer": {

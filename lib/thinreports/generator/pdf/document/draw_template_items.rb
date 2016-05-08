@@ -10,11 +10,11 @@ module Thinreports
           next unless item_attributes['id'].empty?
 
           case item_attributes['type']
-          when 's-text' then draw_text(item_attributes)
-          when 's-image' then draw_image(item_attributes)
-          when 's-rect' then draw_rect(item_attributes)
-          when 's-ellipse' then draw_ellipse(item_attributes)
-          when 's-line' then draw_line(item_attributes)
+          when 'text' then draw_text(item_attributes)
+          when 'image' then draw_image(item_attributes)
+          when 'rect' then draw_rect(item_attributes)
+          when 'ellipse' then draw_ellipse(item_attributes)
+          when 'line' then draw_line(item_attributes)
           end
         end
       end

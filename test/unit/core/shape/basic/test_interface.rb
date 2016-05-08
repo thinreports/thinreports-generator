@@ -26,7 +26,7 @@ class Thinreports::Core::Shape::Basic::TestInterface < Minitest::Test
   end
 
   def test_type_should_operate_as_delegator_of_internal
-    basic = create_interface('type' => 's-rect')
+    basic = create_interface('type' => 'rect')
     assert_same basic.type, basic.internal.type
   end
 

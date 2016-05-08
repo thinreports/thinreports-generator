@@ -13,7 +13,7 @@ class Thinreports::Core::Shape::Text::TestInternal < Minitest::Test
   end
 
   def test_type_of?
-    assert create_internal.type_of?(:text), true
+    assert create_internal.type_of?('text'), true
     refute create_internal.type_of?(:basic), false
   end
 

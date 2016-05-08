@@ -56,7 +56,7 @@ class Thinreports::Core::Shape::PageNumber::TestInternal < Minitest::Test
 
   def test_type_of
     pageno = init_pageno
-    assert pageno.type_of?(:pageno)
+    assert pageno.type_of?('page-number')
   end
 
   def test_style

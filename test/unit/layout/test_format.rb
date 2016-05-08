@@ -21,8 +21,8 @@ class Thinreports::Layout::TestFormat < Minitest::Test
       ]
     },
     'items' => [
-      { 'type'=> 's-rect', 'id'=> '', 'x'=> 100.0, 'y'=> 100.0, 'width'=> 100.0, 'height'=> 100.0, 'style'=> {'stroke-width'=> 1}},
-      { 'type'=> 's-tblock', 'id'=> 'text_block', 'x'=> 100.0, 'y'=> 100.0 }
+      { 'type'=> 'rect', 'id'=> '', 'x'=> 100.0, 'y'=> 100.0, 'width'=> 100.0, 'height'=> 100.0, 'style'=> {'stroke-width'=> 1}},
+      { 'type'=> 'text-block', 'id'=> 'text_block', 'x'=> 100.0, 'y'=> 100.0 }
     ]
   }
 
