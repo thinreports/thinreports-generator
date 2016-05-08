@@ -18,12 +18,12 @@ module Thinreports::TestHelper
 
   include Thinreports::SchemaHelper
 
-  def data_file(filename)
-    ROOT.join('data', filename).to_s
+  def data_file(*paths)
+    ROOT.join('data', *paths).to_s
   end
 
-  def read_data_file(filename)
-    File.read(data_file(filename))
+  def read_data_file(*paths)
+    File.read(data_file(*paths))
   end
 
   def temp_path

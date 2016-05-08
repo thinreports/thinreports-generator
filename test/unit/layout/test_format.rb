@@ -64,6 +64,21 @@ class Thinreports::Layout::TestFormat < Minitest::Test
     end
   end
 
+  def test_build_regacy_layout
+    format = Layout::Format.build(data_file('regacy_layout', 'all-items.tlf'))
+
+    assert_equal 'Report Title', format.report_title
+    assert_equal '0.8.2', format.last_version
+    assert_equal 'A4', format.page_paper_type
+    assert_equal 'portrait', format.page_orientation
+
+    item_types = format.attributes['items'].map { |items| items['type'] }
+
+    assert_equal 9, item_types.count
+    assert_equal %w( rect ellipse line image image-block text-block list page-number text ).sort,
+      item_types.sort
+  end
+
   def test_initialize_items
     format = Layout::Format.new(layout_schema)
 

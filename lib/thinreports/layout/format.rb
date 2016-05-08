@@ -21,6 +21,9 @@ module Thinreports
             )
           end
 
+          # FIXME: Remove the following process in version 1.0.
+          schema = Layout::RegacySchema.new(schema).upgrade if schema['version'] < '0.9.0'
+
           new schema
         end
 
