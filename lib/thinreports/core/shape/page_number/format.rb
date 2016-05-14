@@ -11,11 +11,7 @@ module Thinreports
       config_reader overflow: %w( style overflow )
 
       def id
-        unless @id
-          @id = read('id')
-          @id = self.class.next_default_id if blank_value?(@id)
-        end
-        @id
+        @id ||= blank_value?(read('id')) ? self.class.next_default_id : read('id')
       end
 
       # FIXME: make be DRY
