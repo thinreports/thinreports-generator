@@ -5,14 +5,14 @@ module Thinreports
 
     class Basic::Internal < Base::Internal
       # Delegate to Format's methods
-      format_delegators :id, :svg_tag, :type
+      format_delegators :id, :type
 
       def style
         @style ||= Style::Graphic.new(format)
       end
 
       def type_of?(type_name)
-        ['s-basic', self.type].include?("s-#{type_name}")
+        [:basic, self.type].include?(type_name)
       end
 
       def identifier

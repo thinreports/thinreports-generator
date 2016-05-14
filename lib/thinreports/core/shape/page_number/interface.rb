@@ -16,7 +16,7 @@ module Thinreports
       end
 
     private
-    
+
       # @see Thinreports::Core::Shape::Base::Interface#init_internal
       def init_internal(parent, format)
         PageNumber::Internal.new(parent, format)

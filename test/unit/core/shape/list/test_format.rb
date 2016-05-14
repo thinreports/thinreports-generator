@@ -5,65 +5,78 @@ require 'test_helper'
 class Thinreports::Core::Shape::List::TestFormat < Minitest::Test
   include Thinreports::TestHelper
 
-  TEST_LIST_FORMAT = {
-    "type" => "s-list",
-    "id" => "List",
-    "display" => "true",
-    "page-footer-enabled" => "true",
-    "footer-enabled" => "true",
-    "header-enabled" => "true",
-    "page-break" => "true",
-    "content-height" => 255,
-    "detail" => {},
-    "footer" => {},
-    "page-footer" => {},
-    "header" => {},
-    "svg" => {
-      "tag" => "g",
-      "attrs" => {}
+  LIST_FORMAT = {
+    'type' => 'list',
+    'id' => 'list',
+    'display' => true,
+    'x' => 10.0,
+    'y' => 20.0,
+    'width' => 30.0,
+    'height' => 40.0,
+    'content-height' => 255,
+    'auto-page-break' => true,
+    'header' => {
+      'enabled' => true,
+      'height' => 100.0,
+      'translate' => { 'x' => 200.0, 'y' => 300.0 },
+      'items' => []
+    },
+    'detail' => {
+      'height' => 400.0,
+      'translate' => { 'x' => 200.0, 'y' => 300.0 },
+      'items' => []
+    },
+    'page-footer' => {
+      'enabled' => true,
+      'height' => 500.0,
+      'translate' => { 'x' => 200.0, 'y' => 300.0 },
+      'items' => []
+    },
+    'footer' => {
+      'enabled' => false,
+      'height' => 600.0,
+      'translate' => { 'x' => 200.0, 'y' => 300.0 },
+      'items' => []
     }
   }
 
   List = Thinreports::Core::Shape::List
 
-  def test_build_when_all_sections_enabled
-    List::SectionFormat.expects(:build).returns({}).times(4)
+  def test_has_section?
+    format = List::Format.new(LIST_FORMAT)
 
-    begin
-      format = build_format
-    rescue => e
-      flunk exception_details(e, 'Building failed.')
-    end
-
-    assert_equal format.sections.size, 4
-    [:detail, :header, :footer, :page_footer].each do |sec|
-      assert_includes format.sections.keys, sec
-    end
+    assert_equal true, format.has_section?(:detail)
+    assert_equal true, format.has_section?(:page_footer)
+    assert_equal false, format.has_section?(:footer)
   end
 
-  def test_build_when_page_footer_and_footer_disabled
-    List::SectionFormat.expects(:build).returns({}).times(2)
+  def test_section_height
+    format = List::Format.new(LIST_FORMAT)
 
-    format = build_format('page-footer-enabled' => 'false',
-                          'footer-enabled'      => 'false')
-
-    assert_equal format.sections.size, 2
-    [:detail, :header].each do |sec|
-      assert_includes format.sections.keys, sec
-    end
+    assert_equal 100.0, format.section_height(:header)
   end
 
-  def test_config_readers
-    format = List::Format.new(TEST_LIST_FORMAT)
+  def test_attribute_readers
+    format = List::Format.new(LIST_FORMAT)
 
-    assert_equal format.height, 255
-    assert_equal format.auto_page_break?, true
-    assert_equal format.has_header?, true
-    assert_equal format.has_footer?, true
-    assert_equal format.has_page_footer?, true
+    assert_equal 255, format.height
+    assert_equal true, format.auto_page_break?
+    assert_equal true, format.has_header?
+    assert_equal true, format.has_page_footer?
+    assert_equal false, format.has_footer?
+    assert_equal 400.0, format.detail_height
+    assert_equal 500.0, format.page_footer_height
+    assert_equal 600.0, format.footer_height
+    assert_equal 100.0, format.header_height
   end
 
-  def build_format(data = {})
-    List::Format.build(TEST_LIST_FORMAT.merge(data))
+  def test_initialize_sections
+    format = List::Format.new(LIST_FORMAT)
+
+    assert_instance_of List::SectionFormat, format.sections[:header]
+    assert_instance_of List::SectionFormat, format.sections[:detail]
+    assert_instance_of List::SectionFormat, format.sections[:page_footer]
+
+    assert_nil format.sections[:footer]
   end
 end

@@ -1,13 +1,9 @@
 # coding: utf-8
-require 'thinreports/core/format/builder'
-
 module Thinreports::Core
   module Format
 
     # @abstract
     class Base
-      extend Format::Builder
-
       class << self
         def config_reader(*configs, &block)
           each_configs(*configs) do |m, location|
@@ -58,6 +54,10 @@ module Thinreports::Core
       def initialize(config, &block)
         @config = config
         block.call(self) if ::Kernel.block_given?
+      end
+
+      def attributes
+        @config
       end
 
       private

@@ -8,40 +8,39 @@ class Thinreports::Layout::TestBase < Minitest::Test
   Layout = Thinreports::Layout
 
   def test_load_format
-    assert_instance_of Layout::Format,
-                       Layout::Base.load_format(data_file('layout_text1.tlf'))
-    assert_instance_of Layout::Format,
-                       Layout::Base.load_format(data_file('layout_text1'))
-
+    assert_instance_of Layout::Format, Layout::Base.load_format(layout_file.path)
     assert_raises Thinreports::Errors::LayoutFileNotFound do
       Layout::Base.load_format 'unknown.tlf'
     end
   end
 
   def test_new
-    layout = create_layout id: 'foo'
+    layout_filename = layout_file.path
+    layout = Layout::Base.new(layout_filename)
 
-    assert_equal 'foo', layout.id
-    assert_equal data_file('layout_text1.tlf'), layout.filename
+    assert_nil layout.id
+    assert_equal layout_filename, layout.filename
+    assert_instance_of Layout::Format, layout.format
+  end
+
+  def test_id
+    layout_without_id = Layout::Base.new(layout_file.path)
+    assert_nil layout_without_id.id
+
+    layout_with_id = Layout::Base.new(layout_file.path, id: 'foo')
+    assert_equal 'foo', layout_with_id.id
   end
 
   def test_default?
-    assert_equal false, create_layout(id: 'foo').default?
-    assert_equal true, create_layout.default?
+    layout_without_id = Layout::Base.new(layout_file.path)
+    assert_equal true, layout_without_id.default?
+
+    layout_with_id = Layout::Base.new(layout_file.path, id: 'bar')
+    assert_equal false, layout_with_id.default?
   end
 
   def test_config
-    assert_instance_of Thinreports::Layout::Configuration,
-                       create_layout.config
-  end
-
-  def test_new_page
-    report = new_report 'layout_text1'
-    assert_instance_of Thinreports::Report::Page,
-                       create_layout.new_page(report)
-  end
-
-  def create_layout(options = {})
-    Layout::Base.new data_file('layout_text1.tlf'), options
+    layout = Layout::Base.new(layout_file.path)
+    assert_instance_of Thinreports::Layout::Configuration, layout.config
   end
 end

@@ -9,7 +9,7 @@ class Thinreports::Core::Shape::Basic::TestInternal < Minitest::Test
   Basic = Thinreports::Core::Shape::Basic
 
   def create_internal(format_config = {})
-    report = Thinreports::Report.new layout: data_file('layout_text1')
+    report = Thinreports::Report.new layout: layout_file.path
 
     Basic::Internal.new report.page, Basic::Format.new(format_config)
   end
@@ -19,13 +19,8 @@ class Thinreports::Core::Shape::Basic::TestInternal < Minitest::Test
     assert_same basic.id, basic.format.id
   end
 
-  def test_svg_tag_should_operate_as_delegator_of_format
-    basic = create_internal('svg' => {'tag' => 'rect'})
-    assert_same basic.svg_tag, basic.format.svg_tag
-  end
-
   def test_type_should_operate_as_delegator_of_format
-    basic = create_internal('type' => 's-ellipse')
+    basic = create_internal('type' => 'ellipse')
     assert_same basic.type, basic.format.type
   end
 
@@ -41,10 +36,10 @@ class Thinreports::Core::Shape::Basic::TestInternal < Minitest::Test
   def test_type_of_asker_should_return_true_when_the_specified_type_equal_self_type_name
     result = []
 
-    result << create_internal('type' => 's-rect').type_of?(:rect)
-    result << create_internal('type' => 's-ellipse').type_of?(:ellipse)
-    result << create_internal('type' => 's-line').type_of?(:line)
-    result << create_internal('type' => 's-image').type_of?(:image)
+    result << create_internal('type' => 'rect').type_of?('rect')
+    result << create_internal('type' => 'ellipse').type_of?('ellipse')
+    result << create_internal('type' => 'line').type_of?('line')
+    result << create_internal('type' => 'image').type_of?('image')
 
     assert_equal result.all?, true
   end

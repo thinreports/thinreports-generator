@@ -9,12 +9,14 @@ class Thinreports::Core::Shape::List::TestManager < Minitest::Test
   List = Thinreports::Core::Shape::List
 
   def create_report(&block)
-    new_report('layout_list.tlf', &block)
+    report = Thinreports::Report.new layout: layout_file.path
+    block.call(report) if block_given?
+    report
   end
 
   def list_manager
     report = create_report {|r| r.start_new_page }
-    report.page.list(:list).manager
+    report.page.list.manager
   end
 
   def test_config_should_return_the_instance_of_ListConfiguration
@@ -31,7 +33,7 @@ class Thinreports::Core::Shape::List::TestManager < Minitest::Test
 
   def test_switch_current_should_replace_own_current_page_property_by_the_given_page
     report = create_report {|r| r.start_new_page }
-    list   = report.page.list(:list)
+    list   = report.page.list
     new_page = List::Page.new(report.page, list.internal.format)
 
     list.manager.switch_current!(new_page)
@@ -41,7 +43,7 @@ class Thinreports::Core::Shape::List::TestManager < Minitest::Test
 
   def test_switch_current_should_replace_own_current_page_state_property_by_internal_property_of_the_given_page
     report = create_report {|r| r.start_new_page }
-    list   = report.page.list(:list)
+    list   = report.page.list
     new_page = List::Page.new(report.page, list.internal.format)
 
     list.manager.switch_current!(new_page)
@@ -51,7 +53,7 @@ class Thinreports::Core::Shape::List::TestManager < Minitest::Test
 
   def test_switch_current_should_return_the_self
     report = create_report {|r| r.start_new_page }
-    list   = report.page.list(:list)
+    list   = report.page.list
     new_page = List::Page.new(report.page, list.internal.format)
 
     assert_same list.manager.switch_current!(new_page), list.manager
@@ -61,7 +63,7 @@ class Thinreports::Core::Shape::List::TestManager < Minitest::Test
     flag = false
 
     report = create_report do |r|
-      r.layout.config.list(:list) do
+      r.layout.config.list do
         events.on :page_finalize do
           flag = true
         end
@@ -69,7 +71,7 @@ class Thinreports::Core::Shape::List::TestManager < Minitest::Test
     end
 
     report.start_new_page do |page|
-      page.list(:list).manager.finalize_page
+      page.list.manager.finalize_page
     end
 
     assert flag, 'The :page_finalize event was not dispatched.'
@@ -79,7 +81,7 @@ class Thinreports::Core::Shape::List::TestManager < Minitest::Test
     page_used_in_event = nil
 
     report = create_report do |r|
-      r.layout.config.list(:list) do
+      r.layout.config.list do
         events.on :page_finalize do |e|
           page_used_in_event = e.page
         end
@@ -87,7 +89,7 @@ class Thinreports::Core::Shape::List::TestManager < Minitest::Test
     end
 
     current_page = report.start_new_page
-    current_page.list(:list).manager.finalize_page
+    current_page.list.manager.finalize_page
 
     assert_same page_used_in_event, current_page
   end
@@ -96,7 +98,7 @@ class Thinreports::Core::Shape::List::TestManager < Minitest::Test
     list_used_in_event = nil
 
     report = create_report do |r|
-      r.layout.config.list(:list) do
+      r.layout.config.list do
         events.on :page_finalize do |e|
           list_used_in_event = e.list
         end
@@ -104,7 +106,7 @@ class Thinreports::Core::Shape::List::TestManager < Minitest::Test
     end
 
     report.start_new_page
-    current_list = report.page.list(:list)
+    current_list = report.page.list
     current_list.manager.finalize_page
 
     assert_same list_used_in_event, current_list
@@ -114,9 +116,9 @@ class Thinreports::Core::Shape::List::TestManager < Minitest::Test
     report = create_report
     assert_equal report.page_count, 0
 
-    report.list(:list).page_break
-    report.list(:list).page_break
+    report.list.page_break
+    report.list.page_break
 
-    assert_equal report.list(:list).manager.page_count, 2
+    assert_equal report.list.manager.page_count, 2
   end
 end

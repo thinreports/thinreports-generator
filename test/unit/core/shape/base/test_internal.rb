@@ -6,7 +6,7 @@ class Thinreports::Core::Shape::Base::TestInternal < Minitest::Test
   include Thinreports::TestHelper
 
   def setup
-    @report = Thinreports::Report.new layout: data_file('layout_text1.tlf')
+    @report = Thinreports::Report.new layout: layout_file.path
     @report.start_new_page
   end
 

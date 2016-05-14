@@ -5,14 +5,14 @@ module Thinreports
 
     class Text::Internal < Basic::Internal
       # Delegate to Format's methods
-      format_delegators :svg_content, :text, :box
+      format_delegators :texts, :box
 
       def style
         @style ||= Style::Text.new(format)
       end
 
       def type_of?(type_name)
-        type_name == :text
+        type_name == Text::TYPE_NAME
       end
     end
 

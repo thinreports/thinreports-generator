@@ -26,10 +26,7 @@ module Thinreports
         id = @format.identifier.to_s
 
         unless @stamp_created
-          @pdf.create_stamp(id) do
-            @pdf.parse_svg('<svg xmlns:xlink="http://www.w3.org/1999/xlink">' +
-                           "#{@format.layout}</svg>", '/svg')
-          end
+          @pdf.create_stamp(id) { @pdf.draw_template_items(@format.attributes['items']) }
           @stamp_created = true
         end
         pdf_stamp(id)

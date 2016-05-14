@@ -7,7 +7,7 @@ module Thinreports
       alias_method :src, :read_value
 
       def type_of?(type_name)
-        type_name == :iblock || super
+        type_name == ImageBlock::TYPE_NAME || super
       end
     end
 

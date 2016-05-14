@@ -2,11 +2,11 @@
 
 module Thinreports
   module Core::Shape
-    
+
     module List
-      TYPE_NAME = 's-list'
+      TYPE_NAME = 'list'
     end
-    
+
   end
 end
 

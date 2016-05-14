@@ -27,7 +27,7 @@ class Thinreports::Core::Shape::Manager::TestFormat < Minitest::Test
   def test_find_shape_should_return_format_of_shape_when_shape_is_found
     format = TestFormat.new({}) do |f|
       f.shapes[:foo] = Thinreports::Core::Shape::TextBlock::Format.new('id'   => 'foo',
-                                                                       'type' => 's-tblock')
+                                                                       'type' => 'text-block')
     end
     assert_equal format.find_shape(:foo).id, 'foo'
   end

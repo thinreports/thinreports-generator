@@ -9,7 +9,7 @@ class Thinreports::Core::Shape::Basic::TestInterface < Minitest::Test
   Basic = Thinreports::Core::Shape::Basic
 
   def create_interface(format_config = {})
-    report = Thinreports::Report.new layout: data_file('layout_text1')
+    report = Thinreports::Report.new layout: layout_file.path
     parent = report.start_new_page
 
     Basic::Interface.new parent, Basic::Format.new(format_config)
@@ -26,24 +26,24 @@ class Thinreports::Core::Shape::Basic::TestInterface < Minitest::Test
   end
 
   def test_type_should_operate_as_delegator_of_internal
-    basic = create_interface('type' => 's-rect')
+    basic = create_interface('type' => 'rect')
     assert_same basic.type, basic.internal.type
   end
 
   def test_visible_asker_should_return_result_with_reference_to_style_of_internal
-    basic = create_interface('display' => 'false')
+    basic = create_interface('display' => false)
     assert_equal basic.visible?, basic.internal.style.visible
   end
 
   def test_visible_should_properly_set_visibility_to_style_of_internal
-    basic = create_interface('display' => 'false')
+    basic = create_interface('display' => false)
     basic.visible(true)
 
     assert_equal basic.internal.style.visible, true
   end
 
   def test_style_should_operate_as_reader_when_one_argument_is_given
-    basic = create_interface('svg' => {'attrs' => {'fill' => '#ff0000'}})
+    basic = create_interface('style' => { 'fill-color' => '#ff0000' })
 
     assert_equal basic.style(:fill_color), '#ff0000'
   end

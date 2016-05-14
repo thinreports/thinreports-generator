@@ -48,7 +48,7 @@ module Thinreports
       # @param [Thinreports::Layout::Format] format
       def create_format_stamp(format)
         create_stamp(format.identifier.to_s) do
-          parse_svg(format.layout, '/svg/g')
+          draw_template_items(format.attributes['items'])
         end
         format_stamp_registry << format.identifier
       end

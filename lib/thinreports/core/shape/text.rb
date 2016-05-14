@@ -2,11 +2,11 @@
 
 module Thinreports
   module Core::Shape
-    
+
     module Text
-      TYPE_NAME = 's-text'
+      TYPE_NAME = 'text'
     end
-    
+
   end
 end
 

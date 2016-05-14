@@ -9,10 +9,10 @@ class Thinreports::Core::Shape::TextBlock::TestInternal < Minitest::Test
   TextBlock = Thinreports::Core::Shape::TextBlock
 
   def create_parent
-    report = new_report('layout_text1.tlf')
+    report = Thinreports::Report.new layout: layout_file.path
     report.start_new_page do |page|
       # Add to force TextBlock shape.
-      page.manager.format.shapes[:foo] = TextBlock::Format.new('type' => 's-tblock',
+      page.manager.format.shapes[:foo] = TextBlock::Format.new('type' => 'text-block',
                                                                'id'   => 'foo')
       # Set value to TextBlock.
       page.item(:foo).value('foo value')
@@ -24,7 +24,7 @@ class Thinreports::Core::Shape::TextBlock::TestInternal < Minitest::Test
   end
 
   def test_multiple_asker_should_operate_as_delegator_of_format
-    tblock = create_internal('multiple' => 'true')
+    tblock = create_internal('multiple-line' => true)
     assert_equal tblock.multiple?, tblock.format.multiple?
   end
 
@@ -38,7 +38,7 @@ class Thinreports::Core::Shape::TextBlock::TestInternal < Minitest::Test
   end
 
   def test_read_value_should_return_the_value_of_referenced_shape
-    tblock = create_internal('ref-id' => 'foo')
+    tblock = create_internal('reference-id' => 'foo', 'value' => '')
     assert_equal tblock.read_value, 'foo value'
   end
 
@@ -57,7 +57,7 @@ class Thinreports::Core::Shape::TextBlock::TestInternal < Minitest::Test
   end
 
   def test_write_value_should_show_warnings_when_tblock_has_reference
-    tblock = create_internal('id' => 'bar', 'ref-id' => 'foo')
+    tblock = create_internal('id' => 'bar', 'reference-id' => 'foo')
     _out, err = capture_io do
       tblock.write_value('value')
     end
@@ -104,16 +104,16 @@ class Thinreports::Core::Shape::TextBlock::TestInternal < Minitest::Test
   end
 
   def test_format_enabled_asker_should_return_false_constantly_when_tblock_is_multiple_mode
-    tblock = create_internal('multiple' => 'true',
-                             'format'   => {'base' => '{value}',
-                                            'type' => 'number'})
+    tblock = create_internal('multiple-line' => true,
+                             'format' => {'base' => '{value}',
+                                          'type' => 'number'})
     tblock.format_enabled(true)
 
     assert_equal tblock.format_enabled?, false
   end
 
   def test_type_of_asker_should_return_true_when_value_is_tblock
-    assert_equal create_internal.type_of?(:tblock), true
+    assert_equal create_internal.type_of?('text-block'), true
   end
 
   def test_type_of_asker_should_return_true_when_value_is_block

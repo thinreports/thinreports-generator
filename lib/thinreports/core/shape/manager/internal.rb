@@ -57,7 +57,7 @@ module Thinreports
             shape
           end
         # When shape was not found in registry.
-      elsif format.has_shape?(id)
+        elsif format.has_shape?(id)
           shape_format = find_format(id)
           return nil unless shape_format.display?
 

@@ -8,7 +8,7 @@ class Thinreports::Core::Shape::Basic::TestBlockInterface < Minitest::Test
   Basic = Thinreports::Core::Shape::Basic
 
   def setup
-    report = Thinreports::Report.new layout: data_file('layout_text1')
+    report = Thinreports::Report.new layout: layout_file.path
     parent = report.start_new_page
 
     format = Basic::BlockFormat.new({})

@@ -8,17 +8,17 @@ class Thinreports::Core::Shape::ImageBlock::TestInterface < Minitest::Test
   ImageBlock = Thinreports::Core::Shape::ImageBlock
 
   def setup
-    @report = new_report 'layout_block.tlf'
+    @report = Thinreports::Report.new layout: layout_file.path
     @page = @report.start_new_page
   end
 
   def test_src
-    @page.item(:image_block1).src('/path/to/image.png')
-    assert_equal '/path/to/image.png', @page.item(:image_block1).src
+    @page.item(:image_block).src('/path/to/image.png')
+    assert_equal '/path/to/image.png', @page.item(:image_block).src
   end
 
   def test_src=
-    @page.item(:image_block1).src = '/path/to/image.png'
-    assert_equal '/path/to/image.png', @page.item(:image_block1).src
+    @page.item(:image_block).src = '/path/to/image.png'
+    assert_equal '/path/to/image.png', @page.item(:image_block).src
   end
 end

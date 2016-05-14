@@ -10,23 +10,17 @@ module Thinreports
       #   @return [String]
       # @method border_color=(color)
       #   @param [String] color
-      style_accessor :border_color, 'stroke'
+      style_accessor :border_color, 'border-color'
 
       # @method border_width
-      #   @return [String, Number]
-      style_reader :border_width, 'stroke-width'
+      #   @return [Number]
+      style_accessor :border_width, 'border-width'
 
       # @method fill_color
       #   @return [String]
       # @method fill_color=(color)
       #   @param [String] color
-      style_accessor :fill_color, 'fill'
-
-      # @param [String, Number] width
-      def border_width=(width)
-        write_internal_style('stroke-opacity', '1') unless width.to_i.zero?
-        write_internal_style('stroke-width', width)
-      end
+      style_accessor :fill_color, 'fill-color'
 
       # @return [Array<String, Number>]
       def border

@@ -2,11 +2,11 @@
 
 module Thinreports
   module Core::Shape
-    
+
     module TextBlock
-      TYPE_NAME = 's-tblock'
+      TYPE_NAME = 'text-block'
     end
-    
+
   end
 end
 

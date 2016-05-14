@@ -5,55 +5,33 @@ require 'test_helper'
 class Thinreports::Core::Shape::Basic::TestFormat < Minitest::Test
   include Thinreports::TestHelper
 
-  TEST_BASIC_FORMAT = {
-    "type" => "s-rect",
-    "id" => "rect_1",
-    "display" => "true",
-    "svg" => {
-      "tag" => "rect",
-      "attrs" => {
-        "stroke" => "#000000",
-        "stroke-width" => "1",
-        "fill" => "#ff0000",
-        "fill-opacity" => "1",
-        "stroke-dasharray" => "none",
-        "rx" => "0",
-        "ry" => "0",
-        "width" => "196.1",
-        "height" => "135.1",
-        "x" => "85",
-        "y" => "82"
-      }
+  RECT_FORMAT = {
+    "id" => "",
+    "type" => "rect",
+    "x" => 100.0,
+    "y" => 200.0,
+    "width" => 300.0,
+    "height" => 400.0,
+    "description" => "Description for rect",
+    "display" => true,
+    "rx" => 1.0,
+    "ry" => 1.0,
+    "style" => {
+      "border-width" => 1,
+      "border-color" => "#000000",
+      "border-style" => "dashed",
+      "fill-color" => "#ff0000"
     }
   }
 
-  # Alias
-  Format = Thinreports::Core::Shape::Basic::Format
+  Basic = Thinreports::Core::Shape::Basic
 
-  def test_build_basic_format
-    build_basic_format
-  rescue => e
-    flunk exception_details(e, 'Building failed.')
-  end
-  
-  def test_basic_config_readers
-    format = Format.new(TEST_BASIC_FORMAT)
-    
-    assert_equal format.id, 'rect_1'
-    assert_equal format.type, 's-rect'
-    assert_equal format.svg_tag, 'rect'
-    assert_equal format.display?, true
-    assert_equal format.svg_attrs['stroke'], '#000000'
-    assert_equal format.svg_attrs['stroke-dasharray'], 'none'
-  end
-  
-  def test_display?
-    format = Format.new('display' => 'false')
-    
-    assert_equal format.display?, false
-  end
-  
-  def build_basic_format
-    Format.build(TEST_BASIC_FORMAT)
+  def test_attribute_readers
+    format = Basic::Format.new(RECT_FORMAT)
+
+    assert_equal '', format.id
+    assert_equal 'rect', format.type
+    assert_equal RECT_FORMAT['style'], format.style
+    assert_equal true, format.display?
   end
 end

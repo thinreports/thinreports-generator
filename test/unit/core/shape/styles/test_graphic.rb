@@ -5,51 +5,46 @@ require 'test_helper'
 class Thinreports::Core::Shape::Style::TestGraphic < Minitest::Test
   include Thinreports::TestHelper
 
-  def create_graphic_style
-    format = Thinreports::Core::Shape::Basic::Format.new({})
+  def test_border_color
+    style = create_graphic_style('border-color' => 'red')
+    assert_equal 'red', style.border_color
+
+    style.border_color = '#ff0000'
+    assert_equal '#ff0000', style.styles['border-color']
+    assert_equal '#ff0000', style.border_color
+  end
+
+  def test_border_width
+    style = create_graphic_style('border-width' => 2.0)
+    assert_equal 2.0, style.border_width
+
+    style.border_width = 10.9
+    assert_equal 10.9, style.styles['border-width']
+    assert_equal 10.9, style.border_width
+  end
+
+  def test_fill_color
+    style = create_graphic_style('fill-color' => '#0000ff')
+    assert_equal '#0000ff', style.fill_color
+
+    style.fill_color = 'blue'
+    assert_equal 'blue', style.styles['fill-color']
+    assert_equal 'blue', style.fill_color
+  end
+
+  def test_border
+    style = create_graphic_style('border-color' => 'red', 'border-width' => 1)
+    assert_equal [1, 'red'], style.border
+
+    style.border = [2.0, '#ff0000']
+    assert_equal 2.0, style.styles['border-width']
+    assert_equal '#ff0000', style.styles['border-color']
+  end
+
+  private
+
+  def create_graphic_style(default_style = {})
+    format = Thinreports::Core::Shape::Basic::Format.new('style' => default_style)
     Thinreports::Core::Shape::Style::Graphic.new(format)
-  end
-
-  def test_border_color_should_properly_set_to_internal_styles_as_stroke_style
-    style = create_graphic_style
-    style.border_color = '#ff0000'
-
-    assert_equal style.styles['stroke'], '#ff0000'
-  end
-
-  def test_border_width_should_properly_set_to_internal_styles_as_stroke_width_style
-    style = create_graphic_style
-    style.border_width = 1
-
-    assert_equal style.styles['stroke-width'], 1
-  end
-
-  def test_border_width_should_set_stroke_opacity_to_1_when_width_is_not_zero
-    style = create_graphic_style
-    style.border_width = 5
-
-    assert_equal style.styles['stroke-opacity'], '1'
-  end
-
-  def test_fill_color_should_properly_set_to_internal_styles_as_fill_style
-    style = create_graphic_style
-    style.fill_color = '#0000ff'
-
-    assert_equal style.styles['fill'], '#0000ff'
-  end
-
-  def test_border_should_return_an_Array_included_border_width_and_border_color
-    style = create_graphic_style
-    style.border_width = 1
-    style.border_color = '#ff0000'
-
-    assert_equal style.border, [style.border_width, style.border_color]
-  end
-
-  def test_border_should_properly_set_both_border_width_and_border_color_from_the_specified_array_argument
-    style = create_graphic_style
-    style.border = [5, '#000000']
-
-    assert_equal style.border, [5, '#000000']
   end
 end

@@ -4,122 +4,142 @@ module Thinreports
   module Generator
 
     module PDF::Graphics
-      # @param [Hash] svg_attrs
+      # @param [Hash] style
       # @yield [attrs]
       # @yieldparam [Hash] attrs
       # @return [Hash]
-      def common_graphic_attrs(svg_attrs, &block)
-        attrs = {stroke: svg_attrs['stroke'],
-                 stroke_width: svg_attrs['stroke-width'],
-                 fill: svg_attrs['fill']}
-
-        # Set 0 to stroke_width if stroke_opacity is '0'.
-        if svg_attrs['stroke-opacity'] == '0'
-          attrs[:stroke_width] = 0
-        end
-
-        # Setting for stroke dash.
-        if (dash = svg_attrs['stroke-dasharray']) && dash != 'none'
-          attrs[:stroke_dash] = dash.split(',')
-        end
-        block.call(attrs) if block_given?
-        attrs
+      def build_graphic_attributes(style, &block)
+        graphic_attributes = {
+          stroke: style['border-color'],
+          stroke_width: style['border-width'],
+          stroke_type: style['border-style'],
+          fill: style['fill-color']
+        }
+        block.call(graphic_attributes) if block_given?
+        graphic_attributes
       end
 
-      # @param [Hash] svg_attrs
+      # @param [Hash] style
       # @yield [attrs]
       # @yieldparam [Hash] attrs
       # @return [Hash]
-      def common_text_attrs(svg_attrs, &block)
-        attrs = {font: default_family_if_missing(svg_attrs['font-family']),
-                 size: svg_attrs['font-size'],
-                 color: svg_attrs['fill'],
-                 align: text_align(svg_attrs['text-anchor']),
-                 styles: font_styles(svg_attrs)}
-
-        # The Letter Spacing Property.
-        #
-        # When the version of Layout is
-        #   smaller then 0.6.0:
-        #     Use letter-spacing attribute (normal is none).
-        #   0.6.0 or more:
-        #     Use kerning attribute (auto is none).
-        #
-        spacing = text_letter_spacing(svg_attrs['kerning'] || svg_attrs['letter-spacing'])
-        attrs[:letter_spacing] = spacing if spacing
-
-        block.call(attrs) if block_given?
-        attrs
+      def build_text_attributes(style, &block)
+        text_attributes = {
+          font: font_family(style['font-family']),
+          size: style['font-size'],
+          color: style['color'],
+          align: text_align(style['text-align']),
+          valign: text_valign(style['vertical-align']),
+          styles: font_styles(style['font-style']),
+          letter_spacing: letter_spacing(style['letter-spacing']),
+          line_height: line_height(style['line-height']),
+          overflow: text_overflow(style['overflow']),
+          word_wrap: word_wrap(style['word-wrap'])
+        }
+        block.call(text_attributes) if block_given?
+        text_attributes
       end
 
-      # @param [Hash] svg_attrs
+      # @param [Array<String>] font_names
+      # @return [String]
+      def font_family(font_names)
+        font_name = font_names.first
+        default_family_if_missing(font_name)
+      end
+
+      # @param [Array<String>] styles
       # @return [Array<Symbol>]
-      def font_styles(svg_attrs)
-        styles = []
-        styles << :bold   if svg_attrs['font-weight'] == 'bold'
-        styles << :italic if svg_attrs['font-style'] == 'italic'
-
-        if (deco = svg_attrs['text-decoration']) && deco != 'none'
-          deco = deco.split(' ')
-          styles << :underline     if deco.include?('underline')
-          styles << :strikethrough if deco.include?('line-through')
-        end
-        styles
-      end
-
-      # @param [String] space
-      # @return [String, nil]
-      def text_letter_spacing(space)
-        %w( normal auto ).include?(space) ? nil : space
-      end
-
-      # @param [String] svg_align
-      # @return [Symbol]
-      def text_align(svg_align)
-        case svg_align
-        when 'start'  then :left
-        when 'middle' then :center
-        when 'end'    then :right
-        else :left
+      def font_styles(styles)
+        styles.map do |font_style|
+          case font_style
+          when 'bold' then :bold
+          when 'italic' then :italic
+          when 'underline' then :underline
+          when 'linethrough' then :strikethrough
+          end
         end
       end
 
-      # @param [String] svg_valign
-      # @return [Symbol]
-      def text_valign(svg_valign)
-        case svg_valign
-        when 'top'    then :top
+      # @param [Float, "", nil] spacing
+      # @return [Float, nil]
+      def letter_spacing(spacing)
+        blank_value?(spacing) ? nil : spacing
+      end
+
+      # @param ["left", "center", "right", ""] align
+      # @return [:left, :center, :right]
+      def text_align(align)
+        case align
+        when 'left' then :left
         when 'center' then :center
-        when 'bottom' then :bottom
-        else :top
+        when 'right' then :right
+        when '' then :left
         end
       end
 
-      # @param [String] overflow
-      # @return [Symbol]
+      # @param ["top", "middle", "bottom", "", nil] valign
+      # @return [:top, :center, :bottom, nil]
+      def text_valign(valign)
+        return nil unless valign
+
+        case valign
+        when 'top' then :top
+        when 'middle' then :center
+        when 'bottom' then :bottom
+        when '' then :top
+        end
+      end
+
+      # @param ["truncate", "fit", "expand", "", nil] overflow
+      # @return [:truncate, :shrink_to_fit, :expand]
       def text_overflow(overflow)
+        return nil unless overflow
+
         case overflow
         when 'truncate' then :truncate
-        when 'fit'      then :shrink_to_fit
-        when 'expand'   then :expand
-        else :truncate
+        when 'fit' then :shrink_to_fit
+        when 'expand' then :expand
+        when '' then :truncate
         end
       end
 
-      # @param [String] word_wrap
-      # @return [Symbol]
-      def text_word_wrap(word_wrap)
+      # @param ["break-word", "none", "", nil] word_wrap
+      # @return [:break_word, :none, nil]
+      def word_wrap(word_wrap)
+        return nil unless word_wrap
+
         case word_wrap
         when 'break-word' then :break_word
-        else :none
+        when '' then :none
         end
       end
 
-      # @param [String] xlink
-      # @return [Array<string>] returns ['image/png', '<base64 data>']
-      def extract_base64_string(xlink)
-        _, type, data = xlink.match(%r|^data:(image/[a-z]+?);base64,(.+)|).to_a
-        [type, data]
+      # @param [Float, "", nil] height
+      # @return [Float, nil]
+      def line_height(height)
+        blank_value?(height) ? nil : height
+      end
+
+      # @param ["left", "center", "right", ""] position
+      # @return [:left, :center, :right]
+      def image_position_x(position)
+        case position
+        when 'left' then :left
+        when 'center' then :center
+        when 'right' then :right
+        when '' then :left
+        end
+      end
+
+      # @param ["top", "middle", "bottom", ""] position
+      # @return [:left, :center, :right]
+      def image_position_y(position)
+        case position
+        when 'top' then :top
+        when 'middle' then :center
+        when 'bottom' then :bottom
+        when '' then :top
+        end
       end
     end
 

@@ -7,6 +7,6 @@ class Thinreports::TestLayout < Minitest::Test
 
   def test_new
     assert_instance_of Thinreports::Layout::Base,
-                       Thinreports::Layout.new(data_file('layout_text1.tlf'))
+                       Thinreports::Layout.new(layout_file.path)
   end
 end

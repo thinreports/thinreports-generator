@@ -18,7 +18,7 @@ class Thinreports::Generator::PDF::Document::TestPage < Minitest::Test
   def test_B4_paper_size_should_be_converted_to_B4_JIS
     create_pdf
 
-    format = new_layout_format('layout_text1.tlf')
+    format = Thinreports::Layout::Format.build(layout_file.path)
     format.stubs(page_paper_type: 'B4')
 
     @pdf.start_new_page(format)
@@ -28,7 +28,7 @@ class Thinreports::Generator::PDF::Document::TestPage < Minitest::Test
   def test_B4_ISO_paper_size_should_be_converted_to_B4
     create_pdf
 
-    format = new_layout_format('layout_text1.tlf')
+    format = Thinreports::Layout::Format.build(layout_file.path)
     format.stubs(page_paper_type: 'B4_ISO')
 
     @pdf.start_new_page(format)
@@ -37,14 +37,14 @@ class Thinreports::Generator::PDF::Document::TestPage < Minitest::Test
 
   def test_change_page_format_should_return_true_at_first_time
     create_pdf
-    format = new_layout_format('layout_text1.tlf')
+    format = Thinreports::Layout::Format.build(layout_file.path)
 
     assert_equal @pdf.send(:change_page_format?, format), true
   end
 
   def test_change_page_format_should_return_false_when_given_the_same_format
     create_pdf
-    format = new_layout_format('layout_text1.tlf')
+    format = Thinreports::Layout::Format.build(layout_file.path)
 
     @pdf.instance_variable_set(:@current_page_format, format)
     assert_equal @pdf.send(:change_page_format?, format), false
@@ -52,15 +52,15 @@ class Thinreports::Generator::PDF::Document::TestPage < Minitest::Test
 
   def test_change_page_format_should_return_true_when_given_the_other_format
     create_pdf
-    format1 = new_layout_format('layout_text1.tlf')
-    format2 = new_layout_format('layout_text2.tlf')
+    format1 = Thinreports::Layout::Format.build(layout_file.path)
+    format2 = Thinreports::Layout::Format.build(layout_file.path)
 
     @pdf.instance_variable_set(:@current_page_format, format1)
     assert_equal @pdf.send(:change_page_format?, format2), true
   end
 
   def test_new_basic_page_options
-    format  = new_layout_format('layout_text1.tlf')
+    format = Thinreports::Layout::Format.build(layout_file.path)
     options = create_pdf.send(:new_basic_page_options, format)
 
     assert_equal options[:layout], format.page_orientation.to_sym
@@ -79,7 +79,7 @@ class Thinreports::Generator::PDF::Document::TestPage < Minitest::Test
 
   def test_start_new_page_should_create_stamp
     create_pdf
-    format = new_layout_format('layout_text1.tlf')
+    format = Thinreports::Layout::Format.build(layout_file.path)
     @pdf.start_new_page(format)
 
     assert_includes @pdf.send(:format_stamp_registry), format.identifier
@@ -87,7 +87,7 @@ class Thinreports::Generator::PDF::Document::TestPage < Minitest::Test
 
   def test_start_new_page_should_not_create_stamp
     create_pdf
-    format = new_layout_format('layout_text1.tlf')
+    format = Thinreports::Layout::Format.build(layout_file.path)
     @pdf.start_new_page(format)
     @pdf.start_new_page(format)
 
@@ -96,7 +96,7 @@ class Thinreports::Generator::PDF::Document::TestPage < Minitest::Test
 
   def test_start_new_page_should_stamp_constantly
     create_pdf
-    format = new_layout_format('layout_text1.tlf')
+    format = Thinreports::Layout::Format.build(layout_file.path)
     @pdf.expects(:stamp).with(format.identifier.to_s).times(2)
 
     @pdf.start_new_page(format)
@@ -112,7 +112,9 @@ class Thinreports::Generator::PDF::Document::TestPage < Minitest::Test
 
   def test_add_blank_page_should_call_with_no_arguments_since_second_page
     create_pdf
-    @pdf.start_new_page(new_layout_format('layout_text1.tlf'))
+    format = Thinreports::Layout::Format.build(layout_file.path)
+
+    @pdf.start_new_page(format)
     @pdf.internal.expects(:start_new_page).with({}).once
 
     @pdf.add_blank_page

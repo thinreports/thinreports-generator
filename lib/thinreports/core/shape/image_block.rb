@@ -2,11 +2,11 @@
 
 module Thinreports
   module Core::Shape
-    
+
     module ImageBlock
-      TYPE_NAME = 's-iblock'
+      TYPE_NAME = 'image-block'
     end
-    
+
   end
 end
 

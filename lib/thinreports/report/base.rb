@@ -142,7 +142,7 @@ module Thinreports
 
         raise Thinreports::Errors::NoRegisteredLayoutFound unless layout
 
-        page = internal.add_page(layout.new_page(self, options))
+        page = internal.add_page(Report::Page.new(self, layout, options))
         call_block_in(page, &block)
       end
 

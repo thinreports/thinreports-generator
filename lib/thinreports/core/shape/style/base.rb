@@ -54,10 +54,9 @@ module Thinreports
       def initialize(format, default_styles = {})
         @format = format
         @styles = default_styles
-        @base_styles = format.svg_attrs || {}
+        @base_styles = format.style || {}
 
         @accessible_styles = self.class.accessible_styles.dup
-        @finalized_svg_attributes = nil
       end
 
       # @param [Symbol] style_method
@@ -84,17 +83,6 @@ module Thinreports
         self.class.new(@format, @styles.empty? ? {} : deep_copy(@styles))
       end
 
-      # @return [Hash]
-      def finalized_svg_attributes
-        @finalized_svg_attributes ||=
-          if @styles.empty?
-            @base_styles.dup
-          else
-            @base_styles.merge(@styles)
-          end
-      end
-      alias_method :svg_attrs, :finalized_svg_attributes
-
       # @param [String, Symbol] style
       # @return [Object]
       def read_internal_style(style)
@@ -112,6 +100,16 @@ module Thinreports
       # @return [Boolean]
       def has_style?(style_method)
         accessible_styles.include?(style_method)
+      end
+
+      # @return [Hash]
+      def finalized_styles
+        @finalized_styles ||=
+          if @styles.empty?
+            @base_styles.dup
+          else
+            @base_styles.merge(@styles)
+          end
       end
 
     private

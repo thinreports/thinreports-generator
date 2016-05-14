@@ -52,14 +52,6 @@ module Thinreports
         @config ||= Layout::Configuration.new(self)
         call_block_in(@config, &block)
       end
-
-      # @param [Thinreports::Report::Base] parent
-      # @param [Hash] options ({})
-      # @option option [Boolean] :count (true)
-      # @return [Page]
-      def new_page(parent, options = {})
-        Report::Page.new(parent, self, options)
-      end
     end
 
   end

@@ -4,7 +4,7 @@ require 'thinreports/generator/pdf/document/font'
 require 'thinreports/generator/pdf/document/parse_color'
 require 'thinreports/generator/pdf/document/graphics'
 require 'thinreports/generator/pdf/document/draw_shape'
-require 'thinreports/generator/pdf/document/parse_svg'
+require 'thinreports/generator/pdf/document/draw_template_items'
 require 'thinreports/generator/pdf/document/page'
 
 module Thinreports
@@ -17,7 +17,7 @@ module Thinreports
       include PDF::ParseColor
       include PDF::Graphics
       include PDF::DrawShape
-      include PDF::ParseSVG
+      include PDF::DrawTemplateItems
       include PDF::Page
 
       # @return [Prawn::Document]

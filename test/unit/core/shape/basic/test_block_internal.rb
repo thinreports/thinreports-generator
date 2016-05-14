@@ -7,11 +7,6 @@ class Thinreports::Core::Shape::Basic::TestBlockInternal < Minitest::Test
 
   Basic = Thinreports::Core::Shape::Basic
 
-  def test_box_should_return_value_of_format
-    internal = init_internal('box' => 'box of format')
-    assert_equal internal.box, 'box of format'
-  end
-
   def test_read_value_should_return_value_from_format
     internal = init_internal('value' => 'default value')
     assert_equal internal.read_value, 'default value'
@@ -46,11 +41,13 @@ class Thinreports::Core::Shape::Basic::TestBlockInternal < Minitest::Test
   end
 
   def test_type_of_asker_should_return_false_otherwise
-    assert_equal [:iblock, :tblock, :text, :list].all? {|t| !init_internal.type_of?(t)}, true
+    assert_equal %w( image-block text-block text list ).all? {|t| !init_internal.type_of?(t)}, true
   end
 
+  private
+
   def init_internal(format = {})
-    report = Thinreports::Report.new layout: data_file('layout_text1')
+    report = Thinreports::Report.new layout: layout_file.path
     parent = report.start_new_page
 
     Basic::BlockInternal.new(parent, Basic::BlockFormat.new(format))

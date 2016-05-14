@@ -9,7 +9,9 @@ class Thinreports::Core::Shape::List::TestPage < Minitest::Test
   List = Thinreports::Core::Shape::List
 
   def create_report(&block)
-    new_report('layout_list.tlf', &block)
+    report = Thinreports::Report.new layout: layout_file.path
+    block.call(report) if block_given?
+    report
   end
 
   def create_report_for_checking_dispatched_event(event)
@@ -17,7 +19,7 @@ class Thinreports::Core::Shape::List::TestPage < Minitest::Test
     @is_dispatched = false
 
     create_report do |r|
-      r.layout.config.list(:list) do |list|
+      r.layout.config.list do |list|
         list.events.on(event) { @is_dispatched = true }
       end
     end
@@ -29,7 +31,7 @@ class Thinreports::Core::Shape::List::TestPage < Minitest::Test
 
   def test_on_page_finalize_callback
     report = create_report
-    list = report.list(:list)
+    list = report.list
 
     counter = 0
     callback = -> { counter += 1 }
@@ -39,13 +41,13 @@ class Thinreports::Core::Shape::List::TestPage < Minitest::Test
     5.times { list.add_row }
     assert_equal 1, counter
 
-    report.generate
+    report.finalize
     assert_equal 2, counter
   end
 
   def test_on_page_footer_insert_callback
     report = create_report
-    list = report.list(:list)
+    list = report.list
 
     tester = 0
     callback = -> footer {
@@ -60,13 +62,13 @@ class Thinreports::Core::Shape::List::TestPage < Minitest::Test
     5.times { list.add_row }
     assert_equal 1, tester
 
-    report.generate
+    report.finalize
     assert_equal 2, tester
   end
 
   def test_on_footer_insert_callback
     report = create_report
-    list = report.list(:list)
+    list = report.list
 
     tester = 0
     callback = -> footer {
@@ -81,14 +83,14 @@ class Thinreports::Core::Shape::List::TestPage < Minitest::Test
     5.times { list.add_row }
     assert_equal 0, tester
 
-    report.generate
+    report.finalize
     assert_equal 1, tester
   end
 
   def test_page_finalize_event_should_be_dispatched_when_page_break_is_called
     report = create_report_for_checking_dispatched_event :page_finalize
     report.start_new_page do
-      list(:list).page_break
+      list.page_break
     end
 
     assert_dispatched_event
@@ -97,7 +99,7 @@ class Thinreports::Core::Shape::List::TestPage < Minitest::Test
   def test_page_finalize_event_should_be_dispatched_when_list_was_overflowed
     report = create_report_for_checking_dispatched_event :page_finalize
     report.start_new_page do
-      6.times { list(:list).add_row }
+      6.times { list.add_row }
     end
 
     assert_dispatched_event
@@ -106,7 +108,7 @@ class Thinreports::Core::Shape::List::TestPage < Minitest::Test
   def test_page_finalize_event_should_be_dispatched_when_a_new_page_is_created
     report = create_report_for_checking_dispatched_event :page_finalize
     report.start_new_page do
-      list(:list).add_row
+      list.add_row
     end
     report.start_new_page
 
@@ -116,7 +118,7 @@ class Thinreports::Core::Shape::List::TestPage < Minitest::Test
   def test_page_finalize_event_should_be_dispatched_when_report_is_finalized
     report = create_report_for_checking_dispatched_event :page_finalize
     report.start_new_page do
-      list(:list).add_row
+      list.add_row
     end
     report.finalize
 
@@ -124,7 +126,7 @@ class Thinreports::Core::Shape::List::TestPage < Minitest::Test
   end
 
   def test_copy_should_properly_work_when_list_has_not_header
-    report = new_report('layout_list_noheader.tlf')
+    report = Thinreports::Report.new layout: layout_file(schema: LIST_NO_HEADER_SCHEMA_JSON).path
 
     10.times { report.list.add_row }
   rescue => e

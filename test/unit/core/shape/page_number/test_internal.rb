@@ -8,7 +8,7 @@ class Thinreports::Core::Shape::PageNumber::TestInternal < Minitest::Test
   PageNumber = Thinreports::Core::Shape::PageNumber
 
   def setup
-    @report = new_report('layout_text1.tlf')
+    @report = Thinreports::Report.new layout: layout_file.path
     @report.start_new_page
   end
 
@@ -56,7 +56,7 @@ class Thinreports::Core::Shape::PageNumber::TestInternal < Minitest::Test
 
   def test_type_of
     pageno = init_pageno
-    assert pageno.type_of?(:pageno)
+    assert pageno.type_of?('page-number')
   end
 
   def test_style

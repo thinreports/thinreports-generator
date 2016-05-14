@@ -61,7 +61,7 @@ module Thinreports
       end
 
       def type_of?(type_name)
-        type_name == :tblock || super
+        type_name == TextBlock::TYPE_NAME || super
       end
 
     private
