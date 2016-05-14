@@ -12,7 +12,7 @@ class Thinreports::Layout::TestConfiguration < Minitest::Test
     configuration = Configuration.new(layout)
 
     assert_raises NoMethodError do
-      @config.values
+      configuration.values
     end
   end
 end
