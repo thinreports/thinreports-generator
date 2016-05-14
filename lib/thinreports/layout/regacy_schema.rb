@@ -13,7 +13,6 @@ module Thinreports
       def upgrade
         config = regacy_schema['config']
         page_config = config['page']
-        state = regacy_schema['state']
 
         {
           'version' => regacy_schema['version'],
