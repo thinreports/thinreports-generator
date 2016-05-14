@@ -11,7 +11,6 @@ class Thinreports::Generator::PDF::TestFont < Minitest::Test
     # Reset font settings
     Thinreports.configure do |c|
       c.fallback_fonts = []
-      c.generator.pdf.eudc_fonts = []
     end
   end
 
@@ -33,37 +32,32 @@ class Thinreports::Generator::PDF::TestFont < Minitest::Test
   def test_setup_fonts_with_custom_fallback_fonts
     Thinreports.configure do |c|
       c.fallback_fonts = []
-      c.generator.pdf.eudc_fonts = []
     end
     assert_equal Font::DEFAULT_FALLBACK_FONTS,
                  document.pdf.fallback_fonts
 
     Thinreports.configure do |c|
       c.fallback_fonts = 'IPAGothic'
-      c.generator.pdf.eudc_fonts = []
     end
     assert_equal ['IPAGothic'] + Font::DEFAULT_FALLBACK_FONTS,
                  document.pdf.fallback_fonts
 
     Thinreports.configure do |c|
       c.fallback_fonts = ['IPAMincho']
-      c.generator.pdf.eudc_fonts = [data_file('font.ttf')]
     end
-    assert_equal ['Custom-fallback-font0', 'IPAMincho'] + Font::DEFAULT_FALLBACK_FONTS,
+    assert_equal ['IPAMincho'] + Font::DEFAULT_FALLBACK_FONTS,
                  document.pdf.fallback_fonts
 
     Thinreports.configure do |c|
-      c.generator.pdf.eudc_fonts = [data_file('font.ttf')]
-      c.fallback_fonts = ['IPAMincho', 'IPAMincho', data_file('font.ttf')]
+      c.fallback_fonts = ['IPAMincho', data_file('font.ttf')]
     end
-    assert_equal ['Custom-fallback-font0', 'IPAMincho'] + Font::DEFAULT_FALLBACK_FONTS,
+    assert_equal ['IPAMincho', 'Custom-fallback-font1'] + Font::DEFAULT_FALLBACK_FONTS,
                  document.pdf.fallback_fonts
   end
 
   def test_setup_fonts_with_unknown_custom_fallback_fonts
     Thinreports.configure do |c|
       c.fallback_fonts = ['/path/to/unknown.ttf']
-      c.generator.pdf.eudc_fonts = []
     end
 
     assert_raises Thinreports::Errors::FontFileNotFound do

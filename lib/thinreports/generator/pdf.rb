@@ -56,7 +56,6 @@ module Thinreports
   end
 end
 
-require 'thinreports/generator/pdf/configuration'
 require 'thinreports/generator/pdf/prawn_ext'
 require 'thinreports/generator/pdf/document'
 require 'thinreports/generator/pdf/drawer/base'
