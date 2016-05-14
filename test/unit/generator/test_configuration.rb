@@ -9,10 +9,6 @@ class Thinreports::Generator::TestConfiguration < Minitest::Test
     @config = Thinreports::Generator::Configuration.new
   end
 
-  def test_pdf_should_return_configuration_of_pdf
-    assert_instance_of Thinreports::Generator::PDF::Configuration, @config.pdf
-  end
-
   def test_default_should_return_pdf_by_default
     assert_equal @config.default, :pdf
   end

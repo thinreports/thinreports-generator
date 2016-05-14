@@ -30,12 +30,7 @@ module Thinreports
         end
 
         # Setup custom fallback fonts
-        fallback_fonts = []
-        # For compatible to v0.7 or less
-        fallback_fonts |= Thinreports.config.generator.pdf.eudc_fonts
-        fallback_fonts |= Thinreports.config.fallback_fonts
-        fallback_fonts.uniq!
-
+        fallback_fonts = Thinreports.config.fallback_fonts.uniq
         fallback_fonts.map!.with_index do |font, i|
           unless pdf.font_families.key?(font)
             install_font "Custom-fallback-font#{i}", font
