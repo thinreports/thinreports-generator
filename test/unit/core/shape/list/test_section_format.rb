@@ -23,7 +23,7 @@ class Thinreports::Core::Shape::List::TestSectionFormat < Minitest::Test
 
     assert_equal 47.7, format.height
     assert_equal 0, format.relative_left
-    assert_equal -64.2, format.relative_top
+    assert_equal(-64.2, format.relative_top)
     assert_equal true, format.display?
   end
 
