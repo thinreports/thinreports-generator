@@ -108,14 +108,12 @@ module Thinreports
       # @param [Hash] options
       # @option options [Boolean] :default (true)
       # @option options [Symbol] :id (nil)
-      # @yield [config]
-      # @yieldparam [Thinreports::Layout::Configuration] config
       # @example
       #   report.use_layout '/path/to/default_layout.tlf' # Default layout
       #   report.use_layout '/path/to/default_layout.tlf', default: true
       #   report.use_layout '/path/to/other_layout', id: :other_layout
-      def use_layout(layout, options = {}, &block)
-        internal.register_layout(layout, options, &block)
+      def use_layout(layout, options = {})
+        internal.register_layout(layout, options)
       end
 
       # @example
@@ -189,18 +187,6 @@ module Thinreports
       def list(id = nil, &block)
         start_new_page if page.nil? || page.finalized?
         page.list(id, &block)
-      end
-
-      # @return [Thinreports::Report::Events]
-      # @deprecated
-      #   `Report::Base#events` will be removed in the next major version.
-      #   Please use #on_page_create callbacks instead.
-      #   See also https://github.com/thinreports/thinreports-generator/blob/master/examples/report_callbacks/report_callbacks.rb.
-      def events
-        warn '[DEPRECATION] `Report::Base#events` will be removed in the next major version. ' +
-             'Please use #on_page_create callbacks instead. ' +
-             'See also https://github.com/thinreports/thinreports-generator/blob/master/examples/report_callbacks/report_callbacks.rb.'
-        internal.events
       end
 
       def_delegators :internal, :finalize, :finalized?

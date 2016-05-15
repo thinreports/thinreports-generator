@@ -69,21 +69,6 @@ module Thinreports
         manager.overflow_with?(:detail)
       end
 
-      # @return [Thinreports::Core::Shape::List::Configuration]
-      def config
-        manager.config
-      end
-
-      # @return [Thinreports::Core::Shape::List::Store]
-      def store
-        config.store
-      end
-
-      # @return [Thinreports::Core::Shape::List::Events]
-      def events
-        config.events
-      end
-
       # @param [Thinreports::Report::Page] new_parent
       # @return [Thinreports::Core::Shape::List::Page]
       def copy(new_parent)

@@ -9,7 +9,6 @@ module Thinreports
       attr_reader :page_count
       attr_reader :default_layout
       attr_reader :layout_registry
-      attr_reader :events
 
       attr_accessor :page_create_handler
 
@@ -27,24 +26,20 @@ module Thinreports
         @page_count = 0
 
         @page_create_handler = nil
-
-        @events = Report::Events.new
       end
 
       # @see Thinreports::Report::Base#use_layout
-      def register_layout(layout, options = {}, &block)
-        layout =
-          if options.empty? || options[:default]
-            @default_layout = init_layout(layout)
-          else
-            id = options[:id].to_sym
+      def register_layout(layout, options = {})
+        if options.empty? || options[:default]
+          @default_layout = init_layout(layout)
+        else
+          id = options[:id].to_sym
 
-            if layout_registry.key?(id)
-              raise ArgumentError, "Id :#{id} is already in use."
-            end
-            layout_registry[id] = init_layout(layout, id)
+          if layout_registry.key?(id)
+            raise ArgumentError, "Id :#{id} is already in use."
           end
-        layout.config(&block)
+          layout_registry[id] = init_layout(layout, id)
+        end
       end
 
       def add_page(new_page)
@@ -61,23 +56,6 @@ module Thinreports
         unless finalized?
           finalize_current_page
           @finalized = true
-
-          # [DEPRECATION] You can do the same implements as the :generate Event
-          #   with the following code:
-          #
-          #   report = Thinreports::Report.new layout: 'foo.tlf'
-          #   report.start_new_page do |page|
-          #     page.item(:price).value = 100000
-          #   end
-          #
-          #   report.pages.each do |page|
-          #     page[:title] = 'Common Title'
-          #   end
-          #
-          #   report.generate filename: 'foo.pdf'
-          #
-          events.dispatch(Report::Events::Event.new(:generate,
-                                                    @report, nil, pages))
         end
       end
 
@@ -111,13 +89,7 @@ module Thinreports
           new_page.no = @page_count
         end
 
-        unless new_page.blank?
-          # [DEPRECATION] Please use #on_page_create callback instead.
-          events.dispatch(Report::Events::Event.new(:page_create,
-                                                    @report,
-                                                    new_page))
-          @page_create_handler.call(new_page) if @page_create_handler
-        end
+        @page_create_handler.call(new_page) if !new_page.blank? && @page_create_handler
         @page = new_page
       end
 

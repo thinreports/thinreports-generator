@@ -49,16 +49,4 @@ class Thinreports::Core::TestShape < Minitest::Test
       ShapeModule.find_by_type('unknown')
     end
   end
-
-  def test_Configuration_should_return_Configuration_of_List
-    assert_same ShapeModule::Configuration('list'),
-                ShapeModule::List::Configuration
-  end
-
-  def test_Configuration_should_raise
-    # When shape don't have a Configuration
-    assert_raises Thinreports::Errors::NoConfigurationFound do
-      ShapeModule::Configuration('line')
-    end
-  end
 end

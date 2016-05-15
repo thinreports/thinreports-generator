@@ -131,17 +131,6 @@ class Thinreports::Report::TestBase < Minitest::Test
                  File.read(temp_path.join('result2.pdf'))
   end
 
-  def test_events_should_return_Report_Events
-    assert_instance_of Thinreports::Report::Events, @report.events
-  end
-
-  def test_events_should_deprecated
-    _out, err = capture_io do
-      @report.events
-    end
-    assert_includes err, '[DEPRECATION]'
-  end
-
   def test_page_should_return_the_current_page
     @report.use_layout(@layout_file.path)
     @report.start_new_page

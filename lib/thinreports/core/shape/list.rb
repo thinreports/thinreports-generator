@@ -19,7 +19,3 @@ require 'thinreports/core/shape/list/page_state'
 require 'thinreports/core/shape/list/section_format'
 require 'thinreports/core/shape/list/section_interface'
 require 'thinreports/core/shape/list/section_internal'
-
-require 'thinreports/core/shape/list/store'
-require 'thinreports/core/shape/list/events'
-require 'thinreports/core/shape/list/configuration'

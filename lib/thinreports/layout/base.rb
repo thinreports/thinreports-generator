@@ -44,14 +44,6 @@ module Thinreports
       def default?
         @id.nil?
       end
-
-      # @yield [config]
-      # @yieldparam [List::Configuration] config
-      # @return [List::Configuration]
-      def config(&block)
-        @config ||= Layout::Configuration.new(self)
-        call_block_in(@config, &block)
-      end
     end
 
   end

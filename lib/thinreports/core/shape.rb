@@ -12,15 +12,7 @@ module Thinreports
         find_by_type(type)::Format
       end
 
-      def Configuration(type)
-        klass = find_by_type(type)
-        unless klass.const_defined?(:Configuration)
-          raise Thinreports::Errors::NoConfigurationFound, type
-        end
-        klass.const_get(:Configuration)
-      end
-
-      module_function :Interface, :Format, :Configuration
+      module_function :Interface, :Format
 
       def self.find_by_type(type)
         case type

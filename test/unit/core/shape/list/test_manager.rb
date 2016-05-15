@@ -19,10 +19,6 @@ class Thinreports::Core::Shape::List::TestManager < Minitest::Test
     report.page.list.manager
   end
 
-  def test_config_should_return_the_instance_of_ListConfiguration
-    assert_same list_manager.config.class, List::Configuration
-  end
-
   def test_current_page_should_return_the_instance_of_ListPage
     assert_instance_of List::Page, list_manager.current_page
   end
@@ -57,59 +53,6 @@ class Thinreports::Core::Shape::List::TestManager < Minitest::Test
     new_page = List::Page.new(report.page, list.internal.format)
 
     assert_same list.manager.switch_current!(new_page), list.manager
-  end
-
-  def test_finalize_page_should_dispatch_page_finalize_event
-    flag = false
-
-    report = create_report do |r|
-      r.layout.config.list do
-        events.on :page_finalize do
-          flag = true
-        end
-      end
-    end
-
-    report.start_new_page do |page|
-      page.list.manager.finalize_page
-    end
-
-    assert flag, 'The :page_finalize event was not dispatched.'
-  end
-
-  def test_page_property_which_dispatcher_of_finalize_page_event_should_return_the_current_page
-    page_used_in_event = nil
-
-    report = create_report do |r|
-      r.layout.config.list do
-        events.on :page_finalize do |e|
-          page_used_in_event = e.page
-        end
-      end
-    end
-
-    current_page = report.start_new_page
-    current_page.list.manager.finalize_page
-
-    assert_same page_used_in_event, current_page
-  end
-
-  def test_list_property_which_dispatcher_of_finalize_event_should_return_the_current_page_of_list
-    list_used_in_event = nil
-
-    report = create_report do |r|
-      r.layout.config.list do
-        events.on :page_finalize do |e|
-          list_used_in_event = e.list
-        end
-      end
-    end
-
-    report.start_new_page
-    current_list = report.page.list
-    current_list.manager.finalize_page
-
-    assert_same list_used_in_event, current_list
   end
 
   def test_page_count

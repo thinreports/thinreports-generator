@@ -57,13 +57,6 @@ class Thinreports::Report::TestInternal < Minitest::Test
     end
   end
 
-  def test_register_layout_should_return_the_instance_of_LayoutConfiguration
-    internal = Report::Internal.new(report, {})
-
-    assert_instance_of Thinreports::Layout::Configuration,
-                       internal.register_layout(@layout_file.path)
-  end
-
   def test_add_page_should_finalize_the_current_page
     layout = Thinreports::Layout.new(@layout_file.path)
 
@@ -118,27 +111,6 @@ class Thinreports::Report::TestInternal < Minitest::Test
     assert_same internal.page, new_pages[1]
   end
 
-  def test_add_page_should_dispatch_the_event_page_creation
-    dispatched = false
-    layout = Thinreports::Layout.new(@layout_file.path)
-
-    internal = Report::Internal.new(report, layout: @layout_file.path)
-    internal.events.on(:page_create) { dispatched = true }
-    internal.add_page(Thinreports::Report::Page.new(report, layout))
-
-    assert dispatched
-  end
-
-  def test_add_blank_page_should_not_dispatch_the_event_page_creation
-    dispatched = false
-
-    internal = Report::Internal.new(report, layout: @layout_file.path)
-    internal.events.on(:page_create) { dispatched = true }
-    internal.add_page(Thinreports::Report::BlankPage.new)
-
-    refute dispatched
-  end
-
   def test_add_blank_page_should_not_count_up_the_total_page_count_when_count_is_disabled
     internal = Report::Internal.new(report, layout: @layout_file.path)
     internal.add_page(Thinreports::Report::BlankPage.new(false))
@@ -151,16 +123,6 @@ class Thinreports::Report::TestInternal < Minitest::Test
     internal.add_page(Thinreports::Report::BlankPage.new)
 
     assert_equal internal.page_count, 1
-  end
-
-  def test_finalize_should_dispatch_the_event_report_generation
-    dispatched = false
-
-    internal = Report::Internal.new(report, layout: @layout_file.path)
-    internal.events.on(:generate) { dispatched = true }
-    internal.finalize
-
-    assert dispatched
   end
 
   def test_finalize_should_finalize_the_report
