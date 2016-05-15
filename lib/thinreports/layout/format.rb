@@ -21,8 +21,11 @@ module Thinreports
             )
           end
 
-          # FIXME: Remove the following process in version 1.0.
-          schema = Layout::RegacySchema.new(schema).upgrade if schema['version'] < '0.9.0'
+          if schema['version'] < '0.9.0'
+            warn '[DEPRECATION] Loading regacy layout format is deprecated and will be removed in thinreports-generator 1.0.' \
+                 ' Please convert to new layout format using Thinreports Editor 0.9.x.'
+            schema = Layout::RegacySchema.new(schema).upgrade
+          end
 
           new schema
         end
