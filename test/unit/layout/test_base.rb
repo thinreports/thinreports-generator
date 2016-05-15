@@ -38,9 +38,4 @@ class Thinreports::Layout::TestBase < Minitest::Test
     layout_with_id = Layout::Base.new(layout_file.path, id: 'bar')
     assert_equal false, layout_with_id.default?
   end
-
-  def test_config
-    layout = Layout::Base.new(layout_file.path)
-    assert_instance_of Thinreports::Layout::Configuration, layout.config
-  end
 end

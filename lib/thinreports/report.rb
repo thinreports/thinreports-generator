@@ -23,5 +23,4 @@ end
 
 require 'thinreports/report/base'
 require 'thinreports/report/internal'
-require 'thinreports/report/events'
 require 'thinreports/report/page'

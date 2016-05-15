@@ -52,9 +52,6 @@ module Thinreports
       end
     end
 
-    class NoConfigurationFound < Basic
-    end
-
     class UnsupportedColorName < Basic
     end
 

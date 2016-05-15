@@ -6,9 +6,6 @@ module Thinreports
     class List::Manager
       include Utils
 
-      # @return [Thinreports::Core::Shape::List::Configuration]
-      attr_reader :config
-
       # @return [Thinreports::Core::Shape:::List::Page]
       attr_reader :current_page
 
@@ -31,7 +28,6 @@ module Thinreports
       def initialize(page)
         switch_current!(page)
 
-        @config = init_config
         @finalized = false
         @page_count = 0
 
@@ -159,16 +155,6 @@ module Thinreports
         end
       end
 
-      # @return [Thinreports::Core::Shape::List::Store]
-      def store
-        config.store
-      end
-
-      # @return [Thinreports::Core::Shape::List::Events]
-      def events
-        config.internal_events
-      end
-
       # @return [Boolean]
       def auto_page_break?
         format.auto_page_break?
@@ -184,22 +170,10 @@ module Thinreports
 
         if !options[:ignore_page_footer] && format.has_page_footer?
           page_footer = insert_row(init_section(:page_footer))
-
-          # [DEPRECATION] Use List::Interface#on_page_footer_insert instead.
-          events.
-            dispatch(List::Events::SectionEvent.new(:page_footer_insert,
-                                                    page_footer, store))
-          # In 0.8 or later
           @page_footer_handler.call(page_footer) if @page_footer_handler
         end
-        current_page_state.finalized!
 
-        # [DEPRECATION] Use List::Interface#on_page_finalize instead.
-        events.
-          dispatch(List::Events::PageEvent.new(:page_finalize,
-                                               current_page,
-                                               current_page_state.parent))
-        # In 0.8 or later
+        current_page_state.finalized!
         @page_finalize_handler.call if @page_finalize_handler
 
         @page_count += 1
@@ -213,10 +187,6 @@ module Thinreports
         if format.has_footer?
           footer = init_section(:footer)
 
-          # [DEPRECATION] Use List::Interface#on_footer_insert instead.
-          events.dispatch(List::Events::SectionEvent.new(:footer_insert, footer, store))
-
-          # In 0.8 or later
           @footer_handler.call(footer) if @footer_handler
 
           if auto_page_break? && overflow_with?(:footer)
@@ -249,11 +219,6 @@ module Thinreports
       # @return [Thinreports::Core::Shape::List::Format]
       def format
         current_page_state.format
-      end
-
-      # @return [Thinreports::Core::Shape::List::Configuration]
-      def init_config
-        layout.config.activate(current_page.id) || List::Configuration.new
       end
     end
 
