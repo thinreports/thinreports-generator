@@ -5,8 +5,7 @@ require 'yard'
 
 Rake::TestTask.new do |t|
   t.libs << 'test'
-  t.test_files = Dir['test/unit/**/test_*.rb'] +
-                 Dir['test/unit/**/*_spec.rb']
+  t.test_files = Dir['test/unit/**/test_*.rb']
 end
 
 namespace :examples do
