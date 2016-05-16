@@ -18,6 +18,11 @@ module Thinreports::TestHelper
 
   include Thinreports::SchemaHelper
 
+  def assert_deprecated(&block)
+    _out, err = capture_io { block.call }
+    assert err.to_s.include?('[DEPRECATION]')
+  end
+
   def data_file(*paths)
     ROOT.join('data', *paths).to_s
   end

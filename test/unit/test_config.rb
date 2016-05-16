@@ -24,8 +24,10 @@ class Thinreports::TestConfig < Minitest::Test
     config = Thinreports::Configuration.new
     assert_equal false, config.convert_palleted_transparency_png
 
-    config.convert_palleted_transparency_png = true
-    assert_equal true, config.convert_palleted_transparency_png
+    assert_deprecated do
+      config.convert_palleted_transparency_png = true
+      assert_equal true, config.convert_palleted_transparency_png
+    end
   end
 
   def test_fallback_fonts

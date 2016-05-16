@@ -65,7 +65,9 @@ class Thinreports::Layout::TestFormat < Minitest::Test
   end
 
   def test_build_regacy_layout
-    format = Layout::Format.build(data_file('regacy_layout', 'all-items.tlf'))
+    format = nil
+
+    assert_deprecated { format = Layout::Format.build(data_file('regacy_layout', 'all-items.tlf')) }
 
     assert_equal 'Report Title', format.report_title
     assert_equal '0.8.2', format.last_version
