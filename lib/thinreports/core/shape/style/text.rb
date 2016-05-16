@@ -85,7 +85,8 @@ module Thinreports
       # @param [:top, :center, :middle, :bottom] valign_name
       def valign=(valign_name)
         if valign_name == :center
-          warn '[DEPRECATION] :center will be deprecated in the next major version. Please use :middle instead of :center.'
+          warn '[DEPRECATION] :center value for valign style is deprecated and will be removed in thinreports-generator 1.0.' \
+               ' Please use :middle instead of :center.'
           valign_name = :middle
         end
 

@@ -43,9 +43,10 @@ module Thinreports
     #   config.convert_palleted_transparency_png = true
     #   config.convert_palleted_transparency_png = false # default
     # @see https://github.com/thinreports/thinreports-generator/pull/32
-    # @deprecated This is deprecated and will be removed in thinreports-generator 1.0 with no replacement
+    # @deprecated convert_palleted_transparency_png is deprecated and will be removed in thinreports-generator 1.0 with no replacement
     def convert_palleted_transparency_png=(enable)
-      warn 'This is deprecated and will be removed in thinreports-generator 1.0 with no replacement.' if enable
+      warn '[DEPRECATION] convert_palleted_transparency_png is deprecated' \
+           ' and will be removed in thinreports-generator 1.0 with no replacement.' if enable
       @convert_palleted_transparency_png = enable
     end
 
