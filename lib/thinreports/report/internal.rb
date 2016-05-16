@@ -16,8 +16,7 @@ module Thinreports
       # @param options (see Thinreports::Report::Base#initialize)
       def initialize(report, options)
         @report = report
-        # Default layout
-        @default_layout = prepare_layout(options[:layout])
+        @default_layout = init_layout(options[:layout]) if options[:layout]
 
         @layout_registry = {}
         @finalized  = false
@@ -71,10 +70,11 @@ module Thinreports
           when Symbol
             layout_registry[id_or_filename]
           when String
-            prepare_layout(id_or_filename)
+            init_layout(id_or_filename)
           else
             raise ArgumentError, 'Invalid argument for layout.'
           end
+
         @default_layout = layout unless @default_layout
         layout
       end
@@ -96,20 +96,6 @@ module Thinreports
       # @param (see Thinreports::Report::Page#finalize)
       def finalize_current_page(options = {})
         page.finalize(options) unless page.nil? || page.blank?
-      end
-
-      def prepare_layout(layout)
-        return nil if layout.nil?
-
-        case layout
-        when String
-          init_layout(layout)
-        # @note Currently not used. Since 0.6.0?
-        when Thinreports::Layout::Base
-          layout
-        else
-          raise ArgumentError, 'Invalid argument for layout.'
-        end
       end
 
       def init_layout(filename, id = nil)
