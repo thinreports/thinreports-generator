@@ -4,7 +4,7 @@ module Thinreports
   module Core::Shape
 
     class PageNumber::Internal < Basic::Internal
-      format_delegators :box
+      format_delegators :box, :for_report?
 
       def read_format
         states.key?(:format) ? states[:format] : format.default_format.dup
@@ -34,10 +34,6 @@ module Thinreports
 
       def style
         @style ||= PageNumber::Style.new(format)
-      end
-
-      def for_report?
-        blank_value?(format.target)
       end
 
       def type_of?(type_name)

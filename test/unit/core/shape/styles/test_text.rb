@@ -72,7 +72,7 @@ class Thinreports::Core::Shape::Style::TestText < Minitest::Test
     assert_equal :center, style.align
 
     style.align = :right
-    assert_equal :right, style.styles['text-align']
+    assert_equal 'right', style.styles['text-align']
     assert_equal :right, style.align
   end
 
@@ -81,7 +81,7 @@ class Thinreports::Core::Shape::Style::TestText < Minitest::Test
     assert_equal :top, style.valign
 
     style.valign = :middle
-    assert_equal :middle, style.styles['vertical-align']
+    assert_equal 'middle', style.styles['vertical-align']
     assert_equal :middle, style.valign
 
     assert_deprecated { style.valign = :center }

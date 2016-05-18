@@ -7,7 +7,7 @@ module Thinreports
       # @param [Array<Hash>] items
       def draw_template_items(items)
         items.each do |item_attributes|
-          next unless item_attributes['id'].empty?
+          next unless drawable?(item_attributes)
 
           case item_attributes['type']
           when 'text' then draw_text(item_attributes)
@@ -55,6 +55,10 @@ module Thinreports
         image_data = item_attributes['data']
 
         base64image(image_data['mime-type'], image_data['base64'], x, y, w, h)
+      end
+
+      def drawable?(item_attributes)
+        item_attributes['id'].empty? && item_attributes['display']
       end
     end
 

@@ -86,6 +86,7 @@ class Thinreports::Generator::PDF::Graphics::TestAttributes < Minitest::Test
     assert_equal :center, @pdf.text_align('center')
     assert_equal :right, @pdf.text_align('right')
     assert_equal :left, @pdf.text_align('')
+    assert_equal :left, @pdf.text_align(nil)
   end
 
   def test_text_valign
@@ -93,7 +94,7 @@ class Thinreports::Generator::PDF::Graphics::TestAttributes < Minitest::Test
     assert_equal :center, @pdf.text_valign('middle')
     assert_equal :bottom, @pdf.text_valign('bottom')
     assert_equal :top, @pdf.text_valign('')
-    assert_nil @pdf.text_valign(nil)
+    assert_equal :top, @pdf.text_valign(nil)
   end
 
   def test_text_overflow
@@ -101,13 +102,13 @@ class Thinreports::Generator::PDF::Graphics::TestAttributes < Minitest::Test
     assert_equal :shrink_to_fit, @pdf.text_overflow('fit')
     assert_equal :expand, @pdf.text_overflow('expand')
     assert_equal :truncate, @pdf.text_overflow('')
-    assert_nil @pdf.text_overflow(nil)
+    assert_equal :truncate, @pdf.text_overflow(nil)
   end
 
   def test_word_wrap
     assert_equal :break_word, @pdf.word_wrap('break-word')
-    assert_equal :none, @pdf.word_wrap('')
-    assert_nil @pdf.word_wrap(nil)
+    assert_equal :none, @pdf.word_wrap('none')
+    assert_equal :none, @pdf.word_wrap(nil)
   end
 
   def test_line_height
@@ -121,6 +122,7 @@ class Thinreports::Generator::PDF::Graphics::TestAttributes < Minitest::Test
     assert_equal :center, @pdf.image_position_x('center')
     assert_equal :right, @pdf.image_position_x('right')
     assert_equal :left, @pdf.image_position_x('')
+    assert_equal :left, @pdf.image_position_x(nil)
   end
 
   def test_image_position_y
@@ -128,5 +130,6 @@ class Thinreports::Generator::PDF::Graphics::TestAttributes < Minitest::Test
     assert_equal :center, @pdf.image_position_y('middle')
     assert_equal :bottom, @pdf.image_position_y('bottom')
     assert_equal :top, @pdf.image_position_y('')
+    assert_equal :top, @pdf.image_position_y(nil)
   end
 end

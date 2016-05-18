@@ -19,6 +19,5 @@ class Thinreports::Core::Shape::Basic::TestBlockFormat < Minitest::Test
     format = Basic::BlockFormat.new(BLOCK_FORMAT)
 
     assert_equal 'default value', format.value
-    assert_equal({ 'x' => 100.0, 'y' => 200.0, 'width' => 300.0, 'height' => 400.0 }, format.box)
   end
 end
