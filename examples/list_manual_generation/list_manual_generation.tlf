@@ -1,1 +1,132 @@
-{"version":"0.7.7.1","finger-print":914687887,"config":{"title":"List Manual Generation","option":{},"page":{"paper-type":"A4","orientation":"portrait","margin-top":"20","margin-bottom":"20","margin-left":"20","margin-right":"20"}},"svg":"<svg width=\"595.2\" height=\"841.8\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" preserveAspectRatio=\"none\" viewBox=\"0 0 595.2 841.8\"><g class=\"canvas\"><!--SHAPE{\"type\":\"s-list\",\"id\":\"default\",\"display\":\"true\",\"desc\":null,\"footer\":{},\"footer-enabled\":\"false\",\"page-footer\":{},\"page-footer-enabled\":\"false\",\"detail\":{\"height\":57.7,\"svg\":{\"tag\":\"g\",\"content\":\"<!---SHAPE{\\\"type\\\":\\\"s-tblock\\\",\\\"id\\\":\\\"detail\\\",\\\"display\\\":\\\"true\\\",\\\"desc\\\":null,\\\"multiple\\\":\\\"false\\\",\\\"valign\\\":\\\"\\\",\\\"line-height\\\":\\\"\\\",\\\"box\\\":{\\\"x\\\":211.4,\\\"y\\\":124.5,\\\"width\\\":172.5,\\\"height\\\":36},\\\"format\\\":{\\\"base\\\":\\\"Detail#{value}\\\",\\\"type\\\":\\\"\\\"},\\\"value\\\":\\\"\\\",\\\"ref-id\\\":\\\"\\\",\\\"overflow\\\":\\\"\\\",\\\"word-wrap\\\":\\\"none\\\",\\\"svg\\\":{\\\"tag\\\":\\\"text\\\",\\\"attrs\\\":{\\\"x\\\":297.7,\\\"y\\\":150.3,\\\"xml:space\\\":\\\"preserve\\\",\\\"kerning\\\":\\\"auto\\\",\\\"fill\\\":\\\"#000000\\\",\\\"fill-opacity\\\":\\\"1\\\",\\\"font-size\\\":\\\"36\\\",\\\"font-family\\\":\\\"Helvetica\\\",\\\"font-weight\\\":\\\"normal\\\",\\\"font-style\\\":\\\"normal\\\",\\\"text-anchor\\\":\\\"middle\\\",\\\"text-decoration\\\":\\\"none\\\",\\\"id\\\":\\\"goog_2086231649\\\"}}}SHAPE--->\"},\"translate\":{\"x\":0,\"y\":-45.3}},\"header\":{\"height\":46.3,\"svg\":{\"tag\":\"g\",\"content\":\"<!---SHAPE{\\\"type\\\":\\\"s-tblock\\\",\\\"id\\\":\\\"header\\\",\\\"display\\\":\\\"true\\\",\\\"desc\\\":null,\\\"multiple\\\":\\\"false\\\",\\\"valign\\\":\\\"\\\",\\\"line-height\\\":\\\"\\\",\\\"box\\\":{\\\"x\\\":160.6,\\\"y\\\":62.2,\\\"width\\\":274.1,\\\"height\\\":36},\\\"format\\\":{\\\"base\\\":\\\"Header#{value}\\\",\\\"type\\\":\\\"\\\"},\\\"value\\\":\\\"\\\",\\\"ref-id\\\":\\\"\\\",\\\"overflow\\\":\\\"\\\",\\\"word-wrap\\\":\\\"none\\\",\\\"svg\\\":{\\\"tag\\\":\\\"text\\\",\\\"attrs\\\":{\\\"x\\\":297.7,\\\"y\\\":88,\\\"xml:space\\\":\\\"preserve\\\",\\\"kerning\\\":\\\"auto\\\",\\\"fill\\\":\\\"#000000\\\",\\\"fill-opacity\\\":\\\"1\\\",\\\"font-size\\\":\\\"36\\\",\\\"font-family\\\":\\\"Helvetica\\\",\\\"font-weight\\\":\\\"normal\\\",\\\"font-style\\\":\\\"normal\\\",\\\"text-decoration\\\":\\\"none\\\",\\\"text-anchor\\\":\\\"middle\\\",\\\"id\\\":\\\"goog_2086231648\\\"}}}SHAPE--->\"},\"translate\":{\"x\":0,\"y\":-35}},\"header-enabled\":\"true\",\"svg\":{\"tag\":\"g\",\"attrs\":{}},\"content-height\":273.8,\"page-break\":\"false\"}SHAPE--><!--LAYOUT<g xmlns=\"http://www.w3.org/2000/svg\" class=\"s-list\" x-id=\"default\" x-header-enabled=\"true\" x-page-footer-enabled=\"false\" x-footer-enabled=\"false\" x-changing-page=\"false\" x-display=\"true\" width=\"555.2\" height=\"320.1\" x=\"20\" y=\"22\" id=\"goog_2086231650\"><g class=\"s-list-header\" transform=\"translate(0,-35) rotate(0 0 0)\" x-top=\"22\" x-height=\"46.3\"><g class=\"s-tblock\" x-format-type=\"\" x-value=\"\" x-format-base=\"Header#{value}\" x-ref-id=\"\" kerning=\"auto\" x-display=\"true\" x-multiple=\"false\" x-id=\"header\" x-width=\"274.1\" x-height=\"36\" x-left=\"160.6\" x-top=\"62.2\" fill=\"#000000\" fill-opacity=\"1\" font-size=\"36\" font-family=\"Helvetica\" font-weight=\"normal\" font-style=\"normal\" text-decoration=\"none\" text-anchor=\"middle\" id=\"goog_2086231648\"><rect class=\"s-tblock-box\" stroke=\"#7C4007\" fill=\"#f4e2c4\" stroke-width=\"0.28\" fill-opacity=\"0.8\" width=\"274.1\" height=\"36\" x=\"160.6\" y=\"62.2\"/><text class=\"s-tblock-id\" font-size=\"11\" font-family=\"Helvetica\" font-weight=\"normal\" font-style=\"normal\" text-decoration=\"none\" text-anchor=\"start\" kerning=\"auto\" stroke=\"none\" fill=\"#7C4007\" fill-opacity=\"1\" x=\"162.6\" y=\"73.2\">header</text></g></g><g class=\"s-list-detail\" transform=\"translate(0,-45.3) rotate(0 0 0)\" x-top=\"68.3\" x-height=\"57.7\"><g class=\"s-tblock\" x-format-type=\"\" x-value=\"\" x-format-base=\"Detail#{value}\" x-ref-id=\"\" kerning=\"auto\" x-display=\"true\" x-multiple=\"false\" x-id=\"detail\" fill=\"#000000\" fill-opacity=\"1\" font-size=\"36\" font-family=\"Helvetica\" font-weight=\"normal\" font-style=\"normal\" text-anchor=\"middle\" text-decoration=\"none\" x-width=\"172.5\" x-height=\"36\" x-left=\"211.4\" x-top=\"124.5\" id=\"goog_2086231649\"><rect class=\"s-tblock-box\" stroke=\"#7C4007\" fill=\"#f4e2c4\" stroke-width=\"0.28\" fill-opacity=\"0.8\" width=\"172.5\" height=\"36\" x=\"211.4\" y=\"124.5\"/><text class=\"s-tblock-id\" font-size=\"11\" font-family=\"Helvetica\" font-weight=\"normal\" font-style=\"normal\" text-decoration=\"none\" text-anchor=\"start\" kerning=\"auto\" stroke=\"none\" fill=\"#7C4007\" fill-opacity=\"1\" x=\"213.4\" y=\"135.5\">detail</text></g></g><g class=\"s-list-page-footer\" transform=\"translate(0,-44.2) rotate(0 0 0)\" x-top=\"126\" x-height=\"0\" display=\"none\"/><g class=\"s-list-footer\" transform=\"translate(0,-86.7) rotate(0 0 0)\" x-top=\"126\" x-height=\"0\" display=\"none\"/><text class=\"s-list-id\" font-size=\"11\" font-family=\"Helvetica\" font-weight=\"normal\" font-style=\"normal\" text-anchor=\"start\" stroke=\"none\" fill=\"#7C4007\" fill-opacity=\"1\" x=\"22\" y=\"32.8\">default</text><rect stroke-dasharray=\"5\" stroke=\"#BBBBBB\" stroke-width=\"1\" fill=\"#FFFFFF\" fill-opacity=\"0\" class=\"s-list-face\" width=\"555.2\" height=\"320.1\" x=\"20\" y=\"22\"/></g>LAYOUT--></g></svg>","state":{"layout-guide":[]}}
+{
+  "version": "0.9.0",
+  "items": [
+    {
+      "id": "default",
+      "type": "list",
+      "display": true,
+      "description": "",
+      "x": 20,
+      "y": 22,
+      "width": 555.2,
+      "height": 320.1,
+      "header": {
+        "enabled": true,
+        "height": 46.3,
+        "translate": {
+          "x": 0,
+          "y": -35
+        },
+        "items": [
+          {
+            "id": "header",
+            "type": "text-block",
+            "display": true,
+            "description": "",
+            "x": 160.6,
+            "y": 62,
+            "width": 274.1,
+            "height": 36,
+            "style": {
+              "font-family": [
+                "Helvetica"
+              ],
+              "font-size": 36,
+              "color": "#000000",
+              "text-align": "center",
+              "vertical-align": "top",
+              "line-height": "",
+              "line-height-ratio": "",
+              "letter-spacing": "",
+              "font-style": [],
+              "overflow": "truncate",
+              "word-wrap": "break-word"
+            },
+            "reference-id": "",
+            "value": "",
+            "multiple-line": false,
+            "format": {
+              "base": "Header#{value}",
+              "type": ""
+            }
+          }
+        ]
+      },
+      "detail": {
+        "height": 57.7,
+        "translate": {
+          "x": 0,
+          "y": -45.3
+        },
+        "items": [
+          {
+            "id": "detail",
+            "type": "text-block",
+            "display": true,
+            "description": "",
+            "x": 211.4,
+            "y": 124.5,
+            "width": 172.5,
+            "height": 36,
+            "style": {
+              "font-family": [
+                "Helvetica"
+              ],
+              "font-size": 36,
+              "color": "#000000",
+              "text-align": "center",
+              "vertical-align": "top",
+              "line-height": "",
+              "line-height-ratio": "",
+              "letter-spacing": "",
+              "font-style": [],
+              "overflow": "truncate",
+              "word-wrap": "break-word"
+            },
+            "reference-id": "",
+            "value": "",
+            "multiple-line": false,
+            "format": {
+              "base": "Detail#{value}",
+              "type": ""
+            }
+          }
+        ]
+      },
+      "page-footer": {
+        "enabled": false,
+        "height": 0,
+        "translate": {
+          "x": 0,
+          "y": -44.2
+        },
+        "items": []
+      },
+      "footer": {
+        "enabled": false,
+        "height": 0,
+        "translate": {
+          "x": 0,
+          "y": -86.7
+        },
+        "items": []
+      },
+      "content-height": 273.8,
+      "auto-page-break": false
+    }
+  ],
+  "state": {
+    "layout-guides": []
+  },
+  "title": "List Manual Generation",
+  "report": {
+    "paper-type": "A4",
+    "orientation": "portrait",
+    "margin": [
+      20,
+      20,
+      20,
+      20
+    ]
+  }
+}
