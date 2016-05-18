@@ -14,7 +14,7 @@ class Thinreports::Core::Shape::PageNumber::TestFormat < Minitest::Test
     'width' => 300.0,
     'height' => 400.0,
     'format' => '{page} / {total}',
-    'target' => 'report',
+    'target' => '',
     'style' => {
       'overflow' => 'truncate',
       'letter-spacing' => 'normal',
@@ -33,16 +33,23 @@ class Thinreports::Core::Shape::PageNumber::TestFormat < Minitest::Test
     format = PageNumber::Format.new(PAGE_NUMBER_FORMAT)
 
     assert_equal 'truncate', format.overflow
-    assert_equal 'report', format.target
+    assert_equal '', format.target
     assert_equal '{page} / {total}', format.default_format
-    assert_equal({ 'x' => 100.0, 'y' => 200.0, 'width' => 300.0, 'height' => 400.0 }, format.box)
   end
 
   def test_id
     format = PageNumber::Format.new(PAGE_NUMBER_FORMAT)
-    assert_equal '__pageno1', format.id
+    assert_match(/^__pageno\d+$/, format.id)
 
     format = PageNumber::Format.new(PAGE_NUMBER_FORMAT.merge('id' => 'foo'))
     assert_equal 'foo', format.id
+  end
+
+  def test_for_report?
+    format_for_report = PageNumber::Format.new(PAGE_NUMBER_FORMAT)
+    assert_equal true, format_for_report.for_report?
+
+    format_for_list = PageNumber::Format.new(PAGE_NUMBER_FORMAT.merge('target' => 'target_list_id'))
+    assert_equal false, format_for_list.for_report?
   end
 end

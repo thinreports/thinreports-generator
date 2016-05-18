@@ -73,7 +73,7 @@ module Thinreports
       def align=(align_name)
         verify_style_value(align_name, [:left, :center, :right],
                            'Only :left or :center, :right can be specified as align.')
-        write_internal_style('text-align', align_name)
+        write_internal_style('text-align', align_name.to_s)
       end
 
       # @return [:top, :middle, :bottom]
@@ -92,7 +92,7 @@ module Thinreports
 
         verify_style_value(valign_name, [:top, :middle, :bottom],
                            'Only :top or :middle (:center), :bottom can be specified as valign.')
-        write_internal_style('vertical-align', valign_name)
+        write_internal_style('vertical-align', valign_name.to_s)
       end
 
       private

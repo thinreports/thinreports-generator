@@ -38,7 +38,6 @@ class Thinreports::Core::Shape::Text::TestFormat < Minitest::Test
     format = Text::Format.new(TEXT_FORMAT)
 
     assert_equal TEXT_FORMAT['texts'], format.texts
-    assert_equal({ 'x' => 100.0, 'y' => 200.0, 'width' => 300.0, 'height' => 400.0 }, format.box)
     assert_equal 'top', format.valign
     assert_equal 60, format.line_height
   end

@@ -22,7 +22,8 @@ class Thinreports::Layout::TestFormat < Minitest::Test
     },
     'items' => [
       { 'type'=> 'rect', 'id'=> '', 'x'=> 100.0, 'y'=> 100.0, 'width'=> 100.0, 'height'=> 100.0, 'style'=> {'stroke-width'=> 1}},
-      { 'type'=> 'text-block', 'id'=> 'text_block', 'x'=> 100.0, 'y'=> 100.0 }
+      { 'type'=> 'text-block', 'id'=> 'text_block', 'x'=> 100.0, 'y'=> 100.0 },
+      { 'type'=> 'page-number', 'id'=> '', 'x'=> 100.0, 'y'=> 100.0 }
     ]
   }
 
@@ -84,8 +85,11 @@ class Thinreports::Layout::TestFormat < Minitest::Test
   def test_initialize_items
     format = Layout::Format.new(layout_schema)
 
-    assert_equal 1, format.shapes.count
-    assert_instance_of Shape::TextBlock::Format, format.shapes[:text_block]
+    assert_equal 2, format.shapes.count
+
+    shape_classes = format.shapes.values.map(&:class)
+    assert_includes shape_classes, Shape::TextBlock::Format
+    assert_includes shape_classes, Shape::PageNumber::Format
   end
 
   private

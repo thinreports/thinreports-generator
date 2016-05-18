@@ -14,14 +14,8 @@ module Thinreports
         @id ||= blank_value?(read('id')) ? self.class.next_default_id : read('id')
       end
 
-      # FIXME: make be DRY
-      def box
-        @box ||= {
-          'x' => attributes['x'],
-          'y' => attributes['y'],
-          'width' => attributes['width'],
-          'height' => attributes['height']
-        }
+      def for_report?
+        blank_value?(target)
       end
 
       def self.next_default_id

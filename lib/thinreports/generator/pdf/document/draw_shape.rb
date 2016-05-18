@@ -42,7 +42,9 @@ module Thinreports
         x, y, w, h = shape.format.attributes.values_at('x', 'y', 'width', 'height')
         style = shape.style.finalized_styles
 
-        image_box(shape.src, x, y, w, h, image_position_x(style['position-x']), image_position_y(style['position-y']))
+        image_box(shape.src, x, y, w, h,
+          position_x: image_position_x(style['position-x']),
+          position_y: image_position_y(style['position-y']))
       end
 
       # @param [Thinreports::Core::Shape::Text::Internal] shape

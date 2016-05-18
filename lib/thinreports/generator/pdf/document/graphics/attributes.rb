@@ -74,43 +74,41 @@ module Thinreports
         when 'center' then :center
         when 'right' then :right
         when '' then :left
+        else :left
         end
       end
 
       # @param ["top", "middle", "bottom", "", nil] valign
-      # @return [:top, :center, :bottom, nil]
+      # @return [:top, :center, :bottom]
       def text_valign(valign)
-        return nil unless valign
-
         case valign
         when 'top' then :top
         when 'middle' then :center
         when 'bottom' then :bottom
         when '' then :top
+        else :top
         end
       end
 
       # @param ["truncate", "fit", "expand", "", nil] overflow
       # @return [:truncate, :shrink_to_fit, :expand]
       def text_overflow(overflow)
-        return nil unless overflow
-
         case overflow
         when 'truncate' then :truncate
         when 'fit' then :shrink_to_fit
         when 'expand' then :expand
         when '' then :truncate
+        else :truncate
         end
       end
 
       # @param ["break-word", "none", "", nil] word_wrap
-      # @return [:break_word, :none, nil]
+      # @return [:break_word, :none]
       def word_wrap(word_wrap)
-        return nil unless word_wrap
-
         case word_wrap
         when 'break-word' then :break_word
-        when '' then :none
+        when 'none' then :none
+        else :none
         end
       end
 
@@ -128,6 +126,7 @@ module Thinreports
         when 'center' then :center
         when 'right' then :right
         when '' then :left
+        else :left
         end
       end
 
@@ -139,6 +138,7 @@ module Thinreports
         when 'middle' then :center
         when 'bottom' then :bottom
         when '' then :top
+        else :top
         end
       end
     end

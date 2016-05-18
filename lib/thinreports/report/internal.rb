@@ -16,7 +16,7 @@ module Thinreports
       # @param options (see Thinreports::Report::Base#initialize)
       def initialize(report, options)
         @report = report
-        @default_layout = init_layout(options[:layout]) if options[:layout]
+        @default_layout = options[:layout] ? init_layout(options[:layout]) : nil
 
         @layout_registry = {}
         @finalized  = false

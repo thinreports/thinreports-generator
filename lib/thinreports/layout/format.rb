@@ -49,9 +49,11 @@ module Thinreports
       def initialize_items(item_schemas)
         item_schemas.each do |item_schema|
           id, type = item_schema.values_at 'id', 'type'
-          next if id.empty?
 
-          self.shapes[id.to_sym] = Core::Shape::Format(type).new(item_schema)
+          next if id.empty? && type != 'page-number'
+
+          item = Core::Shape::Format(type).new(item_schema)
+          self.shapes[item.id.to_sym] = item
         end
       end
     end
