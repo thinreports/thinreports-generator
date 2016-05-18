@@ -95,10 +95,10 @@ example :dynamic_style, 'Change styles of the object dynamically' do |t|
       header.item(:rect).styles(border_color: nil,
                                 fill_color: 'ff00ff')
       header.item(:text).styles(align: :center,
-                                valign: :center,
+                                valign: :middle,
                                 bold: true)
       header[:tblock].styles(align: :center,
-                             valign: :center,
+                             valign: :middle,
                              color: 'red',
                              linethrough: true)
     end
@@ -116,10 +116,10 @@ example :dynamic_style, 'Change styles of the object dynamically' do |t|
                                  fill_color: '0000ff')
           row.item(:text).styles(color: 'red',
                                  align: :left,
-                                 valign: :center)
+                                 valign: :middle)
           row.item(:tblock).styles(color: 'blue',
                                    align: :left,
-                                   valign: :center)
+                                   valign: :middle)
         when i % 3 == 0
           row.item(:rect).style(:visible, false)
           row.item(:text).styles(color: '0000ff',
