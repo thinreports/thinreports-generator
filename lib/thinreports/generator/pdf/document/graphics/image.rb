@@ -75,7 +75,7 @@ module Thinreports
         return filename unless png_conversion_enabled?
         return filename unless extname.downcase == '.png' || extname.empty?
 
-        return temp_image_registry[filename] if temp_image_registry.key?(filename)
+        return temp_image_registry[filename].path if temp_image_registry.key?(filename)
 
         png_normalizer = PNGNormalizer.load_file(filename)
 
@@ -101,17 +101,16 @@ module Thinreports
 
       # @param [String] image_id
       # @param [String] image_data
-      # @return [String] imagefile path
+      # @return [String] Path to imagefile
       def create_temp_imagefile(image_id, image_data)
         temp_image_registry[image_id] ||= begin
           file = Tempfile.new('temp-image')
           file.binmode
           file.write(image_data)
-          file.path
-        ensure
-          file.close
+          file.open
+          file
         end
-        temp_image_registry[image_id]
+        temp_image_registry[image_id].path
       end
 
       def png_conversion_enabled?
