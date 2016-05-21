@@ -5,18 +5,18 @@ require 'rexml/document'
 
 module Thinreports
   module Layout
-    class RegacySchema
-      def initialize(regacy_schema)
-        @regacy_schema = regacy_schema
+    class LegacySchema
+      def initialize(legacy_schema)
+        @legacy_schema = legacy_schema
       end
 
       def upgrade
-        config = regacy_schema['config']
+        config = legacy_schema['config']
         page_config = config['page']
 
         {
-          'version' => regacy_schema['version'],
-          'title' => regacy_schema['config']['title'],
+          'version' => legacy_schema['version'],
+          'title' => legacy_schema['config']['title'],
           'report' => {
             'paper-type' => page_config['paper-type'],
             'width' => page_config['width'].to_f,
@@ -24,11 +24,11 @@ module Thinreports
             'orientation' => page_config['orientation'],
             'margin' => page_config.values_at('margin-top', 'margin-right', 'margin-bottom', 'margin-left').map(&:to_f)
           },
-          'items' => build_item_schemas_from_svg(regacy_schema['svg'].dup, '/svg/g', 1)
+          'items' => build_item_schemas_from_svg(legacy_schema['svg'].dup, '/svg/g', 1)
         }
       end
 
-      attr_reader :regacy_schema
+      attr_reader :legacy_schema
 
       def build_item_schemas_from_svg(svg, root_xpath, level)
         item_schemas = extract_item_schemas(svg, level)
@@ -239,36 +239,36 @@ module Thinreports
         }
       end
 
-      def list_item_schema(regacy_schema)
+      def list_item_schema(legacy_schema)
         {
-          'id' => regacy_schema['id'],
+          'id' => legacy_schema['id'],
           'type' => Core::Shape::List::TYPE_NAME,
-          'content-height' => regacy_schema['content-height'].to_f,
-          'auto-page-break' => regacy_schema['page-break'] == 'true',
-          'display' => display(regacy_schema['display']),
-          'header' => list_section_schema('header', regacy_schema),
-          'detail' => list_section_schema('detail', regacy_schema),
-          'page-footer' => list_section_schema('page-footer', regacy_schema),
-          'footer' => list_section_schema('footer', regacy_schema)
+          'content-height' => legacy_schema['content-height'].to_f,
+          'auto-page-break' => legacy_schema['page-break'] == 'true',
+          'display' => display(legacy_schema['display']),
+          'header' => list_section_schema('header', legacy_schema),
+          'detail' => list_section_schema('detail', legacy_schema),
+          'page-footer' => list_section_schema('page-footer', legacy_schema),
+          'footer' => list_section_schema('footer', legacy_schema)
         }
       end
 
-      def list_section_schema(section_name, regacy_list_schema)
-        regacy_section_schema = regacy_list_schema[section_name]
+      def list_section_schema(section_name, legacy_list_schema)
+        legacy_section_schema = legacy_list_schema[section_name]
 
-        section_svg = %(<svg xmlns:xlink="http://www.w3.org/1999/xlink">#{regacy_section_schema['svg']['content']}</svg>)
+        section_svg = %(<svg xmlns:xlink="http://www.w3.org/1999/xlink">#{legacy_section_schema['svg']['content']}</svg>)
 
         section_schema = {
-          'height' => regacy_section_schema['height'].to_f,
+          'height' => legacy_section_schema['height'].to_f,
           'translate' => {
-            'x' => regacy_section_schema['translate']['x'].to_f,
-            'y' => regacy_section_schema['translate']['y'].to_f
+            'x' => legacy_section_schema['translate']['x'].to_f,
+            'y' => legacy_section_schema['translate']['y'].to_f
           },
           'items' => build_item_schemas_from_svg(section_svg, '/svg', 2)
         }
 
         unless section_name == 'detail'
-          section_schema['enabled'] = regacy_list_schema["#{section_name}-enabled"] == 'true'
+          section_schema['enabled'] = legacy_list_schema["#{section_name}-enabled"] == 'true'
         end
         section_schema
       end
@@ -279,16 +279,16 @@ module Thinreports
         end
       end
 
-      def image_position_y(regacy_position_y)
-        case regacy_position_y
+      def image_position_y(legacy_position_y)
+        case legacy_position_y
         when 'top' then 'top'
         when 'center' then 'middle'
         when 'bottom' then 'bottom'
         end
       end
 
-      def display(regacy_display)
-        regacy_display == 'true'
+      def display(legacy_display)
+        legacy_display == 'true'
       end
 
       def font_style(attributes)
@@ -300,8 +300,8 @@ module Thinreports
         style
       end
 
-      def text_align(regacy_text_align)
-        case regacy_text_align
+      def text_align(legacy_text_align)
+        case legacy_text_align
         when 'start' then 'left'
         when 'middle' then 'center'
         when 'end' then 'right'
@@ -309,10 +309,10 @@ module Thinreports
         end
       end
 
-      def vertical_align(regacy_vertical_align)
-        return nil unless regacy_vertical_align
+      def vertical_align(legacy_vertical_align)
+        return nil unless legacy_vertical_align
 
-        case regacy_vertical_align
+        case legacy_vertical_align
         when 'top' then 'top'
         when 'center' then 'middle'
         when 'bottom' then 'bottom'
@@ -320,14 +320,14 @@ module Thinreports
         end
       end
 
-      def line_height(regacy_line_height)
-        regacy_line_height == '' ? '' : regacy_line_height.to_f
+      def line_height(legacy_line_height)
+        legacy_line_height == '' ? '' : legacy_line_height.to_f
       end
 
-      def letter_spacing(regacy_letter_spacing)
-        case regacy_letter_spacing
+      def letter_spacing(legacy_letter_spacing)
+        case legacy_letter_spacing
         when 'auto', '' then ''
-        else regacy_letter_spacing.to_f
+        else legacy_letter_spacing.to_f
         end
       end
 

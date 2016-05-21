@@ -14,4 +14,4 @@ end
 require 'thinreports/layout/version'
 require 'thinreports/layout/base'
 require 'thinreports/layout/format'
-require 'thinreports/layout/regacy_schema'
+require 'thinreports/layout/legacy_schema'
