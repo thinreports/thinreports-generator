@@ -1,13 +1,13 @@
 # coding: utf-8
 require 'test_helper'
 
-class Thinreports::Layout::TestRegacySchema < Minitest::Test
+class Thinreports::Layout::TestLegacySchema < Minitest::Test
   include Thinreports::TestHelper
 
   Layout = Thinreports::Layout
 
   def test_upgrade
-    regacy_schema = {
+    legacy_schema = {
       'version' => '0.8.2',
       'finger-print' => 'abcd',
       'config' => {
@@ -42,12 +42,12 @@ class Thinreports::Layout::TestRegacySchema < Minitest::Test
         },
         'items' => []
       },
-      Layout::RegacySchema.new(regacy_schema).upgrade
+      Layout::LegacySchema.new(legacy_schema).upgrade
     )
   end
 
   def test_text_item_schema
-    regacy_attributes = {
+    legacy_attributes = {
       'x-id' => 'text_id',
       'x-left' => '100.1',
       'x-top' => '200.1',
@@ -65,7 +65,7 @@ class Thinreports::Layout::TestRegacySchema < Minitest::Test
       'x-line-height' => '20.1',
       'kerning' => '2.1'
     }
-    regacy_texts = %w( line1 line2 )
+    legacy_texts = %w( line1 line2 )
 
     assert_equal(
       {
@@ -88,12 +88,12 @@ class Thinreports::Layout::TestRegacySchema < Minitest::Test
           'letter-spacing' => 2.1
         }
       },
-      layout_regacy_schema.text_item_schema(regacy_attributes, regacy_texts)
+      layout_legacy_schema.text_item_schema(legacy_attributes, legacy_texts)
     )
   end
 
   def test_rect_item_schema
-    regacy_attributes = {
+    legacy_attributes = {
       'x-id' => 'rect_id',
       'x' => '100.1',
       'y' => '200.1',
@@ -121,12 +121,12 @@ class Thinreports::Layout::TestRegacySchema < Minitest::Test
           'fill-color' => 'red'
         }
       },
-      layout_regacy_schema.rect_item_schema(regacy_attributes)
+      layout_legacy_schema.rect_item_schema(legacy_attributes)
     )
   end
 
   def test_line_item_schema
-    regacy_attributes = {
+    legacy_attributes = {
       'x-id' => 'line_id',
       'x1' => '100.1',
       'y1' => '200.1',
@@ -152,12 +152,12 @@ class Thinreports::Layout::TestRegacySchema < Minitest::Test
           'border-style' => 'solid'
         }
       },
-      layout_regacy_schema.line_item_schema(regacy_attributes)
+      layout_legacy_schema.line_item_schema(legacy_attributes)
     )
   end
 
   def test_ellipse_item_schema
-    regacy_attributes = {
+    legacy_attributes = {
       'x-id' => 'ellipse_id',
       'cx' => '100.1',
       'cy' => '200.1',
@@ -185,12 +185,12 @@ class Thinreports::Layout::TestRegacySchema < Minitest::Test
           'fill-color' => 'blue'
         }
       },
-      layout_regacy_schema.ellipse_item_schema(regacy_attributes)
+      layout_legacy_schema.ellipse_item_schema(legacy_attributes)
     )
   end
 
   def test_image_item_schema
-    regacy_attributes = {
+    legacy_attributes = {
       'x-id' => 'image_id',
       'x' => '100.1',
       'y' => '200.1',
@@ -213,12 +213,12 @@ class Thinreports::Layout::TestRegacySchema < Minitest::Test
           'base64' => 'xxxxxxxxxxxxx'
         }
       },
-      layout_regacy_schema.image_item_schema(regacy_attributes)
+      layout_legacy_schema.image_item_schema(legacy_attributes)
     )
   end
 
   def test_page_number_item_schema
-    regacy_attributes = {
+    legacy_attributes = {
       'x-id' => 'page_number_id',
       'x-left' => '100.1',
       'x-top' => '200.1',
@@ -256,12 +256,12 @@ class Thinreports::Layout::TestRegacySchema < Minitest::Test
           'overflow' => 'fit'
         }
       },
-      layout_regacy_schema.page_number_item_schema(regacy_attributes)
+      layout_legacy_schema.page_number_item_schema(legacy_attributes)
     )
   end
 
   def test_image_block_item_schema
-    regacy_attributes = {
+    legacy_attributes = {
       'x-id' => 'image_block_id',
       'x-left' => '100.1',
       'x-top' => '200.1',
@@ -285,12 +285,12 @@ class Thinreports::Layout::TestRegacySchema < Minitest::Test
           'position-y' => 'bottom'
         }
       },
-      layout_regacy_schema.image_block_item_schema(regacy_attributes)
+      layout_legacy_schema.image_block_item_schema(legacy_attributes)
     )
   end
 
   def test_text_block_schema
-    base_regacy_attributes = {
+    base_legacy_attributes = {
       'x-id' => 'text_block_id',
       'x-left' => '100.1',
       'x-top' => '200.1',
@@ -342,10 +342,10 @@ class Thinreports::Layout::TestRegacySchema < Minitest::Test
           'word-wrap' => 'break-word'
         }
       },
-      layout_regacy_schema.text_block_item_schema(base_regacy_attributes)
+      layout_legacy_schema.text_block_item_schema(base_legacy_attributes)
     )
 
-    schema_with_datetime_format = layout_regacy_schema.text_block_item_schema(base_regacy_attributes.merge(
+    schema_with_datetime_format = layout_legacy_schema.text_block_item_schema(base_legacy_attributes.merge(
       'x-format-type' => 'datetime',
       'x-format-datetime-format' => '%Y'
     ))
@@ -360,7 +360,7 @@ class Thinreports::Layout::TestRegacySchema < Minitest::Test
       schema_with_datetime_format['format']
     )
 
-    schema_with_number_format = layout_regacy_schema.text_block_item_schema(base_regacy_attributes.merge(
+    schema_with_number_format = layout_legacy_schema.text_block_item_schema(base_legacy_attributes.merge(
       'x-format-type' => 'number',
       'x-format-number-precision' => '1',
       'x-format-number-delimiter' => ','
@@ -377,7 +377,7 @@ class Thinreports::Layout::TestRegacySchema < Minitest::Test
       schema_with_number_format['format']
     )
 
-    schema_with_padding_format = layout_regacy_schema.text_block_item_schema(base_regacy_attributes.merge(
+    schema_with_padding_format = layout_legacy_schema.text_block_item_schema(base_legacy_attributes.merge(
       'x-format-type' => 'padding',
       'x-format-padding-char' => '0',
       'x-format-padding-length' => '10',
@@ -400,7 +400,7 @@ class Thinreports::Layout::TestRegacySchema < Minitest::Test
   def test_list_item_schema
     rect_item_svg = '<rect stroke="#000000" stroke-width="1" fill="#FFFFFF" class="s-rect" x-display="true" x-stroke-type="solid" stroke-dasharray="none" x-id="" rx="0" width="102.6" height="42" x="40" y="20"/>'
 
-    regacy_schema = {
+    legacy_schema = {
       'id' => 'default',
       'type' => 's-list',
       'content-height' => '300',
@@ -501,19 +501,19 @@ class Thinreports::Layout::TestRegacySchema < Minitest::Test
           'enabled' => false
         }
       },
-      layout_regacy_schema.list_item_schema(regacy_schema)
+      layout_legacy_schema.list_item_schema(legacy_schema)
     )
   end
 
   def test_image_position_y
-    assert_equal 'top', layout_regacy_schema.image_position_y('top')
-    assert_equal 'middle', layout_regacy_schema.image_position_y('center')
-    assert_equal 'bottom', layout_regacy_schema.image_position_y('bottom')
+    assert_equal 'top', layout_legacy_schema.image_position_y('top')
+    assert_equal 'middle', layout_legacy_schema.image_position_y('center')
+    assert_equal 'bottom', layout_legacy_schema.image_position_y('bottom')
   end
 
   def test_display
-    assert_equal true, layout_regacy_schema.display('true')
-    assert_equal false, layout_regacy_schema.display('false')
+    assert_equal true, layout_legacy_schema.display('true')
+    assert_equal false, layout_legacy_schema.display('false')
   end
 
   def test_font_style
@@ -522,42 +522,42 @@ class Thinreports::Layout::TestRegacySchema < Minitest::Test
       'font-style' => 'normal',
       'text-decoration' => 'none'
     }
-    assert_equal [], layout_regacy_schema.font_style(no_style)
-    assert_equal %w( bold ), layout_regacy_schema.font_style(no_style.merge('font-weight' => 'bold'))
-    assert_equal %w( italic ), layout_regacy_schema.font_style(no_style.merge('font-style' => 'italic'))
-    assert_equal %w( underline ), layout_regacy_schema.font_style(no_style.merge('text-decoration' => 'underline'))
-    assert_equal %w( linethrough ), layout_regacy_schema.font_style(no_style.merge('text-decoration' => 'line-through'))
-    assert_equal %w( underline linethrough ), layout_regacy_schema.font_style(no_style.merge('text-decoration' => 'line-through underline'))
+    assert_equal [], layout_legacy_schema.font_style(no_style)
+    assert_equal %w( bold ), layout_legacy_schema.font_style(no_style.merge('font-weight' => 'bold'))
+    assert_equal %w( italic ), layout_legacy_schema.font_style(no_style.merge('font-style' => 'italic'))
+    assert_equal %w( underline ), layout_legacy_schema.font_style(no_style.merge('text-decoration' => 'underline'))
+    assert_equal %w( linethrough ), layout_legacy_schema.font_style(no_style.merge('text-decoration' => 'line-through'))
+    assert_equal %w( underline linethrough ), layout_legacy_schema.font_style(no_style.merge('text-decoration' => 'line-through underline'))
   end
 
   def test_text_align
-    assert_equal 'left', layout_regacy_schema.text_align('start')
-    assert_equal 'center', layout_regacy_schema.text_align('middle')
-    assert_equal 'right', layout_regacy_schema.text_align('end')
+    assert_equal 'left', layout_legacy_schema.text_align('start')
+    assert_equal 'center', layout_legacy_schema.text_align('middle')
+    assert_equal 'right', layout_legacy_schema.text_align('end')
   end
 
   def test_vertical_align
-    assert_equal nil, layout_regacy_schema.vertical_align(nil)
-    assert_equal 'top', layout_regacy_schema.vertical_align('top')
-    assert_equal 'middle', layout_regacy_schema.vertical_align('center')
-    assert_equal 'bottom', layout_regacy_schema.vertical_align('bottom')
-    assert_equal 'top', layout_regacy_schema.vertical_align('')
+    assert_equal nil, layout_legacy_schema.vertical_align(nil)
+    assert_equal 'top', layout_legacy_schema.vertical_align('top')
+    assert_equal 'middle', layout_legacy_schema.vertical_align('center')
+    assert_equal 'bottom', layout_legacy_schema.vertical_align('bottom')
+    assert_equal 'top', layout_legacy_schema.vertical_align('')
   end
 
   def test_line_height
-    assert_equal '', layout_regacy_schema.line_height('')
-    assert_equal 20.1, layout_regacy_schema.line_height('20.1')
+    assert_equal '', layout_legacy_schema.line_height('')
+    assert_equal 20.1, layout_legacy_schema.line_height('20.1')
   end
 
   def test_letter_spacing
-    assert_equal '', layout_regacy_schema.letter_spacing('')
-    assert_equal '', layout_regacy_schema.letter_spacing('auto')
-    assert_equal 2.5, layout_regacy_schema.letter_spacing('2.5')
+    assert_equal '', layout_legacy_schema.letter_spacing('')
+    assert_equal '', layout_legacy_schema.letter_spacing('auto')
+    assert_equal 2.5, layout_legacy_schema.letter_spacing('2.5')
   end
 
   def test_level_symbol
-    assert_equal '', layout_regacy_schema.level_symbol(1)
-    assert_equal '-', layout_regacy_schema.level_symbol(2)
+    assert_equal '', layout_legacy_schema.level_symbol(1)
+    assert_equal '-', layout_legacy_schema.level_symbol(2)
   end
 
   def test_extract_item_schemas
@@ -568,7 +568,7 @@ class Thinreports::Layout::TestRegacySchema < Minitest::Test
 SVG
     assert_equal(
       { 'item1' => { 'id' => 'item1' }, 'item3' => { 'id' => 'item3' } },
-      layout_regacy_schema.extract_item_schemas(svg, 1)
+      layout_legacy_schema.extract_item_schemas(svg, 1)
     )
   end
 
@@ -576,12 +576,12 @@ SVG
     svg = '<!---SHAPE{"id":"item1"}SHAPE---><!---LAYOUT<rect id="item2"/>LAYOUT---><!--SHAPE{"id":"item2"}SHAPE-->'
     normalized_svg = '<rect id="item2"/><!--SHAPE{"id":"item2"}SHAPE-->'
 
-    assert_equal normalized_svg, layout_regacy_schema.normalize_svg(svg, 2)
+    assert_equal normalized_svg, layout_legacy_schema.normalize_svg(svg, 2)
   end
 
   private
 
-  def layout_regacy_schema
-    @layout_regacy_schema ||= Layout::RegacySchema.new({})
+  def layout_legacy_schema
+    @layout_legacy_schema ||= Layout::LegacySchema.new({})
   end
 end

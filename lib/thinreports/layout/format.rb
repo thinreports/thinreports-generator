@@ -22,9 +22,9 @@ module Thinreports
           end
 
           if schema['version'] < '0.9.0'
-            warn '[DEPRECATION] Loading regacy layout format is deprecated and will be removed in thinreports-generator 1.0.' \
+            warn '[DEPRECATION] Loading old layout format is deprecated and will be removed in thinreports-generator 1.0.' \
                  ' Please convert to new layout format using Thinreports Editor 0.9.x.'
-            schema = Layout::RegacySchema.new(schema).upgrade
+            schema = Layout::LegacySchema.new(schema).upgrade
           end
 
           new schema
