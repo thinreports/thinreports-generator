@@ -58,11 +58,11 @@ class Thinreports::Generator::PDF::Graphics::TestImage < Minitest::Test
 
       image_id = Digest::MD5.hexdigest(base64_normal_image)
       assert_includes image_registry.keys, image_id
-      assert_equal normalized_image_path, image_registry[image_id]
+      assert_equal normalized_image_path, image_registry[image_id].path
 
       assert equal_image(data_file(image_file), normalized_image_path)
 
-      assert_same normalized_image_path,
+      assert_equal normalized_image_path,
         test_image.normalize_image_from_base64(image_type, base64_normal_image)
     end
   end
@@ -81,14 +81,14 @@ class Thinreports::Generator::PDF::Graphics::TestImage < Minitest::Test
 
     image_id = Digest::MD5.hexdigest(base64_palleted_png)
     assert_includes image_registry.keys, image_id
-    assert_equal normalized_image_path, image_registry[image_id]
+    assert_equal normalized_image_path, image_registry[image_id].path
 
     refute equal_image(data_file('image_pallete_based.png'), normalized_image_path)
 
     assert_not_palette_based_transparency_png File.read(normalized_image_path)
 
     # 2nd time
-    assert_same normalized_image_path,
+    assert_equal normalized_image_path,
       test_image.normalize_image_from_base64('image/png', base64_palleted_png)
     assert_equal 1, test_image.temp_image_registry.count
   end
@@ -130,7 +130,7 @@ class Thinreports::Generator::PDF::Graphics::TestImage < Minitest::Test
 
     # It should never called in 2nd time or subsequent.
     TestImage::PNGNormalizer.stubs(:load_file).never
-    assert_same normalized_image_path,
+    assert_equal normalized_image_path,
       test_image.normalize_image_from_file(original_image_path)
   end
 
