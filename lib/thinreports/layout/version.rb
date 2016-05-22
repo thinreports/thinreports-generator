@@ -4,7 +4,7 @@ module Thinreports
   module Layout
 
     module Version
-      REQUIRED_RULES = ['>= 0.7.7.0', '< 1.0.0']
+      REQUIRED_RULES = ['>= 0.8.0', '< 1.0.0']
 
       # @param [String] version
       # @return [Boolean]
