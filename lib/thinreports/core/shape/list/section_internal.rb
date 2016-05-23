@@ -5,8 +5,7 @@ module Thinreports
 
     class List::SectionInternal < Base::Internal
       format_delegators :height,
-                        :relative_left,
-                        :relative_top
+                        :relative_left
 
       # @return [Symbol]
       attr_accessor :section_name
@@ -20,10 +19,9 @@ module Thinreports
         states[:relative_top] = ry
       end
 
-      # @return [Array<Numeric>]
-      def relative_position
-        [relative_left,
-         relative_top + (states[:relative_top] || 0)]
+      # @return [Float]
+      def relative_top
+        format.relative_top + (states[:relative_top] || 0)
       end
     end
 
