@@ -21,7 +21,7 @@ module Thinreports
 
       # @return [Float]
       def relative_top
-        format.relative_top + (states[:relative_top] || 0)
+        states[:relative_top] || 0
       end
     end
 

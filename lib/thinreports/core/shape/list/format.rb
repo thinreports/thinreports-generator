@@ -51,7 +51,7 @@ module Thinreports
 
       # @param [:detai, :header, :page_footer, :footer] section_name
       # @return [Numeric]
-      def section_relative_top(section_name)
+      def section_base_position_top(section_name)
         section = @sections[section_name]
         return 0 unless has_section?(section_name)
 

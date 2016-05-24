@@ -33,11 +33,6 @@ class Thinreports::Core::Shape::List::TestSectionInternal < Minitest::Test
     assert_same list.relative_left, list.format.relative_left
   end
 
-  def test_relative_top_should_operate_as_delegator_of_format
-    list = create_internal('translate' => {'y' => 10})
-    assert_same list.relative_top, list.format.relative_top
-  end
-
   def test_move_top_to_should_properly_set_value_to_states_as_relative_top
     list = create_internal
     list.move_top_to(200)
@@ -46,10 +41,10 @@ class Thinreports::Core::Shape::List::TestSectionInternal < Minitest::Test
   end
 
   def test_relative_top
-    list = create_internal('translate' => {'x' => 100, 'y' => 100})
-    assert_equal 100, list.relative_top
+    list = create_internal('translate' => { 'y' => 100 })
+    assert_equal 0, list.relative_top
 
     list.move_top_to 50
-    assert_equal 150, list.relative_top
+    assert_equal 50, list.relative_top
   end
 end

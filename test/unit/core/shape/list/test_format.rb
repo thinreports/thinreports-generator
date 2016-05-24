@@ -70,24 +70,24 @@ class Thinreports::Core::Shape::List::TestFormat < Minitest::Test
     assert_equal 10.0, format.header_height
   end
 
-  def test_section_relative_top
+  def test_section_base_position_top
     page_footer_disabled = LIST_FORMAT
 
     format = List::Format.new(page_footer_disabled)
-    assert_equal 310.0, format.section_relative_top(:header)
-    assert_equal 320.0, format.section_relative_top(:detail)
-    assert_equal 310.0, format.section_relative_top(:page_footer)
-    assert_equal 0, format.section_relative_top(:footer)
+    assert_equal 310.0, format.section_base_position_top(:header)
+    assert_equal 320.0, format.section_base_position_top(:detail)
+    assert_equal 310.0, format.section_base_position_top(:page_footer)
+    assert_equal 0, format.section_base_position_top(:footer)
 
     format_footer_enabled = format_section_enabled(true, 'footer', LIST_FORMAT)
 
     format = List::Format.new(format_footer_enabled)
-    assert_equal 290.0, format.section_relative_top(:footer)
+    assert_equal 290.0, format.section_base_position_top(:footer)
 
     format_footer_enabld_and_page_footer_disabled = format_section_enabled(false, 'page-footer', format_footer_enabled)
 
     format = List::Format.new(format_footer_enabld_and_page_footer_disabled)
-    assert_equal 320.0, format.section_relative_top(:footer)
+    assert_equal 320.0, format.section_base_position_top(:footer)
   end
 
   def test_initialize_sections

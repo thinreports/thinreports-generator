@@ -43,7 +43,11 @@ module Thinreports
       # @param [Thinreports::Core::Shape::List::SectionInterface] section
       def draw_section(section)
         internal = section.internal
-        drawer(internal).draw(section, [internal.relative_left, @format.section_relative_top(internal.section_name)])
+
+        base_top = @format.section_base_position_top(internal.section_name)
+        position = [internal.relative_left, base_top + internal.relative_top]
+
+        drawer(internal).draw(section, position)
       end
 
       # @param [Thinreports::Core::Shape::List::SectionInternal] section
