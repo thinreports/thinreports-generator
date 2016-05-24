@@ -45,16 +45,11 @@ class Thinreports::Core::Shape::List::TestSectionInternal < Minitest::Test
     assert_equal list.states[:relative_top], 200
   end
 
-  def test_relative_position_should_return_Array_included_coordinates
-    list = create_internal('translate' => {'x' => 100, 'y' => 200})
-
-    assert_equal list.relative_position, [100, 200]
-  end
-
-  def test_Y_coordinate_which_relative_position_returns_should_be_calculated_position_with_relative_top_of_states
+  def test_relative_top
     list = create_internal('translate' => {'x' => 100, 'y' => 100})
-    list.move_top_to(50)
+    assert_equal 100, list.relative_top
 
-    assert_equal list.relative_position.last, 150
+    list.move_top_to 50
+    assert_equal 150, list.relative_top
   end
 end

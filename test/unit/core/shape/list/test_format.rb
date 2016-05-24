@@ -17,25 +17,25 @@ class Thinreports::Core::Shape::List::TestFormat < Minitest::Test
     'auto-page-break' => true,
     'header' => {
       'enabled' => true,
-      'height' => 100.0,
-      'translate' => { 'x' => 200.0, 'y' => 300.0 },
+      'height' => 10.0,
+      'translate' => { 'x' => 210.0, 'y' => 310.0 },
       'items' => []
     },
     'detail' => {
-      'height' => 400.0,
-      'translate' => { 'x' => 200.0, 'y' => 300.0 },
+      'height' => 20.0,
+      'translate' => { 'x' => 220.0, 'y' => 320.0 },
       'items' => []
     },
     'page-footer' => {
       'enabled' => true,
-      'height' => 500.0,
-      'translate' => { 'x' => 200.0, 'y' => 300.0 },
+      'height' => 30.0,
+      'translate' => { 'x' => 230.0, 'y' => 330.0 },
       'items' => []
     },
     'footer' => {
       'enabled' => false,
-      'height' => 600.0,
-      'translate' => { 'x' => 200.0, 'y' => 300.0 },
+      'height' => 40.0,
+      'translate' => { 'x' => 240.0, 'y' => 340.0 },
       'items' => []
     }
   }
@@ -53,7 +53,7 @@ class Thinreports::Core::Shape::List::TestFormat < Minitest::Test
   def test_section_height
     format = List::Format.new(LIST_FORMAT)
 
-    assert_equal 100.0, format.section_height(:header)
+    assert_equal 10.0, format.section_height(:header)
   end
 
   def test_attribute_readers
@@ -64,10 +64,30 @@ class Thinreports::Core::Shape::List::TestFormat < Minitest::Test
     assert_equal true, format.has_header?
     assert_equal true, format.has_page_footer?
     assert_equal false, format.has_footer?
-    assert_equal 400.0, format.detail_height
-    assert_equal 500.0, format.page_footer_height
-    assert_equal 600.0, format.footer_height
-    assert_equal 100.0, format.header_height
+    assert_equal 20.0, format.detail_height
+    assert_equal 30.0, format.page_footer_height
+    assert_equal 40.0, format.footer_height
+    assert_equal 10.0, format.header_height
+  end
+
+  def test_section_relative_top
+    page_footer_disabled = LIST_FORMAT
+
+    format = List::Format.new(page_footer_disabled)
+    assert_equal 310.0, format.section_relative_top(:header)
+    assert_equal 320.0, format.section_relative_top(:detail)
+    assert_equal 310.0, format.section_relative_top(:page_footer)
+    assert_equal 0, format.section_relative_top(:footer)
+
+    format_footer_enabled = format_section_enabled(true, 'footer', LIST_FORMAT)
+
+    format = List::Format.new(format_footer_enabled)
+    assert_equal 290.0, format.section_relative_top(:footer)
+
+    format_footer_enabld_and_page_footer_disabled = format_section_enabled(false, 'page-footer', format_footer_enabled)
+
+    format = List::Format.new(format_footer_enabld_and_page_footer_disabled)
+    assert_equal 320.0, format.section_relative_top(:footer)
   end
 
   def test_initialize_sections
@@ -78,5 +98,14 @@ class Thinreports::Core::Shape::List::TestFormat < Minitest::Test
     assert_instance_of List::SectionFormat, format.sections[:page_footer]
 
     assert_nil format.sections[:footer]
+  end
+
+  private
+
+  def format_section_enabled(enable, section, list_format)
+    section_format = list_format[section].dup
+    section_format['enabled'] = enable
+
+    list_format.merge(section => section_format)
   end
 end

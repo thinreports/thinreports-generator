@@ -49,6 +49,24 @@ module Thinreports
         has_section?(section_name) ? __send__(:"#{section_name}_height") : 0
       end
 
+      # @param [:detai, :header, :page_footer, :footer] section_name
+      # @return [Numeric]
+      def section_relative_top(section_name)
+        section = @sections[section_name]
+        return 0 unless has_section?(section_name)
+
+        top = section.relative_top
+
+        case section_name
+        when :page_footer
+          top - section_height(:detail)
+        when :footer
+          top - section_height(:detail) - section_height(:page_footer)
+        else
+          top
+        end
+      end
+
       private
 
       def initialize_sections
