@@ -1,1 +1,293 @@
-{"version":"0.7.7.1","finger-print":-105588852,"config":{"title":"Character Spacing","option":{},"page":{"paper-type":"A4","orientation":"portrait","margin-top":"20","margin-bottom":"20","margin-left":"20","margin-right":"20"}},"svg":"<svg width=\"595.2\" height=\"841.8\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" preserveAspectRatio=\"none\" viewBox=\"0 0 595.2 841.8\"><g class=\"canvas\"><g class=\"s-text\" stroke-width=\"0\" fill=\"#000000\" fill-opacity=\"1\" kerning=\"10\" x-display=\"true\" x-id=\"\" font-size=\"36\" font-family=\"Times New Roman\" font-weight=\"normal\" font-style=\"normal\" text-anchor=\"start\" text-decoration=\"none\" x-width=\"555.2\" x-height=\"40\" x-left=\"20\" x-top=\"21\" id=\"goog_2086231467\"><rect class=\"s-text-box\" stroke=\"none\" fill=\"#000000\" fill-opacity=\"0.001\" width=\"555.2\" height=\"40\" x=\"20\" y=\"21\"/><text class=\"s-text-l0\" xml:space=\"preserve\" stroke=\"none\" fill=\"inherit\" fill-opacity=\"1\" text-decoration=\"none\" x=\"20\" y=\"45.4\">Times Roman Left</text></g><line stroke=\"#ff0000\" stroke-width=\"1\" fill=\"none\" class=\"s-line\" x-display=\"true\" x-stroke-type=\"solid\" stroke-dasharray=\"none\" x-id=\"\" x1=\"436\" x2=\"436\" y1=\"20\" y2=\"57\" id=\"goog_2086231468\"/><g class=\"s-text\" stroke-width=\"0\" fill=\"#000000\" fill-opacity=\"1\" kerning=\"10\" x-display=\"true\" x-id=\"\" font-size=\"36\" font-family=\"IPAMincho\" font-weight=\"normal\" font-style=\"normal\" text-anchor=\"start\" text-decoration=\"none\" x-width=\"555.2\" x-height=\"36\" x-left=\"20\" x-top=\"137\" id=\"goog_2086231469\"><rect class=\"s-text-box\" stroke=\"none\" fill=\"#000000\" fill-opacity=\"0.001\" width=\"555.2\" height=\"36\" x=\"20\" y=\"137\"/><text class=\"s-text-l0\" xml:space=\"preserve\" stroke=\"none\" fill=\"inherit\" fill-opacity=\"1\" text-decoration=\"none\" x=\"20\" y=\"169\">IPA\u660e\u671d \u5de6\u5bc4\u305b</text></g><line stroke=\"#ff0000\" stroke-width=\"1\" fill=\"none\" class=\"s-line\" x-display=\"true\" x-stroke-type=\"solid\" stroke-dasharray=\"none\" x-id=\"\" x2=\"351\" y1=\"136\" y2=\"173\" x1=\"351\" id=\"goog_2086231470\"/><g class=\"s-text\" stroke-width=\"0\" fill=\"#000000\" fill-opacity=\"1\" kerning=\"10\" x-display=\"true\" x-id=\"\" stroke=\"none\" font-weight=\"normal\" font-style=\"normal\" font-family=\"IPAPGothic\" font-size=\"36\" text-anchor=\"start\" text-decoration=\"none\" x-width=\"555.2\" x-height=\"36\" x-left=\"20\" x-top=\"260\" id=\"goog_2086231471\"><rect class=\"s-text-box\" stroke=\"none\" fill=\"#000000\" fill-opacity=\"0.001\" width=\"555.2\" height=\"36\" x=\"20\" y=\"260\"/><text class=\"s-text-l0\" xml:space=\"preserve\" stroke=\"none\" fill=\"inherit\" fill-opacity=\"1\" text-decoration=\"none\" x=\"20\" y=\"292\">IPA P\u30b4\u30b7\u30c3\u30af\u3000\u5de6\u5bc4\u305b</text></g><line stroke=\"#ff0000\" stroke-width=\"1\" fill=\"none\" class=\"s-line\" x-display=\"true\" x-stroke-type=\"solid\" stroke-dasharray=\"none\" x-id=\"\" x2=\"487\" y1=\"262\" y2=\"299\" x1=\"487\" id=\"goog_2086231472\"/><g class=\"s-text\" stroke-width=\"0\" fill=\"#000000\" fill-opacity=\"1\" kerning=\"10\" x-display=\"true\" x-id=\"\" stroke=\"none\" font-weight=\"normal\" font-style=\"normal\" font-family=\"Times New Roman\" font-size=\"36\" text-anchor=\"end\" text-decoration=\"none\" x-width=\"555.2\" x-height=\"40\" x-left=\"20\" x-top=\"70\" id=\"goog_2086231473\"><rect class=\"s-text-box\" stroke=\"none\" fill=\"#000000\" fill-opacity=\"0.001\" width=\"555.2\" height=\"40\" x=\"20\" y=\"70\"/><text class=\"s-text-l0\" xml:space=\"preserve\" stroke=\"none\" fill=\"inherit\" fill-opacity=\"1\" text-decoration=\"none\" x=\"575.2\" y=\"94\">Times Roman Right</text></g><line stroke=\"#ff0000\" stroke-width=\"1\" fill=\"none\" class=\"s-line\" x-display=\"true\" x-stroke-type=\"solid\" stroke-dasharray=\"none\" x-id=\"\" x2=\"575.2\" y1=\"21\" y2=\"821.8\" x1=\"575\" id=\"goog_2086231474\"/><line stroke=\"#ff0000\" stroke-width=\"1\" fill=\"none\" class=\"s-line\" x-display=\"true\" x-stroke-type=\"solid\" stroke-dasharray=\"none\" x-id=\"\" x2=\"131\" y1=\"66\" y2=\"103\" x1=\"131\" id=\"goog_2086231475\"/><g class=\"s-text\" stroke-width=\"0\" fill=\"#000000\" fill-opacity=\"1\" kerning=\"10\" x-display=\"true\" x-id=\"\" stroke=\"none\" font-weight=\"normal\" font-style=\"normal\" font-family=\"IPAMincho\" font-size=\"36\" text-anchor=\"end\" text-decoration=\"none\" x-width=\"555.2\" x-height=\"36\" x-left=\"20\" x-top=\"186.9\" id=\"goog_2086231476\"><rect class=\"s-text-box\" stroke=\"none\" fill=\"#000000\" fill-opacity=\"0.001\" width=\"555.2\" height=\"36\" x=\"20\" y=\"186.9\"/><text class=\"s-text-l0\" xml:space=\"preserve\" stroke=\"none\" fill=\"inherit\" fill-opacity=\"1\" text-decoration=\"none\" x=\"575.2\" y=\"218.9\">IPA\u660e\u671d \u53f3\u5bc4\u305b</text></g><line stroke=\"#ff0000\" stroke-width=\"1\" fill=\"none\" class=\"s-line\" x-display=\"true\" x-stroke-type=\"solid\" stroke-dasharray=\"none\" x-id=\"\" x2=\"247\" y1=\"185.9\" y2=\"222.9\" x1=\"247\" id=\"goog_2086231477\"/><g class=\"s-text\" stroke-width=\"0\" fill=\"#000000\" fill-opacity=\"1\" kerning=\"10\" x-display=\"true\" x-id=\"\" stroke=\"none\" font-weight=\"normal\" font-style=\"normal\" font-family=\"IPAPGothic\" font-size=\"36\" text-anchor=\"end\" text-decoration=\"none\" x-width=\"555.2\" x-height=\"36\" x-left=\"20\" x-top=\"316\" id=\"goog_2086231478\"><rect class=\"s-text-box\" stroke=\"none\" fill=\"#000000\" fill-opacity=\"0.001\" width=\"555.2\" height=\"36\" x=\"20\" y=\"316\"/><text class=\"s-text-l0\" xml:space=\"preserve\" stroke=\"none\" fill=\"inherit\" fill-opacity=\"1\" text-decoration=\"none\" x=\"575.2\" y=\"347\">IPA P\u30b4\u30b7\u30c3\u30af\u3000\u53f3\u5bc4\u305b</text></g><line stroke=\"#ff0000\" stroke-width=\"1\" fill=\"none\" class=\"s-line\" x-display=\"true\" x-stroke-type=\"solid\" stroke-dasharray=\"none\" x-id=\"\" x2=\"108\" y1=\"318\" y2=\"355\" x1=\"108\" id=\"goog_2086231479\"/></g></svg>","state":{"layout-guide":[{"type":"x","position":59.5},{"type":"y","position":434.1},{"type":"y","position":374.1}]}}
+{
+  "version": "0.9.0",
+  "items": [
+    {
+      "id": "",
+      "type": "text",
+      "display": true,
+      "description": "",
+      "x": 20,
+      "y": 21,
+      "width": 555.2,
+      "height": 40,
+      "style": {
+        "font-family": [
+          "Times New Roman"
+        ],
+        "font-size": 36,
+        "color": "#000000",
+        "text-align": "left",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": 10,
+        "font-style": []
+      },
+      "texts": [
+        "Times Roman Left"
+      ]
+    },
+    {
+      "id": "",
+      "type": "line",
+      "display": true,
+      "description": "",
+      "style": {
+        "border-color": "#ff0000",
+        "border-width": 1,
+        "border-style": "solid"
+      },
+      "x1": 436,
+      "y1": 20,
+      "x2": 436,
+      "y2": 57
+    },
+    {
+      "id": "",
+      "type": "text",
+      "display": true,
+      "description": "",
+      "x": 20,
+      "y": 137,
+      "width": 555.2,
+      "height": 36,
+      "style": {
+        "font-family": [
+          "IPAMincho"
+        ],
+        "font-size": 36,
+        "color": "#000000",
+        "text-align": "left",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": 10,
+        "font-style": []
+      },
+      "texts": [
+        "IPA明朝 左寄せ"
+      ]
+    },
+    {
+      "id": "",
+      "type": "line",
+      "display": true,
+      "description": "",
+      "style": {
+        "border-color": "#ff0000",
+        "border-width": 1,
+        "border-style": "solid"
+      },
+      "x1": 351,
+      "y1": 136,
+      "x2": 351,
+      "y2": 173
+    },
+    {
+      "id": "",
+      "type": "text",
+      "display": true,
+      "description": "",
+      "x": 20,
+      "y": 260,
+      "width": 555.2,
+      "height": 38.5,
+      "style": {
+        "font-family": [
+          "IPAPGothic"
+        ],
+        "font-size": 36,
+        "color": "#000000",
+        "text-align": "left",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": 10,
+        "font-style": []
+      },
+      "texts": [
+        "IPA Pゴシック　左寄せ"
+      ]
+    },
+    {
+      "id": "",
+      "type": "line",
+      "display": true,
+      "description": "",
+      "style": {
+        "border-color": "#ff0000",
+        "border-width": 1,
+        "border-style": "solid"
+      },
+      "x1": 487,
+      "y1": 262,
+      "x2": 487,
+      "y2": 299
+    },
+    {
+      "id": "",
+      "type": "text",
+      "display": true,
+      "description": "",
+      "x": 20,
+      "y": 70,
+      "width": 555.2,
+      "height": 40,
+      "style": {
+        "font-family": [
+          "Times New Roman"
+        ],
+        "font-size": 36,
+        "color": "#000000",
+        "text-align": "right",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": 10,
+        "font-style": []
+      },
+      "texts": [
+        "Times Roman Right"
+      ]
+    },
+    {
+      "id": "",
+      "type": "line",
+      "display": true,
+      "description": "",
+      "style": {
+        "border-color": "#ff0000",
+        "border-width": 1,
+        "border-style": "solid"
+      },
+      "x1": 575,
+      "y1": 21,
+      "x2": 575.2,
+      "y2": 821.8
+    },
+    {
+      "id": "",
+      "type": "line",
+      "display": true,
+      "description": "",
+      "style": {
+        "border-color": "#ff0000",
+        "border-width": 1,
+        "border-style": "solid"
+      },
+      "x1": 131,
+      "y1": 66,
+      "x2": 131,
+      "y2": 103
+    },
+    {
+      "id": "",
+      "type": "text",
+      "display": true,
+      "description": "",
+      "x": 20,
+      "y": 186.9,
+      "width": 555.2,
+      "height": 36,
+      "style": {
+        "font-family": [
+          "IPAMincho"
+        ],
+        "font-size": 36,
+        "color": "#000000",
+        "text-align": "right",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": 10,
+        "font-style": []
+      },
+      "texts": [
+        "IPA明朝 右寄せ"
+      ]
+    },
+    {
+      "id": "",
+      "type": "line",
+      "display": true,
+      "description": "",
+      "style": {
+        "border-color": "#ff0000",
+        "border-width": 1,
+        "border-style": "solid"
+      },
+      "x1": 247,
+      "y1": 185.9,
+      "x2": 247,
+      "y2": 222.9
+    },
+    {
+      "id": "",
+      "type": "text",
+      "display": true,
+      "description": "",
+      "x": 20,
+      "y": 316,
+      "width": 555.2,
+      "height": 38.5,
+      "style": {
+        "font-family": [
+          "IPAPGothic"
+        ],
+        "font-size": 36,
+        "color": "#000000",
+        "text-align": "right",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": 10,
+        "font-style": []
+      },
+      "texts": [
+        "IPA Pゴシック　右寄せ"
+      ]
+    },
+    {
+      "id": "",
+      "type": "line",
+      "display": true,
+      "description": "",
+      "style": {
+        "border-color": "#ff0000",
+        "border-width": 1,
+        "border-style": "solid"
+      },
+      "x1": 108,
+      "y1": 318,
+      "x2": 108,
+      "y2": 355
+    }
+  ],
+  "state": {
+    "layout-guides": [
+      {
+        "type": "x",
+        "position": 59.5
+      },
+      {
+        "type": "y",
+        "position": 434.1
+      },
+      {
+        "type": "y",
+        "position": 374.1
+      }
+    ]
+  },
+  "title": "Character Spacing",
+  "report": {
+    "paper-type": "A4",
+    "orientation": "portrait",
+    "margin": [
+      20,
+      20,
+      20,
+      20
+    ]
+  }
+}

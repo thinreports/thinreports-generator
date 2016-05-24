@@ -1,1 +1,383 @@
-{"version":"0.7.7.1","finger-print":850455808,"config":{"title":"FontSize","option":{},"page":{"paper-type":"A4","orientation":"portrait","margin-top":"20","margin-bottom":"20","margin-left":"20","margin-right":"20"}},"svg":"<svg width=\"595.2\" height=\"841.8\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" preserveAspectRatio=\"none\" viewBox=\"0 0 595.2 841.8\"><g class=\"canvas\"><g class=\"s-text\" stroke-width=\"0\" fill=\"#000000\" fill-opacity=\"1\" kerning=\"auto\" x-display=\"true\" x-id=\"\" id=\"goog_1856690740\" font-size=\"18\" font-family=\"Helvetica\" font-weight=\"normal\" font-style=\"normal\" text-anchor=\"start\" text-decoration=\"none\" x-width=\"151.8\" x-height=\"46\" x-left=\"40\" x-top=\"60.9\"><rect class=\"s-text-box\" stroke=\"none\" fill=\"#000000\" fill-opacity=\"0.001\" width=\"151.8\" height=\"46\" x=\"40\" y=\"60.9\"/><text class=\"s-text-l0\" xml:space=\"preserve\" stroke=\"none\" fill=\"inherit\" fill-opacity=\"1\" text-decoration=\"none\" x=\"40\" y=\"73.8\">\u30b5\u30a4\u30ba18</text></g><!--SHAPE{\"type\":\"s-text\",\"id\":\"text_single24\",\"display\":\"true\",\"desc\":null,\"line-height\":\"\",\"valign\":\"\",\"box\":{\"x\":165,\"y\":60.9,\"width\":151.8,\"height\":46},\"text\":[\"\\u30b5\\u30a4\\u30ba24\"],\"svg\":{\"tag\":\"g\",\"attrs\":{\"stroke-width\":\"0\",\"fill\":\"#000000\",\"fill-opacity\":\"1\",\"kerning\":\"auto\",\"id\":\"goog_1856690741\",\"stroke\":\"none\",\"font-weight\":\"normal\",\"font-style\":\"normal\",\"font-family\":\"Helvetica\",\"font-size\":\"18\",\"text-anchor\":\"start\",\"text-decoration\":\"none\"},\"content\":\"<text xmlns=\\\"http://www.w3.org/2000/svg\\\" class=\\\"s-text-l0\\\" xml:space=\\\"preserve\\\" stroke=\\\"none\\\" fill=\\\"inherit\\\" fill-opacity=\\\"1\\\" text-decoration=\\\"none\\\" x=\\\"165\\\" y=\\\"73.8\\\">\\u30b5\\u30a4\\u30ba24</text>\"}}SHAPE--><!--LAYOUT<g xmlns=\"http://www.w3.org/2000/svg\" class=\"s-text\" stroke-width=\"0\" fill=\"#000000\" fill-opacity=\"1\" kerning=\"auto\" x-display=\"true\" x-id=\"text_single24\" id=\"goog_1856690741\" stroke=\"none\" font-weight=\"normal\" font-style=\"normal\" font-family=\"Helvetica\" font-size=\"18\" text-anchor=\"start\" text-decoration=\"none\" x-width=\"151.8\" x-height=\"46\" x-left=\"165\" x-top=\"60.9\"><rect class=\"s-text-box\" stroke=\"none\" fill=\"#000000\" fill-opacity=\"0.001\" width=\"151.8\" height=\"46\" x=\"165\" y=\"60.9\"/><text class=\"s-text-l0\" xml:space=\"preserve\" stroke=\"none\" fill=\"inherit\" fill-opacity=\"1\" text-decoration=\"none\" x=\"165\" y=\"73.8\">\u30b5\u30a4\u30ba24</text></g>LAYOUT--><!--SHAPE{\"type\":\"s-text\",\"id\":\"text_single32\",\"display\":\"true\",\"desc\":null,\"line-height\":\"\",\"valign\":\"\",\"box\":{\"x\":345,\"y\":60.9,\"width\":151.8,\"height\":46},\"text\":[\"\\u30b5\\u30a4\\u30ba32\"],\"svg\":{\"tag\":\"g\",\"attrs\":{\"stroke-width\":\"0\",\"fill\":\"#000000\",\"fill-opacity\":\"1\",\"kerning\":\"auto\",\"id\":\"goog_1856690742\",\"stroke\":\"none\",\"font-weight\":\"normal\",\"font-style\":\"normal\",\"font-family\":\"Helvetica\",\"font-size\":\"18\",\"text-anchor\":\"start\",\"text-decoration\":\"none\"},\"content\":\"<text xmlns=\\\"http://www.w3.org/2000/svg\\\" class=\\\"s-text-l0\\\" xml:space=\\\"preserve\\\" stroke=\\\"none\\\" fill=\\\"inherit\\\" fill-opacity=\\\"1\\\" text-decoration=\\\"none\\\" x=\\\"345\\\" y=\\\"73.8\\\">\\u30b5\\u30a4\\u30ba32</text>\"}}SHAPE--><!--LAYOUT<g xmlns=\"http://www.w3.org/2000/svg\" class=\"s-text\" stroke-width=\"0\" fill=\"#000000\" fill-opacity=\"1\" kerning=\"auto\" x-display=\"true\" x-id=\"text_single32\" id=\"goog_1856690742\" stroke=\"none\" font-weight=\"normal\" font-style=\"normal\" font-family=\"Helvetica\" font-size=\"18\" text-anchor=\"start\" text-decoration=\"none\" x-width=\"151.8\" x-height=\"46\" x-left=\"345\" x-top=\"60.9\"><rect class=\"s-text-box\" stroke=\"none\" fill=\"#000000\" fill-opacity=\"0.001\" width=\"151.8\" height=\"46\" x=\"345\" y=\"60.9\"/><text class=\"s-text-l0\" xml:space=\"preserve\" stroke=\"none\" fill=\"inherit\" fill-opacity=\"1\" text-decoration=\"none\" x=\"345\" y=\"73.8\">\u30b5\u30a4\u30ba32</text></g>LAYOUT--><g class=\"s-text\" stroke-width=\"0\" fill=\"#000000\" fill-opacity=\"1\" kerning=\"auto\" x-display=\"true\" x-id=\"\" id=\"goog_1856690743\" font-size=\"18\" font-family=\"Helvetica\" font-weight=\"normal\" font-style=\"normal\" text-anchor=\"start\" text-decoration=\"none\" x-width=\"200\" x-height=\"100\" x-left=\"35\" x-top=\"179.8\"><rect class=\"s-text-box\" stroke=\"none\" fill=\"#000000\" fill-opacity=\"0.001\" width=\"200\" height=\"100\" x=\"35\" y=\"179.8\"/><text class=\"s-text-l0\" xml:space=\"preserve\" stroke=\"none\" fill=\"inherit\" fill-opacity=\"1\" text-decoration=\"none\" x=\"35\" y=\"192.7\">\u30b5\u30a4\u30ba18</text><text class=\"s-text-l1\" xml:space=\"preserve\" stroke=\"none\" fill=\"inherit\" fill-opacity=\"1\" text-decoration=\"none\" x=\"35\" y=\"209.7\">\u30b5\u30a4\u30ba18</text></g><!--SHAPE{\"type\":\"s-text\",\"id\":\"text_multiple24\",\"display\":\"true\",\"desc\":null,\"line-height\":\"\",\"valign\":\"\",\"box\":{\"x\":165,\"y\":179.8,\"width\":200,\"height\":100},\"text\":[\"\\u30b5\\u30a4\\u30ba24\",\"\\u30b5\\u30a4\\u30ba24\"],\"svg\":{\"tag\":\"g\",\"attrs\":{\"stroke-width\":\"0\",\"fill\":\"#000000\",\"fill-opacity\":\"1\",\"kerning\":\"auto\",\"id\":\"goog_1856690745\",\"stroke\":\"none\",\"font-weight\":\"normal\",\"font-style\":\"normal\",\"font-family\":\"Helvetica\",\"font-size\":\"18\",\"text-anchor\":\"start\",\"text-decoration\":\"none\"},\"content\":\"<text xmlns=\\\"http://www.w3.org/2000/svg\\\" class=\\\"s-text-l0\\\" xml:space=\\\"preserve\\\" stroke=\\\"none\\\" fill=\\\"inherit\\\" fill-opacity=\\\"1\\\" text-decoration=\\\"none\\\" x=\\\"165\\\" y=\\\"192.7\\\">\\u30b5\\u30a4\\u30ba24</text><text xmlns=\\\"http://www.w3.org/2000/svg\\\" class=\\\"s-text-l1\\\" xml:space=\\\"preserve\\\" stroke=\\\"none\\\" fill=\\\"inherit\\\" fill-opacity=\\\"1\\\" text-decoration=\\\"none\\\" x=\\\"165\\\" y=\\\"209.7\\\">\\u30b5\\u30a4\\u30ba24</text>\"}}SHAPE--><!--LAYOUT<g xmlns=\"http://www.w3.org/2000/svg\" class=\"s-text\" stroke-width=\"0\" fill=\"#000000\" fill-opacity=\"1\" kerning=\"auto\" x-display=\"true\" x-id=\"text_multiple24\" id=\"goog_1856690745\" stroke=\"none\" font-weight=\"normal\" font-style=\"normal\" font-family=\"Helvetica\" font-size=\"18\" text-anchor=\"start\" text-decoration=\"none\" x-width=\"200\" x-height=\"100\" x-left=\"165\" x-top=\"179.8\"><rect class=\"s-text-box\" stroke=\"none\" fill=\"#000000\" fill-opacity=\"0.001\" width=\"200\" height=\"100\" x=\"165\" y=\"179.8\"/><text class=\"s-text-l0\" xml:space=\"preserve\" stroke=\"none\" fill=\"inherit\" fill-opacity=\"1\" text-decoration=\"none\" x=\"165\" y=\"192.7\">\u30b5\u30a4\u30ba24</text><text class=\"s-text-l1\" xml:space=\"preserve\" stroke=\"none\" fill=\"inherit\" fill-opacity=\"1\" text-decoration=\"none\" x=\"165\" y=\"209.7\">\u30b5\u30a4\u30ba24</text></g>LAYOUT--><!--SHAPE{\"type\":\"s-text\",\"id\":\"text_multiple32\",\"display\":\"true\",\"desc\":null,\"line-height\":\"\",\"valign\":\"\",\"box\":{\"x\":345,\"y\":179.8,\"width\":200,\"height\":100},\"text\":[\"\\u30b5\\u30a4\\u30ba32\",\"\\u30b5\\u30a4\\u30ba32\"],\"svg\":{\"tag\":\"g\",\"attrs\":{\"stroke-width\":\"0\",\"fill\":\"#000000\",\"fill-opacity\":\"1\",\"kerning\":\"auto\",\"id\":\"goog_1856690746\",\"stroke\":\"none\",\"font-weight\":\"normal\",\"font-style\":\"normal\",\"font-family\":\"Helvetica\",\"font-size\":\"18\",\"text-anchor\":\"start\",\"text-decoration\":\"none\"},\"content\":\"<text xmlns=\\\"http://www.w3.org/2000/svg\\\" class=\\\"s-text-l0\\\" xml:space=\\\"preserve\\\" stroke=\\\"none\\\" fill=\\\"inherit\\\" fill-opacity=\\\"1\\\" text-decoration=\\\"none\\\" x=\\\"345\\\" y=\\\"192.7\\\">\\u30b5\\u30a4\\u30ba32</text><text xmlns=\\\"http://www.w3.org/2000/svg\\\" class=\\\"s-text-l1\\\" xml:space=\\\"preserve\\\" stroke=\\\"none\\\" fill=\\\"inherit\\\" fill-opacity=\\\"1\\\" text-decoration=\\\"none\\\" x=\\\"345\\\" y=\\\"209.7\\\">\\u30b5\\u30a4\\u30ba32</text>\"}}SHAPE--><!--LAYOUT<g xmlns=\"http://www.w3.org/2000/svg\" class=\"s-text\" stroke-width=\"0\" fill=\"#000000\" fill-opacity=\"1\" kerning=\"auto\" x-display=\"true\" x-id=\"text_multiple32\" id=\"goog_1856690746\" stroke=\"none\" font-weight=\"normal\" font-style=\"normal\" font-family=\"Helvetica\" font-size=\"18\" text-anchor=\"start\" text-decoration=\"none\" x-width=\"200\" x-height=\"100\" x-left=\"345\" x-top=\"179.8\"><rect class=\"s-text-box\" stroke=\"none\" fill=\"#000000\" fill-opacity=\"0.001\" width=\"200\" height=\"100\" x=\"345\" y=\"179.8\"/><text class=\"s-text-l0\" xml:space=\"preserve\" stroke=\"none\" fill=\"inherit\" fill-opacity=\"1\" text-decoration=\"none\" x=\"345\" y=\"192.7\">\u30b5\u30a4\u30ba32</text><text class=\"s-text-l1\" xml:space=\"preserve\" stroke=\"none\" fill=\"inherit\" fill-opacity=\"1\" text-decoration=\"none\" x=\"345\" y=\"209.7\">\u30b5\u30a4\u30ba32</text></g>LAYOUT--><!--SHAPE{\"type\":\"s-tblock\",\"id\":\"block_single18\",\"display\":\"true\",\"desc\":null,\"multiple\":\"false\",\"valign\":\"\",\"line-height\":\"\",\"box\":{\"x\":40,\"y\":320.6,\"width\":103.4,\"height\":17},\"format\":{\"base\":\"\",\"type\":\"\"},\"value\":\"\",\"ref-id\":\"\",\"overflow\":\"\",\"word-wrap\":\"none\",\"svg\":{\"tag\":\"text\",\"attrs\":{\"x\":40,\"y\":333.5,\"xml:space\":\"preserve\",\"kerning\":\"auto\",\"id\":\"goog_1856690747\",\"fill\":\"#000000\",\"fill-opacity\":\"1\",\"font-size\":\"18\",\"font-family\":\"Helvetica\",\"font-weight\":\"normal\",\"font-style\":\"normal\",\"text-anchor\":\"start\",\"text-decoration\":\"none\"}}}SHAPE--><!--LAYOUT<g xmlns=\"http://www.w3.org/2000/svg\" class=\"s-tblock\" x-format-type=\"\" x-value=\"\" x-format-base=\"\" x-ref-id=\"\" kerning=\"auto\" x-display=\"true\" x-multiple=\"false\" id=\"goog_1856690747\" x-id=\"block_single18\" fill=\"#000000\" fill-opacity=\"1\" font-size=\"18\" font-family=\"Helvetica\" font-weight=\"normal\" font-style=\"normal\" text-anchor=\"start\" text-decoration=\"none\" x-width=\"103.4\" x-height=\"17\" x-left=\"40\" x-top=\"320.6\"><rect class=\"s-tblock-box\" stroke=\"#7C4007\" fill=\"#f4e2c4\" stroke-width=\"0.28\" fill-opacity=\"0.8\" width=\"103.4\" height=\"17\" x=\"40\" y=\"320.6\"/><text class=\"s-tblock-id\" font-size=\"11\" font-family=\"Helvetica\" font-weight=\"normal\" font-style=\"normal\" text-decoration=\"none\" text-anchor=\"start\" kerning=\"auto\" stroke=\"none\" fill=\"#7C4007\" fill-opacity=\"1\" x=\"42\" y=\"331.6\">block_single18</text></g>LAYOUT--><!--SHAPE{\"type\":\"s-tblock\",\"id\":\"block_single24\",\"display\":\"true\",\"desc\":null,\"multiple\":\"false\",\"valign\":\"\",\"line-height\":\"\",\"box\":{\"x\":165,\"y\":320.6,\"width\":157.2,\"height\":17},\"format\":{\"base\":\"\",\"type\":\"\"},\"value\":\"\",\"ref-id\":\"\",\"overflow\":\"truncate\",\"word-wrap\":\"none\",\"svg\":{\"tag\":\"text\",\"attrs\":{\"x\":165,\"y\":333.5,\"xml:space\":\"preserve\",\"kerning\":\"auto\",\"id\":\"goog_1856690748\",\"fill\":\"#000000\",\"fill-opacity\":\"1\",\"font-size\":\"18\",\"font-family\":\"Helvetica\",\"font-weight\":\"normal\",\"font-style\":\"normal\",\"text-decoration\":\"none\",\"text-anchor\":\"start\"}}}SHAPE--><!--LAYOUT<g xmlns=\"http://www.w3.org/2000/svg\" class=\"s-tblock\" x-format-type=\"\" x-value=\"\" x-format-base=\"\" x-ref-id=\"\" kerning=\"auto\" x-display=\"true\" x-multiple=\"false\" id=\"goog_1856690748\" x-id=\"block_single24\" x-width=\"157.2\" x-height=\"17\" x-left=\"165\" x-top=\"320.6\" fill=\"#000000\" fill-opacity=\"1\" font-size=\"18\" font-family=\"Helvetica\" font-weight=\"normal\" font-style=\"normal\" text-decoration=\"none\" text-anchor=\"start\" x-overflow=\"truncate\" x-word-wrap=\"none\"><rect class=\"s-tblock-box\" stroke=\"#7C4007\" fill=\"#f4e2c4\" stroke-width=\"0.28\" fill-opacity=\"0.8\" width=\"157.2\" height=\"17\" x=\"165\" y=\"320.6\"/><text class=\"s-tblock-id\" font-size=\"11\" font-family=\"Helvetica\" font-weight=\"normal\" font-style=\"normal\" text-decoration=\"none\" text-anchor=\"start\" kerning=\"auto\" stroke=\"none\" fill=\"#7C4007\" fill-opacity=\"1\" x=\"167\" y=\"331.6\">block_single24</text></g>LAYOUT--><!--SHAPE{\"type\":\"s-tblock\",\"id\":\"block_single32\",\"display\":\"true\",\"desc\":null,\"multiple\":\"false\",\"valign\":\"\",\"line-height\":\"\",\"box\":{\"x\":345,\"y\":320.6,\"width\":230.2,\"height\":17},\"format\":{\"base\":\"\",\"type\":\"\"},\"value\":\"\",\"ref-id\":\"\",\"overflow\":\"truncate\",\"word-wrap\":\"none\",\"svg\":{\"tag\":\"text\",\"attrs\":{\"x\":345,\"y\":333.5,\"xml:space\":\"preserve\",\"kerning\":\"auto\",\"id\":\"goog_1856690749\",\"fill\":\"#000000\",\"fill-opacity\":\"1\",\"font-size\":\"18\",\"font-family\":\"Helvetica\",\"font-weight\":\"normal\",\"font-style\":\"normal\",\"text-decoration\":\"none\",\"text-anchor\":\"start\"}}}SHAPE--><!--LAYOUT<g xmlns=\"http://www.w3.org/2000/svg\" class=\"s-tblock\" x-format-type=\"\" x-value=\"\" x-format-base=\"\" x-ref-id=\"\" kerning=\"auto\" x-display=\"true\" x-multiple=\"false\" id=\"goog_1856690749\" x-id=\"block_single32\" x-width=\"230.2\" x-height=\"17\" x-left=\"345\" x-top=\"320.6\" fill=\"#000000\" fill-opacity=\"1\" font-size=\"18\" font-family=\"Helvetica\" font-weight=\"normal\" font-style=\"normal\" text-decoration=\"none\" text-anchor=\"start\" x-overflow=\"truncate\" x-word-wrap=\"none\"><rect class=\"s-tblock-box\" stroke=\"#7C4007\" fill=\"#f4e2c4\" stroke-width=\"0.28\" fill-opacity=\"0.8\" width=\"230.2\" height=\"17\" x=\"345\" y=\"320.6\"/><text class=\"s-tblock-id\" font-size=\"11\" font-family=\"Helvetica\" font-weight=\"normal\" font-style=\"normal\" text-decoration=\"none\" text-anchor=\"start\" kerning=\"auto\" stroke=\"none\" fill=\"#7C4007\" fill-opacity=\"1\" x=\"347\" y=\"331.6\">block_single32</text></g>LAYOUT--><!--SHAPE{\"type\":\"s-tblock\",\"id\":\"block_multiple18\",\"display\":\"true\",\"desc\":null,\"multiple\":\"true\",\"valign\":\"\",\"line-height\":\"\",\"box\":{\"x\":40,\"y\":390,\"width\":103.4,\"height\":113.3},\"format\":{\"base\":\"\",\"type\":\"\"},\"value\":\"\",\"ref-id\":\"\",\"overflow\":\"truncate\",\"word-wrap\":\"none\",\"svg\":{\"tag\":\"textArea\",\"attrs\":{\"x\":40,\"y\":389.9,\"width\":103.4,\"height\":113.3,\"xml:space\":\"preserve\",\"kerning\":\"auto\",\"id\":\"goog_1856690750\",\"fill\":\"#000000\",\"fill-opacity\":\"1\",\"font-size\":\"18\",\"font-family\":\"Helvetica\",\"font-weight\":\"normal\",\"font-style\":\"normal\",\"text-decoration\":\"none\",\"text-anchor\":\"start\"}}}SHAPE--><!--LAYOUT<g xmlns=\"http://www.w3.org/2000/svg\" class=\"s-tblock\" x-format-type=\"\" x-value=\"\" x-format-base=\"\" x-ref-id=\"\" kerning=\"auto\" x-display=\"true\" x-multiple=\"true\" id=\"goog_1856690750\" x-id=\"block_multiple18\" x-width=\"103.4\" x-height=\"113.3\" x-left=\"40\" x-top=\"390\" fill=\"#000000\" fill-opacity=\"1\" font-size=\"18\" font-family=\"Helvetica\" font-weight=\"normal\" font-style=\"normal\" text-decoration=\"none\" text-anchor=\"start\" x-overflow=\"truncate\" x-word-wrap=\"none\"><rect class=\"s-tblock-box\" stroke=\"#7C4007\" fill=\"#f4e2c4\" stroke-width=\"0.28\" fill-opacity=\"0.8\" width=\"103.4\" height=\"113.3\" x=\"40\" y=\"390\"/><text class=\"s-tblock-id\" font-size=\"11\" font-family=\"Helvetica\" font-weight=\"normal\" font-style=\"normal\" text-decoration=\"none\" text-anchor=\"start\" kerning=\"auto\" stroke=\"none\" fill=\"#7C4007\" fill-opacity=\"1\" x=\"42\" y=\"401\">block_multiple18</text></g>LAYOUT--><!--SHAPE{\"type\":\"s-tblock\",\"id\":\"block_multiple24\",\"display\":\"true\",\"desc\":null,\"multiple\":\"true\",\"valign\":\"\",\"line-height\":\"\",\"box\":{\"x\":165,\"y\":390,\"width\":157.2,\"height\":113.3},\"format\":{\"base\":\"\",\"type\":\"\"},\"value\":\"\",\"ref-id\":\"\",\"overflow\":\"truncate\",\"word-wrap\":\"none\",\"svg\":{\"tag\":\"textArea\",\"attrs\":{\"x\":165,\"y\":389.9,\"width\":157.2,\"height\":113.3,\"xml:space\":\"preserve\",\"kerning\":\"auto\",\"id\":\"goog_1856690751\",\"fill\":\"#000000\",\"fill-opacity\":\"1\",\"font-size\":\"18\",\"font-family\":\"Helvetica\",\"font-weight\":\"normal\",\"font-style\":\"normal\",\"text-decoration\":\"none\",\"text-anchor\":\"start\"}}}SHAPE--><!--LAYOUT<g xmlns=\"http://www.w3.org/2000/svg\" class=\"s-tblock\" x-format-type=\"\" x-value=\"\" x-format-base=\"\" x-ref-id=\"\" kerning=\"auto\" x-display=\"true\" x-multiple=\"true\" id=\"goog_1856690751\" x-id=\"block_multiple24\" x-width=\"157.2\" x-height=\"113.3\" x-left=\"165\" x-top=\"390\" fill=\"#000000\" fill-opacity=\"1\" font-size=\"18\" font-family=\"Helvetica\" font-weight=\"normal\" font-style=\"normal\" text-decoration=\"none\" text-anchor=\"start\" x-overflow=\"truncate\" x-word-wrap=\"none\"><rect class=\"s-tblock-box\" stroke=\"#7C4007\" fill=\"#f4e2c4\" stroke-width=\"0.28\" fill-opacity=\"0.8\" width=\"157.2\" height=\"113.3\" x=\"165\" y=\"390\"/><text class=\"s-tblock-id\" font-size=\"11\" font-family=\"Helvetica\" font-weight=\"normal\" font-style=\"normal\" text-decoration=\"none\" text-anchor=\"start\" kerning=\"auto\" stroke=\"none\" fill=\"#7C4007\" fill-opacity=\"1\" x=\"167\" y=\"401\">block_multiple24</text></g>LAYOUT--><!--SHAPE{\"type\":\"s-tblock\",\"id\":\"block_multiple32\",\"display\":\"true\",\"desc\":null,\"multiple\":\"true\",\"valign\":\"\",\"line-height\":\"\",\"box\":{\"x\":345,\"y\":390,\"width\":230.2,\"height\":113.3},\"format\":{\"base\":\"\",\"type\":\"\"},\"value\":\"\",\"ref-id\":\"\",\"overflow\":\"truncate\",\"word-wrap\":\"none\",\"svg\":{\"tag\":\"textArea\",\"attrs\":{\"x\":345,\"y\":389.9,\"width\":230.2,\"height\":113.3,\"xml:space\":\"preserve\",\"kerning\":\"auto\",\"id\":\"goog_1856690752\",\"fill\":\"#000000\",\"fill-opacity\":\"1\",\"font-size\":\"18\",\"font-family\":\"Helvetica\",\"font-weight\":\"normal\",\"font-style\":\"normal\",\"text-decoration\":\"none\",\"text-anchor\":\"start\"}}}SHAPE--><!--LAYOUT<g xmlns=\"http://www.w3.org/2000/svg\" class=\"s-tblock\" x-format-type=\"\" x-value=\"\" x-format-base=\"\" x-ref-id=\"\" kerning=\"auto\" x-display=\"true\" x-multiple=\"true\" id=\"goog_1856690752\" x-id=\"block_multiple32\" x-width=\"230.2\" x-height=\"113.3\" x-left=\"345\" x-top=\"390\" fill=\"#000000\" fill-opacity=\"1\" font-size=\"18\" font-family=\"Helvetica\" font-weight=\"normal\" font-style=\"normal\" text-decoration=\"none\" text-anchor=\"start\" x-overflow=\"truncate\" x-word-wrap=\"none\"><rect class=\"s-tblock-box\" stroke=\"#7C4007\" fill=\"#f4e2c4\" stroke-width=\"0.28\" fill-opacity=\"0.8\" width=\"230.2\" height=\"113.3\" x=\"345\" y=\"390\"/><text class=\"s-tblock-id\" font-size=\"11\" font-family=\"Helvetica\" font-weight=\"normal\" font-style=\"normal\" text-decoration=\"none\" text-anchor=\"start\" kerning=\"auto\" stroke=\"none\" fill=\"#7C4007\" fill-opacity=\"1\" x=\"347\" y=\"401\">block_multiple32</text></g>LAYOUT--></g></svg>","state":{"layout-guide":[{"type":"x","position":164.4},{"type":"x","position":344.1},{"type":"y","position":503.3}]}}
+{
+  "version": "0.9.0",
+  "items": [
+    {
+      "id": "",
+      "type": "text",
+      "display": true,
+      "description": "",
+      "x": 40,
+      "y": 60,
+      "width": 151.8,
+      "height": 46,
+      "style": {
+        "font-family": [
+          "Helvetica"
+        ],
+        "font-size": 18,
+        "color": "#000000",
+        "text-align": "left",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": "",
+        "font-style": []
+      },
+      "texts": [
+        "サイズ18"
+      ]
+    },
+    {
+      "id": "text_single24",
+      "type": "text",
+      "display": true,
+      "description": "",
+      "x": 165,
+      "y": 60,
+      "width": 151.8,
+      "height": 46,
+      "style": {
+        "font-family": [
+          "Helvetica"
+        ],
+        "font-size": 18,
+        "color": "#000000",
+        "text-align": "left",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": "",
+        "font-style": []
+      },
+      "texts": [
+        "サイズ24"
+      ]
+    },
+    {
+      "id": "text_single32",
+      "type": "text",
+      "display": true,
+      "description": "",
+      "x": 345,
+      "y": 60,
+      "width": 151.8,
+      "height": 46,
+      "style": {
+        "font-family": [
+          "Helvetica"
+        ],
+        "font-size": 18,
+        "color": "#000000",
+        "text-align": "left",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": "",
+        "font-style": []
+      },
+      "texts": [
+        "サイズ32"
+      ]
+    },
+    {
+      "id": "",
+      "type": "text",
+      "display": true,
+      "description": "",
+      "x": 35,
+      "y": 179.8,
+      "width": 200,
+      "height": 100,
+      "style": {
+        "font-family": [
+          "Helvetica"
+        ],
+        "font-size": 18,
+        "color": "#000000",
+        "text-align": "left",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": "",
+        "font-style": []
+      },
+      "texts": [
+        "サイズ18",
+        "サイズ18"
+      ]
+    },
+    {
+      "id": "text_multiple24",
+      "type": "text",
+      "display": true,
+      "description": "",
+      "x": 165,
+      "y": 179.8,
+      "width": 200,
+      "height": 100,
+      "style": {
+        "font-family": [
+          "Helvetica"
+        ],
+        "font-size": 18,
+        "color": "#000000",
+        "text-align": "left",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": "",
+        "font-style": []
+      },
+      "texts": [
+        "サイズ24",
+        "サイズ24"
+      ]
+    },
+    {
+      "id": "text_multiple32",
+      "type": "text",
+      "display": true,
+      "description": "",
+      "x": 345,
+      "y": 179.8,
+      "width": 200,
+      "height": 100,
+      "style": {
+        "font-family": [
+          "Helvetica"
+        ],
+        "font-size": 18,
+        "color": "#000000",
+        "text-align": "left",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": "",
+        "font-style": []
+      },
+      "texts": [
+        "サイズ32",
+        "サイズ32"
+      ]
+    },
+    {
+      "id": "block_single18",
+      "type": "text-block",
+      "display": true,
+      "description": "",
+      "x": 40,
+      "y": 320.6,
+      "width": 103.4,
+      "height": 17,
+      "style": {
+        "font-family": [
+          "Helvetica"
+        ],
+        "font-size": 18,
+        "color": "#000000",
+        "text-align": "left",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": "",
+        "font-style": [],
+        "overflow": "truncate",
+        "word-wrap": "break-word"
+      },
+      "reference-id": "",
+      "value": "",
+      "multiple-line": false,
+      "format": {
+        "base": "",
+        "type": ""
+      }
+    },
+    {
+      "id": "block_single24",
+      "type": "text-block",
+      "display": true,
+      "description": "",
+      "x": 165,
+      "y": 320.6,
+      "width": 157.2,
+      "height": 17,
+      "style": {
+        "font-family": [
+          "Helvetica"
+        ],
+        "font-size": 18,
+        "color": "#000000",
+        "text-align": "left",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": "",
+        "font-style": [],
+        "overflow": "truncate",
+        "word-wrap": "none"
+      },
+      "reference-id": "",
+      "value": "",
+      "multiple-line": false,
+      "format": {
+        "base": "",
+        "type": ""
+      }
+    },
+    {
+      "id": "block_single32",
+      "type": "text-block",
+      "display": true,
+      "description": "",
+      "x": 345,
+      "y": 320.6,
+      "width": 230.2,
+      "height": 17,
+      "style": {
+        "font-family": [
+          "Helvetica"
+        ],
+        "font-size": 18,
+        "color": "#000000",
+        "text-align": "left",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": "",
+        "font-style": [],
+        "overflow": "truncate",
+        "word-wrap": "none"
+      },
+      "reference-id": "",
+      "value": "",
+      "multiple-line": false,
+      "format": {
+        "base": "",
+        "type": ""
+      }
+    },
+    {
+      "id": "block_multiple18",
+      "type": "text-block",
+      "display": true,
+      "description": "",
+      "x": 40,
+      "y": 390,
+      "width": 103.4,
+      "height": 113.3,
+      "style": {
+        "font-family": [
+          "Helvetica"
+        ],
+        "font-size": 18,
+        "color": "#000000",
+        "text-align": "left",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": "",
+        "font-style": [],
+        "overflow": "truncate",
+        "word-wrap": "none"
+      },
+      "reference-id": "",
+      "value": "",
+      "multiple-line": true,
+      "format": {
+        "base": "",
+        "type": ""
+      }
+    },
+    {
+      "id": "block_multiple24",
+      "type": "text-block",
+      "display": true,
+      "description": "",
+      "x": 165,
+      "y": 390,
+      "width": 157.2,
+      "height": 113.3,
+      "style": {
+        "font-family": [
+          "Helvetica"
+        ],
+        "font-size": 18,
+        "color": "#000000",
+        "text-align": "left",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": "",
+        "font-style": [],
+        "overflow": "truncate",
+        "word-wrap": "none"
+      },
+      "reference-id": "",
+      "value": "",
+      "multiple-line": true,
+      "format": {
+        "base": "",
+        "type": ""
+      }
+    },
+    {
+      "id": "block_multiple32",
+      "type": "text-block",
+      "display": true,
+      "description": "",
+      "x": 345,
+      "y": 390,
+      "width": 230.2,
+      "height": 113.3,
+      "style": {
+        "font-family": [
+          "Helvetica"
+        ],
+        "font-size": 18,
+        "color": "#000000",
+        "text-align": "left",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": "",
+        "font-style": [],
+        "overflow": "truncate",
+        "word-wrap": "none"
+      },
+      "reference-id": "",
+      "value": "",
+      "multiple-line": true,
+      "format": {
+        "base": "",
+        "type": ""
+      }
+    }
+  ],
+  "state": {
+    "layout-guides": [
+      {
+        "type": "x",
+        "position": 164.4
+      },
+      {
+        "type": "x",
+        "position": 344.1
+      },
+      {
+        "type": "y",
+        "position": 503.3
+      }
+    ]
+  },
+  "title": "FontSize",
+  "report": {
+    "paper-type": "A4",
+    "orientation": "portrait",
+    "margin": [
+      20,
+      20,
+      20,
+      20
+    ]
+  }
+}
