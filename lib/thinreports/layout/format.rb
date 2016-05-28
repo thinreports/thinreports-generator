@@ -22,8 +22,8 @@ module Thinreports
           end
 
           if schema['version'] < '0.9.0'
-            warn '[DEPRECATION] Loading old layout format is deprecated and will be removed in thinreports-generator 1.0.' \
-                 ' Please convert to new layout format using Thinreports Editor 0.9.x.'
+            warn '[DEPRECATION] Support for the layout file with old format that generated with Editor 0.8 or lower will be dropped in Thinreports 1.1.' \
+                 ' Please convert to new layout format using Thinreports Editor 0.9 or 1.0.'
             schema = Layout::LegacySchema.new(schema).upgrade
           end
 
