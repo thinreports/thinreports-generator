@@ -30,7 +30,7 @@ module Thinreports
         image(image_path, x, y, w, h)
       end
 
-      # @param file (see Prawn#image)
+      # @param [String, IO] file
       # @param [Numeric, Strng] x
       # @param [Numeric, Strng] y
       # @param [Numeric, Strng] w
@@ -39,13 +39,16 @@ module Thinreports
       # @option options [:left, :center, :right] :position_x (:left)
       # @option options [:top, :center, :bottom] :position_y (:top)
       def image_box(file, x, y, w, h, options = {})
-        image_path = normalize_image_from_file(file)
+        image_data_or_path = normalize_image_from_file(file)
 
         w, h = s2f(w, h)
         pdf.bounding_box(pos(x, y), width: w, height: h) do
-          pdf.image(image_path, position: options[:position_x] || :left,
-                                vposition: options[:position_y] || :top,
-                                auto_fit: [w, h])
+          pdf.image(
+            image_data_or_path,
+            position: options[:position_x] || :left,
+            vposition: options[:position_y] || :top,
+            auto_fit: [w, h]
+          )
         end
       end
 
@@ -69,7 +72,10 @@ module Thinreports
         create_temp_imagefile(image_id, image_data)
       end
 
-      def normalize_image_from_file(filename)
+      def normalize_image_from_file(file)
+        return file unless file.is_a?(String)
+
+        filename = file
         extname = File.extname(filename)
 
         return filename unless png_conversion_enabled?
