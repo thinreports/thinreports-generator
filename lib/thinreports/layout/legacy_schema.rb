@@ -349,7 +349,7 @@ module Thinreports
       end
 
       def line_height(legacy_line_height)
-        legacy_line_height == '' ? '' : legacy_line_height.to_f
+        blank_value?(legacy_line_height) ? '' : legacy_line_height.to_f
       end
 
       def letter_spacing(legacy_letter_spacing)

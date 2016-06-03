@@ -537,6 +537,7 @@ class Thinreports::Layout::TestLegacySchema < Minitest::Test
 
   def test_line_height
     assert_equal '', layout_legacy_schema.line_height('')
+    assert_equal '', layout_legacy_schema.line_height(nil)
     assert_equal 20.1, layout_legacy_schema.line_height('20.1')
   end
 
