@@ -6,8 +6,14 @@ require 'rexml/document'
 module Thinreports
   module Layout
     class LegacySchema
+      include Utils
+
       def initialize(legacy_schema)
         @legacy_schema = legacy_schema
+        @legacy_svg = legacy_schema['svg'].dup
+        @legacy_item_schemas = extract_legacy_item_schemas(legacy_svg)
+
+        normalize_svg!(@legacy_svg)
       end
 
       def upgrade
@@ -24,20 +30,23 @@ module Thinreports
             'orientation' => page_config['orientation'],
             'margin' => page_config.values_at('margin-top', 'margin-right', 'margin-bottom', 'margin-left').map(&:to_f)
           },
-          'items' => build_item_schemas_from_svg(legacy_schema['svg'].dup, '/svg/g', 1)
+          'items' => item_schemas
         }
       end
 
-      attr_reader :legacy_schema
+      attr_reader :legacy_schema, :legacy_svg, :legacy_item_schemas
 
-      def build_item_schemas_from_svg(svg, root_xpath, level)
-        item_schemas = extract_item_schemas(svg, level)
+      def item_schemas
+        svg = REXML::Document.new(legacy_svg)
+        build_item_schemas_from_svg(svg.elements['/svg/g'])
+      end
 
-        svg_doc = REXML::Document.new(normalize_svg(svg, level))
+      def build_item_schemas_from_svg(svg_elements)
+        return [] unless svg_elements
+
         items = []
 
-        svg_doc.elements[root_xpath].each do |item_element|
-          item_schema = item_schemas[item_element.attributes['x-id']] || {}
+        svg_elements.each do |item_element|
           item_attributes = item_element.attributes
 
           items <<
@@ -50,7 +59,7 @@ module Thinreports
             when 's-tblock' then text_block_item_schema(item_attributes)
             when 's-iblock' then image_block_item_schema(item_attributes)
             when 's-pageno' then page_number_item_schema(item_attributes)
-            when 's-list' then list_item_schema(item_schema)
+            when 's-list' then list_item_schema(item_element)
             else raise 'Unknown item type'
             end
         end
@@ -234,29 +243,47 @@ module Thinreports
             'line-height' => line_height(attributes['x-line-height']),
             'letter-spacing' => letter_spacing(attributes['kerning']),
             'overflow' => attributes['x-overflow'],
-            'word-wrap' => attributes['x-word-wrap']
+            'word-wrap' => attributes['x-word-wrap'] || ''
           }
         }
       end
 
-      def list_item_schema(legacy_schema)
-        {
+      def list_item_schema(legacy_element)
+        legacy_schema = legacy_item_schemas[legacy_element.attributes['x-id']]
+
+        header = list_section_schema('header', legacy_element, legacy_schema)
+        detail = list_section_schema('detail', legacy_element, legacy_schema)
+        page_footer = list_section_schema('page-footer', legacy_element, legacy_schema)
+        footer = list_section_schema('footer', legacy_element, legacy_schema)
+
+        schema = {
           'id' => legacy_schema['id'],
           'type' => Core::Shape::List::TYPE_NAME,
           'content-height' => legacy_schema['content-height'].to_f,
           'auto-page-break' => legacy_schema['page-break'] == 'true',
           'display' => display(legacy_schema['display']),
-          'header' => list_section_schema('header', legacy_schema),
-          'detail' => list_section_schema('detail', legacy_schema),
-          'page-footer' => list_section_schema('page-footer', legacy_schema),
-          'footer' => list_section_schema('footer', legacy_schema)
+          'header' => header,
+          'detail' => detail,
+          'page-footer' => page_footer,
+          'footer' => footer
         }
+
+        if page_footer['enabled']
+          page_footer['translate']['y'] += detail['height']
+        end
+
+        if footer['enabled']
+          footer['translate']['y'] += detail['height']
+          footer['translate']['y'] += page_footer['height'] if page_footer['enabled']
+        end
+        schema
       end
 
-      def list_section_schema(section_name, legacy_list_schema)
+      def list_section_schema(section_name, legacy_list_element, legacy_list_schema)
         legacy_section_schema = legacy_list_schema[section_name]
+        return {} if legacy_section_schema.empty?
 
-        section_svg = %(<svg xmlns:xlink="http://www.w3.org/1999/xlink">#{legacy_section_schema['svg']['content']}</svg>)
+        section_item_elements = legacy_list_element.elements["g[@class='s-list-#{section_name}']"]
 
         section_schema = {
           'height' => legacy_section_schema['height'].to_f,
@@ -264,7 +291,7 @@ module Thinreports
             'x' => legacy_section_schema['translate']['x'].to_f,
             'y' => legacy_section_schema['translate']['y'].to_f
           },
-          'items' => build_item_schemas_from_svg(section_svg, '/svg', 2)
+          'items' => build_item_schemas_from_svg(section_item_elements)
         }
 
         unless section_name == 'detail'
@@ -310,7 +337,7 @@ module Thinreports
       end
 
       def vertical_align(legacy_vertical_align)
-        return nil unless legacy_vertical_align
+        return '' unless legacy_vertical_align
 
         case legacy_vertical_align
         when 'top' then 'top'
@@ -331,23 +358,18 @@ module Thinreports
         end
       end
 
-      def extract_item_schemas(svg, level)
+      def extract_legacy_item_schemas(svg)
         items = {}
-        svg.scan(/<!--#{level_symbol(level)}SHAPE(.*?)SHAPE#{level_symbol(level)}-->/) do |(item_schema_json)|
+        svg.scan(/<!--SHAPE(.*?)SHAPE-->/) do |(item_schema_json)|
           item_schema = JSON.parse(item_schema_json)
           items[item_schema['id']] = item_schema
         end
         items
       end
 
-      def normalize_svg(svg, level)
-        svg.gsub!(/<!--#{level_symbol(level)}SHAPE.*?SHAPE#{level_symbol(level)}-->/, '')
-        svg.gsub!(/<!--#{level_symbol(level)}LAYOUT(.*?)LAYOUT#{level_symbol(level)}-->/) { $1 }
-        svg
-      end
-
-      def level_symbol(level)
-        '-' * (level - 1)
+      def normalize_svg!(svg)
+        svg.gsub!(/<!--SHAPE.*?SHAPE-->/, '')
+        svg.gsub!(/<!--LAYOUT(.*?)LAYOUT-->/) { $1 }
       end
     end
   end
