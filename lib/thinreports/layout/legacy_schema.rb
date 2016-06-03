@@ -233,6 +233,7 @@ module Thinreports
           'value' => attributes['x-value'],
           'multiple-line' => attributes['x-multiple'] == 'true',
           'format' => text_format,
+          'reference-id' => attributes['x-ref-id'],
           'style' => {
             'font-family' => [ attributes['font-family'] ],
             'font-size' => attributes['font-size'].to_f,

@@ -312,7 +312,8 @@ class Thinreports::Layout::TestLegacySchema < Minitest::Test
       'x-overflow' => 'expand',
       'x-word-wrap' => 'break-word',
       'x-format-base' => '$ {value}',
-      'x-format-type' => ''
+      'x-format-type' => '',
+      'x-ref-id' => 'other_text_block_id'
     }
     assert_equal(
       {
@@ -325,6 +326,7 @@ class Thinreports::Layout::TestLegacySchema < Minitest::Test
         'display' => true,
         'value' => 'default value',
         'multiple-line' => true,
+        'reference-id' => 'other_text_block_id',
         'format' => {
           'base' => '$ {value}',
           'type' => ''
