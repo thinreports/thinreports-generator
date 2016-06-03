@@ -1,3 +1,9 @@
+## 0.9.1
+
+ * Fixed bug that line-height of text-block is always set to 0 #68
+ * Fixed a referenced text-block not rendered #68
+ * Fixed #66 an error occurred when render list #68
+
 ## 0.9.0
 
  * Drop support for layout file saved with Editor v0.7 or lower #62
