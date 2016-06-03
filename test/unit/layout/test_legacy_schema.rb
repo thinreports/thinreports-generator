@@ -312,7 +312,8 @@ class Thinreports::Layout::TestLegacySchema < Minitest::Test
       'x-overflow' => 'expand',
       'x-word-wrap' => 'break-word',
       'x-format-base' => '$ {value}',
-      'x-format-type' => ''
+      'x-format-type' => '',
+      'x-ref-id' => 'other_text_block_id'
     }
     assert_equal(
       {
@@ -325,6 +326,7 @@ class Thinreports::Layout::TestLegacySchema < Minitest::Test
         'display' => true,
         'value' => 'default value',
         'multiple-line' => true,
+        'reference-id' => 'other_text_block_id',
         'format' => {
           'base' => '$ {value}',
           'type' => ''
@@ -398,17 +400,15 @@ class Thinreports::Layout::TestLegacySchema < Minitest::Test
   end
 
   def test_list_item_schema
-    rect_item_svg = '<rect stroke="#000000" stroke-width="1" fill="#FFFFFF" class="s-rect" x-display="true" x-stroke-type="solid" stroke-dasharray="none" x-id="" rx="0" width="102.6" height="42" x="40" y="20"/>'
-
     legacy_schema = {
       'id' => 'default',
       'type' => 's-list',
       'content-height' => '300',
       'page-break' => 'true',
       'display' => 'false',
-      'header-enabled' => 'true',
+      'header-enabled' => 'false',
       'page-footer-enabled' => 'true',
-      'footer-enabled' => 'false',
+      'footer-enabled' => 'true',
       'header' => {
         'height' => '100.1',
         'translate' => {
@@ -423,9 +423,7 @@ class Thinreports::Layout::TestLegacySchema < Minitest::Test
           'x' => '300',
           'y' => '400'
         },
-        'svg' => {
-          'content' => rect_item_svg
-        }
+        'svg' => { 'content' => '' }
       },
       'page-footer' => {
         'height' => '300.1',
@@ -444,6 +442,13 @@ class Thinreports::Layout::TestLegacySchema < Minitest::Test
         'svg' => { 'content' => '' }
       }
     }
+
+    layout_legacy_schema.stubs(:legacy_item_schemas).returns({ 'default' => legacy_schema })
+
+    legacy_element = mock()
+    legacy_element.stubs(:attributes).returns({ 'x-id' => 'default' })
+    legacy_element.stubs(:elements).returns({})
+
     assert_equal(
       {
         'id' => 'default',
@@ -458,7 +463,7 @@ class Thinreports::Layout::TestLegacySchema < Minitest::Test
             'y' => 200.0
           },
           'items' => [],
-          'enabled' => true
+          'enabled' => false
         },
         'detail' => {
           'height' => 200.1,
@@ -466,27 +471,13 @@ class Thinreports::Layout::TestLegacySchema < Minitest::Test
             'x' => 300.0,
             'y' => 400.0
           },
-          'items' => [{
-            'id' => '',
-            'type' => 'rect',
-            'x' => 40.0,
-            'y' => 20.0,
-            'width' => 102.6,
-            'height' => 42.0,
-            'display' => true,
-            'style' => {
-              'border-width' => 1.0,
-              'border-color' => '#000000',
-              'border-style' => 'solid',
-              'fill-color' => '#FFFFFF'
-            }
-          }]
+          'items' => []
         },
         'page-footer' => {
           'height' => 300.1,
           'translate' => {
             'x' => 500.0,
-            'y' => 600.0
+            'y' => 800.1
           },
           'items' => [],
           'enabled' => true
@@ -495,13 +486,13 @@ class Thinreports::Layout::TestLegacySchema < Minitest::Test
           'height' => 400.1,
           'translate' => {
             'x' => 700.0,
-            'y' => 800.0
+            'y' => 1300.2
           },
           'items' => [],
-          'enabled' => false
+          'enabled' => true
         }
       },
-      layout_legacy_schema.list_item_schema(legacy_schema)
+      layout_legacy_schema.list_item_schema(legacy_element)
     )
   end
 
@@ -537,7 +528,7 @@ class Thinreports::Layout::TestLegacySchema < Minitest::Test
   end
 
   def test_vertical_align
-    assert_equal nil, layout_legacy_schema.vertical_align(nil)
+    assert_equal '', layout_legacy_schema.vertical_align(nil)
     assert_equal 'top', layout_legacy_schema.vertical_align('top')
     assert_equal 'middle', layout_legacy_schema.vertical_align('center')
     assert_equal 'bottom', layout_legacy_schema.vertical_align('bottom')
@@ -546,6 +537,7 @@ class Thinreports::Layout::TestLegacySchema < Minitest::Test
 
   def test_line_height
     assert_equal '', layout_legacy_schema.line_height('')
+    assert_equal '', layout_legacy_schema.line_height(nil)
     assert_equal 20.1, layout_legacy_schema.line_height('20.1')
   end
 
@@ -553,11 +545,6 @@ class Thinreports::Layout::TestLegacySchema < Minitest::Test
     assert_equal '', layout_legacy_schema.letter_spacing('')
     assert_equal '', layout_legacy_schema.letter_spacing('auto')
     assert_equal 2.5, layout_legacy_schema.letter_spacing('2.5')
-  end
-
-  def test_level_symbol
-    assert_equal '', layout_legacy_schema.level_symbol(1)
-    assert_equal '-', layout_legacy_schema.level_symbol(2)
   end
 
   def test_extract_item_schemas
@@ -568,20 +555,20 @@ class Thinreports::Layout::TestLegacySchema < Minitest::Test
 SVG
     assert_equal(
       { 'item1' => { 'id' => 'item1' }, 'item3' => { 'id' => 'item3' } },
-      layout_legacy_schema.extract_item_schemas(svg, 1)
+      layout_legacy_schema.extract_legacy_item_schemas(svg)
     )
   end
 
   def test_normalize_svg
-    svg = '<!---SHAPE{"id":"item1"}SHAPE---><!---LAYOUT<rect id="item2"/>LAYOUT---><!--SHAPE{"id":"item2"}SHAPE-->'
-    normalized_svg = '<rect id="item2"/><!--SHAPE{"id":"item2"}SHAPE-->'
+    svg = '<!--SHAPE{"id":"item1"}SHAPE--><!--LAYOUT<rect id="item2"/>LAYOUT--><!--SHAPE{"id":"item2"}SHAPE-->'
 
-    assert_equal normalized_svg, layout_legacy_schema.normalize_svg(svg, 2)
+    layout_legacy_schema.normalize_svg!(svg)
+    assert_equal '<rect id="item2"/>', svg
   end
 
   private
 
   def layout_legacy_schema
-    @layout_legacy_schema ||= Layout::LegacySchema.new({})
+    @layout_legacy_schema ||= Layout::LegacySchema.new({ 'svg' => '' })
   end
 end
