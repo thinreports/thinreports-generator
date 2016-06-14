@@ -40,9 +40,6 @@ module Thinreports
       end
     end
 
-    class UnknownEventType < Basic
-    end
-
     class UnknownLayoutId < Basic
     end
 
