@@ -25,5 +25,4 @@ module Thinreports
 end
 
 require 'thinreports/generator/configuration'
-require 'thinreports/generator/base'
 require 'thinreports/generator/pdf'

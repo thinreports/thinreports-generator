@@ -11,13 +11,22 @@ end
 module Thinreports
   module Generator
 
-    class PDF < Base
-      # @param report (see Thinreports::Generator::Base#initialize)
+    class PDF
+      # @return [Thinreports::Report::Base]
+      attr_reader :report
+
+      # @return [Hash]
+      attr_reader :options
+
+      # @param [Thinreports::Report::Base] report
       # @param [Hash] options
       # @option options [Hash] :security (nil)
       #   See Prawn::Document#encrypt_document
-      def initialize(report, options)
-        super
+      def initialize(report, options = {})
+        report.finalize
+
+        @report  = report.internal
+        @options = options || {}
 
         title = default_layout ? default_layout.format.report_title : nil
 
@@ -25,10 +34,15 @@ module Thinreports
         @drawers = {}
       end
 
-      # @see Thinreports::Generator::Base#generate
+      # @param [String, nil] filename
+      # @return [String, nil]
       def generate(filename = nil)
         draw_report
         filename ? @document.render_file(filename) : @document.render
+      end
+
+      def default_layout
+        report.default_layout
       end
 
     private
