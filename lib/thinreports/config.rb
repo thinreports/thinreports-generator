@@ -49,10 +49,5 @@ module Thinreports
            ' and will be removed in thinreports-generator 1.0 with no replacement.' if enable
       @convert_palleted_transparency_png = enable
     end
-
-    # @return [Thinreports::Generator::Configuration]
-    def generator
-      @generator ||= Thinreports::Generator::Configuration.new
-    end
   end
 end

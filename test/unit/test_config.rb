@@ -5,11 +5,6 @@ require 'test_helper'
 class Thinreports::TestConfig < Minitest::Test
   include Thinreports::TestHelper
 
-  def test_generator_of_Configuration_should_return_configuration_of_generator
-    config = Thinreports::Configuration.new
-    assert_instance_of Thinreports::Generator::Configuration, config.generator
-  end
-
   def test_config_should_return_configuration_of_thinreports
     assert_instance_of Thinreports::Configuration, Thinreports.config
   end

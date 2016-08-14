@@ -176,9 +176,8 @@ module Thinreports
       #   report.generate(filename: 'foo.pdf')
       def generate(*args)
         options = args.last.is_a?(::Hash) ? args.pop : {}
-        type = args.first || Thinreports.config.generator.default
         filename = options.delete(:filename)
-        generator = Thinreports::Generator.new(type, self, options)
+        generator = Thinreports::Generator::PDF.new(self, options)
 
         generator.generate(filename)
       end
