@@ -1,9 +1,8 @@
 # coding: utf-8
 
 module Thinreports
-  module Generator
-
-    module PDF::Graphics
+  module PDF
+    module Text
       # @param [String] content
       # @param [Numeric, String] x
       # @param [Numeric, String] y
@@ -75,7 +74,7 @@ module Thinreports
         # When no color is given, do not draw.
         return unless attrs.key?(:color) && attrs[:color] != 'none'
 
-        save_graphics_state
+        pdf.save_graphics_state
 
         fontinfo = {name: attrs.delete(:font).to_s,
                     color: parse_color(attrs.delete(:color)),
@@ -98,7 +97,7 @@ module Thinreports
           block.call(modified_attrs, styles)
         end
 
-        restore_graphics_state
+        pdf.restore_graphics_state
       end
 
       # @param [Numeric] line_height
@@ -154,8 +153,6 @@ module Thinreports
           block.call(attrs, styles || [])
         end
       end
-
     end
-
   end
 end

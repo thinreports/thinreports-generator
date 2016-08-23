@@ -1,9 +1,8 @@
 # coding: utf-8
 
 module Thinreports
-  module Generator
-
-    module PDF::Page
+  module PDF
+    module Page
       # Add JIS-B4,B5 page geometry
       ::PDF::Core::PageGeometry::SIZES.update(
         'B4_JIS' => [728.5, 1031.8],
@@ -81,6 +80,5 @@ module Thinreports
         options
       end
     end
-
   end
 end

@@ -1,9 +1,8 @@
 # coding: utf-8
 
 module Thinreports
-  module Generator
-
-    module PDF::Font
+  module PDF
+    module Font
       FONT_STORE = File.join(Thinreports::ROOT, 'fonts')
 
       BUILTIN_FONTS = {
@@ -74,6 +73,5 @@ module Thinreports
         (f = pdf.font_families[font]) && f.key?(style)
       end
     end
-
   end
 end
