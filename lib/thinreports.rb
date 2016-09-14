@@ -18,3 +18,6 @@ require 'thinreports/generator/pdf'
 
 # Alias for Thinreports
 ThinReports = Thinreports
+class Object
+  deprecate_constant :ThinReports
+end if Object.respond_to?(:deprecate_constant)
