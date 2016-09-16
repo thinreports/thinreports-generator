@@ -46,8 +46,9 @@ png_image = StringIO.new(png_data)
 page.item(:image_block).src(png_image)
 
 require 'open-uri'
-png_data = open('http://example.com/image.png')
-page.item(:image_block).src(image_data)
+open('http://example.com/image.png') do |image_data|
+  page.item(:image_block).src(image_data)
+end
 ```
 
 ### Remove old way to define callback of list
