@@ -13,7 +13,6 @@ require 'thinreports/core/shape'
 require 'thinreports/core/utils'
 require 'thinreports/report'
 require 'thinreports/layout'
-require 'thinreports/generator/configuration'
 require 'thinreports/generator/pdf'
 
 # Alias for Thinreports
