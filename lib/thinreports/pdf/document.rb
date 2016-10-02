@@ -1,24 +1,26 @@
 # coding: utf-8
 
-require 'thinreports/generator/pdf/document/font'
-require 'thinreports/generator/pdf/document/parse_color'
-require 'thinreports/generator/pdf/document/graphics'
-require 'thinreports/generator/pdf/document/draw_shape'
-require 'thinreports/generator/pdf/document/draw_template_items'
-require 'thinreports/generator/pdf/document/page'
+require 'prawn'
+require_relative 'prawn_ext'
+
+require_relative 'font'
+require_relative 'parse_color'
+require_relative 'graphics'
+require_relative 'text'
+require_relative 'image'
+require_relative 'page'
 
 module Thinreports
-  module Generator
-
-    class PDF::Document
+  module PDF
+    class Document
       include Utils
 
-      include PDF::Font
-      include PDF::ParseColor
-      include PDF::Graphics
-      include PDF::DrawShape
-      include PDF::DrawTemplateItems
-      include PDF::Page
+      include Font
+      include ParseColor
+      include Graphics
+      include Text
+      include Image
+      include Page
 
       # @return [Prawn::Document]
       attr_reader :pdf
@@ -126,6 +128,5 @@ module Thinreports
       end
       alias_method :pos, :map_to_upper_left_position
     end
-
   end
 end

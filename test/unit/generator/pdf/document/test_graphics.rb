@@ -29,14 +29,4 @@ class Thinreports::Generator::PDF::TestGraphics < Minitest::Test
 
     @g.send(:line_width, 10)
   end
-
-  def test_save_graphics_state
-    @g.pdf.expects(:save_graphics_state).once
-    @g.send(:save_graphics_state)
-  end
-
-  def test_restore_graphics_state
-    @g.pdf.expects(:restore_graphics_state).once
-    @g.send(:restore_graphics_state)
-  end
 end

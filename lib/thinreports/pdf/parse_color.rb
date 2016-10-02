@@ -1,9 +1,8 @@
 # coding: utf-8
 
 module Thinreports
-  module Generator
-
-    module PDF::ParseColor
+  module PDF
+    module ParseColor
       # @param [String] color
       # @return [String]
       def parse_color(color)
@@ -44,6 +43,5 @@ module Thinreports
         color
       end
     end
-
   end
 end

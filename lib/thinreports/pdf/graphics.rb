@@ -1,9 +1,10 @@
 # coding: utf-8
 
 module Thinreports
-  module Generator
+  module PDF
+    module Graphics
+      BASE_LINE_WIDTH = 0.9
 
-    module PDF::Graphics
       STROKE_DASH = {
         dashed: [2, 2],
         dotted: [1, 2]
@@ -64,6 +65,16 @@ module Thinreports
         end
       end
 
+      # @param [Numeric] width
+      def line_width(width)
+        pdf.line_width(width * BASE_LINE_WIDTH)
+      end
+
+      # Change the default graphic states defined by Prawn.
+      def setup_custom_graphic_states
+        pdf.line_width(BASE_LINE_WIDTH)
+      end
+
       # @param [Hash] attrs
       def with_graphic_styles(attrs, &block)
         stroke = build_stroke_styles(attrs)
@@ -72,7 +83,7 @@ module Thinreports
         # Do not draw if no colors given.
         return unless fill || stroke
 
-        save_graphics_state
+        pdf.save_graphics_state
 
         # Apply stroke-dashed.
         if stroke && stroke[:dash]
@@ -104,7 +115,7 @@ module Thinreports
           }
         end
 
-        restore_graphics_state
+        pdf.restore_graphics_state
       end
 
       # @param [Hash] styles
@@ -130,8 +141,6 @@ module Thinreports
 
         { color: parse_color(color) }
       end
-
     end
-
   end
 end

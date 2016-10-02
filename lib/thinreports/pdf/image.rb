@@ -6,9 +6,8 @@ require 'digest/md5'
 require 'chunky_png'
 
 module Thinreports
-  module Generator
-
-    module PDF::Graphics
+  module PDF
+    module Graphics
       # @param [String] filename
       # @param [Numeric, Strng] x
       # @param [Numeric, Strng] y
@@ -167,6 +166,5 @@ module Thinreports
         end
       end
     end
-
   end
 end
