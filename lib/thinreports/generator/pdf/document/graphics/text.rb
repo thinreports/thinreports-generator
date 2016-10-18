@@ -27,9 +27,9 @@ module Thinreports
         box_attrs = text_box_attrs(x, y, w, h, single: attrs.delete(:single),
                                                overflow: attrs[:overflow])
         # Do not break by word unless :word_wrap is :break_word
-        content = text_without_line_wrap(content) if attrs[:word_wrap] == :none
 
         with_text_styles(attrs) do |built_attrs, font_styles|
+          content = text_without_line_wrap(content) if attrs[:word_wrap] == :none && pdf.font.unicode?
           pdf.formatted_text_box([{ text: content, styles: font_styles }],
             built_attrs.merge(box_attrs))
         end

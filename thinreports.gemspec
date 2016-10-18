@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.test_files    = s.files.grep %r{^test/}
   s.require_paths = ['lib']
 
-  s.add_dependency 'prawn', '1.3.0'
+  s.add_dependency 'prawn', '2.1.0'
   s.add_dependency 'chunky_png', '~> 1.3'
 
   s.add_development_dependency 'bundler', ['>= 1.0.0']
