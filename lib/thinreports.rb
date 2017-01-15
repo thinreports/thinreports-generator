@@ -8,7 +8,7 @@ module Thinreports
   end
 
   def self.generate(report_params, filename: nil)
-    Generate.new(filename).call(report_params)
+    Generate.new.call(report_params, filename: filename)
   end
 end
 

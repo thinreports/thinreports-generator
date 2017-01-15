@@ -1,6 +1,6 @@
 module Thinreports
   module SectionReport
-    module Bulder
+    module Builder
       class ItemBuilder
         def initialize(item_schema)
           @item = Core::Shape::Interface(nil, item_schema)
