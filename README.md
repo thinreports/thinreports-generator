@@ -22,8 +22,8 @@
 
 ## Supported versions
 
-  * Ruby 1.9.3, 2.0, 2.1, 2.2, 2.3
-  * JRuby 1.7.0+ (1.9 mode)
+  * Ruby 2.1, 2.2, 2.3
+  * JRuby 9.1.8.0
 
 ## Quick Reference
 
