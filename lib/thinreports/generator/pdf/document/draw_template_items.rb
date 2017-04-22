@@ -54,7 +54,7 @@ module Thinreports
         x, y, w, h = item_attributes.values_at('x', 'y', 'width', 'height')
         image_data = item_attributes['data']
 
-        base64image(image_data['mime-type'], image_data['base64'], x, y, w, h)
+        base64image(image_data['base64'], x, y, w, h)
       end
 
       def drawable?(item_attributes)

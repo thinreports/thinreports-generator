@@ -32,7 +32,7 @@ module Thinreports
         x, y, w, h = shape.format.attributes.values_at('x', 'y', 'width', 'height')
 
         image_data = shape.format.attributes['data']
-        base64image(image_data['mime-type'], image_data['base64'], x, y, w, h)
+        base64image(image_data['base64'], x, y, w, h)
       end
 
       # @param [Thinreports::Core::Shape::ImageBlock::Internal] shape

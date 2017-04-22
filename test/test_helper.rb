@@ -4,10 +4,10 @@ require 'minitest/autorun'
 require 'minitest/spec'
 require 'minitest/unit'
 require 'mocha/mini_test'
+require 'pdf/inspector'
 
 require 'digest/sha1'
 require 'pathname'
-require 'chunky_png'
 require 'thinreports'
 
 require 'schema_helper'
@@ -32,6 +32,13 @@ module Thinreports::TestHelper
 
   def temp_path
     ROOT.join('tmp')
+  end
+
+  def analyze_pdf_images(pdf_data)
+    analyzer = PDF::Inspector::XObject.analyze(pdf_data)
+    analyzer.page_xobjects
+      .reduce(:merge).values
+      .select { |o| o.hash[:Subtype] == :Image }
   end
 
   def teardown

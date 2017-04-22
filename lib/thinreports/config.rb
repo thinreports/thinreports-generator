@@ -15,7 +15,6 @@ module Thinreports
   class Configuration
     def initialize
       @fallback_fonts = []
-      @convert_palleted_transparency_png = false
     end
 
     # @return [Array<String>]
@@ -32,22 +31,6 @@ module Thinreports
     #   config.fallback_fonts = ['/path/to/font.ttf', 'IPAGothic']
     def fallback_fonts=(font_names)
       @fallback_fonts = font_names.is_a?(Array) ? font_names : [font_names]
-    end
-
-    # @return [Boolean]
-    # @see https://github.com/thinreports/thinreports-generator/pull/32
-    attr_reader :convert_palleted_transparency_png
-
-    # @param [Boolean]
-    # @example
-    #   config.convert_palleted_transparency_png = true
-    #   config.convert_palleted_transparency_png = false # default
-    # @see https://github.com/thinreports/thinreports-generator/pull/32
-    # @deprecated convert_palleted_transparency_png is deprecated and will be removed in thinreports-generator 1.0 with no replacement
-    def convert_palleted_transparency_png=(enable)
-      warn '[DEPRECATION] convert_palleted_transparency_png is deprecated' \
-           ' and will be removed in thinreports-generator 1.0 with no replacement.' if enable
-      @convert_palleted_transparency_png = enable
     end
   end
 end
