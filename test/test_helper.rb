@@ -1,6 +1,5 @@
 # coding: utf-8
 
-gem 'minitest' # for 1.9.3
 require 'minitest/autorun'
 require 'minitest/spec'
 require 'minitest/unit'
