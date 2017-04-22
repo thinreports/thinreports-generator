@@ -9,20 +9,20 @@ class Thinreports::Generator::PDF::Document::TestPage < Minitest::Test
     @pdf = Thinreports::Generator::PDF::Document.new
   end
 
-  def test_page_geometry
-    page_geometry = ::PDF::Core::PageGeometry::SIZES
-    assert_equal page_geometry['B4_JIS'], [728.5, 1031.8]
-    assert_equal page_geometry['B5_JIS'], [515.9, 728.5]
+  def test_JIS_page_size
+    sizes = Thinreports::Generator::PDF::Document::JIS_SIZES
+    assert_equal sizes['B4'], [728.5, 1031.8]
+    assert_equal sizes['B5'], [515.9, 728.5]
   end
 
-  def test_B4_paper_size_should_be_converted_to_B4_JIS
+  def test_B4_paper_size_should_returns_size_as_B4_JIS
     create_pdf
 
     format = Thinreports::Layout::Format.build(layout_file.path)
     format.stubs(page_paper_type: 'B4')
 
     @pdf.start_new_page(format)
-    assert_equal @pdf.internal.page.size, 'B4_JIS'
+    assert_equal @pdf.internal.page.size, [728.5, 1031.8]
   end
 
   def test_B4_ISO_paper_size_should_be_converted_to_B4
