@@ -4,11 +4,10 @@ module Thinreports
   module Generator
 
     module PDF::Page
-      # Add JIS-B4,B5 page geometry
-      ::PDF::Core::PageGeometry::SIZES.update(
-        'B4_JIS' => [728.5, 1031.8],
-        'B5_JIS' => [515.9, 728.5]
-      )
+      JIS_SIZES = {
+        'B4' => [728.5, 1031.8],
+        'B5' => [515.9, 728.5]
+      }
 
       # @param [Thinreports::Layout::Format] format
       def start_new_page(format)
@@ -71,9 +70,8 @@ module Thinreports
             # Convert B4(5)_ISO to B4(5)
             when 'B4_ISO', 'B5_ISO'
               format.page_paper_type.delete('_ISO')
-            # Convert B4(5) to B4(5)_JIS
             when 'B4', 'B5'
-              "#{format.page_paper_type}_JIS"
+              JIS_SIZES[format.page_paper_type]
             else
               format.page_paper_type
             end
