@@ -1,5 +1,7 @@
 # coding: utf-8
 
+Prawn::Font::AFM.hide_m17n_warning = true
+
 module Prawn
   class Document
     alias_method :original_width_of, :width_of
