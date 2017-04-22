@@ -1,5 +1,3 @@
-# coding: utf-8
-
 require 'thinreports/generator/pdf/document/font'
 require 'thinreports/generator/pdf/document/parse_color'
 require 'thinreports/generator/pdf/document/graphics'

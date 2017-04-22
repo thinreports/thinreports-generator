@@ -1,5 +1,3 @@
-# coding: utf-8
-
 require 'test_helper'
 
 class Thinreports::Generator::PDF::TestFont < Minitest::Test

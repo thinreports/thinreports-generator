@@ -1,5 +1,3 @@
-# coding: utf-8
-
 example :eudc, 'Show External Characters' do |t|
   Thinreports.configure do |config|
     config.fallback_fonts = t.resource('eudc.ttf')

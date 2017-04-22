@@ -1,5 +1,3 @@
-# coding: utf-8
-
 example :tblock_styles, 'Set the styles of Tblock in the Editor' do |t|
   Thinreports::Report.generate filename: t.output_filename do |report|
     report.use_layout t.layout_filename

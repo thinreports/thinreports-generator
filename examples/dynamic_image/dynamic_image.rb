@@ -1,5 +1,3 @@
-# coding: utf-8
-
 require 'open-uri'
 
 example :dynamic_image, 'Show images dynamically' do

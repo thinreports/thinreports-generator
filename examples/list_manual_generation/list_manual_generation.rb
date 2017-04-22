@@ -1,5 +1,3 @@
-# coding: utf-8
-
 example :list_manual_generation, 'Generate list manually' do |t|
   Thinreports::Report.generate(filename: t.output_filename) do
     use_layout(t.layout_filename)

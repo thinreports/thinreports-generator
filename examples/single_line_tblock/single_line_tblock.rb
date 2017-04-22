@@ -1,5 +1,3 @@
-# coding: utf-8
-
 example :single_line_tblock, 'Show a single-line Tblock' do |t|
   Thinreports::Report.generate filename: t.output_filename do
     use_layout(t.layout_filename)

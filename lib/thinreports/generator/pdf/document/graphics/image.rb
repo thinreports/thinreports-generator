@@ -1,5 +1,3 @@
-# coding: utf-8
-
 require 'tempfile'
 require 'base64'
 require 'digest/md5'

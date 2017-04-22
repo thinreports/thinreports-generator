@@ -1,5 +1,3 @@
-# coding: utf-8
-
 require 'pdf/inspector'
 
 example :typeB_page_size, 'Generate type B(JIS/ISO) size pages' do |t|

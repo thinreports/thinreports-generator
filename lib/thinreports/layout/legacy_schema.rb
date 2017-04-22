@@ -1,5 +1,3 @@
-# coding: utf-8
-
 require 'json'
 require 'rexml/document'
 

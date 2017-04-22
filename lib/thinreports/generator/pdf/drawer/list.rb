@@ -1,5 +1,3 @@
-# coding: utf-8
-
 module Thinreports
   module Generator::PDF::Drawer
 

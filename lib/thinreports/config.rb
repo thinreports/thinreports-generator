@@ -1,5 +1,3 @@
-# coding: utf-8
-
 module Thinreports
   # @yield [config]
   # @yieldparam [Thinreports::Configuration] config

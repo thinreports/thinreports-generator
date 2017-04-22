@@ -1,5 +1,3 @@
-# coding: utf-8
-
 module Thinreports
   module Utils
     def self.included(klass)

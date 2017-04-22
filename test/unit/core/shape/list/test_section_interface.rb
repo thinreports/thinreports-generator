@@ -1,5 +1,3 @@
-# coding: utf-8
-
 require 'test_helper'
 
 class Thinreports::Core::Shape::List::TestSectionInterface < Minitest::Test
