@@ -108,12 +108,11 @@ EOF
 EOF
 
     def layout_file(options = {})
-      # FIXME: '0.9.0' -> Thinreports::VERSION
-      version = options[:version] || '0.9.0'
+      schema_version = options[:version] || Thinreports::VERSION
       schema_json = options[:schema] || BASIC_SCHEMA_JSON
 
       Tempfile.open %w( test-thinreports-layout .tlf ) do |file|
-        file.puts (schema_json % { version: version })
+        file.puts (schema_json % { version: schema_version })
         file
       end
     end
