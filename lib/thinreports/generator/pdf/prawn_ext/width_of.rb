@@ -15,9 +15,9 @@ module Thinreports
         #
         #   width_of('abcd') #=> 4 + 3 = 7
         #
-        def width_of(string, options={})
-          font.compute_width_of(string, options) +
-            (character_spacing * (font.character_count(string) - 1))
+        def width_of(*)
+          width = super - character_spacing
+          width.negative? ? 0 : width
         end
       end
     end
