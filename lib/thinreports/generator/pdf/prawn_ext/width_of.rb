@@ -17,7 +17,7 @@ module Thinreports
         #
         def width_of(*)
           width = super - character_spacing
-          width.negative? ? 0 : width
+          width > 0 ? width : 0
         end
       end
     end
