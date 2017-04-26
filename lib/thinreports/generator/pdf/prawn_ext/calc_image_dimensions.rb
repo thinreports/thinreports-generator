@@ -13,12 +13,12 @@ module Thinreports
         #
         def calc_image_dimensions(options)
           if options[:auto_fit]
-            w = options[:width] || width
-            h = options[:height] || height
+            image_width = options[:width] || width
+            image_height = options[:height] || height
 
             box_width, box_height = options.delete(:auto_fit)
 
-            if w > box_width || h > box_height
+            if image_width > box_width || image_height > box_height
               options[:fit] = [box_width, box_height]
             end
           end
