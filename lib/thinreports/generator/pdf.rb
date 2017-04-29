@@ -7,9 +7,6 @@ module Thinreports
       # @return [Thinreports::Report::Base]
       attr_reader :report
 
-      # @return [Hash]
-      attr_reader :options
-
       # @param [Thinreports::Report::Base] report
       # @param [Hash] options
       # @option options [Hash] :security (nil)
@@ -17,9 +14,7 @@ module Thinreports
       def initialize(report, options = {})
         report.finalize
 
-        @report  = report.internal
-        @options = options || {}
-
+        @report = report.internal
         title = default_layout ? default_layout.format.report_title : nil
 
         @document = Document.new(options, Title: title)
