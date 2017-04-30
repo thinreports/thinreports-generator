@@ -23,23 +23,25 @@ module Thinreports
 
       # @param options (see Thinreports::Generator::PDF#initialize)
       # @param [Hash] metadata
+      # @param [String] title (nil)
+      # @param [Hash] security (nil)
       # @option metadata [String] :Title
-      def initialize(options = {}, metadata = {})
+      def initialize(title: nil, security: nil)
         @pdf = Prawn::Document.new(
           skip_page_creation: true,
           margin: [0, 0],
-          info: {CreationDate: Time.now,
-                      Creator: 'Thinreports Generator for Ruby ' +
-                                        Thinreports::VERSION}.merge(metadata)
+          info: {
+            CreationDate: Time.now,
+            Creator: 'Thinreports Generator for Ruby ' + Thinreports::VERSION,
+            Title: title
+          }
         )
         # Setup to Prawn::Document.
         setup_fonts
         setup_custom_graphic_states
 
         # Encrypts the document.
-        if options[:security]
-          @pdf.encrypt_document(options[:security])
-        end
+        @pdf.encrypt_document(security) if security
       end
 
       # Delegate to Prawn::Document#render

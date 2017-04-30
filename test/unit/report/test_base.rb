@@ -117,10 +117,19 @@ class Thinreports::Report::TestBase < Minitest::Test
   end
 
   def test_generate
-    report = Report::Base.new layout: @layout_file.path
-    report.generate filename: temp_path.join('result.pdf')
+    report = Report::Base.new(layout: @layout_file.path)
 
-    assert File.exist?(temp_path.join('result.pdf'))
+    generator = mock('generator')
+    generator.expects(:generate).with('result.pdf')
+
+    Thinreports::Generator::PDF.expects(:new)
+      .with(report, { security: { owner_password: 'pass' }})
+      .returns(generator)
+
+    report.generate(
+      filename: 'result.pdf',
+      security: { owner_password: 'pass' }
+    )
   end
 
   def test_page_should_return_the_current_page

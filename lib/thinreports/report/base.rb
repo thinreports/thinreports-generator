@@ -146,19 +146,15 @@ module Thinreports
         end
       end
 
-      # @param [Hash] options ({})
-      # @option options [String, nil] :filename
-      # @option options [Hash] :secruity
+      # @param [String] filename
+      # @param [Hash] secruity (see http://prawnpdf.org/api-docs/2.0/Prawn/Document/Security.html#encrypt_document-instance_method)
       # @return [String]
       # @example Generate PDF data
       #   report.generate # => "%PDF-1.4...."
       # @example Create a PDF file
       #   report.generate(filename: 'foo.pdf')
-      def generate(options = {})
-        filename = options.delete(:filename)
-        generator = Thinreports::Generator::PDF.new(self, options)
-
-        generator.generate(filename)
+      def generate(filename: nil, security: nil)
+        Thinreports::Generator::PDF.new(self, security: security).generate(filename)
       end
 
       # @see Thinreports::Core::Shape::Manager::Target#list

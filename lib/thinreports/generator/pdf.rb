@@ -8,16 +8,14 @@ module Thinreports
       attr_reader :report
 
       # @param [Thinreports::Report::Base] report
-      # @param [Hash] options
-      # @option options [Hash] :security (nil)
-      #   See Prawn::Document#encrypt_document
-      def initialize(report, options = {})
+      # @param [Hash] security (nil)
+      def initialize(report, security: nil)
         report.finalize
 
         @report = report.internal
         title = default_layout ? default_layout.format.report_title : nil
 
-        @document = Document.new(options, Title: title)
+        @document = Document.new(title: title, security: security)
         @drawers = {}
       end
 
