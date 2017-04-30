@@ -16,8 +16,7 @@ module Thinreports
         pdf.image(filename_or_io, at: pos(x, y), width: w, height: h)
       end
 
-      # @param [String] image_type Mime-type of image
-      # @param [String] base64
+      # @param [String] base64_data
       # @param [Numeric, Strng] x
       # @param [Numeric, Strng] y
       # @param [Numeric, Strng] w

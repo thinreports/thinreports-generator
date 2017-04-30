@@ -14,7 +14,7 @@ module Thinreports
       # @method font_size
       #   @return [Numeric, String]
       # @method font_size=(v)
-      #   @param [Numeric, String]
+      #   @param [Numeric, String] v
       style_accessor :font_size, 'font-size'
 
       def initialize(*)

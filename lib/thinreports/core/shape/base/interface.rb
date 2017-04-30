@@ -27,7 +27,7 @@ module Thinreports
       # @param [Thinreports::Core::Shape::Basic::Format] format
       # @return [Thinreports::Core::Shape::Basic::Internal]
       # @abstract
-      def init_internal
+      def init_internal(parent, format)
         raise NotImplementedError
       end
     end

@@ -21,11 +21,8 @@ module Thinreports
       # @return [Prawn::Document]
       attr_reader :pdf
 
-      # @param options (see Thinreports::Generator::PDF#initialize)
-      # @param [Hash] metadata
       # @param [String] title (nil)
       # @param [Hash] security (nil)
-      # @option metadata [String] :Title
       def initialize(title: nil, security: nil)
         @pdf = Prawn::Document.new(
           skip_page_creation: true,

@@ -147,7 +147,7 @@ module Thinreports
       end
 
       # @param [String] filename
-      # @param [Hash] secruity (see http://prawnpdf.org/api-docs/2.0/Prawn/Document/Security.html#encrypt_document-instance_method)
+      # @param [Hash] security (see http://prawnpdf.org/api-docs/2.0/Prawn/Document/Security.html#encrypt_document-instance_method)
       # @return [String]
       # @example Generate PDF data
       #   report.generate # => "%PDF-1.4...."
