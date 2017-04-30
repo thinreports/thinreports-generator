@@ -1,4 +1,4 @@
-# Thinreports Generator [![Join the chat at https://gitter.im/thinreports/thinreports-generator](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/thinreports/thinreports-generator?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Thinreports Generator
 
 [![Gem Version](https://badge.fury.io/rb/thinreports.svg)](http://badge.fury.io/rb/thinreports)
 [![](http://img.shields.io/travis/thinreports/thinreports-generator.svg?style=flat)](http://travis-ci.org/thinreports/thinreports-generator)
@@ -15,10 +15,9 @@
   * [Installation Guide](http://www.thinreports.org/documentation/getting-started/installation.html)
   * [Quick Start Guide](http://www.thinreports.org/documentation/getting-started/quickstart.html)
   * [Examples](https://github.com/thinreports/thinreports-examples)
-  * [Rails4 Example](https://github.com/thinreports/thinreports-rails4-example)
+  * [Rails5 Example](https://github.com/thinreports/thinreports-rails5-example)
   * [Changelog](https://github.com/thinreports/thinreports-generator/blob/master/CHANGELOG.md)
   * [Discussion Group](https://groups.google.com/forum/#!forum/thinreports)
-  * [![Join the chat at https://gitter.im/thinreports/thinreports-generator](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/thinreports/thinreports-generator?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Supported versions
 
