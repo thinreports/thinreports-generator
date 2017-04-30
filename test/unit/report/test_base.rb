@@ -200,45 +200,38 @@ class Thinreports::Report::TestBase < Minitest::Test
     end
   end
 
-  def test_Base_extract_options_should_return_as_report_option_the_value_which_has_report_in_a_key
-    report, _generator = Report::Base.send(:extract_options!, [{report: {layout: 'hoge.tlf'}}])
-    assert_equal report[:layout], 'hoge.tlf'
+  def test_Base_generate_with_deprecated_arguments
+    Report::Base.expects(:create).with(layout: '/path/to/layout.tlf').returns(@report)
+    @report.expects(:generate).with(
+      filename: 'result.pdf',
+      security: { owner_password: 'pass' }
+    )
+
+    Report::Base.generate(
+      report: { layout: '/path/to/layout.tlf' },
+      generator: {
+        filename: 'result.pdf',
+        security: { owner_password: 'pass' }
+      }
+    ) { |_| }
   end
 
-  def test_Base_extract_options_should_operate_an_argument_destructively
-    args = [:pdf, 'output.pdf', {report: {layout: 'foo.tlf'}}]
-    Report::Base.send(:extract_options!, args)
-    assert_equal args, [:pdf, 'output.pdf']
-  end
+  def test_Base_generate_argument_priority
+    Report::Base.expects(:create).with(layout: '/path/to/layout.tlf').returns(@report)
+    @report.expects(:generate).with(
+      filename: 'result.pdf',
+      security: { owner_password: 'pass' }
+    )
 
-  def test_Base_extract_options_should_include_the_layout_key_in_the_report_option
-    report, _generator = Report::Base.send(:extract_options!, [{layout: 'hoge.tlf'}])
-    assert_equal report[:layout], 'hoge.tlf'
-  end
-
-  def test_Base_extract_options_should_give_priority_to_the_value_of_the_layout_key_over_in_the_report_option
-    report, _generator = Report::Base.send(:extract_options!,
-                                          [{report: {layout: 'foo.tlf'}, layout: 'hoge.tlf'}])
-    assert_equal report[:layout], 'hoge.tlf'
-  end
-
-  def test_Base_extract_options_should_return_as_generator_option_the_value_which_has_generator_in_a_key
-    _report, generator = Report::Base.send(:extract_options!,
-                                          [{generator: {option: 'value'}}])
-    assert_equal generator[:option], 'value'
-  end
-
-  def test_Base_extract_options_should_give_priority_to_the_value_of_other_keys_over_in_the_generator_option
-    _report, generator = Report::Base.send(:extract_options!,
-                                          [{generator: {option: 'value1'}, option: 'value2'}])
-    assert_equal generator[:option], 'value2'
-  end
-
-  def test_Base_extract_options_should_return_all_the_values_except_the_report_option_as_a_generator_option
-    _report, generator = Report::Base.send(:extract_options!,
-                                          [{report: {layout: 'foo.tlf'}, layout: 'hoge.tlf',
-                                            generator_opt1: 'value1', generator_opt2: 'value2'}])
-    assert_equal generator.values_at(:generator_opt1, :generator_opt2),
-                 ['value1', 'value2']
+    Report::Base.generate(
+      layout: '/path/to/layout.tlf',
+      filename: 'result.pdf',
+      security: { owner_password: 'pass' },
+      report: { layout: '/path/to/deprecated.tlf' },
+      generator: {
+        filename: 'deprecated.pdf',
+        security: { owner_password: 'deprecated' }
+      }
+    ) { |_| }
   end
 end

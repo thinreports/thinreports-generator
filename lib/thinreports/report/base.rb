@@ -22,43 +22,28 @@ module Thinreports
           report
         end
 
-        # @overload generate(type, options = {}, &block)
-        #   @param [Symbol] type
-        #   @param [Hash] options
-        #   @option options [Hash] :report ({}) Options for Report.
-        #   @option options [Hash] :generator ({}) Options for Generator.
-        # @overload generate(options = {}, &block)
-        #   @param [Hash] options
-        #   @option options [Hash] :report ({}) Options for Report.
-        #   @option options [Hash] :generator ({}) Options for Generator.
+        # @param layout (see #initialize)
+        # @param filename (see #generate)
+        # @param security (see #generate)
+        # @param [Hash] report ({}) DEPRECATED. Options for Report.
+        # @param [Hash] generator ({}) DEPRECATED. Options for Generator.
         # @yield (see .create)
         # @yieldparam (see .create)
         # @return [String]
-        def generate(*args, &block)
+        def generate(layout: nil, filename: nil, security: nil, report: {}, generator: {}, &block)
           raise ArgumentError, '#generate requires a block' unless block_given?
 
-          report_opts, generator_opts = extract_options!(args)
-
-          report = create(report_opts, &block)
-          report.generate(*args.push(generator_opts))
-        end
-
-        # @param [Array] args
-        # @return [Array<Hash>]
-        def extract_options!(args)
-          if args.last.is_a?(::Hash)
-            options = args.pop
-
-            generator = options.delete(:generator) || {}
-            report    = options.delete(:report) || {}
-
-            if options.key?(:layout)
-              report[:layout] = options.delete(:layout)
-            end
-            [report, generator.merge(options)]
-          else
-            [{}, {}]
+          if report.any? || generator.any?
+            warn '[DEPRECATION] :report and :generator argument has been deprecated. ' \
+                 'Use :layout and :filename, :security argument instead.'
           end
+
+          layout ||= report[:layout]
+          filename ||= generator[:filename]
+          security ||= generator[:security]
+
+          report = create(layout: layout, &block)
+          report.generate(filename: filename, security: security)
         end
       end
 
