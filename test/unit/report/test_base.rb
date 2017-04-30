@@ -116,17 +116,11 @@ class Thinreports::Report::TestBase < Minitest::Test
     assert_equal @report.layout(:foo).filename, @layout_file.path
   end
 
-  def test_generate_with_filename
+  def test_generate
     report = Report::Base.new layout: @layout_file.path
+    report.generate filename: temp_path.join('result.pdf')
 
-    report.generate :pdf, filename: temp_path.join('result1.pdf')
-    report.generate filename: temp_path.join('result2.pdf')
-
-    assert File.exist?(temp_path.join('result1.pdf'))
-    assert File.exist?(temp_path.join('result2.pdf'))
-
-    assert_equal File.read(temp_path.join('result1.pdf')),
-                 File.read(temp_path.join('result2.pdf'))
+    assert File.exist?(temp_path.join('result.pdf'))
   end
 
   def test_page_should_return_the_current_page
@@ -198,16 +192,6 @@ class Thinreports::Report::TestBase < Minitest::Test
     assert_raises ArgumentError do
       Report::Base.create
     end
-  end
-
-  def test_Base_generate_with_filename
-    Report::Base.generate(:pdf, report: { layout: @layout_file.path },
-                          generator: { filename: temp_path.join('result1.pdf') }) {}
-    Report::Base.generate(report: { layout: @layout_file.path },
-                          generator: { filename: temp_path.join('result2.pdf') }) {}
-
-    assert_equal temp_path.join('result1.pdf').read,
-                 temp_path.join('result2.pdf').read
   end
 
   def test_Base_generate_should_raise_when_no_block_given

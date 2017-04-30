@@ -161,19 +161,15 @@ module Thinreports
         end
       end
 
-      # @overload generate(options = {})
-      #   @param [Hash] options ({})
-      #   @return [String]
-      # @overload generate(type, options = {})
-      #   This way has been DEPRECATED. Use instead #generate(options = {}).
-      #   @param [Symbol] type
-      #   @return [String]
+      # @param [Hash] options ({})
+      # @option options [String, nil] :filename
+      # @option options [Hash] :secruity
+      # @return [String]
       # @example Generate PDF data
       #   report.generate # => "%PDF-1.4...."
       # @example Create a PDF file
       #   report.generate(filename: 'foo.pdf')
-      def generate(*args)
-        options = args.last.is_a?(::Hash) ? args.pop : {}
+      def generate(options = {})
         filename = options.delete(:filename)
         generator = Thinreports::Generator::PDF.new(self, options)
 
