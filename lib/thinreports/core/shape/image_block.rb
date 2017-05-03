@@ -1,10 +1,10 @@
 module Thinreports
-  module Core::Shape
-
-    module ImageBlock
-      TYPE_NAME = 'image-block'
+  module Core
+    module Shape
+      module ImageBlock
+        TYPE_NAME = 'image-block'.freeze
+      end
     end
-
   end
 end
 

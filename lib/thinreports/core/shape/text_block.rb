@@ -1,10 +1,10 @@
 module Thinreports
-  module Core::Shape
-
-    module TextBlock
-      TYPE_NAME = 'text-block'
+  module Core
+    module Shape
+      module TextBlock
+        TYPE_NAME = 'text-block'.freeze
+      end
     end
-
   end
 end
 

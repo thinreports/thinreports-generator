@@ -27,7 +27,7 @@ class Thinreports::Core::Shape::List::TestManager < Minitest::Test
 
   def test_switch_current_should_replace_own_current_page_property_by_the_given_page
     report = create_report {|r| r.start_new_page }
-    list   = report.page.list
+    list = report.page.list
     new_page = List::Page.new(report.page, list.internal.format)
 
     list.manager.switch_current!(new_page)
@@ -37,7 +37,7 @@ class Thinreports::Core::Shape::List::TestManager < Minitest::Test
 
   def test_switch_current_should_replace_own_current_page_state_property_by_internal_property_of_the_given_page
     report = create_report {|r| r.start_new_page }
-    list   = report.page.list
+    list = report.page.list
     new_page = List::Page.new(report.page, list.internal.format)
 
     list.manager.switch_current!(new_page)
@@ -47,7 +47,7 @@ class Thinreports::Core::Shape::List::TestManager < Minitest::Test
 
   def test_switch_current_should_return_the_self
     report = create_report {|r| r.start_new_page }
-    list   = report.page.list
+    list = report.page.list
     new_page = List::Page.new(report.page, list.internal.format)
 
     assert_same list.manager.switch_current!(new_page), list.manager

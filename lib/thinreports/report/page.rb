@@ -1,6 +1,5 @@
 module Thinreports
   module Report
-
     class BlankPage
       # @example
       #   3.times do
@@ -49,8 +48,8 @@ module Thinreports
       def initialize(report, layout, options = {})
         super(options.key?(:count) ? options[:count] : true)
 
-        @report    = report
-        @layout    = layout
+        @report = report
+        @layout = layout
         @finalized = false
 
         initialize_manager(layout.format) do |f|
@@ -63,6 +62,7 @@ module Thinreports
         false
       end
 
+      # rubocop:disable Metrics/AbcSize
       def copy
         new_page = self.class.new(report, layout, count: count?)
 
@@ -84,7 +84,7 @@ module Thinreports
 
         # For list shapes.
         if at == :create
-          manager.lists.values.each {|list| list.manager.finalize }
+          manager.lists.values.each { |list| list.manager.finalize }
         end
 
         @finalized = true
@@ -94,6 +94,5 @@ module Thinreports
         @finalized
       end
     end
-
   end
 end

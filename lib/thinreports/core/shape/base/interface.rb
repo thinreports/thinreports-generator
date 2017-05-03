@@ -1,36 +1,39 @@
 module Thinreports
-  module Core::Shape
+  module Core
+    module Shape
+      module Base
+        # @abstract
+        class Interface
+          include Utils
+          extend  Forwardable
 
-    # @abstract
-    class Base::Interface
-      include Utils
-      extend  Forwardable
+          def self.internal_delegators(*args)
+            def_delegators :internal, *args
+          end
+          private_class_method :internal_delegators
 
-      def self.internal_delegators(*args)
-        def_delegators :internal, *args
-      end
-      private_class_method :internal_delegators
+          attr_reader :internal
 
-      attr_reader :internal
+          def initialize(parent, format, internal = nil)
+            @internal = internal || init_internal(parent, format)
+          end
 
-      def initialize(parent, format, internal = nil)
-        @internal = internal || init_internal(parent, format)
-      end
+          def copy(parent)
+            self.class.new(parent, internal.format, internal.copy(parent))
+          end
 
-      def copy(parent)
-        self.class.new(parent, internal.format, internal.copy(parent))
-      end
+          private
 
-    private
-
-      # @param [Thinreports::Report::Page, Thinreports::Core::Shape::List::SectionInterface] parent
-      # @param [Thinreports::Core::Shape::Basic::Format] format
-      # @return [Thinreports::Core::Shape::Basic::Internal]
-      # @abstract
-      def init_internal(parent, format)
-        raise NotImplementedError
+          # @param [Thinreports::Report::Page, Thinreports::Core::Shape::List::SectionInterface] parent
+          # @param [Thinreports::Core::Shape::Basic::Format] format
+          # @return [Thinreports::Core::Shape::Basic::Internal]
+          # @abstract
+          # rubocop:disable Lint/UnusedMethodArgument
+          def init_internal(parent, format)
+            raise NotImplementedError
+          end
+        end
       end
     end
-
   end
 end

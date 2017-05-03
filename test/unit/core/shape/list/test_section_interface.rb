@@ -60,7 +60,7 @@ class Thinreports::Core::Shape::List::TestSectionInterface < Minitest::Test
   end
 
   def copied_list(list, &block)
-    tblock     = Thinreports::Core::Shape::TextBlock
+    tblock = Thinreports::Core::Shape::TextBlock
     new_parent = @report.start_new_page
 
     %w( foo bar hoge ).each do |id|

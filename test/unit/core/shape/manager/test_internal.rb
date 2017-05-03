@@ -7,8 +7,8 @@ class Thinreports::Core::Shape::Manager::TestInternal < Minitest::Test
   Shape = Thinreports::Core::Shape
 
   def create_shape_format(type, id, other_config = {})
-    Shape::Format(type).new({'id'      => id,
-                             'type'    => type,
+    Shape::Format(type).new({'id' => id,
+                             'type' => type,
                              'display' => true}.merge(other_config))
   end
 

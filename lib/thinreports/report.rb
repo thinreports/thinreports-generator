@@ -1,5 +1,4 @@
 module Thinreports
-
   module Report
     # @see Thinreports::Report::Base#initialize
     def self.new(*args)
@@ -16,7 +15,6 @@ module Thinreports
       Base.generate(*args, &block)
     end
   end
-
 end
 
 require 'thinreports/report/base'

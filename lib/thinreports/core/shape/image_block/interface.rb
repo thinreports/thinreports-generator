@@ -1,19 +1,21 @@
 module Thinreports
-  module Core::Shape
+  module Core
+    module Shape
+      module ImageBlock
+        class Interface < Basic::BlockInterface
+          # @see #value
+          alias src value
+          # @see #value=
+          alias src= value=
 
-    class ImageBlock::Interface < Basic::BlockInterface
-      # @see #value
-      alias_method :src, :value
-      # @see #value=
-      alias_method :src=, :value=
+          private
 
-    private
-
-      # @see Thinreports::Core::Shape::Base::Interface#init_internal
-      def init_internal(parent, format)
-        ImageBlock::Internal.new(parent, format)
+          # @see Thinreports::Core::Shape::Base::Interface#init_internal
+          def init_internal(parent, format)
+            ImageBlock::Internal.new(parent, format)
+          end
+        end
       end
     end
-
   end
 end

@@ -1,13 +1,15 @@
 module Thinreports
-  module Core::Shape
+  module Core
+    module Shape
+      module Basic
+        class Format < Core::Format::Base
+          include Utils
 
-    class Basic::Format < Core::Format::Base
-      include Utils
-
-      config_reader :type, :id
-      config_reader :style
-      config_checker true, :display
+          config_reader :type, :id
+          config_reader :style
+          config_checker true, :display
+        end
+      end
     end
-
   end
 end

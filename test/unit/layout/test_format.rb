@@ -25,7 +25,7 @@ class Thinreports::Layout::TestFormat < Minitest::Test
     ]
   }
 
-  Shape  = Thinreports::Core::Shape
+  Shape = Thinreports::Core::Shape
   Layout = Thinreports::Layout
 
   def test_attribute_readers

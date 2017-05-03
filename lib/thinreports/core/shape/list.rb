@@ -1,10 +1,10 @@
 module Thinreports
-  module Core::Shape
-
-    module List
-      TYPE_NAME = 'list'
+  module Core
+    module Shape
+      module List
+        TYPE_NAME = 'list'.freeze
+      end
     end
-
   end
 end
 

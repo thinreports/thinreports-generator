@@ -3,6 +3,7 @@ require 'rexml/document'
 
 module Thinreports
   module Layout
+    # rubocop:disable Metrics/ClassLength
     class LegacySchema
       include Utils
 
@@ -14,6 +15,7 @@ module Thinreports
         normalize_svg!(@legacy_svg)
       end
 
+      # rubocop:disable Metrics/AbcSize
       def upgrade
         config = legacy_schema['config']
         page_config = config['page']
@@ -26,7 +28,12 @@ module Thinreports
             'width' => page_config['width'].to_f,
             'height' => page_config['height'].to_f,
             'orientation' => page_config['orientation'],
-            'margin' => page_config.values_at('margin-top', 'margin-right', 'margin-bottom', 'margin-left').map(&:to_f)
+            'margin' => page_config.values_at(
+              'margin-top',
+              'margin-right',
+              'margin-bottom',
+              'margin-left'
+            ).map(&:to_f)
           },
           'items' => item_schemas
         }
@@ -39,6 +46,7 @@ module Thinreports
         build_item_schemas_from_svg(svg.elements['/svg/g'])
       end
 
+      # rubocop:disable Metrics/CyclomaticComplexity
       def build_item_schemas_from_svg(svg_elements)
         return [] unless svg_elements
 
@@ -76,7 +84,7 @@ module Thinreports
           'display' => display(attributes['x-display']),
           'texts' => texts,
           'style' => {
-            'font-family' => [ attributes['font-family'] ],
+            'font-family' => [attributes['font-family']],
             'font-size' => attributes['font-size'].to_f,
             'color' => attributes['fill'],
             'font-style' => font_style(attributes),
@@ -142,7 +150,7 @@ module Thinreports
       end
 
       def image_item_schema(attributes)
-        _, image_type, image_data = attributes['xlink:href'].match(%r|^data:(image/[a-z]+?);base64,(.+)|).to_a
+        _, image_type, image_data = attributes['xlink:href'].match(%r{^data:(image/[a-z]+?);base64,(.+)}).to_a
 
         {
           'id' => attributes['x-id'],
@@ -171,7 +179,7 @@ module Thinreports
           'target' => attributes['x-target'],
           'display' => display(attributes['x-display']),
           'style' => {
-            'font-family' => [ attributes['font-family'] ],
+            'font-family' => [attributes['font-family']],
             'font-size' => attributes['font-size'].to_f,
             'color' => attributes['fill'],
             'font-style' => font_style(attributes),
@@ -233,7 +241,7 @@ module Thinreports
           'format' => text_format,
           'reference-id' => attributes['x-ref-id'],
           'style' => {
-            'font-family' => [ attributes['font-family'] ],
+            'font-family' => [attributes['font-family']],
             'font-size' => attributes['font-size'].to_f,
             'color' => attributes['fill'],
             'font-style' => font_style(attributes),

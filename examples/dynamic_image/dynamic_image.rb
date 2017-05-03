@@ -1,8 +1,8 @@
 require 'open-uri'
 
 example :dynamic_image, 'Show images dynamically' do
-  image50x50    = resource('img50x50.png')
-  image200x100  = resource('img200x100.png')
+  image50x50 = resource('img50x50.png')
+  image200x100 = resource('img200x100.png')
 
   Thinreports::Report.generate filename: output_filename do |r|
     r.use_layout(layout_filename)

@@ -1,27 +1,29 @@
 module Thinreports
-  module Core::Shape
+  module Core
+    module Shape
+      module Manager
+        class Format < Core::Format::Base
+          # @return [Symbol, Integer]
+          attr_reader :identifier
 
-    class Manager::Format < Core::Format::Base
-      # @return [Symbol, Integer]
-      attr_reader :identifier
+          def initialize(config, id = nil, &block)
+            super(config, &block)
+            @identifier = id || object_id
+          end
 
-      def initialize(config, id = nil, &block)
-        super(config, &block)
-        @identifier = id || self.object_id
-      end
+          def find_shape(id)
+            shapes[id]
+          end
 
-      def find_shape(id)
-        shapes[id]
-      end
+          def has_shape?(id)
+            shapes.key?(id)
+          end
 
-      def has_shape?(id)
-        shapes.key?(id)
-      end
-
-      def shapes
-        @shapes ||= {}
+          def shapes
+            @shapes ||= {}
+          end
+        end
       end
     end
-
   end
 end

@@ -1,8 +1,7 @@
 module Thinreports
   module Layout
-
     class Base
-      EXT_NAME = 'tlf'
+      EXT_NAME = 'tlf'.freeze
       include Utils
 
       class << self
@@ -11,7 +10,7 @@ module Thinreports
         # @raise [Thinreports::Errors::InvalidLayoutFormat]
         # @raise [Thinreports::Errors::IncompatibleLayoutFormat]
         def load_format(filename)
-          filename += ".#{EXT_NAME}" unless filename =~/\.#{EXT_NAME}$/
+          filename += ".#{EXT_NAME}" unless filename =~ /\.#{EXT_NAME}$/
 
           unless File.exist?(filename)
             raise Thinreports::Errors::LayoutFileNotFound
@@ -34,8 +33,8 @@ module Thinreports
       # @option options [Symbol] :id (nil)
       def initialize(filename, options = {})
         @filename = filename
-        @format   = self.class.load_format(filename)
-        @id       = options[:id]
+        @format = self.class.load_format(filename)
+        @id = options[:id]
       end
 
       # @return [Boolean] Return the true if is default layout.
@@ -43,6 +42,5 @@ module Thinreports
         @id.nil?
       end
     end
-
   end
 end
