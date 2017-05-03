@@ -3,12 +3,12 @@ require 'json'
 module Thinreports
   module Layout
     class Format < Core::Shape::Manager::Format
-      config_reader last_version: %w( version )
-      config_reader report_title: %w( title )
-      config_reader page_paper_type: %w( report paper-type ),
-                    page_width: %w( report width ),
-                    page_height: %w( report height ),
-                    page_orientation: %w( report orientation )
+      config_reader last_version: %w[version]
+      config_reader report_title: %w[title]
+      config_reader page_paper_type: %w[report paper-type],
+                    page_width: %w[report width],
+                    page_height: %w[report height],
+                    page_orientation: %w[report orientation]
 
       class << self
         def build(filename)
@@ -21,7 +21,8 @@ module Thinreports
           end
 
           if schema['version'] < '0.9.0'
-            warn '[DEPRECATION] Support for the layout file with old format that generated with Editor 0.8 or lower will be dropped in Thinreports 1.1.' \
+            warn '[DEPRECATION] Support for the layout file with old format' \
+                 ' that generated with Editor 0.8 or lower will be dropped in Thinreports 1.1.' \
                  ' Please convert to new layout format using Thinreports Editor 0.9 or 1.0.'
             schema = Layout::LegacySchema.new(schema).upgrade
           end
@@ -30,7 +31,7 @@ module Thinreports
         end
 
         def read_file(filename)
-          File.open(filename, 'r:UTF-8') {|f| f.read }
+          File.read(filename, encoding: 'UTF-8')
         end
       end
 
@@ -52,7 +53,7 @@ module Thinreports
           next if id.empty? && type != 'page-number'
 
           item = Core::Shape::Format(type).new(item_schema)
-          self.shapes[item.id.to_sym] = item
+          shapes[item.id.to_sym] = item
         end
       end
     end

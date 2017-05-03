@@ -10,7 +10,7 @@ namespace :examples do
   desc 'Run all examples'
   task all: :_init do
     require_relative 'examples/helper'
-    Dir['examples/*/*.rb'].each {|f| require_relative f }
+    Dir['examples/*/*.rb'].each { |f| require_relative f }
   end
 
   Dir['examples/*/*.rb'].each do |f|
@@ -24,7 +24,7 @@ namespace :examples do
   end
 
   task :_init do
-    $:.push File.expand_path('../lib', __FILE__)
+    $LOAD_PATH.push File.expand_path('../lib', __FILE__)
   end
 end
 

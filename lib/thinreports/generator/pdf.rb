@@ -2,7 +2,6 @@ require 'prawn'
 
 module Thinreports
   module Generator
-
     class PDF
       # @return [Thinreports::Report::Base]
       attr_reader :report
@@ -30,7 +29,7 @@ module Thinreports
         report.default_layout
       end
 
-    private
+      private
 
       def draw_report
         report.pages.each do |page|
@@ -51,7 +50,6 @@ module Thinreports
         @drawers[format.identifier] ||= Drawer::Page.new(@document, format)
       end
     end
-
   end
 end
 

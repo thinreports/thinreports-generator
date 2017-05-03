@@ -1,37 +1,37 @@
 module Thinreports
-  module Core::Shape::TextBlock
+  module Core
+    module Shape
+      module TextBlock
+        module Formatter
+          class Basic
+            include Utils
 
-    class Formatter::Basic
-      include Utils
+            attr_reader :format
 
-      attr_reader :format
+            def initialize(format)
+              @format = format
+            end
 
-      def initialize(format)
-        @format = format
-      end
+            def apply(value)
+              value = apply_format_to(value) if applicable?(value)
 
-      def apply(value)
-        if applicable?(value)
-          value = apply_format_to(value)
+              return value if blank_value?(format.format_base)
+
+              format.format_base.gsub(/\{value\}/, value.to_s)
+            end
+
+            private
+
+            def apply_format_to(value)
+              value
+            end
+
+            def applicable?(_value)
+              true
+            end
+          end
         end
-
-        unless blank_value?(format.format_base)
-          format.format_base.gsub(/\{value\}/, value.to_s)
-        else
-          value
-        end
-      end
-
-    private
-
-      def apply_format_to(value)
-        value
-      end
-
-      def applicable?(_value)
-        true
       end
     end
-
   end
 end

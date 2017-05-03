@@ -1,12 +1,10 @@
 module Thinreports
-
   module Layout
     # @see Thinreports::Layout::Base#initialize
     def self.new(filename, options = {})
       Base.new(filename, options)
     end
   end
-
 end
 
 require 'thinreports/layout/version'

@@ -1,7 +1,7 @@
 module Thinreports
   module Layout
-
     module Version
+      # rubocop:disable Style/MutableConstant
       REQUIRED_RULES = ['>= 0.8.0', '< 1.0.0']
 
       # @param [String] version
@@ -35,6 +35,5 @@ module Thinreports
         end
       end
     end
-
   end
 end

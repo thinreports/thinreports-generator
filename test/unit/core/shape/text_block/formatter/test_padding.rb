@@ -32,7 +32,7 @@ class Thinreports::Core::Shape::TextBlock::Formatter::TestPadding < Minitest::Te
   def test_apply_padding_formats_with_right_direction
     formatter = init_formatter(format_padding_length: 5,
                                format_padding_char: '0',
-                               :format_padding_rdir?  => true)
+                               :format_padding_rdir? => true)
 
     assert_equal formatter.apply(123), '12300'
   end

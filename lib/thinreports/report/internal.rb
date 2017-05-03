@@ -1,6 +1,5 @@
 module Thinreports
   module Report
-
     class Internal
       attr_reader :pages
       attr_reader :page
@@ -17,9 +16,9 @@ module Thinreports
         @default_layout = options[:layout] ? init_layout(options[:layout]) : nil
 
         @layout_registry = {}
-        @finalized  = false
-        @pages      = []
-        @page       = nil
+        @finalized = false
+        @pages = []
+        @page = nil
         @page_count = 0
 
         @page_create_handler = nil
@@ -50,10 +49,10 @@ module Thinreports
       end
 
       def finalize
-        unless finalized?
-          finalize_current_page
-          @finalized = true
-        end
+        return if finalized?
+
+        finalize_current_page
+        @finalized = true
       end
 
       def finalized?
@@ -77,7 +76,7 @@ module Thinreports
         layout
       end
 
-    private
+      private
 
       def insert_page(new_page)
         @pages << new_page
@@ -100,6 +99,5 @@ module Thinreports
         Thinreports::Layout.new(filename, id: id)
       end
     end
-
   end
 end

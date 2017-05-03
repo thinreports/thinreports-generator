@@ -1,13 +1,12 @@
 module Thinreports
-
   module Errors
     class Basic < ::StandardError
     end
 
     class UnknownShapeStyleName < Basic
       def initialize(style, availables)
-        super("The specified style name, '#{style}', cannot be used. " +
-              "The available styles are #{availables.map{|s| ":#{s}"}.join(', ')}.")
+        super("The specified style name, '#{style}', cannot be used. " \
+              "The available styles are #{availables.map { |s| ":#{s}" }.join(', ')}.")
       end
     end
 
@@ -49,12 +48,11 @@ module Thinreports
 
     class IncompatibleLayoutFormat < Basic
       def initialize(filename, fileversion, required_rules)
-        super("Generator #{Thinreports::VERSION} can not be built this file, " +
-              "'#{File.basename(filename)}'. " +
-              "This file is updated in the Editor of version '#{fileversion}', " +
+        super("Generator #{Thinreports::VERSION} can not be built this file, " \
+              "'#{File.basename(filename)}'. " \
+              "This file is updated in the Editor of version '#{fileversion}', " \
               "but Generator requires version #{required_rules}.")
       end
     end
   end
-
 end

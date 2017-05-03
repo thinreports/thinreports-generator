@@ -1,10 +1,10 @@
 module Thinreports
-  module Core::Shape
-
-    module Basic
-      TYPE_NAMES = %w( line rect ellipse image )
+  module Core
+    module Shape
+      module Basic
+        TYPE_NAMES = %w[line rect ellipse image].freeze
+      end
     end
-
   end
 end
 

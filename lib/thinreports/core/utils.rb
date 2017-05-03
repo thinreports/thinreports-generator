@@ -4,12 +4,13 @@ module Thinreports
       klass.extend self
     end
 
+    # rubocop:disable Style/RescueModifier
     def deep_copy(src)
       case src
       when Hash
-        src.inject({}) {|h, (k, v)| h[k] = (v.dup rescue v); h }
+        src.each_with_object({}) { |(k, v), h| h[k] = v.dup rescue v }
       when Array
-        src.map {|a| a.dup rescue a }
+        src.map { |a| a.dup rescue a }
       else
         raise ArgumentError
       end

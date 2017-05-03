@@ -1,9 +1,11 @@
 module Thinreports
-  module Core::Shape
-
-    class Basic::BlockFormat < Basic::Format
-      config_reader :value
+  module Core
+    module Shape
+      module Basic
+        class BlockFormat < Basic::Format
+          config_reader :value
+        end
+      end
     end
-
   end
 end

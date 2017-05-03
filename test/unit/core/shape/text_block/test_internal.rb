@@ -11,7 +11,7 @@ class Thinreports::Core::Shape::TextBlock::TestInternal < Minitest::Test
     report.start_new_page do |page|
       # Add to force TextBlock shape.
       page.manager.format.shapes[:foo] = TextBlock::Format.new('type' => 'text-block',
-                                                               'id'   => 'foo')
+                                                               'id' => 'foo')
       # Set value to TextBlock.
       page.item(:foo).value('foo value')
     end
@@ -64,7 +64,7 @@ class Thinreports::Core::Shape::TextBlock::TestInternal < Minitest::Test
   end
 
   def test_real_value_should_return_the_formatted_value_when_tblock_has_any_format
-    tblock = create_internal('format' => {'type'     => 'datetime',
+    tblock = create_internal('format' => {'type' => 'datetime',
                                           'datetime' => {'format' => '%Y/%m/%d'}})
     tblock.write_value(value = Time.now)
 

@@ -1,10 +1,10 @@
 module Thinreports
-  module Core::Shape
-
-    module PageNumber
-      TYPE_NAME = 'page-number'
+  module Core
+    module Shape
+      module PageNumber
+        TYPE_NAME = 'page-number'.freeze
+      end
     end
-
   end
 end
 

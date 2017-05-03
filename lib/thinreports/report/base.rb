@@ -1,6 +1,5 @@
 module Thinreports
   module Report
-
     class Base
       extend  Forwardable
       include Utils
@@ -12,9 +11,8 @@ module Thinreports
         # @yieldparam [Thinreports::Report::Base] report
         # @return [Thinreports::Report::Base]
         def create(options = {}, &block)
-          unless block_given?
-            raise ArgumentError, '#create requires a block'
-          end
+          raise ArgumentError, '#create requires a block' unless block_given?
+
           report = new(options)
           call_block_in(report, &block)
           report.finalize
@@ -133,7 +131,7 @@ module Thinreports
       def add_blank_page(options = {})
         internal.add_page(Report::BlankPage.new(options[:count]))
       end
-      alias_method :blank_page, :add_blank_page
+      alias blank_page add_blank_page
 
       # @param [Symbol, nil] id
       # @return [Thinreports::Layout::Base]
@@ -165,6 +163,5 @@ module Thinreports
 
       def_delegators :internal, :finalize, :finalized?
     end
-
   end
 end
