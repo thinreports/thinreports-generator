@@ -1,0 +1,41 @@
+AllCops:
+  Exclude:
+    - 'examples/**/*'
+    - 'test/**/*'
+    - 'thinreports.gemspec'
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/ParameterLists:
+  Max: 6
+
+Performance/RedundantBlockCall:
+  Enabled: false
+
+Performance/RegexpMatch:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/FormatString:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/NumericPredicate:
+  Enabled: false
+
+Style/PerlBackrefs:
+  Enabled: false
+
+Style/PredicateName:
+  Enabled: false
+
+Style/SafeNavigation:
+  Enabled: false
