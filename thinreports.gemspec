@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 2.1.0'
 
   s.files = `git ls-files`.split($\)
-  s.require_paths = 'lib'
+  s.require_path = 'lib'
 
   s.add_dependency 'prawn', '~> 2.2.0'
 
