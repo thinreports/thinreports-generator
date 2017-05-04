@@ -28,12 +28,12 @@ module Thinreports
   end
 end
 
-require 'thinreports/core/shape/style'
-require 'thinreports/core/shape/manager'
-require 'thinreports/core/shape/base'
-require 'thinreports/core/shape/basic'
-require 'thinreports/core/shape/text'
-require 'thinreports/core/shape/text_block'
-require 'thinreports/core/shape/image_block'
-require 'thinreports/core/shape/list'
-require 'thinreports/core/shape/page_number'
+require_relative 'shape/style'
+require_relative 'shape/manager'
+require_relative 'shape/base'
+require_relative 'shape/basic'
+require_relative 'shape/text'
+require_relative 'shape/text_block'
+require_relative 'shape/image_block'
+require_relative 'shape/list'
+require_relative 'shape/page_number'

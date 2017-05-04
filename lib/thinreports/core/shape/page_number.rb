@@ -8,6 +8,6 @@ module Thinreports
   end
 end
 
-require 'thinreports/core/shape/page_number/format'
-require 'thinreports/core/shape/page_number/internal'
-require 'thinreports/core/shape/page_number/interface'
+require_relative 'page_number/format'
+require_relative 'page_number/internal'
+require_relative 'page_number/interface'

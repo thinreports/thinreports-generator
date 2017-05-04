@@ -8,12 +8,12 @@ module Thinreports
   end
 end
 
-require 'thinreports/core/shape/list/format'
-require 'thinreports/core/shape/list/manager'
+require_relative 'list/format'
+require_relative 'list/manager'
 
-require 'thinreports/core/shape/list/page'
-require 'thinreports/core/shape/list/page_state'
+require_relative 'list/page'
+require_relative 'list/page_state'
 
-require 'thinreports/core/shape/list/section_format'
-require 'thinreports/core/shape/list/section_interface'
-require 'thinreports/core/shape/list/section_internal'
+require_relative 'list/section_format'
+require_relative 'list/section_interface'
+require_relative 'list/section_internal'

@@ -1,4 +1,4 @@
-require 'thinreports/core/shape/style/base'
-require 'thinreports/core/shape/style/basic'
-require 'thinreports/core/shape/style/graphic'
-require 'thinreports/core/shape/style/text'
+require_relative 'style/base'
+require_relative 'style/basic'
+require_relative 'style/graphic'
+require_relative 'style/text'

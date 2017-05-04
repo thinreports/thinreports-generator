@@ -8,6 +8,6 @@ module Thinreports
   end
 end
 
-require 'thinreports/core/shape/text/format'
-require 'thinreports/core/shape/text/internal'
-require 'thinreports/core/shape/text/interface'
+require_relative 'text/format'
+require_relative 'text/internal'
+require_relative 'text/interface'

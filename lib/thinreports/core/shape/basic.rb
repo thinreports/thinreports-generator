@@ -8,9 +8,9 @@ module Thinreports
   end
 end
 
-require 'thinreports/core/shape/basic/format'
-require 'thinreports/core/shape/basic/internal'
-require 'thinreports/core/shape/basic/interface'
-require 'thinreports/core/shape/basic/block_format'
-require 'thinreports/core/shape/basic/block_internal'
-require 'thinreports/core/shape/basic/block_interface'
+require_relative 'basic/format'
+require_relative 'basic/internal'
+require_relative 'basic/interface'
+require_relative 'basic/block_format'
+require_relative 'basic/block_internal'
+require_relative 'basic/block_interface'

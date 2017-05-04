@@ -1,5 +1,6 @@
-$LOAD_PATH.unshift(File.expand_path('../lib/', __FILE__))
-require 'thinreports/version'
+rootdir = File.expand_path(File.dirname(__FILE__))
+
+require "#{rootdir}/lib/thinreports/version"
 
 Gem::Specification.new do |s|
   s.name        = 'thinreports'

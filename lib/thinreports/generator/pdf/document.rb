@@ -1,9 +1,9 @@
-require 'thinreports/generator/pdf/document/font'
-require 'thinreports/generator/pdf/document/parse_color'
-require 'thinreports/generator/pdf/document/graphics'
-require 'thinreports/generator/pdf/document/draw_shape'
-require 'thinreports/generator/pdf/document/draw_template_items'
-require 'thinreports/generator/pdf/document/page'
+require_relative 'document/font'
+require_relative 'document/parse_color'
+require_relative 'document/graphics'
+require_relative 'document/draw_shape'
+require_relative 'document/draw_template_items'
+require_relative 'document/page'
 
 module Thinreports
   module Generator

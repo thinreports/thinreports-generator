@@ -53,9 +53,9 @@ module Thinreports
   end
 end
 
-require 'thinreports/generator/pdf/prawn_ext'
-require 'thinreports/generator/pdf/document'
-require 'thinreports/generator/pdf/drawer/base'
-require 'thinreports/generator/pdf/drawer/page'
-require 'thinreports/generator/pdf/drawer/list'
-require 'thinreports/generator/pdf/drawer/list_section'
+require_relative 'pdf/prawn_ext'
+require_relative 'pdf/document'
+require_relative 'pdf/drawer/base'
+require_relative 'pdf/drawer/page'
+require_relative 'pdf/drawer/list'
+require_relative 'pdf/drawer/list_section'

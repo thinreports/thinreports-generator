@@ -32,7 +32,7 @@ module Thinreports
   end
 end
 
-require 'thinreports/generator/pdf/document/graphics/attributes'
-require 'thinreports/generator/pdf/document/graphics/basic'
-require 'thinreports/generator/pdf/document/graphics/image'
-require 'thinreports/generator/pdf/document/graphics/text'
+require_relative 'graphics/attributes'
+require_relative 'graphics/basic'
+require_relative 'graphics/image'
+require_relative 'graphics/text'

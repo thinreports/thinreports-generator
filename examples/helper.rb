@@ -1,5 +1,5 @@
 require 'pathname'
-require 'thinreports'
+require_relative '../lib/thinreports'
 
 class Thinreports::Example
   ROOT = Pathname.new File.expand_path('..', __FILE__)

@@ -7,7 +7,7 @@ module Thinreports
   end
 end
 
-require 'thinreports/layout/version'
-require 'thinreports/layout/base'
-require 'thinreports/layout/format'
-require 'thinreports/layout/legacy_schema'
+require_relative 'layout/version'
+require_relative 'layout/base'
+require_relative 'layout/format'
+require_relative 'layout/legacy_schema'

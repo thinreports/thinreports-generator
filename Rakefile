@@ -11,7 +11,7 @@ end
 
 namespace :examples do
   desc 'Run all examples'
-  task all: :_init do
+  task :all do
     require_relative 'examples/helper'
     Dir['examples/*/*.rb'].each { |f| require_relative f }
   end
@@ -24,10 +24,6 @@ namespace :examples do
       require_relative 'examples/helper'
       require_relative "examples/#{casename}/#{casename}"
     end
-  end
-
-  task :_init do
-    $LOAD_PATH.push File.expand_path('../lib', __FILE__)
   end
 end
 

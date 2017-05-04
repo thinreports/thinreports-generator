@@ -17,6 +17,6 @@ module Thinreports
   end
 end
 
-require 'thinreports/report/base'
-require 'thinreports/report/internal'
-require 'thinreports/report/page'
+require_relative 'report/base'
+require_relative 'report/internal'
+require_relative 'report/page'

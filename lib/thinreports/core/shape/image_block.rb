@@ -8,6 +8,6 @@ module Thinreports
   end
 end
 
-require 'thinreports/core/shape/image_block/format'
-require 'thinreports/core/shape/image_block/internal'
-require 'thinreports/core/shape/image_block/interface'
+require_relative 'image_block/format'
+require_relative 'image_block/internal'
+require_relative 'image_block/interface'

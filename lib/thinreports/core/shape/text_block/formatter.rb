@@ -26,7 +26,7 @@ module Thinreports
   end
 end
 
-require 'thinreports/core/shape/text_block/formatter/basic'
-require 'thinreports/core/shape/text_block/formatter/datetime'
-require 'thinreports/core/shape/text_block/formatter/padding'
-require 'thinreports/core/shape/text_block/formatter/number'
+require_relative 'formatter/basic'
+require_relative 'formatter/datetime'
+require_relative 'formatter/padding'
+require_relative 'formatter/number'

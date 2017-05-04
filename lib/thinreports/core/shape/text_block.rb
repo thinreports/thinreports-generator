@@ -8,7 +8,7 @@ module Thinreports
   end
 end
 
-require 'thinreports/core/shape/text_block/format'
-require 'thinreports/core/shape/text_block/internal'
-require 'thinreports/core/shape/text_block/interface'
-require 'thinreports/core/shape/text_block/formatter'
+require_relative 'text_block/format'
+require_relative 'text_block/internal'
+require_relative 'text_block/interface'
+require_relative 'text_block/formatter'
