@@ -1,5 +1,9 @@
+require 'pathname'
+
 module Thinreports
-  ROOT = File.expand_path File.join(File.dirname(__FILE__), '..')
+  def self.root
+    @root ||= Pathname.new(__FILE__).join('..', '..')
+  end
 end
 
 require 'thinreports/version'

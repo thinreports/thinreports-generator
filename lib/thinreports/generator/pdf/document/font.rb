@@ -2,13 +2,13 @@ module Thinreports
   module Generator
     class PDF
       module Font
-        FONT_STORE = File.join(Thinreports::ROOT, 'fonts')
+        FONT_STORE = Thinreports.root.join('fonts')
 
         BUILTIN_FONTS = {
-          'IPAMincho'  => { normal: File.join(FONT_STORE, 'ipam.ttf') },
-          'IPAPMincho' => { normal: File.join(FONT_STORE, 'ipamp.ttf') },
-          'IPAGothic'  => { normal: File.join(FONT_STORE, 'ipag.ttf') },
-          'IPAPGothic' => { normal: File.join(FONT_STORE, 'ipagp.ttf') }
+          'IPAMincho'  => { normal: FONT_STORE.join('ipam.ttf').to_s },
+          'IPAPMincho' => { normal: FONT_STORE.join('ipamp.ttf').to_s },
+          'IPAGothic'  => { normal: FONT_STORE.join('ipag.ttf').to_s },
+          'IPAPGothic' => { normal: FONT_STORE.join('ipagp.ttf').to_s }
         }.freeze
 
         DEFAULT_FALLBACK_FONTS = %w[Helvetica IPAMincho].freeze
