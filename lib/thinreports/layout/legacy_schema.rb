@@ -12,7 +12,7 @@ module Thinreports
         @legacy_svg = legacy_schema['svg'].dup
         @legacy_item_schemas = extract_legacy_item_schemas(legacy_svg)
 
-        normalize_svg!(@legacy_svg)
+        @legacy_svg = cleanup_svg(@legacy_svg)
       end
 
       # rubocop:disable Metrics/AbcSize
@@ -374,9 +374,9 @@ module Thinreports
         items
       end
 
-      def normalize_svg!(svg)
-        svg.gsub!(/<!--SHAPE.*?SHAPE-->/, '')
-        svg.gsub!(/<!--LAYOUT(.*?)LAYOUT-->/) { $1 }
+      def cleanup_svg(svg)
+        cleaned_svg = svg.gsub(/<!--SHAPE.*?SHAPE-->/, '')
+        cleaned_svg.gsub(/<!--LAYOUT(.*?)LAYOUT-->/) { $1 }
       end
     end
   end

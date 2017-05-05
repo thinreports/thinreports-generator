@@ -558,11 +558,10 @@ SVG
     )
   end
 
-  def test_normalize_svg
+  def test_cleanup_svg
     svg = '<!--SHAPE{"id":"item1"}SHAPE--><!--LAYOUT<rect id="item2"/>LAYOUT--><!--SHAPE{"id":"item2"}SHAPE-->'
 
-    layout_legacy_schema.normalize_svg!(svg)
-    assert_equal '<rect id="item2"/>', svg
+    assert_equal '<rect id="item2"/>', layout_legacy_schema.cleanup_svg(svg)
   end
 
   private
