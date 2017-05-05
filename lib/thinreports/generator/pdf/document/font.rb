@@ -11,7 +11,7 @@ module Thinreports
           'IPAPGothic' => { normal: FONT_STORE.join('ipagp.ttf').to_s }
         }.freeze
 
-        DEFAULT_FALLBACK_FONTS = %w[Helvetica IPAMincho].freeze
+        DEFAULT_FALLBACK_FONTS = %w[IPAMincho].freeze
 
         PRAWN_BUINTIN_FONT_ALIASES = {
           'Courier New' => 'Courier',

@@ -24,7 +24,7 @@ class Thinreports::Generator::PDF::TestFont < Minitest::Test
                    pdf.font_families[original_font]
     end
 
-    assert_equal Font::DEFAULT_FALLBACK_FONTS, pdf.fallback_fonts[-2..-1]
+    assert_equal Font::DEFAULT_FALLBACK_FONTS, %w[IPAMincho]
   end
 
   def test_setup_fonts_with_custom_fallback_fonts
