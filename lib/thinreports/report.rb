@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Thinreports
   module Report
     # @see Thinreports::Report::Base#initialize

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Thinreports
   module Errors
     class Basic < ::StandardError

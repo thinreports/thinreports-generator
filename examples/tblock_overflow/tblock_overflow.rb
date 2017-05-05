@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 example :tblock_overflow, 'Control overflowing the Tblock' do
   report = Thinreports::Report.new layout: layout_filename
   report.start_new_page do |page|

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Thinreports
   module SchemaHelper
     BASIC_SCHEMA_JSON = <<-EOF

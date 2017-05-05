@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 example :list_events, 'Basic list events' do |t|
   Thinreports::Report.generate filename: t.output_filename do |report|
     report.use_layout t.layout_filename

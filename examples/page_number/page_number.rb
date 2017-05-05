@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 example :page_number, 'Draw page-number automatically each pages' do |t|
   # Basic PageNumber
   report = Thinreports::Report.new layout: t.layout_filename

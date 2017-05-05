@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Thinreports
   # @yield [config]
   # @yieldparam [Thinreports::Configuration] config

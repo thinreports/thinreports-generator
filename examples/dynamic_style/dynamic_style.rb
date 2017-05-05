@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 example :dynamic_style, 'Change styles of the object dynamically' do |t|
   image = t.resource('image.png')
   setup_values = Proc.new do |page|

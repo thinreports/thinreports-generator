@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class Thinreports::Core::Shape::Manager::TestTarget < Minitest::Test

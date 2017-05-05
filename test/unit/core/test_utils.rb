@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class Thinreports::Core::TestShape < Minitest::Test
@@ -8,7 +10,7 @@ class Thinreports::Core::TestShape < Minitest::Test
     expected = '123'
     assert_same expected, call_block_in(expected)
 
-    assert_equal '321', call_block_in('123', &proc { reverse! })
+    assert_equal [1, 2, 3], call_block_in([2, 1, 3], &proc { sort! })
     assert_equal [1, 2, 3], call_block_in([2, 1, 3], &proc { |a| a.sort! })
   end
 

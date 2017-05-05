@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'pdf/inspector'
 
 example :typeB_page_size, 'Generate type B(JIS/ISO) size pages' do |t|

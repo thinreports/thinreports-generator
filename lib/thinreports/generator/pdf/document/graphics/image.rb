@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'tempfile'
 require 'base64'
 require 'digest/md5'

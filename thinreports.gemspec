@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 rootdir = File.expand_path(File.dirname(__FILE__))
 
 require "#{rootdir}/lib/thinreports/version"

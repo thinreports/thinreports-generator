@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 example :report_callbacks, 'Callbacks of Report' do |t|
   report = Thinreports::Report.new layout: t.layout_filename
 

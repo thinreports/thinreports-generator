@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'document/font'
 require_relative 'document/parse_color'
 require_relative 'document/graphics'
