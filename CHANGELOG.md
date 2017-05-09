@@ -1,4 +1,4 @@
-## master
+## 0.10.0
 
  * Thinreports requires Prawn 2.2
  * Dropped Ruby 1.9.3 and 2.0.0 support
