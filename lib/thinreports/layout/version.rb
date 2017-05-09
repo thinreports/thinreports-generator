@@ -2,39 +2,37 @@
 
 module Thinreports
   module Layout
-    module Version
-      # rubocop:disable Style/MutableConstant
-      REQUIRED_RULES = ['>= 0.8.0', '< 1.0.0']
+    class Version
+      COMPATIBLE_RULES = ['>= 0.8.0', '< 1.0.0'].freeze
+      NEW_SCHEMA_FROM = '0.9.0'.freeze
 
-      # @param [String] version
-      # @return [Boolean]
-      def self.compatible?(version)
-        compare(version, *REQUIRED_RULES)
+      class << self
+        def compatible_rules
+          COMPATIBLE_RULES
+        end
       end
 
-      # @param [String] base
-      # @param [Array<String>] rules
-      # @return [Boolean]
-      def self.compare(base, *rules)
-        rules.all? do |rule|
+      def initialize(schema_version)
+        @schema_version = normalize_version(schema_version)
+      end
+
+      def compatible?
+        self.class.compatible_rules.all? do |rule|
           op, ver = rule.split(' ')
-          comparable_version(base).send(op.to_sym, comparable_version(ver))
+          schema_version.send(op.to_sym, normalize_version(ver))
         end
       end
 
-      # @return [String]
-      def self.inspect_required_rules
-        '(' + REQUIRED_RULES.join(' and ') + ')'
+      def legacy?
+        @schema_version < normalize_version(NEW_SCHEMA_FROM)
       end
 
-      # @param [String] version
-      # @return [String]
-      def self.comparable_version(version)
-        if version =~ /pre/
-          version.sub(/pre(\d*)$/) { $1 == '' ? '1' : $1 }
-        else
-          "#{version}.99"
-        end
+      private
+
+      attr_reader :schema_version
+
+      def normalize_version(version)
+        Gem::Version.create(version)
       end
     end
   end

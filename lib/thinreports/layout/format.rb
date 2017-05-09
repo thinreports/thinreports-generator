@@ -13,16 +13,19 @@ module Thinreports
                     page_orientation: %w[report orientation]
 
       class << self
+        # rubocop:disable Metrics/AbcSize
         def build(filename)
           schema = JSON.parse(read_file(filename))
+          schema_version = Layout::Version.new(schema['version'])
 
-          unless Layout::Version.compatible?(schema['version'])
+          unless schema_version.compatible?
             raise Errors::IncompatibleLayoutFormat.new(
-              filename, schema['version'], Thinreports::Layout::Version.inspect_required_rules
+              filename, schema['version'],
+              Layout::Version.compatible_rules.join(' and ')
             )
           end
 
-          if schema['version'] < '0.9.0'
+          if schema_version.legacy?
             warn '[DEPRECATION] Support for the layout file with old format' \
                  ' that generated with Editor 0.8 or lower will be dropped in Thinreports 1.1.' \
                  ' Please convert to new layout format using Thinreports Editor 0.9 or 1.0.'
