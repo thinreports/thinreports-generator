@@ -3,6 +3,7 @@
  * Thinreports requires Prawn 2.2
  * Dropped Ruby 1.9.3 and 2.0.0 support
  * Fixed a bug line-height of a text line-wrapped is broken #36 [@tkobayashi0330]
+ * Remove deprecated top-module `ThinReports`
  * Remove `config.convert_palleted_transparency_png` option
  * Remove `config.generator.default` option
  * Deprecate `:report` and `:generator` argument of `Thinreports::Report.generate`
@@ -10,6 +11,10 @@
 ### Remove config.convert_palleted_transparency_png option
 
 PNG image with indexed transparency has been supported since Prawn version 2.0. And now, thinreports requires Prawn 2.2+, so the unique support in thinreports is no longer needed.
+
+### Remove deprecated top-module ThinReports
+
+Please use `Thinreports` instead.
 
 ## 0.9.1
 
