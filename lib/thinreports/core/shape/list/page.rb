@@ -87,7 +87,7 @@ module Thinreports
               internal.rows.each do |row|
                 new_list.internal.rows << row.copy(new_list)
               end
-              new_list.finalized!
+              new_list.internal.finalized!
             end
 
             if internal.format.has_header?
