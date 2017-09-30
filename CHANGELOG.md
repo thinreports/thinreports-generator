@@ -1,3 +1,9 @@
+## 0.10.1
+
+Bug Fixes:
+
+ * Fixed a bug that an error occurred on page break in other list when there is a list with page-break disabled #87 [@meganemura]
+
 ## 0.10.0
 
  * Thinreports requires Prawn 2.2
