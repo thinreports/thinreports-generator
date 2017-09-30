@@ -32,8 +32,7 @@ module Thinreports
 
             def normalize(value)
               if value.is_a?(String)
-                # rubocop:disable Style/RescueModifier
-                (Integer(value) rescue nil) || (Float(value) rescue nil)
+                convert_to_integer(value) || convert_to_float(value)
               else
                 value
               end
@@ -46,6 +45,18 @@ module Thinreports
             def number_with_precision(value, precision = 3)
               value = BigDecimal(value.to_s).round(precision)
               sprintf("%.#{precision}f", value)
+            end
+
+            def convert_to_integer(value)
+              Integer(value)
+            rescue ArgumentError
+              nil
+            end
+
+            def convert_to_float(value)
+              Float(value)
+            rescue ArgumentError
+              nil
             end
           end
         end
