@@ -86,7 +86,7 @@ module Thinreports
 
         # For list shapes.
         if at == :create
-          manager.lists.values.each { |list| list.manager.finalize }
+          manager.lists.each_value { |list| list.manager.finalize }
         end
 
         @finalized = true
