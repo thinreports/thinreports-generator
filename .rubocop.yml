@@ -34,7 +34,7 @@ Style/NumericPredicate:
 Style/PerlBackrefs:
   Enabled: false
 
-Style/PredicateName:
+Naming/PredicateName:
   Enabled: false
 
 Style/SafeNavigation:

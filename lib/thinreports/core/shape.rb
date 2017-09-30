@@ -3,11 +3,11 @@
 module Thinreports
   module Core
     module Shape
-      def Interface(parent, format) # rubocop:disable Style/MethodName
+      def Interface(parent, format) # rubocop:disable Naming/MethodName
         find_by_type(format.type)::Interface.new(parent, format)
       end
 
-      def Format(type) # rubocop:disable Style/MethodName
+      def Format(type) # rubocop:disable Naming/MethodName
         find_by_type(type)::Format
       end
 
