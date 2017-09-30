@@ -74,7 +74,7 @@ module Thinreports
             raise ArgumentError, 'Invalid argument for layout.'
           end
 
-        @default_layout = layout unless @default_layout
+        @default_layout ||= layout
         layout
       end
 
