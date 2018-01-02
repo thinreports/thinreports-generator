@@ -8,6 +8,9 @@ rvm:
   - 2.5.0
   - jruby-9.1.15.0
 
+before_install:
+  - travis_retry gem update --system
+
 notifications:
   slack:
     secure: XubYKuE3+6VJNDvjgVE2P0cp3Km/We1RlhkeHBGI+r0wYqAg6tab33IYFo+3BgE0xwl1RX3SwX1pbPt3LVDi8zLA5mkmmmDiNIqqYa1vICDgRgu8OTCRcCCTaWB5DhVY11iZaYFyQEoQ+aUHp9QoYeH7Qmp+M2//+DYG9wka6kA=
