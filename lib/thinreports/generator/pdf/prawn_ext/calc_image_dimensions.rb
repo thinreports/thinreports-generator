@@ -20,9 +20,7 @@ module Thinreports
 
             box_width, box_height = options.delete(:auto_fit)
 
-            if image_width > box_width || image_height > box_height
-              options[:fit] = [box_width, box_height]
-            end
+            options[:fit] = [box_width, box_height] if image_width > box_width || image_height > box_height
           end
           super(options)
         end

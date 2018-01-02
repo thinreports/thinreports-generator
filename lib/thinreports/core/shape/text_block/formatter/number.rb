@@ -15,12 +15,8 @@ module Thinreports
               delimiter = format.format_number_delimiter
 
               if_applicable value do |val|
-                unless blank_value?(precision)
-                  val = number_with_precision(val, precision)
-                end
-                unless blank_value?(delimiter)
-                  val = number_with_delimiter(val, delimiter)
-                end
+                val = number_with_precision(val, precision) unless blank_value?(precision)
+                val = number_with_delimiter(val, delimiter) unless blank_value?(delimiter)
                 val
               end
             end

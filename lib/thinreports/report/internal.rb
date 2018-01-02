@@ -33,9 +33,7 @@ module Thinreports
         else
           id = options[:id].to_sym
 
-          if layout_registry.key?(id)
-            raise ArgumentError, "Id :#{id} is already in use."
-          end
+          raise ArgumentError, "Id :#{id} is already in use." if layout_registry.key?(id)
           layout_registry[id] = init_layout(layout, id)
         end
       end

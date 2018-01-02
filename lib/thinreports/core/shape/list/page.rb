@@ -90,9 +90,7 @@ module Thinreports
               new_list.internal.finalized!
             end
 
-            if internal.format.has_header?
-              new_list.internal.header = internal.header.copy(new_list)
-            end
+            new_list.internal.header = internal.header.copy(new_list) if internal.format.has_header?
             new_list
           end
 

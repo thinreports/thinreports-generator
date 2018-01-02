@@ -72,9 +72,7 @@ module Thinreports
           new_shape = shape.copy(new_page)
           new_page.manager.shapes[id] = new_shape
 
-          if new_shape.internal.type_of?(Core::Shape::List::TYPE_NAME)
-            new_page.manager.lists[id] = new_shape
-          end
+          new_page.manager.lists[id] = new_shape if new_shape.internal.type_of?(Core::Shape::List::TYPE_NAME)
         end
         new_page
       end
@@ -85,9 +83,7 @@ module Thinreports
         at = options[:at] || :create
 
         # For list shapes.
-        if at == :create
-          manager.lists.each_value { |list| list.manager.finalize }
-        end
+        manager.lists.each_value { |list| list.manager.finalize } if at == :create
 
         @finalized = true
       end

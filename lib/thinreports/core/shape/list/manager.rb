@@ -136,9 +136,7 @@ module Thinreports
           def overflow_with?(section_name = :detail)
             max_height = page_max_height
 
-            if section_name == :footer && format.has_page_footer?
-              max_height += format.section_height(:page_footer)
-            end
+            max_height += format.section_height(:page_footer) if section_name == :footer && format.has_page_footer?
 
             height = format.section_height(section_name)
             (current_page_state.height + height) > max_height

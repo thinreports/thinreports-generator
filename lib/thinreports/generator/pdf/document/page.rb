@@ -17,9 +17,7 @@ module Thinreports
               pdf.start_new_page(new_basic_page_options(format))
               @current_page_format = format
 
-              unless format_stamp_registry.include?(format.identifier)
-                create_format_stamp(format)
-              end
+              create_format_stamp(format) unless format_stamp_registry.include?(format.identifier)
               format.identifier
             else
               pdf.start_new_page(new_basic_page_options(current_page_format))

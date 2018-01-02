@@ -277,9 +277,7 @@ module Thinreports
           'footer' => footer
         }
 
-        if page_footer['enabled']
-          page_footer['translate']['y'] += detail['height']
-        end
+        page_footer['translate']['y'] += detail['height'] if page_footer['enabled']
 
         if footer['enabled']
           footer['translate']['y'] += detail['height']

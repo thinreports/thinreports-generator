@@ -14,9 +14,7 @@ module Thinreports
         def load_format(filename)
           filename += ".#{EXT_NAME}" unless filename =~ /\.#{EXT_NAME}$/
 
-          unless File.exist?(filename)
-            raise Thinreports::Errors::LayoutFileNotFound
-          end
+          raise Thinreports::Errors::LayoutFileNotFound unless File.exist?(filename)
           # Build format.
           Thinreports::Layout::Format.build(filename)
         end
