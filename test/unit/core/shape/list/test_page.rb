@@ -120,7 +120,6 @@ class Thinreports::Core::Shape::List::TestPage < Minitest::Test
 
     report = Thinreports::Report::Base.new
     layout = Thinreports::Layout::Base.new(layout_file.path)
-    report_page = Thinreports::Report::Page.new(report, layout)
 
     list_format = Thinreports::Core::Shape::List::Format.new(list_schema)
 
@@ -140,7 +139,6 @@ class Thinreports::Core::Shape::List::TestPage < Minitest::Test
 
     report = Thinreports::Report::Base.new
     layout = Thinreports::Layout::Base.new(layout_file.path)
-    report_page = Thinreports::Report::Page.new(report, layout)
 
     list_format = Thinreports::Core::Shape::List::Format.new(list_schema)
 
