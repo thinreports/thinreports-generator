@@ -2,7 +2,7 @@ require 'rake/testtask'
 require 'rubocop/rake_task'
 require 'yard'
 
-task default: %i[test rubocop]
+task default: :test
 
 Rake::TestTask.new do |t|
   t.libs << 'test'
