@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/thinreports.svg)](http://badge.fury.io/rb/thinreports)
 [![](http://img.shields.io/travis/thinreports/thinreports-generator.svg?style=flat)](http://travis-ci.org/thinreports/thinreports-generator)
-[![](http://img.shields.io/codeclimate/github/thinreports/thinreports-generator.svg?style=flat)](https://codeclimate.com/github/thinreports/thinreports-generator)
+[![Maintainability](https://api.codeclimate.com/v1/badges/054b400031608957ec4a/maintainability)](https://codeclimate.com/github/thinreports/thinreports-generator/maintainability)
 [![](http://img.shields.io/gemnasium/thinreports/thinreports-generator.svg?style=flat)](https://gemnasium.com/thinreports/thinreports-generator)
 
 [Thinreports](http://www.thinreports.org) is an open source report generating tool for Ruby.
