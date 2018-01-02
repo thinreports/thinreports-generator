@@ -5,7 +5,6 @@ module Thinreports
     class PDF
       module DrawShape
         # @param [Thinreports::Core::Shape::TextBlock::Internal] shape
-        # rubocop:disable Metrics/AbcSize
         def draw_shape_tblock(shape)
           x, y, w, h = shape.format.attributes.values_at('x', 'y', 'width', 'height')
 

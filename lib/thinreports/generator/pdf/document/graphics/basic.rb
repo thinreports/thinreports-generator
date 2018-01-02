@@ -65,7 +65,6 @@ module Thinreports
         end
 
         # @param [Hash] attrs
-        # rubocop:disable Metrics/CyclomaticComplexity, Metrics/AbcSize, Metrics/PerceivedComplexity
         def with_graphic_styles(attrs, &block)
           stroke = build_stroke_styles(attrs)
           fill = build_fill_styles(attrs)

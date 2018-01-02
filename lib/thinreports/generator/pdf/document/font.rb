@@ -20,7 +20,6 @@ module Thinreports
           'Times New Roman' => 'Times-Roman'
         }.freeze
 
-        # rubocop:disable Metrics/AbcSize
         def setup_fonts
           # Install built-in fonts.
           pdf.font_families.update(BUILTIN_FONTS)

@@ -30,7 +30,6 @@ module Thinreports
           # @param [Thinreports::Core::Shape::Basic::Format] format
           # @return [Thinreports::Core::Shape::Basic::Internal]
           # @abstract
-          # rubocop:disable Lint/UnusedMethodArgument
           def init_internal(parent, format)
             raise NotImplementedError
           end

@@ -1,5 +1,4 @@
 require 'rake/testtask'
-require 'rubocop/rake_task'
 require 'yard'
 
 task default: :test
@@ -34,5 +33,3 @@ YARD::Rake::YardocTask.new :doc do |yard|
   yard.files = Dir['lib/**/*.rb']
   yard.options = ['--readme', 'README.md']
 end
-
-RuboCop::RakeTask.new

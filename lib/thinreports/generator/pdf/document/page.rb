@@ -10,7 +10,6 @@ module Thinreports
         }.freeze
 
         # @param [Thinreports::Layout::Format] format
-        # rubocop:disable Metrics/AbcSize
         def start_new_page(format)
           format_id =
             if change_page_format?(format)

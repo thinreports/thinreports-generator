@@ -5,7 +5,6 @@ require 'rexml/document'
 
 module Thinreports
   module Layout
-    # rubocop:disable Metrics/ClassLength
     class LegacySchema
       include Utils
 
@@ -17,7 +16,6 @@ module Thinreports
         @legacy_svg = cleanup_svg(@legacy_svg)
       end
 
-      # rubocop:disable Metrics/AbcSize
       def upgrade
         config = legacy_schema['config']
         page_config = config['page']
@@ -48,7 +46,6 @@ module Thinreports
         build_item_schemas_from_svg(svg.elements['/svg/g'])
       end
 
-      # rubocop:disable Metrics/CyclomaticComplexity
       def build_item_schemas_from_svg(svg_elements)
         return [] unless svg_elements
 

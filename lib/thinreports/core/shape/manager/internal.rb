@@ -47,7 +47,6 @@ module Thinreports
 
           # @param [String, Symbol] id
           # @return [Thinreports::Core::Shape::Base::Interface, nil]
-          # rubocop:disable Metrics/CyclomaticComplexity, Metrics/AbcSize, Metrics/PerceivedComplexity
           def final_shape(id)
             shape = shapes[id]
 

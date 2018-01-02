@@ -4,7 +4,6 @@ module Thinreports
   module Core
     module Shape
       module List
-        # rubocop:disable Metrics/ClassLength
         class Manager
           include Utils
 

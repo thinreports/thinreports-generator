@@ -23,7 +23,6 @@ module Thinreports
         # @yield [attrs]
         # @yieldparam [Hash] attrs
         # @return [Hash]
-        # rubocop:disable Metrics/AbcSize
         def build_text_attributes(style, &block)
           text_attributes = {
             font: font_family(style['font-family']),

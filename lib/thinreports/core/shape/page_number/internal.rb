@@ -19,7 +19,6 @@ module Thinreports
             states[:format] = format.to_s
           end
 
-          # rubocop:disable Metrics/AbcSize
           def build_format(page_no, page_count)
             return '' if blank_value?(read_format)
 

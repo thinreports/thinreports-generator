@@ -74,7 +74,6 @@ module Thinreports
 
           # @param [Thinreports::Report::Page] new_parent
           # @return [Thinreports::Core::Shape::List::Page]
-          # rubocop:disable Metrics/AbcSize
           def copy(new_parent)
             if manager.auto_page_break?
               new_list = self.class.new(new_parent, internal.format,

@@ -5,7 +5,6 @@ module Thinreports
     class PDF
       module DrawTemplateItems
         # @param [Array<Hash>] items
-        # rubocop:disable Metrics/CyclomaticComplexity
         def draw_template_items(items)
           items.each do |item_attributes|
             next unless drawable?(item_attributes)

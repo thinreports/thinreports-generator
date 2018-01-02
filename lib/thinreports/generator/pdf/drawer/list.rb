@@ -12,7 +12,6 @@ module Thinreports
           end
 
           # @param [Thinreports::Core::Shape::List::PageState] list_page
-          # rubocop:disable Metrics/AbcSize
           def draw(list_page)
             draw_section(list_page.header) if list_page.header
             list_page.rows.each do |row|

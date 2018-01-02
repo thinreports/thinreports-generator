@@ -13,7 +13,6 @@ module Thinreports
                     page_orientation: %w[report orientation]
 
       class << self
-        # rubocop:disable Metrics/AbcSize
         def build(filename)
           schema = JSON.parse(read_file(filename))
           schema_version = Layout::Version.new(schema['version'])

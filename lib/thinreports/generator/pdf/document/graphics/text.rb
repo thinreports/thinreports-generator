@@ -40,7 +40,6 @@ module Thinreports
               built_attrs.merge(box_attrs)
             )
           end
-        # rubocop:disable Lint/HandleExceptions
         rescue Prawn::Errors::CannotFit
           # Nothing to do.
           #
@@ -81,7 +80,6 @@ module Thinreports
         # @yield [built_attrs, font_styles]
         # @yieldparam [Hash] built_attrs The finalized attributes.
         # @yieldparam [Array] font_styles The finalized styles.
-        # rubocop:disable Metrics/AbcSize
         def with_text_styles(attrs, &block)
           # When no color is given, do not draw.
           return unless attrs.key?(:color) && attrs[:color] != 'none'
@@ -139,7 +137,6 @@ module Thinreports
         # @yield [attributes, styles]
         # @yieldparam [Hash] modified_attrs
         # @yieldparam [Array] styles
-        # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         def with_font_styles(attrs, font, &block)
           # Building font styles.
           styles = attrs.delete(:styles)

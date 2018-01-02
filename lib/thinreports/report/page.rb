@@ -64,7 +64,6 @@ module Thinreports
         false
       end
 
-      # rubocop:disable Metrics/AbcSize
       def copy
         new_page = self.class.new(report, layout, count: count?)
 

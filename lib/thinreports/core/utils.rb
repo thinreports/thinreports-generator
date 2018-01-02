@@ -10,11 +10,11 @@ module Thinreports
       case src
       when Hash
         src.each_with_object({}) do |(k, v), h|
-          h[k] = v.dup rescue v # rubocop:disable Lint/RescueWithoutErrorClass,Lint/RescueModifier
+          h[k] = v.dup rescue v
         end
       when Array
         src.map do |a|
-          a.dup rescue a # rubocop:disable Lint/RescueWithoutErrorClass,Lint/RescueModifier
+          a.dup rescue a
         end
       else
         raise ArgumentError

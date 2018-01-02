@@ -3,17 +3,16 @@
 module Thinreports
   module Core
     module Shape
-      def Interface(parent, format) # rubocop:disable Naming/MethodName
+      def Interface(parent, format)
         find_by_type(format.type)::Interface.new(parent, format)
       end
 
-      def Format(type) # rubocop:disable Naming/MethodName
+      def Format(type)
         find_by_type(type)::Format
       end
 
       module_function :Interface, :Format
 
-      # rubocop:disable Metrics/CyclomaticComplexity
       def self.find_by_type(type)
         case type
         when TextBlock::TYPE_NAME  then TextBlock
