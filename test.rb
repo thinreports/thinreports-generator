@@ -5,21 +5,46 @@ require_relative 'lib/thinreports'
 
 params = {
   type: :section,
-  layout_file: 'test.tlf',
+  layout: 'test.tlf',
   params: {
+    start_page_number: 1,
     groups: [
-      details: [
-        { id: :detail },
-        { id: :detail },
-        { id: :detail },
-        { id: :detail },
-        { id: :detail },
-        { id: :detail },
-        { id: :detail },
-        { id: :detail },
-        { id: :detail },
-        { id: :detail }
-      ]
+      {
+        # headers: {
+        #   'document-header': {
+        #     items: {
+        #       text: 'ここはドキュメントヘッダーです'
+        #     }
+        #   },
+        #   'page-header': {
+        #     items: {
+        #       text: 'ここはページヘッダーです'
+        #     }
+        #   }
+        # },
+        details: [
+          {
+            id: :detail,
+            items: {
+              text: 'ここは明細1です'
+            }
+          },
+          {
+            id: :detail,
+            items: {
+              text: 'ここは明細2です'
+            }
+          },
+          {
+            id: :detail,
+            items: {
+              text: 'ここは明細3です'
+            }
+          }
+        ],
+        footers: {
+        }
+      }
     ]
   }
 }
