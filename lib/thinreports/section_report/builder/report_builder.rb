@@ -69,6 +69,7 @@ module Thinreports
         end
 
         def section_enabled?(section_schema, section_params)
+          return section_params.key?(:display) ? section_params[:display] : true # wip
           section_params.key?(:display) ? section_params[:display] : section_schema.display?
         end
       end
