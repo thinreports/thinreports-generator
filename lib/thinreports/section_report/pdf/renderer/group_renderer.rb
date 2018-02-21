@@ -14,8 +14,16 @@ module Thinreports
         def render(group)
           pdf.pdf.start_new_page
 
+          group.headers.each do |header|
+            section_renderer.render(header) # if header.schema.every_page? || @page_count == 1
+          end
+
           group.details.each do |detail|
             section_renderer.render(detail)
+          end
+
+          group.footers.each do |footer|
+            section_renderer.render(footer)
           end
         end
 
