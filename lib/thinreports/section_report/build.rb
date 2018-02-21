@@ -17,8 +17,8 @@ module Thinreports
         loader = Schema::Loader.new
 
         case
-        when report_params[:layout_file]
-          loader.load_from_file(report_params[:layout_file])
+        when report_params[:layout]
+          loader.load_from_file(report_params[:layout])
         when report_params[:layout_data]
           loader.load_from_data(report_params[:layout_data])
         else
