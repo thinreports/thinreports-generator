@@ -1,0 +1,42 @@
+{
+  "version": "0.9.0",
+  "title": "Report Title",
+  "report": {
+    "paper-type": "A4",
+    "width": 0.0,
+    "height": 0.0,
+    "orientation": "portrait",
+    "margin": [0.0, 0.0, 0.0, 0.0]
+  },
+  "state": {
+    "layout-guides": [
+      { "type": "x", "position": 0.0 }
+    ]
+  },
+  "sections": [
+    {
+      "id": "detail",
+      "type": "detail",
+      "height": 100.0,
+      "display": true,
+      "auto-expand": true,
+      "items": [
+        {
+          "id": "",
+          "type": "rect",
+          "x": 0.0,
+          "y": 0.0,
+          "width": 20.0,
+          "height": 20.0,
+          "display": true,
+          "style": {
+            "border-width": 1.0,
+            "border-color": "red",
+            "border-style": "solid",
+            "fill-color": "none"
+          }
+        }
+      ]
+    }
+  ]
+}
