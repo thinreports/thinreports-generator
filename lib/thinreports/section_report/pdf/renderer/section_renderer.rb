@@ -12,11 +12,11 @@ module Thinreports
           y = doc.cursor
           y = section.schema.height if section.schema.type == 'footer' && section.schema.fixed_bottom?
 
-          box = doc.bounding_box([0, y], width: 300, height: section.schema.height) do
+          doc.bounding_box([0, y], width: doc.bounds.width, height: section.schema.height) do
             section.items.each do |item|
               draw_item(item)
             end
-            # doc.stroke_bounds
+            doc.stroke_bounds
           end
 
           # bounding_box 実行完了後、doc.cursorの位置はbox末尾に移動する
