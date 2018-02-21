@@ -9,7 +9,10 @@ module Thinreports
         def render(section)
           doc = pdf.pdf
 
-          box = doc.bounding_box([0, doc.cursor], width: 300, height: section.schema.height) do
+          y = doc.cursor
+          y = section.schema.height if section.schema.type == 'footer' && section.schema.fixed_bottom?
+
+          box = doc.bounding_box([0, y], width: 300, height: section.schema.height) do
             section.items.each do |item|
               draw_item(item)
             end

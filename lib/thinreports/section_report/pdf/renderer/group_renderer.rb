@@ -23,7 +23,11 @@ module Thinreports
           end
 
           group.footers.each do |footer|
-            section_renderer.render(footer)
+            section_renderer.render(footer) unless footer.schema.fixed_bottom?
+          end
+
+          group.footers.each do |footer|
+            section_renderer.render(footer) if footer.schema.fixed_bottom?
           end
         end
 
