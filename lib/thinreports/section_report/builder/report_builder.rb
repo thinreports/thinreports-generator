@@ -26,9 +26,9 @@ module Thinreports
 
           groups_params.map do |group_params|
             ReportData::Group.new(
-              build_sections(:header, group_params[:headers]),
-              build_detail_sections(group_params[:details]),
-              build_sections(:footer, group_params[:footers])
+              build_sections(:header, group_params[:headers] || {}),
+              build_detail_sections(group_params[:details] || []),
+              build_sections(:footer, group_params[:footers] || {})
             )
           end
         end
