@@ -43,6 +43,31 @@ params = {
           }
         ],
         footers: {
+          'summary-1': {
+            items: {
+              text: 'ここは合計部1です'
+            }
+          },
+          'summary-2': {
+            items: {
+              text: 'ここは合計部2です'
+            }
+          },
+          'summary-3': {
+            items: {
+              text: 'ここは合計部3です'
+            }
+          },
+          'notes': {
+            items: {
+              text: 'ここは備考です'
+            }
+          },
+          'fixed-page-footer': {
+            items: {
+              text: 'ここは下部固定ページフッターです'
+            }
+          }
         }
       }
     ]
