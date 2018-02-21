@@ -10,18 +10,18 @@ params = {
     start_page_number: 1,
     groups: [
       {
-        # headers: {
-        #   'document-header': {
-        #     items: {
-        #       text: 'ここはドキュメントヘッダーです'
-        #     }
-        #   },
-        #   'page-header': {
-        #     items: {
-        #       text: 'ここはページヘッダーです'
-        #     }
-        #   }
-        # },
+        headers: {
+          'document-header': {
+            items: {
+              text: 'ここはドキュメントヘッダーです'
+            }
+          },
+          'page-header': {
+            items: {
+              text: 'ここはページヘッダーです'
+            }
+          }
+        },
         details: [
           {
             id: :detail,
