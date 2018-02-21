@@ -10,7 +10,7 @@ module Thinreports
 
         # @param [SectionReport::Builder::ReportData::Main] report
         def call!(report)
-          report.groups.each { |group| group_renderer.render(group) }
+          report.groups.each { |group| group_renderer.render(report, group) }
         end
 
         private

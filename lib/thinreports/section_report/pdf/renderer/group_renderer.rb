@@ -11,7 +11,7 @@ module Thinreports
           @section_renderer = Renderer::SectionRenderer.new(pdf)
         end
 
-        def render(group)
+        def render(report, group)
           doc = pdf.pdf
           @page_count = 0
 
@@ -20,10 +20,11 @@ module Thinreports
           group.footers.each do |footer|
             page_footers_size += footer.schema.height if footer.schema.every_page?
           end
-          max_page_height = doc.bounds.height - page_footers_size
+          max_page_height = doc.bounds.height - report.schema.page_margin_top - report.schema.page_margin_bottom - page_footers_size
 
 
           doc.start_new_page
+          doc.move_down report.schema.page_margin_top
           @page_count += 1
           current_page_height = 0
 
@@ -41,10 +42,12 @@ module Thinreports
               end
 
               group.footers.each do |footer|
+                doc.move_cursor_to report.schema.page_margin_bottom + footer.schema.height
                 section_renderer.render(footer) if footer.schema.every_page? && footer.schema.fixed_bottom?
               end
 
               doc.start_new_page
+              doc.move_down report.schema.page_margin_top
               @page_count += 1
               current_page_height = 0
 
@@ -64,6 +67,7 @@ module Thinreports
           end
 
           group.footers.each do |footer|
+            doc.move_cursor_to report.schema.page_margin_bottom + footer.schema.height
             section_renderer.render(footer) if footer.schema.fixed_bottom?
           end
         end
