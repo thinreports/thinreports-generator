@@ -28,6 +28,7 @@ module Thinreports
 
         class Footer < Base
           config_checker true, fixed_bottom: 'fixed-bottom'
+          config_checker true, every_page: 'every-page'
         end
 
         class Detail < Base

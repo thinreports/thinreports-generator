@@ -22,26 +22,13 @@ params = {
             }
           }
         },
-        details: [
-          {
-            id: :detail,
-            items: {
-              text: 'ここは明細1です'
+        details: (1...100).map{|i| {
+              id: :detail,
+              items: {
+                text: "ここは明細#{i}です"
+              }
             }
           },
-          {
-            id: :detail,
-            items: {
-              text: 'ここは明細2です'
-            }
-          },
-          {
-            id: :detail,
-            items: {
-              text: 'ここは明細3です'
-            }
-          }
-        ],
         footers: {
           'summary-1': {
             items: {
@@ -63,9 +50,9 @@ params = {
               text: 'ここは備考です'
             }
           },
-          'misoca-logo': {
+          'fixed-page-footer': {
             items: {
-              text: 'ここはMisocaロゴです'
+              text: 'ここは下部固定ページフッターです'
             }
           }
         }

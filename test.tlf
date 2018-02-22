@@ -620,7 +620,7 @@
       ]
     },
     {
-      "id": "misoca-logo",
+      "id": "fixed-page-footer",
       "type": "footer",
       "height": 50.0,
       "every-page": true,

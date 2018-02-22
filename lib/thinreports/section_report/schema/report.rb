@@ -10,6 +10,14 @@ module Thinreports
 
         attr_reader :headers, :details, :footers
 
+        def page_margin_top
+          page_margin[0]
+        end
+
+        def page_margin_bottom
+          page_margin[2]
+        end
+
         def initialize(schema_data, headers:, details:, footers:)
           super(schema_data)
           @headers = headers
