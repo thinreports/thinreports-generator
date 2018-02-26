@@ -22,7 +22,7 @@ module Thinreports
         # @option attrs [Boolean] :single (false)
         # @option attrs [:trancate, :shrink_to_fit, :expand] :overflow (:trancate)
         # @option attrs [:none, :break_word] :word_wrap (:none)
-        def text_box(content, x, y, w, h, attrs = {})
+        def text_box(content, x, y, w, h, attrs = {}, &block)
           w, h = s2f(w, h)
 
           box_attrs = text_box_attrs(
@@ -35,15 +35,15 @@ module Thinreports
           content = text_without_line_wrap(content) if attrs[:word_wrap] == :none
 
           with_text_styles(attrs) do |built_attrs, font_styles|
-            p pdf.margin_box.height
-            p pdf.height_of_formatted(
-              [{ text: content, styles: font_styles }],
-              built_attrs.merge(box_attrs.merge(at:[0, pdf.margin_box.height], height: pdf.margin_box.height))
-            )
-            pdf.formatted_text_box(
-              [{ text: content, styles: font_styles }],
-              built_attrs.merge(box_attrs)
-            )
+            if block
+              block.call [{ text: content, styles: font_styles }],
+                built_attrs.merge(box_attrs)
+            else
+              pdf.formatted_text_box(
+                [{ text: content, styles: font_styles }],
+                built_attrs.merge(box_attrs)
+              )
+            end
           end
         rescue Prawn::Errors::CannotFit
           # Nothing to do.

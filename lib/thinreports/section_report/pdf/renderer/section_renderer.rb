@@ -7,6 +7,16 @@ module Thinreports
         end
 
         def content_height(section)
+          text_items = section.items.select { |s| s.internal.type_of?(Core::Shape::TextBlock::TYPE_NAME) && s.internal.style.finalized_styles['overflow'] == 'expand' }
+          p text_items.map{|item|
+            height = 0
+            @pdf.draw_shape_tblock(item.internal) { |array, options|
+              page_height = @pdf.pdf.bounds.height
+              modified_options = options.merge(at:[0, page_height], height: page_height)
+              height = @pdf.pdf.height_of_formatted(array, modified_options)
+            }
+            height
+          }.max
           section.schema.height
         end
 
