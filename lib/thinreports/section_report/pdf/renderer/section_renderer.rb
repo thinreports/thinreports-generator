@@ -6,6 +6,10 @@ module Thinreports
           @pdf = pdf
         end
 
+        def content_height(section)
+          section.schema.height
+        end
+
         def render(section)
           doc = pdf.pdf
 

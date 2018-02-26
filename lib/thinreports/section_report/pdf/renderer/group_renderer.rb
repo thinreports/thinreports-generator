@@ -36,7 +36,7 @@ module Thinreports
           end
 
           group.details.each do |detail|
-            if current_page_height + detail.schema.height > max_page_height
+            if current_page_height + section_renderer.content_height(detail) > max_page_height
               group.footers.each do |footer|
                 section_renderer.render(footer) if footer.schema.every_page? && !footer.schema.fixed_bottom?
               end
@@ -59,7 +59,7 @@ module Thinreports
               end
             end
             section_renderer.render(detail)
-            current_page_height += detail.schema.height
+            current_page_height += section_renderer.content_height(detail)
           end
 
           group.footers.each do |footer|
