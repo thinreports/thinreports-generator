@@ -13,7 +13,7 @@ module Thinreports
             section.items.each do |item|
               draw_item(item)
             end
-            # doc.stroke_bounds
+            doc.stroke_bounds
           end
 
           # bounding_box 実行完了後、doc.cursorの位置はbox末尾に移動する
