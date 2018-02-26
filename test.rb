@@ -13,7 +13,7 @@ params = {
         headers: {
           'document-header': {
             items: {
-              text: 'ここはドキュメントヘッダーです'
+              text: 'ここはドキュメントヘッダーですここはドキュメントヘッダーですここはドキュメントヘッダーです'
             }
           },
           'page-header': {

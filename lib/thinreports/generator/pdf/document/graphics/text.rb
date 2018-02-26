@@ -35,6 +35,15 @@ module Thinreports
           content = text_without_line_wrap(content) if attrs[:word_wrap] == :none
 
           with_text_styles(attrs) do |built_attrs, font_styles|
+            p content
+            p built_attrs
+            p font_styles
+            box_attrs[:height] = 100
+            p box_attrs
+            p pdf.height_of_formatted(
+              [{ text: content, styles: font_styles }],
+              built_attrs.merge(box_attrs)
+            )
             pdf.formatted_text_box(
               [{ text: content, styles: font_styles }],
               built_attrs.merge(box_attrs)
