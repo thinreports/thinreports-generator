@@ -8,26 +8,25 @@ module Thinreports
 
         def content_height(section)
           text_items = section.items.select { |s| s.internal.type_of?(Core::Shape::TextBlock::TYPE_NAME) && s.internal.style.finalized_styles['overflow'] == 'expand' }
-          p text_items.map{|item|
+          [text_items.map{|item|
             height = 0
             @pdf.draw_shape_tblock(item.internal) { |array, options|
               page_height = @pdf.pdf.bounds.height
               modified_options = options.merge(at:[0, page_height], height: page_height)
               height = @pdf.pdf.height_of_formatted(array, modified_options)
             }
-            height
-          }.max
-          section.schema.height
+            height + section.schema.height - item.internal.format.attributes['height']
+          }.max, section.schema.height].max
         end
 
         def render(section)
           doc = pdf.pdf
 
-          doc.bounding_box([0, doc.cursor], width: doc.bounds.width, height: section.schema.height) do
+          doc.bounding_box([0, doc.cursor], width: doc.bounds.width, height: content_height(section)) do
             section.items.each do |item|
               draw_item(item)
             end
-            doc.stroke_bounds
+            # doc.stroke_bounds
           end
 
           # bounding_box 実行完了後、doc.cursorの位置はbox末尾に移動する

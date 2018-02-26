@@ -22,7 +22,7 @@ params = {
             }
           }
         },
-        details: (1...2).map{|i| {
+        details: (1...100).map{|i| {
               id: :detail,
               items: {
                 text: "ここは明細#{i}です。ここは明細#{i}です。ここは明細#{i}です。ここは明細#{i}です。"
