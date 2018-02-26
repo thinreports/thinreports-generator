@@ -47,7 +47,7 @@ params = {
           },
           'notes': {
             items: {
-              text: 'ここは備考です'
+              text: 'ここは備考1234です'
             }
           },
           'fixed-page-footer': {
