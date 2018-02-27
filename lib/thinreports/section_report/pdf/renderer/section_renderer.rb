@@ -53,7 +53,12 @@ module Thinreports
             case shape.format.follow_expand
               when 'height'
                 # セクションにあわせて伸びる
-                @pdf.draw_shape_line(shape, 0, expanded_height)
+                y1, y2 = shape.format.attributes.values_at('y1', 'y2')
+                if y1 < y2
+                  @pdf.draw_shape_line(shape, 0, expanded_height)
+                else
+                  @pdf.draw_shape_line(shape, expanded_height, 0)
+                end
               when 'y'
                 # セクションにあわせて描画位置をずらす
                 @pdf.draw_shape_line(shape, expanded_height, expanded_height)
