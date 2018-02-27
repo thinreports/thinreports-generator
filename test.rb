@@ -13,16 +13,16 @@ params = {
         headers: {
           'document-header': {
             items: {
-              text: 'ここはドキュメントヘッダーです'
+              text: 'ここはドキュメントヘッダーです' * 3
             }
           },
           'page-header': {
             items: {
-              text: 'ここはページヘッダーです'
+              text: 'ここはページヘッダーです' * 3
             }
           }
         },
-        details: (1...100).map{|i| {
+        details: (1...11).map{|i| {
               id: :detail,
               items: {
                 text: "ここは明細#{i}です。ここは明細#{i}です。ここは明細#{i}です。ここは明細#{i}です。"
@@ -42,7 +42,7 @@ params = {
           },
           'summary-3': {
             items: {
-              text: 'ここは合計部3です'
+              text: 'ここは合計部3です' * 3
             }
           },
           'notes': {
