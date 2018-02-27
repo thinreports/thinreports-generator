@@ -23,7 +23,7 @@ module Thinreports
 
           group.headers.each do |header|
             section_renderer.render(header)
-            current_page_height += header.schema.height
+            current_page_height += section_renderer.content_height(header)
           end
 
           group.details.each do |detail|
@@ -35,7 +35,7 @@ module Thinreports
               group.headers.each do |header|
                 if header.schema.every_page?
                   section_renderer.render(header)
-                  current_page_height += header.schema.height
+                  current_page_height += section_renderer.content_height(header)
                 end
               end
             end
