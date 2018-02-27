@@ -21,9 +21,10 @@ module Thinreports
         def render(section)
           doc = pdf.pdf
 
-          doc.bounding_box([0, doc.cursor], width: doc.bounds.width, height: content_height(section)) do
+          actual_height = content_height(section)
+          doc.bounding_box([0, doc.cursor], width: doc.bounds.width, height: actual_height) do
             section.items.each do |item|
-              draw_item(item)
+              draw_item(item, (actual_height - section.schema.height))
             end
             # doc.stroke_bounds
           end
@@ -36,7 +37,7 @@ module Thinreports
 
         attr_reader :pdf
 
-        def draw_item(item)
+        def draw_item(item, expanded_height = 0)
           shape = item.internal
           if shape.type_of?(Core::Shape::TextBlock::TYPE_NAME)
             @pdf.draw_shape_tblock(shape)
@@ -49,7 +50,16 @@ module Thinreports
           elsif shape.type_of?('rect')
             @pdf.draw_shape_rect(shape)
           elsif shape.type_of?('line')
-            @pdf.draw_shape_line(shape)
+            case shape.format.follow_expand
+              when 'height'
+                # セクションにあわせて伸びる
+                @pdf.draw_shape_line(shape, 0, expanded_height)
+              when 'y'
+                # セクションにあわせて描画位置をずらす
+                @pdf.draw_shape_line(shape, expanded_height, expanded_height)
+              else
+                @pdf.draw_shape_line(shape)
+            end
           else
             puts 'unknown shape type'
           end

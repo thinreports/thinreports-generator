@@ -10,6 +10,7 @@ module Thinreports
           config_reader :type, :id
           config_reader :style
           config_checker true, :display
+          config_reader follow_expand: %w[follow-expand]
         end
       end
     end

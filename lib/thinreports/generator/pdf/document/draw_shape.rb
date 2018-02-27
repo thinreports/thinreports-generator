@@ -66,9 +66,9 @@ module Thinreports
         end
 
         # @param [Thinreports::Core::Shape::Basic::Internal] shape
-        def draw_shape_line(shape)
+        def draw_shape_line(shape, dy1 = 0, dy2 = 0)
           x1, y1, x2, y2 = shape.format.attributes.values_at('x1', 'y1', 'x2', 'y2')
-          line(x1, y1, x2, y2, build_graphic_attributes(shape.style.finalized_styles))
+          line(x1, y1 + dy1, x2, y2 + dy2, build_graphic_attributes(shape.style.finalized_styles))
         end
 
         # @param [Thinreports::Core::Shape::Basic::Internal] shape
