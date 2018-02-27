@@ -13,33 +13,27 @@ module Thinreports
 
         def render(report, group)
           doc = pdf.pdf
-          @page_count = 0
-
 
           max_page_height = doc.bounds.height - report.schema.page_margin_top - report.schema.page_margin_bottom
 
 
           doc.start_new_page
           doc.move_down report.schema.page_margin_top
-          @page_count += 1
           current_page_height = 0
 
           group.headers.each do |header|
-            if header.schema.every_page? || @page_count == 1
-              section_renderer.render(header)
-              current_page_height += header.schema.height
-            end
+            section_renderer.render(header)
+            current_page_height += header.schema.height
           end
 
           group.details.each do |detail|
             if current_page_height + section_renderer.content_height(detail) > max_page_height
               doc.start_new_page
               doc.move_down report.schema.page_margin_top
-              @page_count += 1
               current_page_height = 0
 
               group.headers.each do |header|
-                if header.schema.every_page? || @page_count == 1
+                if header.schema.every_page?
                   section_renderer.render(header)
                   current_page_height += header.schema.height
                 end
