@@ -16,7 +16,7 @@ module Thinreports
               height = @pdf.pdf.height_of_formatted(array, modified_options)
             }
             height + section.schema.height - item.internal.format.attributes['height']
-          }.max, section.schema.height].max
+          }.max || 0, section.schema.height].max
         end
 
         def render(section)

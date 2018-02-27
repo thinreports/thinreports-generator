@@ -1,7 +1,10 @@
 require 'bundler'
+require 'pathname'
 
 Bundler.require
 require_relative 'lib/thinreports'
+
+ROOT = Pathname.new File.expand_path('..', __FILE__)
 
 params = {
   type: :section,
@@ -18,7 +21,7 @@ params = {
           },
           'page-header': {
             items: {
-              text: 'ここはページヘッダーです' * 3
+              image: ROOT.join('examples/dynamic_image/img50x50.png')
             }
           }
         },
