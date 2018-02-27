@@ -7,16 +7,15 @@ module Thinreports
         end
 
         def content_height(section)
-          text_items = section.items.select { |s| s.internal.type_of?(Core::Shape::TextBlock::TYPE_NAME) && s.internal.style.finalized_styles['overflow'] == 'expand' }
-          [text_items.map{|item|
-            height = 0
-            @pdf.draw_shape_tblock(item.internal) { |array, options|
-              page_height = @pdf.pdf.bounds.height
-              modified_options = options.merge(at:[0, page_height], height: page_height)
-              height = @pdf.pdf.height_of_formatted(array, modified_options)
-            }
-            height + section.schema.height - item.internal.format.attributes['height']
-          }.max || 0, section.schema.height].max
+          return section.schema.height unless section.schema.auto_expand?
+
+          text_items = section.items.select do |s|
+            s.internal.type_of?(Core::Shape::TextBlock::TYPE_NAME) && s.internal.style.finalized_styles['overflow'] == 'expand'
+          end
+
+          return section.schema.height if text_items.empty?
+
+          [text_items_max_height(section, text_items), section.schema.height].max
         end
 
         def render(section)
@@ -54,6 +53,18 @@ module Thinreports
           else
             puts 'unknown shape type'
           end
+        end
+
+        def text_items_max_height(section, text_items)
+          text_items.map do |item|
+            height = 0
+            @pdf.draw_shape_tblock(item.internal) { |array, options|
+              page_height = @pdf.pdf.bounds.height
+              modified_options = options.merge(at: [0, page_height], height: page_height)
+              height = @pdf.pdf.height_of_formatted(array, modified_options)
+            }
+            height + section.schema.height - item.internal.format.attributes['height']
+          end.max
         end
       end
     end

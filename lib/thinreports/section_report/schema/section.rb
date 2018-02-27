@@ -6,6 +6,7 @@ module Thinreports
           config_reader :id, :type
           config_reader :top, :height
           config_checker true, :display
+          config_checker true, auto_expand: 'auto-expand'
 
           attr_reader :items, :item_ids
 
@@ -32,7 +33,6 @@ module Thinreports
         end
 
         class Detail < Base
-          config_checker true, auto_expand: 'auto-expand'
         end
       end
     end

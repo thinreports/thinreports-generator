@@ -19,7 +19,7 @@
       "type": "header",
       "height": 50.0,
       "every-page": false,
-      "auto-expand": true,
+      "auto-expand": false,
       "items": [
         {
           "id": "",
