@@ -41,6 +41,14 @@ module Thinreports
           shape = item.internal
           if shape.type_of?(Core::Shape::TextBlock::TYPE_NAME)
             @pdf.draw_shape_tblock(shape)
+          elsif shape.type_of?(Core::Shape::ImageBlock::TYPE_NAME)
+            @pdf.draw_shape_iblock(shape)
+          elsif shape.type_of?('text')
+            @pdf.draw_shape_text(shape)
+          elsif shape.type_of?('image')
+            @pdf.draw_shape_image(shape)
+          elsif shape.type_of?('rect')
+            @pdf.draw_shape_rect(shape)
           elsif shape.type_of?('line')
             @pdf.draw_shape_line(shape)
           else
