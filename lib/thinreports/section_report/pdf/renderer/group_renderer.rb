@@ -16,11 +16,7 @@ module Thinreports
           @page_count = 0
 
 
-          page_footers_size = 0
-          group.footers.each do |footer|
-            page_footers_size += footer.schema.height if footer.schema.every_page?
-          end
-          max_page_height = doc.bounds.height - report.schema.page_margin_top - report.schema.page_margin_bottom - page_footers_size
+          max_page_height = doc.bounds.height - report.schema.page_margin_top - report.schema.page_margin_bottom
 
 
           doc.start_new_page
@@ -37,15 +33,6 @@ module Thinreports
 
           group.details.each do |detail|
             if current_page_height + section_renderer.content_height(detail) > max_page_height
-              group.footers.each do |footer|
-                section_renderer.render(footer) if footer.schema.every_page? && !footer.schema.fixed_bottom?
-              end
-
-              group.footers.each do |footer|
-                doc.move_cursor_to report.schema.page_margin_bottom + footer.schema.height
-                section_renderer.render(footer) if footer.schema.every_page? && footer.schema.fixed_bottom?
-              end
-
               doc.start_new_page
               doc.move_down report.schema.page_margin_top
               @page_count += 1
@@ -63,12 +50,7 @@ module Thinreports
           end
 
           group.footers.each do |footer|
-            section_renderer.render(footer) if !footer.schema.fixed_bottom?
-          end
-
-          group.footers.each do |footer|
-            doc.move_cursor_to report.schema.page_margin_bottom + footer.schema.height
-            section_renderer.render(footer) if footer.schema.fixed_bottom?
+            section_renderer.render(footer)
           end
         end
 
