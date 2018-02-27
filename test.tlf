@@ -190,6 +190,7 @@
           "id": "",
           "type": "line",
           "display": true,
+          "follow-expand": "height",
           "description": "",
           "style": {
             "border-color": "#000000",
@@ -205,6 +206,7 @@
           "id": "",
           "type": "line",
           "display": true,
+          "follow-expand": "y",
           "description": "",
           "style": {
             "border-color": "#000000",
@@ -220,6 +222,7 @@
           "id": "",
           "type": "line",
           "display": true,
+          "follow-expand": "height",
           "description": "",
           "style": {
             "border-color": "#000000",
