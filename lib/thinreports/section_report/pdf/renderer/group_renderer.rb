@@ -44,7 +44,13 @@ module Thinreports
           end
 
           group.footers.each do |footer|
+            if current_page_height + section_renderer.content_height(footer) > max_page_height
+              doc.start_new_page
+              doc.move_down report.schema.page_margin_top
+              current_page_height = 0
+            end
             section_renderer.render(footer)
+            current_page_height += section_renderer.content_height(footer)
           end
         end
 
