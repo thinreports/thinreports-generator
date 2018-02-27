@@ -36,6 +36,7 @@ params = {
             }
           },
           'summary-2': {
+            display: false,
             items: {
               text: 'ここは合計部2です'
             }
