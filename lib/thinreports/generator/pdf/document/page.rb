@@ -26,6 +26,16 @@ module Thinreports
           stamp(format_id.to_s)
         end
 
+        def start_new_page_for_report(format)
+          @current_page_format = format
+          pdf.start_new_page(new_basic_page_options(current_page_format))
+          pdf.move_down current_page_format.page_margin_top
+        end
+
+        def max_content_height
+          pdf.bounds.height - current_page_format.page_margin_top - current_page_format.page_margin_bottom
+        end
+
         def add_blank_page
           pdf.start_new_page(pdf.page_count.zero? ? { size: 'A4' } : {})
         end

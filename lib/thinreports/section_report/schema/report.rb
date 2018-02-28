@@ -6,7 +6,9 @@ module Thinreports
         config_reader report_title: %w( title )
         config_reader page_paper_type: %w( report paper-type ),
                       page_orientation: %w( report orientation ),
-                      page_margin: %w( report margin )
+                      page_margin: %w( report margin ),
+                      page_width: %w[report width],
+                      page_height: %w[report height]
 
         attr_reader :headers, :details, :footers
 
@@ -16,6 +18,10 @@ module Thinreports
 
         def page_margin_bottom
           page_margin[2]
+        end
+
+        def user_paper_type?
+          page_paper_type == 'user'
         end
 
         def initialize(schema_data, headers:, details:, footers:)
