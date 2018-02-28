@@ -5,7 +5,7 @@ module Thinreports
         class Base < Core::Shape::Manager::Format
           config_reader :id, :type
           config_reader :top, :height
-          config_checker true, :display
+          config_reader :display
           config_checker true, auto_expand: 'auto-expand'
 
           attr_reader :items, :item_ids

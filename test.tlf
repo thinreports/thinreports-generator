@@ -521,6 +521,7 @@
       "every-page": false,
       "fixed-bottom": false,
       "auto-expand": true,
+      "display": true,
       "items": [
         {
           "id": "",
@@ -695,6 +696,7 @@
       "every-page": true,
       "fixed-bottom": true,
       "auto-expand": true,
+      "display": false,
       "items": [
         {
           "id": "",
