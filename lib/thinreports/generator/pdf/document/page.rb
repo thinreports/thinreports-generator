@@ -26,7 +26,7 @@ module Thinreports
           stamp(format_id.to_s)
         end
 
-        def start_new_page_for_report(format)
+        def start_new_page_for_section_report(format)
           @current_page_format = format
           pdf.start_new_page(new_basic_page_options(current_page_format))
           pdf.move_down current_page_format.page_margin_top

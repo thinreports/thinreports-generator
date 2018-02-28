@@ -14,7 +14,7 @@ module Thinreports
         def render(report, group)
           doc = pdf.pdf
 
-          pdf.start_new_page_for_report report.schema
+          pdf.start_new_page_for_section_report report.schema
           current_page_height = 0
 
           max_page_height = pdf.max_content_height
@@ -26,7 +26,7 @@ module Thinreports
 
           group.details.each do |detail|
             if current_page_height + section_renderer.content_height(detail) > max_page_height
-              pdf.start_new_page_for_report report.schema
+              pdf.start_new_page_for_section_report report.schema
               current_page_height = 0
 
               group.headers.each do |header|
@@ -42,7 +42,7 @@ module Thinreports
 
           group.footers.each do |footer|
             if current_page_height + section_renderer.content_height(footer) > max_page_height
-              pdf.start_new_page_for_report report.schema
+              pdf.start_new_page_for_section_report report.schema
               current_page_height = 0
             end
             section_renderer.render(footer)
