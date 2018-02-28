@@ -285,6 +285,62 @@
       ]
     },
     {
+      "id": "detail2",
+      "type": "detail",
+      "height": 100.0,
+      "auto-expand": true,
+      "items": [
+        {
+          "id": "",
+          "type": "line",
+          "display": true,
+          "follow-expand": "height",
+          "description": "",
+          "style": {
+            "border-color": "#000000",
+            "border-width": 1,
+            "border-style": "solid"
+          },
+          "x1": 51,
+          "y1": 0,
+          "x2": 479.1,
+          "y2": 100
+        },
+        {
+          "id": "text",
+          "type": "text-block",
+          "display": true,
+          "description": "",
+          "x": 61,
+          "y": 7,
+          "width": 184,
+          "height": 35,
+          "style": {
+            "font-family": [
+              "Helvetica"
+            ],
+            "font-size": 18,
+            "color": "#000000",
+            "text-align": "left",
+            "vertical-align": "top",
+            "line-height": "",
+            "line-height-ratio": "",
+            "letter-spacing": "",
+            "font-style": [],
+            "overflow": "expand",
+            "word-wrap": "none"
+          },
+          "reference-id": "",
+          "value": "",
+          "multiple-line": true,
+          "format": {
+            "base": "",
+            "type": ""
+          }
+        }
+      ]
+    },
+    {
       "id": "summary-1",
       "type": "footer",
       "height": 50.0,

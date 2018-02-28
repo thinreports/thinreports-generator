@@ -31,7 +31,14 @@ params = {
                 text: "ここは明細#{i}です。ここは明細#{i}です。ここは明細#{i}です。ここは明細#{i}です。"
               }
             }
-          },
+          } + [
+            {
+              id: :detail2,
+              items: {
+                text: "detail2\ndetail2\ndetail2"
+              }
+            }
+          ],
         footers: {
           'summary-1': {
             items: {
