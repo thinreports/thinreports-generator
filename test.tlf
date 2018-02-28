@@ -177,6 +177,22 @@
           "texts": [
             "Static テキスト"
           ]
+        },
+        {
+          "id": "",
+          "type": "ellipse",
+          "display": true,
+          "description": "",
+          "style": {
+            "border-color": "#000000",
+            "border-width": 1,
+            "border-style": "solid",
+            "fill-color": "#FFFFFF"
+          },
+          "cx": 307.1,
+          "cy": 29,
+          "rx": 48.5,
+          "ry": 14
         }
       ]
     },

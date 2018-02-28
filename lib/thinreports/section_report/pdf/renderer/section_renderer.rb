@@ -47,6 +47,8 @@ module Thinreports
             @pdf.draw_shape_text(shape)
           elsif shape.type_of?('image')
             @pdf.draw_shape_image(shape)
+          elsif shape.type_of?('ellipse')
+            @pdf.draw_shape_ellipse(shape)
           elsif shape.type_of?('rect')
             @pdf.draw_shape_rect(shape)
           elsif shape.type_of?('line')
