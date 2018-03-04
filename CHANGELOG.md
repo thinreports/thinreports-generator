@@ -1,3 +1,9 @@
+## master
+
+Bug Fixes:
+
+ * Fixed: Prawn::Errors::UnknownFont error occured: "is not a known font" #89
+
 ## 0.10.1
 
 Bug Fixes:
