@@ -7,10 +7,10 @@ module Thinreports
         FONT_STORE = Thinreports.root.join('fonts')
 
         BUILTIN_FONTS = {
-          'IPAMincho'  => { normal: FONT_STORE.join('ipam.ttf').to_s },
-          'IPAPMincho' => { normal: FONT_STORE.join('ipamp.ttf').to_s },
-          'IPAGothic'  => { normal: FONT_STORE.join('ipag.ttf').to_s },
-          'IPAPGothic' => { normal: FONT_STORE.join('ipagp.ttf').to_s }
+          'IPAMincho'  => FONT_STORE.join('ipam.ttf').to_s,
+          'IPAPMincho' => FONT_STORE.join('ipamp.ttf').to_s,
+          'IPAGothic'  => FONT_STORE.join('ipag.ttf').to_s,
+          'IPAPGothic' => FONT_STORE.join('ipagp.ttf').to_s
         }.freeze
 
         DEFAULT_FALLBACK_FONTS = %w[IPAMincho].freeze
@@ -22,7 +22,9 @@ module Thinreports
 
         def setup_fonts
           # Install built-in fonts.
-          pdf.font_families.update(BUILTIN_FONTS)
+          BUILTIN_FONTS.each do |font_name, font_path|
+            install_font(font_name, font_path)
+          end
 
           # Create aliases from the font list provided by Prawn.
           PRAWN_BUINTIN_FONT_ALIASES.each do |alias_name, name|
@@ -69,11 +71,16 @@ module Thinreports
           pdf.font_families.key?(family) ? family : default_family
         end
 
-        # @param [String] font
-        # @param [Symbol] style
+        # @param [String] font_name
+        # @param [:bold, :italic] font_style
         # @return [Boolean]
-        def font_has_style?(font, style)
-          (f = pdf.font_families[font]) && f.key?(style)
+        def font_has_style?(font_name, font_style)
+          font = pdf.font_families[font_name]
+
+          return false unless font
+          return false unless font.key?(font_style)
+
+          font[font_style] != font[:normal]
         end
       end
     end

@@ -17,8 +17,14 @@ class Thinreports::Generator::PDF::TestFont < Minitest::Test
   def test_setup_fonts
     pdf = document.pdf
 
-    Font::BUILTIN_FONTS.each do |name, font|
-      assert_equal font, pdf.font_families[name]
+    Font::BUILTIN_FONTS.each do |name, path|
+      expected_font = {
+        normal: path,
+        bold: path,
+        italic: path,
+        bold_italic: path
+      }
+      assert_equal expected_font, pdf.font_families[name]
     end
 
     Font::PRAWN_BUINTIN_FONT_ALIASES.each do |alias_font, original_font|
@@ -65,16 +71,36 @@ class Thinreports::Generator::PDF::TestFont < Minitest::Test
     end
   end
 
-  def test_font_helpers
-    doc = document
+  def test_default_family
+    assert_equal 'Helvetica', document.default_family
+  end
 
-    assert_equal 'Helvetica', doc.default_family
+  def test_default_family_if_mmissing
+    assert_equal 'Helvetica', document.default_family_if_missing('unknown')
+    assert_equal 'IPAMincho', document.default_family_if_missing('IPAMincho')
+  end
 
-    assert_equal 'Helvetica', doc.default_family_if_missing('unknown')
-    assert_equal 'IPAMincho', doc.default_family_if_missing('IPAMincho')
+  def test_font_has_style?
+    doc = create_document
 
-    assert_equal false, doc.font_has_style?('IPAMincho', :bold)
-    assert_equal true, doc.font_has_style?('Courier New', :bold)
+    assert_equal false, doc.font_has_style?('unknown', :bold)
+
+    doc.pdf.font_families['font_foo'] = {
+      normal: '/path/to/foo.ttf'
+    }
+    assert_equal false, doc.font_has_style?('font_foo', :italic)
+
+    doc.pdf.font_families['font_foo'] = {
+      normal: '/path/to/foo.ttf',
+      bold: '/path/to/foo.ttf'
+    }
+    assert_equal false, doc.font_has_style?('font_foo', :bold)
+
+    doc.pdf.font_families['font_foo'] = {
+      normal: '/path/to/foo.ttf',
+      bold: '/path/to/foo_bold.ttf'
+    }
+    assert_equal true, doc.font_has_style?('font_foo', :bold)
   end
 
   def document
