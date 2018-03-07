@@ -51,10 +51,10 @@ module Thinreports
         end
 
         # @param [Thinreports::Core::Shape::Text::Internal] shape
-        def draw_shape_text(shape)
+        def draw_shape_text(shape, dheight = 0)
           x, y, w, h = shape.format.attributes.values_at('x', 'y', 'width', 'height')
           text(
-            shape.texts.join("\n"), x, y, w, h,
+            shape.texts.join("\n"), x, y, w, h + dheight,
             build_text_attributes(shape.style.finalized_styles)
           )
         end

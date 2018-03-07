@@ -9,7 +9,13 @@ module Thinreports
           elsif shape.type_of?(Core::Shape::ImageBlock::TYPE_NAME)
             pdf.draw_shape_iblock(shape)
           elsif shape.type_of?('text')
-            pdf.draw_shape_text(shape)
+            case shape.format.follow_expand
+            when 'height'
+              # セクションにあわせて伸びる
+              pdf.draw_shape_text(shape, expanded_height)
+            else
+              pdf.draw_shape_text(shape)
+            end
           elsif shape.type_of?('image')
             pdf.draw_shape_image(shape)
           elsif shape.type_of?('ellipse')
