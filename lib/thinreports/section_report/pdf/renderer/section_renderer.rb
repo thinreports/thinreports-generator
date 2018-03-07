@@ -50,7 +50,13 @@ module Thinreports
           elsif shape.type_of?('ellipse')
             @pdf.draw_shape_ellipse(shape)
           elsif shape.type_of?('rect')
-            @pdf.draw_shape_rect(shape)
+            case shape.format.follow_expand
+              when 'height'
+                # セクションにあわせて伸びる
+                @pdf.draw_shape_rect(shape, expanded_height)
+              else
+                @pdf.draw_shape_rect(shape)
+            end
           elsif shape.type_of?('line')
             case shape.format.follow_expand
               when 'height'

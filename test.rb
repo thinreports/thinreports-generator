@@ -21,7 +21,8 @@ params = {
           },
           'page-header': {
             items: {
-              image: ROOT.join('examples/dynamic_image/img50x50.png')
+              image: ROOT.join('examples/dynamic_image/img50x50.png'),
+              text: 'ここはページヘッダーです' * 5
             }
           }
         },
