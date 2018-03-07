@@ -116,6 +116,7 @@
           "y": 0,
           "width": 555.2,
           "height": 60,
+          "follow-expand": "height",
           "style": {
             "border-color": "#000000",
             "border-width": 1,
@@ -123,6 +124,38 @@
             "fill-color": "#bfbfbf"
           },
           "border-radius": 0
+        },
+        {
+          "id": "text",
+          "type": "text-block",
+          "display": true,
+          "description": "",
+          "x": 200,
+          "y": 7,
+          "width": 184,
+          "height": 35,
+          "style": {
+            "font-family": [
+              "Helvetica"
+            ],
+            "font-size": 18,
+            "color": "#000000",
+            "text-align": "left",
+            "vertical-align": "middle",
+            "line-height": "",
+            "line-height-ratio": "",
+            "letter-spacing": "",
+            "font-style": [],
+            "overflow": "expand",
+            "word-wrap": "none"
+          },
+          "reference-id": "",
+          "value": "",
+          "multiple-line": true,
+          "format": {
+            "base": "",
+            "type": ""
+          }
         },
         {
           "id": "",
