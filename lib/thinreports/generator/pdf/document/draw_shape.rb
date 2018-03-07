@@ -72,12 +72,12 @@ module Thinreports
         end
 
         # @param [Thinreports::Core::Shape::Basic::Internal] shape
-        def draw_shape_rect(shape)
+        def draw_shape_rect(shape, dheight = 0)
           x, y, w, h = shape.format.attributes.values_at('x', 'y', 'width', 'height')
           rect_attributes = build_graphic_attributes(shape.style.finalized_styles) do |attrs|
             attrs[:radius] = shape.format.attributes['rx']
           end
-          rect(x, y, w, h, rect_attributes)
+          rect(x, y, w, h + dheight, rect_attributes)
         end
       end
     end
