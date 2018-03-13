@@ -23,8 +23,10 @@ module Thinreports
         def setup_fonts
           # Install built-in fonts.
           BUILTIN_FONTS.each do |font_name, font_path|
-            install_font(font_name, font_path)
+            install_font(font_name, normal: font_path)
           end
+
+          install_custom_fonts
 
           # Create aliases from the font list provided by Prawn.
           PRAWN_BUINTIN_FONT_ALIASES.each do |alias_name, name|
@@ -37,7 +39,7 @@ module Thinreports
             if pdf.font_families.key?(font)
               font
             else
-              install_font "Custom-fallback-font#{i}", font
+              install_font "Custom-fallback-font#{i}", normal: font
             end
           end
 
@@ -46,18 +48,30 @@ module Thinreports
         end
 
         # @param [String] name
-        # @param [String] file
+        # @param [String] normal (required) Path for normal style font
+        # @param [String] bold Path for bold style font. Set :normal by default.
+        # @param [String] italic Path for italic style font. Set :normal by default.
+        # @param [String] bold_italic Path for bold+italic style font. Set :normal by default.
+        # @raise [Thinreports::Errors::FontFileNotFound]
         # @return [String] installed font name
-        def install_font(name, file)
-          raise Errors::FontFileNotFound unless File.exist?(file)
+        def install_font(name, normal:, bold: normal, italic: normal, bold_italic: normal)
+          [normal, bold, italic, bold_italic].uniq.each do |font_file|
+            raise Thinreports::Errors::FontFileNotFound, font_file unless File.exist?(font_file)
+          end
 
           pdf.font_families[name] = {
-            normal: file,
-            bold: file,
-            italic: file,
-            bold_italic: file
+            normal: normal,
+            bold: bold,
+            italic: italic,
+            bold_italic: bold_italic
           }
           name
+        end
+
+        def install_custom_fonts
+          Thinreports.config.fonts.each do |font_name, font_paths|
+            install_font(font_name, **font_paths)
+          end
         end
 
         # @return [String]

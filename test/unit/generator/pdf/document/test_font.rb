@@ -32,7 +32,18 @@ class Thinreports::Generator::PDF::TestFont < Minitest::Test
                    pdf.font_families[original_font]
     end
 
-    assert_equal Font::DEFAULT_FALLBACK_FONTS, %w[IPAMincho]
+    assert_equal %w[IPAMincho], pdf.fallback_fonts
+  end
+
+  def test_setup_fonts_with_custom_fonts
+    Thinreports.config.register_font('Foo', normal: data_file('font.ttf'))
+
+    assert_equal({
+      normal: data_file('font.ttf'),
+      bold: data_file('font.ttf'),
+      italic: data_file('font.ttf'),
+      bold_italic: data_file('font.ttf')
+    }, document.pdf.font_families['Foo'])
   end
 
   def test_setup_fonts_with_custom_fallback_fonts
