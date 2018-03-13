@@ -25,21 +25,53 @@ module Thinreports
         def text_box(content, x, y, w, h, attrs = {})
           w, h = s2f(w, h)
 
-          box_attrs = text_box_attrs(
-            x, y, w, h,
-            single: attrs.delete(:single),
-            overflow: attrs[:overflow]
-          )
+          return if attrs[:color] == 'none'
 
-          # Do not break by word unless :word_wrap is :break_word
-          content = text_without_line_wrap(content) if attrs[:word_wrap] == :none
+          # Building parameters for box
+          box_params = {}.tap do |params|
+            params[:at] = pos(x, y)
+            params[:width] = w
 
-          with_text_styles(attrs) do |built_attrs, font_styles|
-            pdf.formatted_text_box(
-              [{ text: content, styles: font_styles }],
-              built_attrs.merge(box_attrs)
-            )
+            [
+              :align,
+              :valign,
+              :overflow
+            ].each { |param_key| params[param_key] = attrs[param_key] }
+
+            if attrs[:single]
+              params[:single_line] = attrs[:overflow] != :expand
+            else
+              params[:height] = h
+            end
+
+            if attrs[:line_height]
+              params[:leading] = text_line_leading(attrs[:line_height], name: attrs[:font], size: attrs[:size])
+            end
+
+            if attrs[:letter_spacing]
+              params[:character_spacing] = attrs[:letter_spacing]
+            end
           end
+
+          # Building parameters for text
+          text_params = {}.tap do |params|
+            params[:text] = attrs[:word_wrap] == :none ? text_without_line_wrap(content) : content
+            params[:styles] = attrs[:styles] || []
+            params[:size] = attrs[:size]
+            params[:font] = attrs[:font]
+            params[:color] = parse_color(attrs[:color])
+          end
+
+          if need_bold_style_emulation?(text_params[:font], text_params[:styles])
+            box_params[:mode] = :fill_stroke
+
+            emulate_bold_style(text_params[:color], text_params[:size]) do
+              pdf.formatted_text_box([text_params], box_params)
+            end
+          else
+            pdf.formatted_text_box([text_params], box_params)
+          end
+
         rescue Prawn::Errors::CannotFit
           # Nothing to do.
           #
@@ -56,64 +88,6 @@ module Thinreports
 
         private
 
-        # @param x (see #text_box)
-        # @param y (see #text_box)
-        # @param w (see #text_box)
-        # @param h (see #text_box)
-        # @param [Hash] states
-        # @option states [Boolean] :single
-        # @option states [Symbold] :overflow
-        # @return [Hash]
-        def text_box_attrs(x, y, w, h, states = {})
-          attrs = {
-            at: pos(x, y),
-            width: s2f(w)
-          }
-          if states[:single]
-            states[:overflow] != :expand ? attrs.merge(single_line: true) : attrs
-          else
-            attrs.merge(height: s2f(h))
-          end
-        end
-
-        # @param attrs (see #text)
-        # @yield [built_attrs, font_styles]
-        # @yieldparam [Hash] built_attrs The finalized attributes.
-        # @yieldparam [Array] font_styles The finalized styles.
-        def with_text_styles(attrs, &block)
-          # When no color is given, do not draw.
-          return unless attrs.key?(:color) && attrs[:color] != 'none'
-
-          save_graphics_state
-
-          fontinfo = {
-            name: attrs.delete(:font).to_s,
-            color: parse_color(attrs.delete(:color)),
-            size: s2f(attrs.delete(:size))
-          }
-
-          # Add the specified value to :leading option.
-          line_height = attrs.delete(:line_height)
-          if line_height
-            attrs[:leading] = text_line_leading(
-              s2f(line_height),
-              name: fontinfo[:name],
-              size: fontinfo[:size]
-            )
-          end
-
-          # Set the :character_spacing option.
-          spacing = attrs.delete(:letter_spacing)
-          attrs[:character_spacing] = s2f(spacing) if spacing
-
-          # Or... with_font_styles(attrs, fontinfo, &block)
-          with_font_styles(attrs, fontinfo) do |modified_attrs, styles|
-            block.call(modified_attrs, styles)
-          end
-
-          restore_graphics_state
-        end
-
         # @param [Numeric] line_height
         # @param [Hash] font
         # @option font [String] :name Name of font.
@@ -129,43 +103,24 @@ module Thinreports
           content.gsub(/ /, Prawn::Text::NBSP)
         end
 
-        # @param [Hash] attrs
-        # @param [Hash] font
-        # @option font [String] :color
-        # @option font [Numeric] :size
-        # @option font [String] :name
-        # @yield [attributes, styles]
-        # @yieldparam [Hash] modified_attrs
-        # @yieldparam [Array] styles
-        def with_font_styles(attrs, font, &block)
-          # Building font styles.
-          styles = attrs.delete(:styles)
+        # @param [String] font_family
+        # @param [Array<Symbol>] font_styles
+        # @return [Boolean]
+        def need_bold_style_emulation?(font_family, font_styles)
+          font_styles.include?(:bold) && !font_has_style?(font_family, :bold)
+        end
 
-          if styles
-            manual, styles = styles.partition do |style|
-              %i[bold italic].include?(style) && !font_has_style?(font[:name], style)
-            end
-          end
+        # @param [String] font_color
+        # @param [Integer, Float] font_size
+        def emulate_bold_style(font_color, font_size, &block)
+          save_graphics_state
 
-          # Emulate bold style.
-          if manual && manual.include?(:bold)
-            pdf.stroke_color(font[:color])
-            pdf.line_width(font[:size] * 0.025)
+          pdf.stroke_color(font_color)
+          pdf.line_width(font_size * 0.025)
 
-            # Change rendering mode to :fill_stroke.
-            attrs[:mode] = :fill_stroke
-          end
+          yield
 
-          # Emulate italic style.
-          if manual && manual.include?(:italic)
-            # FIXME
-            # pdf.transformation_matrix(1, 0, 0.26, 1, 0, 0)
-          end
-
-          pdf.font(font[:name], size: font[:size]) do
-            pdf.fill_color(font[:color])
-            block.call(attrs, styles || [])
-          end
+          restore_graphics_state
         end
       end
     end
