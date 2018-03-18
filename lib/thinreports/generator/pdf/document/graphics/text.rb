@@ -23,44 +23,13 @@ module Thinreports
         # @option attrs [:trancate, :shrink_to_fit, :expand] :overflow (:trancate)
         # @option attrs [:none, :break_word] :word_wrap (:none)
         def text_box(content, x, y, w, h, attrs = {})
-          w, h = s2f(w, h)
 
           return if attrs[:color] == 'none'
 
           # Building parameters for box
-          box_params = {}.tap do |params|
-            params[:at] = pos(x, y)
-            params[:width] = w
-
-            [
-              :align,
-              :valign,
-              :overflow
-            ].each { |param_key| params[param_key] = attrs[param_key] }
-
-            if attrs[:single]
-              params[:single_line] = attrs[:overflow] != :expand
-            else
-              params[:height] = h
-            end
-
-            if attrs[:line_height]
-              params[:leading] = text_line_leading(attrs[:line_height], name: attrs[:font], size: attrs[:size])
-            end
-
-            if attrs[:letter_spacing]
-              params[:character_spacing] = attrs[:letter_spacing]
-            end
-          end
-
+          box_params = build_box_params(x, y, w, h, attrs)
           # Building parameters for text
-          text_params = {}.tap do |params|
-            params[:text] = attrs[:word_wrap] == :none ? text_without_line_wrap(content) : content
-            params[:styles] = attrs[:styles] || []
-            params[:size] = attrs[:size]
-            params[:font] = attrs[:font]
-            params[:color] = parse_color(attrs[:color])
-          end
+          text_params = build_text_params(content, attrs)
 
           if need_bold_style_emulation?(text_params[:font], text_params[:styles])
             box_params[:mode] = :fill_stroke
@@ -84,6 +53,55 @@ module Thinreports
         def text(content, x, y, w, h, attrs = {})
           # Set the :overflow property to :shirink_to_fit.
           text_box(content, x, y, w, h, { overflow: :shirink_to_fit }.merge(attrs))
+        end
+
+        # @private
+        #
+        # @param (see #text_box)
+        # @return [Hash] Returns first parameter (Formatted Text Array) of Prawn::Document#formatted_text_box
+        #   See http://prawnpdf.org/api-docs/2.0/Prawn/Text/Formatted.html
+        def build_box_params(x, y, w, h, attrs)
+          w, h = s2f(w, h)
+
+          {}.tap do |params|
+            params[:at] = pos(x, y)
+            params[:width] = w
+
+            [
+              :align,
+              :valign,
+              :overflow
+            ].each { |param_key| params[param_key] = attrs[param_key] }
+
+            if attrs[:single]
+              params[:single_line] = attrs[:overflow] != :expand
+            else
+              params[:height] = h
+            end
+
+            if attrs[:line_height]
+              params[:leading] = text_line_leading(attrs[:line_height], name: attrs[:font], size: attrs[:size])
+            end
+
+            if attrs[:letter_spacing]
+              params[:character_spacing] = attrs[:letter_spacing]
+            end
+          end
+        end
+
+        # @private
+        #
+        # @param (see #text_box)
+        # @return [Hash] Returns second parameter (Options) of Prawn::Document#formatted_text_box
+        #   See http://prawnpdf.org/api-docs/2.0/Prawn/Text.html#text_box-instance_method
+        def build_text_params(content, attrs)
+          {}.tap do |params|
+            params[:text] = attrs[:word_wrap] == :none ? text_without_line_wrap(content) : content
+            params[:styles] = attrs[:styles] || []
+            params[:size] = attrs[:size]
+            params[:font] = attrs[:font]
+            params[:color] = parse_color(attrs[:color])
+          end
         end
 
         private
