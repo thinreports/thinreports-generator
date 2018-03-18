@@ -22,6 +22,7 @@ module Thinreports
         # @option attrs [Boolean] :single (false)
         # @option attrs [:trancate, :shrink_to_fit, :expand] :overflow (:trancate)
         # @option attrs [:none, :break_word] :word_wrap (:none)
+        # @raise [Thinreports::Errors::UnknownFont] When :font can't be found in built-in fonts and registerd fonts
         def text_box(content, x, y, w, h, attrs = {})
 
           return if attrs[:color] == 'none'
@@ -40,7 +41,8 @@ module Thinreports
           else
             pdf.formatted_text_box([text_params], box_params)
           end
-
+        rescue Prawn::Errors::UnknownFont => e
+          raise Thinreports::Errors::UnknownFont, e
         rescue Prawn::Errors::CannotFit
           # Nothing to do.
           #
