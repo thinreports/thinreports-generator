@@ -104,8 +104,8 @@ module Thinreports
           end
         end
 
-        private
-
+        # @private
+        #
         # @param [Numeric] line_height
         # @param [Hash] font
         # @option font [String] :name Name of font.
@@ -115,12 +115,16 @@ module Thinreports
           line_height - pdf.font(font[:name], size: font[:size]).height
         end
 
+        # @private
+        #
         # @param [String] content
         # @return [String]
         def text_without_line_wrap(content)
           content.gsub(/ /, Prawn::Text::NBSP)
         end
 
+        # @private
+        #
         # @param [String] font_family
         # @param [Array<Symbol>] font_styles
         # @return [Boolean]
@@ -128,6 +132,8 @@ module Thinreports
           font_styles.include?(:bold) && !font_has_style?(font_family, :bold)
         end
 
+        # @private
+        #
         # @param [String] font_color
         # @param [Integer, Float] font_size
         def emulate_bold_style(font_color, font_size, &block)
