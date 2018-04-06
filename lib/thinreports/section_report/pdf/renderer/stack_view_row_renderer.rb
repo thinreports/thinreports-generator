@@ -5,7 +5,7 @@ require_relative 'draw_item'
 module Thinreports
   module SectionReport
     module Renderer
-      class SectionRenderer
+      class StackViewRowRenderer
         include ContentHeight
         include DrawItem
 
@@ -13,13 +13,13 @@ module Thinreports
           @pdf = pdf
         end
 
-        def render(section)
+        def render(row)
           doc = pdf.pdf
 
-          actual_height = content_height(section)
+          actual_height = content_height(row)
           doc.bounding_box([0, doc.cursor], width: doc.bounds.width, height: actual_height) do
-            section.items.each do |item|
-              draw_item(item, (actual_height - section.schema.height))
+            row.items.each do |item|
+              draw_item(item, (actual_height - row.schema.height))
             end
             # doc.stroke_bounds
           end
