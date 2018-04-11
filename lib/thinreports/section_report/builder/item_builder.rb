@@ -21,8 +21,16 @@ module Thinreports
 
           ## TODO: renderするときにrows を取り出せるように,StackView の Interfaceを拡張する
           if item.internal.format.attributes['type'] == Core::Shape::StackView::TYPE_NAME
+            row_schemas = item.internal.format.rows
+
+            schema_row_ids = row_schemas.map { |row_schema| row_schema.attributes['id'].to_sym }.to_set
+            item_params.each_key do |row_id|
+              next if row_id == :display # XXX
+              raise Thinreports::Errors::UnknownSectionId.new(:row, row_id) unless schema_row_ids.include? row_id
+            end
+
             rows = []
-            item.internal.format.rows.each do |row_schema|
+            row_schemas.each do |row_schema|
               row_params = item_params[row_schema.attributes['id'].to_sym] || {}
               next unless row_enabled?(row_schema, row_params)
               items = build_row_items(row_schema, row_params)
@@ -42,12 +50,18 @@ module Thinreports
           params.is_a?(Hash) ? params : { value: params }
         end
 
-        def build_row_items(row_scheme, row_params)
+        def build_row_items(row_schema, row_params)
           items_params = {}
           unless row_params.nil?
             items_params = row_params[:items] || {}
           end
-          row_scheme.shapes.each_with_object([]) do |shape, items|
+
+          schema_ids = row_schema.shapes.map { |shape| shape.attributes['id']&.to_sym }.to_set.subtract([nil, :""])
+          items_params.each_key do |key|
+            raise Thinreports::Errors::UnknownItemId.new(key, 'Row') unless schema_ids.include? key
+          end
+
+          row_schema.shapes.each_with_object([]) do |shape, items|
             item = ItemBuilder.new(shape).build(items_params[shape.attributes['id']&.to_sym])
             items << item if item.visible?
           end

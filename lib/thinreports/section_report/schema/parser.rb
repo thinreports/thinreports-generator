@@ -25,7 +25,7 @@ module Thinreports
         attr_reader :schema_data
 
         def parse_sections(section_type, section_schema_datas = nil)
-          return [] if section_schema_datas.nil?
+          return {} if section_schema_datas.nil?
 
           section_schema_datas.each_with_object({}) do |section_schema_data, section_schemas|
             id, type = section_schema_data.values_at 'id', 'type'
