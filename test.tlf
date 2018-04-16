@@ -25,6 +25,7 @@
     {
       "id": "top-page-header",
       "type": "header",
+      "display": true,
       "height": 60.0,
       "every-page": true,
       "auto-expand": true,
@@ -52,6 +53,7 @@
     {
       "id": "document-header",
       "type": "header",
+      "display": true,
       "height": 250.0,
       "every-page": false,
       "auto-expand": true,
@@ -412,6 +414,7 @@
     {
       "id": "page-header",
       "type": "header",
+      "display": true,
       "height": 60.0,
       "every-page": true,
       "auto-expand": true,
