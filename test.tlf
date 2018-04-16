@@ -65,6 +65,7 @@
           "x": 0,
           "y": 0,
           "width": 172.5,
+          "display": true,
           "rows": [
             {
               "id": "top_row",
@@ -119,6 +120,7 @@
                   "x": 0,
                   "y": 0,
                   "width": 172.5,
+                  "display": true,
                   "rows": [
                     {
                       "id": "child_top_row",
@@ -260,6 +262,7 @@
           "x": 200,
           "y": 100,
           "width": 172.5,
+          "display": true,
           "rows": [
             {
               "id": "top_row",
