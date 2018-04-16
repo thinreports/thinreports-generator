@@ -18,50 +18,47 @@ params = {
           "document-header": {
             items: {
               sender_info_view_left: {
-                display: true,
-                top_row: {
-                  display: true,
-                  items: {
-                    test_text: "foo\n" * 15
-                  }
-                },
-                bottom_row: {
-                  display: true,
-                  items: {
-                    child_stack_view: {
-                      display: true,
-                      child_top_row: {
-                        display: true,
-                        items: {
-                          test_text: "child_foo"
+                rows: {
+                  top_row: {
+                    items: {
+                      test_text: "foo\n" * 15
+                    }
+                  },
+                  bottom_row: {
+                    items: {
+                      child_stack_view: {
+                        rows: {
+                          child_top_row: {
+                            items: {
+                              test_text: "child_foo"
+                            }
+                          },
+                          child_middle_row: {
+                            display: false
+                          },
+                          child_bottom_row: {
+                            items: {
+                              test_text: "child_bar\n" * 1
+                            }
+                          }
                         }
                       },
-                      child_middle_row: {
-                        display: false
-                      },
-                      child_bottom_row: {
-                        display: true,
-                        items: {
-                          test_text: "child_bar\n" * 1
-                        }
-                      }
-                    },
-                    child_image: ROOT.join('examples/dynamic_image/img50x50.png')
+                      child_image: ROOT.join('examples/dynamic_image/img50x50.png')
+                    }
                   }
                 }
               },
               sender_info_view_right: {
-                display: true,
-                top_row: {
-                  display: true,
-                  items: {
-                    test_text: 'foo'
-                  }
-                },
-                bottom_row: {
-                  display: true,
-                  items: {
-                    test_text: 'hoge'
+                rows: {
+                  top_row: {
+                    items: {
+                      test_text: 'foo'
+                    }
+                  },
+                  bottom_row: {
+                    items: {
+                      test_text: 'hoge'
+                    }
                   }
                 }
               },
