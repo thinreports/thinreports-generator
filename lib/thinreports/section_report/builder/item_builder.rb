@@ -21,17 +21,17 @@ module Thinreports
 
           ## TODO: renderするときにrows を取り出せるように,StackView の Interfaceを拡張する
           if item.internal.format.attributes['type'] == Core::Shape::StackView::TYPE_NAME
-            row_schemas = item.internal.format.rows
+            rows_params = params[:rows] || {}
+            rows_schema = item.internal.format.rows
 
-            schema_row_ids = row_schemas.map { |row_schema| row_schema.attributes['id'].to_sym }.to_set
-            item_params.each_key do |row_id|
-              next if row_id == :display # XXX
+            schema_row_ids = rows_schema.map { |row_schema| row_schema.attributes['id'].to_sym }.to_set
+            rows_params.each_key do |row_id|
               raise Thinreports::Errors::UnknownSectionId.new(:row, row_id) unless schema_row_ids.include? row_id
             end
 
             rows = []
-            row_schemas.each do |row_schema|
-              row_params = item_params[row_schema.attributes['id'].to_sym] || {}
+            rows_schema.each do |row_schema|
+              row_params = rows_params[row_schema.attributes['id'].to_sym] || {}
               next unless row_enabled?(row_schema, row_params)
               items = build_row_items(row_schema, row_params)
               rows << ReportData::Row.new(row_schema, items, nil)
