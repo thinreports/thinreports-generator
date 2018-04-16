@@ -13,7 +13,7 @@ module Thinreports
             s.internal.type_of?(Core::Shape::StackView::TYPE_NAME)
           end
 
-          h_array = [0]
+          h_array = [section.min_height || 0]
           h_array << section.schema.height unless section.schema.auto_shrink?
 
           layouts = text_items.map {|t| text_layout(section, t)} + stack_view_items.map {|s| stack_view_layout(section, s)}

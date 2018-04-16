@@ -49,7 +49,7 @@ module Thinreports
             next unless section_enabled?(section_schema, section_params)
 
             items = build_items(section_schema, section_params[:items] || {})
-            sections << ReportData::Section.new(section_schema, items)
+            sections << ReportData::Section.new(section_schema, items, section_params[:min_height])
           end
         end
 
@@ -61,7 +61,7 @@ module Thinreports
             raise Thinreports::Errors::UnknownSectionId.new(:detail, detail_id) unless detail_schema
 
             items = build_items(detail_schema, detail_params[:items] || {})
-            details << ReportData::Section.new(detail_schema, items)
+            details << ReportData::Section.new(detail_schema, items, detail_params[:min_height])
           end
         end
 
