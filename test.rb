@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'bundler'
 require 'pathname'
 
@@ -14,57 +15,57 @@ params = {
     groups: [
       {
         headers: {
-          'document-header': {
+          "document-header": {
             items: {
-              text: 'ここはドキュメントヘッダーです' * 3
-            }
-          },
-          'page-header': {
-            items: {
-              image: ROOT.join('examples/dynamic_image/img50x50.png'),
-              text: 'ここはページヘッダーです' * 5
-            }
-          }
-        },
-        details: (1...11).map{|i| {
-              id: :detail,
-              items: {
-                text: "ここは明細#{i}です。ここは明細#{i}です。ここは明細#{i}です。ここは明細#{i}です。"
-              }
-            }
-          } + [
-            {
-              id: :detail2,
-              items: {
-                text: "detail2\ndetail2\ndetail2"
-              }
-            }
-          ],
-        footers: {
-          'summary-1': {
-            items: {
-              text: 'ここは合計部1です'
-            }
-          },
-          'summary-2': {
-            display: false,
-            items: {
-              text: 'ここは合計部2です'
-            }
-          },
-          'summary-3': {
-            items: {
-              text: 'ここは合計部3です' * 3
-            }
-          },
-          'notes': {
-            items: {
-              text: 'ここは備考1234です'
-            }
-          },
-          'fixed-page-footer': {
-            items: {
-              text: 'ここは下部固定ページフッターです'
+              sender_info_view_left: {
+                display: true,
+                top_row: {
+                  display: true,
+                  items: {
+                    test_text: "foo\n" * 15
+                  }
+                },
+                bottom_row: {
+                  display: true,
+                  items: {
+                    child_stack_view: {
+                      display: true,
+                      child_top_row: {
+                        display: true,
+                        items: {
+                          test_text: "child_foo"
+                        }
+                      },
+                      child_middle_row: {
+                        display: false
+                      },
+                      child_bottom_row: {
+                        display: true,
+                        items: {
+                          test_text: "child_bar\n" * 1
+                        }
+                      }
+                    },
+                    child_image: ROOT.join('examples/dynamic_image/img50x50.png')
+                  }
+                }
+              },
+              sender_info_view_right: {
+                display: true,
+                top_row: {
+                  display: true,
+                  items: {
+                    test_text: 'foo'
+                  }
+                },
+                bottom_row: {
+                  display: true,
+                  items: {
+                    test_text: 'hoge'
+                  }
+                }
+              },
+              test_text3: "foo3"
             }
           }
         }

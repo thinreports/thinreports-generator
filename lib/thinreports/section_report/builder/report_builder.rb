@@ -40,6 +40,10 @@ module Thinreports
             when :footer then schema.footers
             end
 
+          sections_params.each_key do |key|
+            raise Thinreports::Errors::UnknownSectionId.new(section_type, key) unless sections_schemas.has_key? key
+          end
+
           sections_schemas.each_with_object([]) do |(section_id, section_schema), sections|
             section_params = sections_params[section_id.to_sym] || {}
             next unless section_enabled?(section_schema, section_params)
@@ -62,6 +66,10 @@ module Thinreports
         end
 
         def build_items(section_schema, items_params)
+          schema_ids = section_schema.items.map { |item| item.id&.to_sym }.to_set.subtract([nil, :""])
+          items_params.each_key do |key|
+            raise Thinreports::Errors::UnknownItemId.new(key, 'Section') unless schema_ids.include? key
+          end
           section_schema.items.each_with_object([]) do |item_schema, items|
             item = ItemBuilder.new(item_schema).build(items_params[item_schema.id.to_sym])
             items << item if item.visible?

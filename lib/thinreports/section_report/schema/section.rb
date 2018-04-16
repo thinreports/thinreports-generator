@@ -7,6 +7,7 @@ module Thinreports
           config_reader :top, :height
           config_reader :display
           config_checker true, auto_expand: 'auto-expand'
+          config_checker true, auto_shrink: 'auto-shrink'
 
           attr_reader :items, :item_ids
 
