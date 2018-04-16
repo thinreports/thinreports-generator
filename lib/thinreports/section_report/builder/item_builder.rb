@@ -34,7 +34,7 @@ module Thinreports
               row_params = item_params[row_schema.attributes['id'].to_sym] || {}
               next unless row_enabled?(row_schema, row_params)
               items = build_row_items(row_schema, row_params)
-              rows << ReportData::Row.new(row_schema, items)
+              rows << ReportData::Row.new(row_schema, items, nil)
             end
             item.internal.rows = rows
           end
