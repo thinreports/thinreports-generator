@@ -5,7 +5,7 @@ module Thinreports
     class PDF
       module DrawShape
         # @param [Thinreports::Core::Shape::TextBlock::Internal] shape
-        def draw_shape_tblock(shape)
+        def draw_shape_tblock(shape, dheight = 0, ignore_overflow: false, &block)
           x, y, w, h = shape.format.attributes.values_at('x', 'y', 'width', 'height')
 
           content = shape.real_value.to_s
@@ -13,12 +13,14 @@ module Thinreports
 
           attrs = build_text_attributes(shape.style.finalized_styles)
 
+          attrs = attrs.merge(overflow: :truncate) if ignore_overflow
+
           unless shape.multiple?
             content = content.tr("\n", ' ')
             attrs[:single] = true
           end
 
-          text_box(content, x, y, w, h, attrs)
+          text_box(content, x, y, w, h + dheight, attrs, &block)
         end
 
         def draw_shape_pageno(shape, page_no, page_count)
@@ -51,10 +53,10 @@ module Thinreports
         end
 
         # @param [Thinreports::Core::Shape::Text::Internal] shape
-        def draw_shape_text(shape)
+        def draw_shape_text(shape, dheight = 0)
           x, y, w, h = shape.format.attributes.values_at('x', 'y', 'width', 'height')
           text(
-            shape.texts.join("\n"), x, y, w, h,
+            shape.texts.join("\n"), x, y, w, h + dheight,
             build_text_attributes(shape.style.finalized_styles)
           )
         end
@@ -66,18 +68,18 @@ module Thinreports
         end
 
         # @param [Thinreports::Core::Shape::Basic::Internal] shape
-        def draw_shape_line(shape)
+        def draw_shape_line(shape, dy1 = 0, dy2 = 0)
           x1, y1, x2, y2 = shape.format.attributes.values_at('x1', 'y1', 'x2', 'y2')
-          line(x1, y1, x2, y2, build_graphic_attributes(shape.style.finalized_styles))
+          line(x1, y1 + dy1, x2, y2 + dy2, build_graphic_attributes(shape.style.finalized_styles))
         end
 
         # @param [Thinreports::Core::Shape::Basic::Internal] shape
-        def draw_shape_rect(shape)
+        def draw_shape_rect(shape, dheight = 0)
           x, y, w, h = shape.format.attributes.values_at('x', 'y', 'width', 'height')
           rect_attributes = build_graphic_attributes(shape.style.finalized_styles) do |attrs|
             attrs[:radius] = shape.format.attributes['rx']
           end
-          rect(x, y, w, h, rect_attributes)
+          rect(x, y, w, h + dheight, rect_attributes)
         end
       end
     end

@@ -19,7 +19,7 @@ namespace :examples do
     casename = File.basename(File.dirname(f))
 
     desc "Run example: #{casename}"
-    task casename.to_sym => :_init do
+    task casename.to_sym do
       require_relative 'examples/helper'
       require_relative "examples/#{casename}/#{casename}"
     end
