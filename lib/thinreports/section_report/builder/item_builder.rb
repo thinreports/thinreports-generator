@@ -13,15 +13,10 @@ module Thinreports
 
           params = normalize_params(item_params)
 
-          # TODO:
-          # * PageNumber#format
-          # * TextBlock#format_enabled
-
           item.visible(params[:display]) if params.key?(:display)
           item.value(params[:value]) if params.key?(:value)
           item.styles(params[:styles]) if params.key?(:styles)
 
-          ## TODO: renderするときにrows を取り出せるように,StackView の Interfaceを拡張する
           if item.internal.format.attributes['type'] == Core::Shape::StackView::TYPE_NAME
             StackViewBuilder.new(item).update(params)
           end
