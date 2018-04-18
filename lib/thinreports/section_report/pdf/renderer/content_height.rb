@@ -3,7 +3,10 @@ module Thinreports
     module Renderer
       module ContentHeight
         def content_height(section)
-          return section.schema.height unless section.schema.auto_expand? && section.items
+          h_array = [section.min_height || 0]
+          h_array << section.schema.height unless section.schema.auto_shrink?
+
+          return h_array.max unless section.schema.auto_expand? && section.items
 
           text_items = section.items.select do |s|
             s.internal.type_of?(Core::Shape::TextBlock::TYPE_NAME) && s.internal.style.finalized_styles['overflow'] == 'expand'
@@ -12,9 +15,6 @@ module Thinreports
           stack_view_items = section.items.select do |s|
             s.internal.type_of?(Core::Shape::StackView::TYPE_NAME)
           end
-
-          h_array = [section.min_height || 0]
-          h_array << section.schema.height unless section.schema.auto_shrink?
 
           layouts = text_items.map {|t| text_layout(section, t)} + stack_view_items.map {|s| stack_view_layout(section, s)}
           unless layouts.empty?
