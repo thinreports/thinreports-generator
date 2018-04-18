@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'stack_view_data'
+
 module Thinreports
   module SectionReport
     module Builder
@@ -22,7 +24,7 @@ module Thinreports
             row_params = rows_params[row_schema.attributes['id'].to_sym] || {}
             next unless row_enabled?(row_schema, row_params)
             items = build_row_items(row_schema, row_params)
-            rows << ReportData::Row.new(row_schema, items, nil)
+            rows << StackViewData::Row.new(row_schema, items, nil)
           end
           item.internal.rows = rows
         end
