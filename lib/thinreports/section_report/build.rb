@@ -22,7 +22,7 @@ module Thinreports
         when report_params[:layout_data]
           loader.load_from_data(report_params[:layout_data])
         else
-          # FIXME: Better error handling
+          raise Errors::LayoutFileNotFound
         end
       end
     end
