@@ -3,7 +3,7 @@
 example :section_report, 'section report' do |t|
   params = {
     type: :section,
-    layout: t.resource('section_report.tlf'),
+    layout_file: t.resource('section_report.tlf'),
     params: {
       start_page_number: 1,
       groups: [

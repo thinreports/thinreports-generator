@@ -3,7 +3,7 @@
 example :stack_view_in_section_report, 'stack view in section report' do |t|
   params = {
     type: :section,
-    layout: t.resource('stack_view_in_section_report.tlf'),
+    layout_file: t.resource('stack_view_in_section_report.tlf'),
     params: {
       start_page_number: 1,
       groups: [
