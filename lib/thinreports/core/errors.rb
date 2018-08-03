@@ -33,6 +33,13 @@ module Thinreports
       end
     end
 
+    class UnknownFont < Basic
+      # @param [Prawn::Errors::UnknownFont] exception
+      def initialize(exception)
+        super("#{exception.class}: #{exception.message}")
+      end
+    end
+
     class DisabledListSection < Basic
       def initialize(section)
         super("The #{section} section is disabled.")
