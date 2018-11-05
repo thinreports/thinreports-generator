@@ -25,7 +25,7 @@ module Thinreports
         def draw_rect(item_attributes)
           x, y, w, h = item_attributes.values_at('x', 'y', 'width', 'height')
           graphic_attributes = build_graphic_attributes(item_attributes['style']) do |attrs|
-            attrs[:radius] = item_attributes['rx']
+            attrs[:radius] = item_attributes['border-radius']
           end
 
           rect(x, y, w, h, graphic_attributes)

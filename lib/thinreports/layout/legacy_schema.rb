@@ -104,6 +104,7 @@ module Thinreports
           'width' => attributes['width'].to_f,
           'height' => attributes['height'].to_f,
           'display' => display(attributes['x-display']),
+          'border-radius' => attributes['rx'].to_i,
           'style' => {
             'border-width' => attributes['stroke-width'].to_f,
             'border-color' => attributes['stroke'],
