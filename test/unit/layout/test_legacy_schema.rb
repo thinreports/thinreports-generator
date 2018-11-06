@@ -104,7 +104,8 @@ class Thinreports::Layout::TestLegacySchema < Minitest::Test
       'stroke-width' => '2.5',
       'stroke' => '#ff0000',
       'x-stroke-type' => 'dotted',
-      'fill' => 'red'
+      'fill' => 'red',
+      'rx' => '2'
     }
     assert_equal(
       {
@@ -115,6 +116,7 @@ class Thinreports::Layout::TestLegacySchema < Minitest::Test
         'width' => 300.1,
         'height' => 400.1,
         'display' => false,
+        'border-radius' => 2,
         'style' => {
           'border-width' => 2.5,
           'border-color' => '#ff0000',
