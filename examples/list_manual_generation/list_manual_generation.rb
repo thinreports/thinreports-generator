@@ -16,7 +16,7 @@ example :list_manual_generation, 'Generate list manually' do |t|
 
       list.page_break if row_index == 15
 
-      list.add_row detail: t
+      list.add_row detail: row_index
     end
   end
 end
