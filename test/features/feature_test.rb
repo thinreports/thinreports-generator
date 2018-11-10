@@ -28,14 +28,10 @@ class FeatureTest < Minitest::Test
     actual_pdf.binwrite(actual)
 
     if expect_pdf.exist?
-      assert match_expect_pdf?, message('Does not match expect.pdf. Check diff.pdf for details.')
+      assert match_expect_pdf?, 'Does not match expect.pdf. Check diff.pdf for details.'
     else
-      flunk message('expect.pdf does not exist.')
+      flunk 'expect.pdf does not exist.'
     end
-  end
-
-  def message(msg)
-    "[#{feature_name}] #{msg}"
   end
 
   def template_path(filename = 'template.tlf')
