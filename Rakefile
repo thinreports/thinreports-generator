@@ -5,7 +5,7 @@ task default: :test
 
 Rake::TestTask.new do |t|
   t.libs << 'test'
-  t.test_files = Dir['test/unit/**/test_*.rb']
+  t.test_files = Dir['test/units/**/test_*.rb']
 end
 
 namespace :examples do
