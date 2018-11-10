@@ -1,0 +1,241 @@
+{
+  "version": "0.9.0",
+  "items": [
+    {
+      "id": "",
+      "type": "text",
+      "display": true,
+      "description": "",
+      "x": 20,
+      "y": 19,
+      "width": 555.2,
+      "height": 84.3,
+      "style": {
+        "font-family": [
+          "Helvetica"
+        ],
+        "font-size": 36,
+        "color": "#000000",
+        "text-align": "right",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": "",
+        "font-style": []
+      },
+      "texts": [
+        "Align Right",
+        "Helvetica"
+      ]
+    },
+    {
+      "id": "",
+      "type": "line",
+      "display": true,
+      "description": "",
+      "style": {
+        "border-color": "#000000",
+        "border-width": 1,
+        "border-style": "solid"
+      },
+      "x1": 297.6,
+      "y1": 20,
+      "x2": 297.6,
+      "y2": 821.8
+    },
+    {
+      "id": "",
+      "type": "text",
+      "display": true,
+      "description": "",
+      "x": 20,
+      "y": 105,
+      "width": 555.2,
+      "height": 72,
+      "style": {
+        "font-family": [
+          "IPAMincho"
+        ],
+        "font-size": 36,
+        "color": "#000000",
+        "text-align": "right",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": "",
+        "font-style": []
+      },
+      "texts": [
+        "右寄せ",
+        "IPA明朝"
+      ]
+    },
+    {
+      "id": "",
+      "type": "line",
+      "display": true,
+      "description": "",
+      "style": {
+        "border-color": "#000000",
+        "border-width": 1,
+        "border-style": "solid"
+      },
+      "x1": 297.6,
+      "y1": 20,
+      "x2": 297.6,
+      "y2": 821.8
+    },
+    {
+      "id": "",
+      "type": "line",
+      "display": true,
+      "description": "",
+      "style": {
+        "border-color": "#000000",
+        "border-width": 1,
+        "border-style": "solid"
+      },
+      "x1": 575.2,
+      "y1": 20,
+      "x2": 575.2,
+      "y2": 821.8
+    },
+    {
+      "id": "",
+      "type": "text",
+      "display": true,
+      "description": "",
+      "x": 20,
+      "y": 241,
+      "width": 555.2,
+      "height": 84.3,
+      "style": {
+        "font-family": [
+          "Helvetica"
+        ],
+        "font-size": 36,
+        "color": "#000000",
+        "text-align": "center",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": "",
+        "font-style": []
+      },
+      "texts": [
+        "Align Center",
+        "Helvetica"
+      ]
+    },
+    {
+      "id": "",
+      "type": "text",
+      "display": true,
+      "description": "",
+      "x": 20,
+      "y": 330,
+      "width": 555.2,
+      "height": 72,
+      "style": {
+        "font-family": [
+          "IPAMincho"
+        ],
+        "font-size": 36,
+        "color": "#000000",
+        "text-align": "center",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": "",
+        "font-style": []
+      },
+      "texts": [
+        "中央寄せ",
+        "IPA明朝"
+      ]
+    },
+    {
+      "id": "",
+      "type": "text",
+      "display": true,
+      "description": "",
+      "x": 20,
+      "y": 490,
+      "width": 555.2,
+      "height": 84.3,
+      "style": {
+        "font-family": [
+          "Helvetica"
+        ],
+        "font-size": 36,
+        "color": "#000000",
+        "text-align": "left",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": "",
+        "font-style": []
+      },
+      "texts": [
+        "Align Left",
+        "Helvetica"
+      ]
+    },
+    {
+      "id": "",
+      "type": "text",
+      "display": true,
+      "description": "",
+      "x": 20,
+      "y": 580,
+      "width": 555.2,
+      "height": 72,
+      "style": {
+        "font-family": [
+          "IPAMincho"
+        ],
+        "font-size": 36,
+        "color": "#000000",
+        "text-align": "left",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": "",
+        "font-style": []
+      },
+      "texts": [
+        "左寄せ",
+        "IPA明朝"
+      ]
+    },
+    {
+      "id": "",
+      "type": "line",
+      "display": true,
+      "description": "",
+      "style": {
+        "border-color": "#000000",
+        "border-width": 1,
+        "border-style": "solid"
+      },
+      "x1": 20,
+      "y1": 20,
+      "x2": 20,
+      "y2": 821.8
+    }
+  ],
+  "state": {
+    "layout-guides": []
+  },
+  "title": "Case: Text Align",
+  "report": {
+    "paper-type": "A4",
+    "orientation": "portrait",
+    "margin": [
+      20,
+      20,
+      20,
+      20
+    ]
+  }
+}

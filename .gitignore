@@ -4,3 +4,4 @@ Gemfile.lock
 .bundle
 .yardoc
 doc
+!/test/features/*/expect.pdf

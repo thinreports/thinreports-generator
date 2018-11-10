@@ -1,0 +1,180 @@
+{
+  "version": "0.9.0",
+  "items": [
+    {
+      "id": "",
+      "type": "text",
+      "display": true,
+      "description": "",
+      "x": 105.4,
+      "y": 60,
+      "width": 631,
+      "height": 100,
+      "style": {
+        "font-family": [
+          "IPAMincho"
+        ],
+        "font-size": 36,
+        "color": "#000000",
+        "text-align": "center",
+        "vertical-align": "middle",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": "",
+        "font-style": []
+      },
+      "texts": [
+        "日本で生まれ世界が育てた言語 Ruby"
+      ]
+    },
+    {
+      "id": "eudc",
+      "type": "text-block",
+      "display": true,
+      "description": "",
+      "x": 20,
+      "y": 154.3,
+      "width": 801.8,
+      "height": 61,
+      "style": {
+        "font-family": [
+          "IPAMincho"
+        ],
+        "font-size": 36,
+        "color": "#000000",
+        "text-align": "center",
+        "vertical-align": "middle",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": null,
+        "font-style": [],
+        "overflow": "truncate",
+        "word-wrap": "break-word"
+      },
+      "reference-id": "",
+      "value": "",
+      "multiple-line": true,
+      "format": {
+        "base": "",
+        "type": ""
+      }
+    },
+    {
+      "id": "eudc_bold",
+      "type": "text-block",
+      "display": true,
+      "description": "",
+      "x": 249.2,
+      "y": 249,
+      "width": 343.3,
+      "height": 61,
+      "style": {
+        "font-family": [
+          "IPAMincho"
+        ],
+        "font-size": 36,
+        "color": "#000000",
+        "text-align": "center",
+        "vertical-align": "middle",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": null,
+        "font-style": [
+          "bold"
+        ],
+        "overflow": "truncate",
+        "word-wrap": "break-word"
+      },
+      "reference-id": "",
+      "value": "",
+      "multiple-line": true,
+      "format": {
+        "base": "",
+        "type": ""
+      }
+    },
+    {
+      "id": "eudc_italic",
+      "type": "text-block",
+      "display": true,
+      "description": "",
+      "x": 249.2,
+      "y": 329.1,
+      "width": 343.3,
+      "height": 61,
+      "style": {
+        "font-family": [
+          "IPAMincho"
+        ],
+        "font-size": 36,
+        "color": "#000000",
+        "text-align": "center",
+        "vertical-align": "middle",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": null,
+        "font-style": [
+          "italic"
+        ],
+        "overflow": "truncate",
+        "word-wrap": "break-word"
+      },
+      "reference-id": "",
+      "value": "",
+      "multiple-line": true,
+      "format": {
+        "base": "",
+        "type": ""
+      }
+    },
+    {
+      "id": "eudc_bold_italic",
+      "type": "text-block",
+      "display": true,
+      "description": "",
+      "x": 249.2,
+      "y": 409,
+      "width": 343.3,
+      "height": 61,
+      "style": {
+        "font-family": [
+          "IPAMincho"
+        ],
+        "font-size": 36,
+        "color": "#000000",
+        "text-align": "center",
+        "vertical-align": "middle",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": null,
+        "font-style": [
+          "bold",
+          "italic"
+        ],
+        "overflow": "truncate",
+        "word-wrap": "break-word"
+      },
+      "reference-id": "",
+      "value": "",
+      "multiple-line": true,
+      "format": {
+        "base": "",
+        "type": ""
+      }
+    }
+  ],
+  "state": {
+    "layout-guides": []
+  },
+  "title": "EUDC",
+  "report": {
+    "paper-type": "A4",
+    "orientation": "landscape",
+    "margin": [
+      20,
+      20,
+      20,
+      20
+    ]
+  }
+}

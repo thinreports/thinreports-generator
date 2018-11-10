@@ -1,0 +1,170 @@
+{
+  "version": "0.9.0",
+  "items": [
+    {
+      "id": "fallback_to_ipafont",
+      "type": "text-block",
+      "display": true,
+      "description": "",
+      "x": 37,
+      "y": 102,
+      "width": 291.1,
+      "height": 26,
+      "style": {
+        "font-family": [
+          "Helvetica"
+        ],
+        "font-size": 24,
+        "color": "#ff0000",
+        "text-align": "left",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": "",
+        "font-style": [],
+        "overflow": "truncate",
+        "word-wrap": "break-word"
+      },
+      "reference-id": "",
+      "value": "",
+      "multiple-line": false,
+      "format": {
+        "base": "",
+        "type": ""
+      }
+    },
+    {
+      "id": "",
+      "type": "text",
+      "display": true,
+      "description": "",
+      "x": 38,
+      "y": 52,
+      "width": 488,
+      "height": 36,
+      "style": {
+        "font-family": [
+          "IPAMincho"
+        ],
+        "font-size": 16,
+        "color": "#000000",
+        "text-align": "left",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": "",
+        "font-style": []
+      },
+      "texts": [
+        "Helveticaフォントが設定されているTblockに日本語をセットする。",
+        "溢れたテキストは表示されない。"
+      ]
+    },
+    {
+      "id": "set_multiline_text",
+      "type": "text-block",
+      "display": true,
+      "description": "",
+      "x": 37,
+      "y": 178,
+      "width": 291.1,
+      "height": 24,
+      "style": {
+        "font-family": [
+          "IPAMincho"
+        ],
+        "font-size": 24,
+        "color": "#ff0000",
+        "text-align": "left",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": "",
+        "font-style": [],
+        "overflow": "truncate",
+        "word-wrap": "break-word"
+      },
+      "reference-id": "",
+      "value": "",
+      "multiple-line": false,
+      "format": {
+        "base": "",
+        "type": ""
+      }
+    },
+    {
+      "id": "",
+      "type": "text",
+      "display": true,
+      "description": "",
+      "x": 38,
+      "y": 147,
+      "width": 208,
+      "height": 16,
+      "style": {
+        "font-family": [
+          "IPAMincho"
+        ],
+        "font-size": 16,
+        "color": "#000000",
+        "text-align": "left",
+        "vertical-align": "top",
+        "line-height": "",
+        "line-height-ratio": "",
+        "letter-spacing": "",
+        "font-style": []
+      },
+      "texts": [
+        "複数行テキストをセットする"
+      ]
+    },
+    {
+      "id": "",
+      "type": "rect",
+      "display": true,
+      "description": "",
+      "x": 37,
+      "y": 102,
+      "width": 291.1,
+      "height": 26,
+      "style": {
+        "border-color": "#000000",
+        "border-width": 1,
+        "border-style": "solid",
+        "fill-color": "none"
+      },
+      "border-radius": 0
+    },
+    {
+      "id": "",
+      "type": "rect",
+      "display": true,
+      "description": "",
+      "x": 37,
+      "y": 178,
+      "width": 291.1,
+      "height": 24,
+      "style": {
+        "border-color": "#000000",
+        "border-width": 1,
+        "border-style": "solid",
+        "fill-color": "none"
+      },
+      "border-radius": 0
+    }
+  ],
+  "state": {
+    "layout-guides": []
+  },
+  "title": "Single Line Tblock",
+  "report": {
+    "paper-type": "A4",
+    "orientation": "portrait",
+    "margin": [
+      20,
+      20,
+      20,
+      20
+    ]
+  }
+}
