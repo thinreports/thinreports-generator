@@ -30,19 +30,10 @@ module Thinreports::TestHelper
     File.read(data_file(*paths))
   end
 
-  def temp_path
-    ROOT.join('tmp')
-  end
-
   def analyze_pdf_images(pdf_data)
     analyzer = PDF::Inspector::XObject.analyze(pdf_data)
     analyzer.page_xobjects
       .reduce(:merge).values
       .select { |o| o.hash[:Subtype] == :Image }
-  end
-
-  def teardown
-    super
-    FileUtils.rm Dir.glob(temp_path.join('*'))
   end
 end
