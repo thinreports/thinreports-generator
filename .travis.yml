@@ -8,6 +8,25 @@ rvm:
   - 2.5.3
   - jruby-9.1.15.0
 
+before_script:
+  # Setup diff-pdf command (See https://github.com/vslavik/diff-pdf)
+  - export DIFF_PDF_SRC=/tmp/diff-pdf-src
+  - sudo apt-get install make automake g++
+  - sudo apt-get install libpoppler-glib-dev poppler-utils wxgtk3.0-dev
+  - git clone https://github.com/vslavik/diff-pdf.git $DIFF_PDF_SRC
+  - cd $DIFF_PDF_SRC
+  - ./bootstrap
+  - ./configure
+  - make
+  - sudo make install
+  - diff-pdf --help
+  # Back to build directroy
+  - cd $TRAVIS_BUILD_DIR
+
+script:
+  - bundle exec rake test:units
+  - bundle exec rake test:features
+
 notifications:
   slack:
     secure: XubYKuE3+6VJNDvjgVE2P0cp3Km/We1RlhkeHBGI+r0wYqAg6tab33IYFo+3BgE0xwl1RX3SwX1pbPt3LVDi8zLA5mkmmmDiNIqqYa1vICDgRgu8OTCRcCCTaWB5DhVY11iZaYFyQEoQ+aUHp9QoYeH7Qmp+M2//+DYG9wka6kA=
