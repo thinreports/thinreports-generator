@@ -26,5 +26,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'mocha', '>= 0'
   s.add_development_dependency 'pdf-inspector', '>= 0'
   s.add_development_dependency 'rake', '>= 0'
-  s.add_development_dependency 'yard', '>= 0'
 end

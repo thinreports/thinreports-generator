@@ -1,5 +1,4 @@
 require 'rake/testtask'
-require 'yard'
 
 task default: :test
 
@@ -20,8 +19,3 @@ end
 
 desc 'Run unit and feature tests'
 task test: %i( test:units test:features )
-
-YARD::Rake::YardocTask.new :doc do |yard|
-  yard.files = Dir['lib/**/*.rb']
-  yard.options = ['--readme', 'README.md']
-end
