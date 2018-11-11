@@ -152,7 +152,7 @@ report.on_page_create do |page|
 end
 ```
 
-See also [examples/report_callbacks](https://github.com/thinreports/thinreports-generator/tree/master/examples/report_callbacks).
+See also [features/report_callbacks](https://github.com/thinreports/thinreports-generator/tree/master/test/features/report_callbacks).
 
 ### List
 
@@ -201,7 +201,7 @@ report.list do |list|
 end
 ```
 
-See also  [examples/list_events](https://github.com/thinreports/thinreports-generator/tree/master/examples/list_events).
+See also  [features/list_events](https://github.com/thinreports/thinreports-generator/tree/master/test/features/list_events).
 
 ### Page Number
 
@@ -222,7 +222,7 @@ report.start_new_page do |page|
 end
 ```
 
-See also [examples/page_number](https://github.com/thinreports/thinreports-generator/blob/master/examples/page_number) and [examples/list_page_number](https://github.com/thinreports/thinreports-generator/blob/master/examples/list_page_number).
+See also [features/page_number](https://github.com/thinreports/thinreports-generator/blob/master/test/features/page_number) and [features/page_number_with_list](https://github.com/thinreports/thinreports-generator/blob/master/test/features/page_number_with_list).
 
 ### Configuring fallback fonts
 
@@ -234,7 +234,7 @@ end
 Thinreports.config.fallback_fonts = ['/path/to/font_a.ttf', '/path/to/font_b.ttf']
 ```
 
-See also [examples/eudc](https://github.com/thinreports/thinreports-generator/blob/master/examples/eudc).
+See also [features/eudc](https://github.com/thinreports/thinreports-generator/blob/master/test/features/eudc).
 
 ## Features
 
