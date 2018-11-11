@@ -6,7 +6,7 @@ rvm:
   - 2.3.8
   - 2.4.5
   - 2.5.3
-  - jruby-9.1.15.0
+  - jruby-9.2.0.0
 
 before_script:
   # Setup diff-pdf command (See https://github.com/vslavik/diff-pdf)
