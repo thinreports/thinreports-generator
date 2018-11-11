@@ -18,8 +18,8 @@ Rake::TestTask.new do |t|
   t.warning = false
 end
 
-desc 'Run unit tests'
-task test: :'test:units'
+desc 'Run unit and feature tests'
+task test: %i( test:units test:features )
 
 namespace :examples do
   desc 'Run all examples'
