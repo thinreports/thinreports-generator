@@ -19,7 +19,9 @@ class TestEudc < FeatureTest
     end
 
     assert_pdf report.generate
-  ensure
+  end
+
+  def teardown
     Thinreports.config.fallback_fonts = []
   end
 end
