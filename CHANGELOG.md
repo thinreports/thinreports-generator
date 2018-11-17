@@ -1,9 +1,8 @@
-## master
+## 0.10.3
 
 Bug Fixes:
 
  * Fixed: corner-radius of Rect is not applied correctly #93
-
 
 ## 0.10.2
 
