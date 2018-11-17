@@ -3,7 +3,7 @@
 require 'minitest/autorun'
 require 'minitest/spec'
 require 'minitest/unit'
-require 'mocha/mini_test'
+require 'mocha/minitest'
 require 'pdf/inspector'
 
 require 'digest/sha1'
