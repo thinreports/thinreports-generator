@@ -1,3 +1,13 @@
+## master
+
+Breaking Changes:
+
+ * Now formatter also works with a text-block with multiple-line #95
+
+Bug Fixes:
+
+ * Fixed: thousands separation is applied to decimal part #95
+
 ## 0.10.3
 
 Bug Fixes:

@@ -35,7 +35,12 @@ module Thinreports
             end
 
             def number_with_delimiter(value, delimiter = ',')
-              value.to_s.gsub(/(\d)(?=(\d{3})+(?!\d))/) { "#{$1}#{delimiter}" }
+              value_int, value_float = value.to_s.split('.')
+
+              [
+                value_int.gsub(/(\d)(?=(\d{3})+(?!\d))/) { "#{$1}#{delimiter}" },
+                value_float
+              ].compact.join('.')
             end
 
             def number_with_precision(value, precision = 3)

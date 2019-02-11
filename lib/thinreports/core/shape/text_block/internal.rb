@@ -50,8 +50,6 @@ module Thinreports
           end
 
           def format_enabled?
-            return false if multiple?
-
             if states.key?(:format_enabled)
               states[:format_enabled]
             else

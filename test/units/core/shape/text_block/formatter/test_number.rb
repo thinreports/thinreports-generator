@@ -50,6 +50,7 @@ class Thinreports::Core::Shape::TextBlock::Formatter::TestNumber < Minitest::Tes
     assert_equal formatter.apply(-1000000), '-1,000,000'
     assert_equal formatter.apply('1000.0'), '1,000.0'
     assert_equal formatter.apply('-1000.0'), '-1,000.0'
+    assert_equal '1,000.1111', formatter.apply(1000.1111)
     # Cannot apply, Return the raw value
     assert_equal formatter.apply('invalid value'), 'invalid value'
 

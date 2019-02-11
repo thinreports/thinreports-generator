@@ -103,13 +103,13 @@ class Thinreports::Core::Shape::TextBlock::TestInternal < Minitest::Test
     assert_equal create_internal.format_enabled?, false
   end
 
-  def test_format_enabled_asker_should_return_false_constantly_when_tblock_is_multiple_mode
+  def test_format_enabled_asker_should_return_true_constantly_when_tblock_is_multiple_mode
     tblock = create_internal('multiple-line' => true,
                              'format' => {'base' => '{value}',
                                           'type' => 'number'})
     tblock.format_enabled(true)
 
-    assert_equal tblock.format_enabled?, false
+    assert tblock.format_enabled?
   end
 
   def test_type_of_asker_should_return_true_when_value_is_tblock
