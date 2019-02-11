@@ -35,6 +35,18 @@ class TestTextBlockFormatting < FeatureTest
         padding_with_number_value: 9_999,
         padding_with_blank_value: ''
       )
+
+      # Basic (multi-line)
+      page.item(:multiline_basic).value = 'TitleTitle'
+
+      # Date (multi-line)
+      page.item(:multiline_date).value = Date.new(2019, 2, 1)
+
+      # Number (multi-line)
+      page.item(:multiline_number).value = 123_456
+
+      # Padding (multi-line)
+      page.item(:multiline_padding).value = '123'
     end
 
     assert_pdf report.generate
