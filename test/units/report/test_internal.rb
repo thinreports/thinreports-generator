@@ -20,6 +20,11 @@ class Thinreports::Report::TestInternal < Minitest::Test
     assert_equal internal.default_layout.filename, @layout_file.path
   end
 
+  def test_pathname_layout_specified_in_new_method_should_be_defined_as_default_layout
+    internal = Report::Internal.new(report, layout: Pathname(@layout_file.path))
+    assert_equal internal.default_layout.filename, @layout_file.path
+  end
+
   def test_register_layout_should_be_set_as_default_layout_when_options_are_omitted
     internal = Report::Internal.new(report, {})
     internal.register_layout(@layout_file.path)

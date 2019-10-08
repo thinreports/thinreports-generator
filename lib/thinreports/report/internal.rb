@@ -96,6 +96,8 @@ module Thinreports
       end
 
       def init_layout(filename, id = nil)
+        filename = filename.to_path if filename.is_a?(Pathname)
+
         Thinreports::Layout.new(filename, id: id)
       end
     end
