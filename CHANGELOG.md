@@ -5,6 +5,10 @@ Breaking Changes:
  * Now formatter also works with a text-block with multiple-line #95
  * Drop support ruby2.1 and 2.2
 
+Enhancements:
+
+ * Support Pathname layout option on `Thinreports::Report` #99 [@meganemura]
+
 Bug Fixes:
 
  * Fixed: thousands separation is applied to decimal part #95
