@@ -3,7 +3,9 @@
 Breaking Changes:
 
  * Now formatter also works with a text-block with multiple-line #95
- * Drop support ruby2.1 and 2.2
+ * Dropped Ruby 2.1 support
+ * Dropped Ruby 2.2 support
+ * Dropped Ruby 2.3 support
 
 Enhancements:
 
