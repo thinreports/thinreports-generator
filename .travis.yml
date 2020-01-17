@@ -13,7 +13,7 @@ before_script:
   - export DIFF_PDF_SRC=/tmp/diff-pdf-src
   - sudo apt-get install make automake g++
   - sudo apt-get install libpoppler-glib-dev poppler-utils wxgtk3.0-dev
-  - git clone https://github.com/vslavik/diff-pdf.git $DIFF_PDF_SRC
+  - git clone https://github.com/vslavik/diff-pdf.git -b v0.3 --depth 1 $DIFF_PDF_SRC
   - cd $DIFF_PDF_SRC
   - ./bootstrap
   - ./configure
