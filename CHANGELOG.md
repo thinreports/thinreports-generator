@@ -9,6 +9,7 @@ Breaking Changes:
 
 Enhancements:
 
+ * Ruby 2.7.0 support
  * Support Pathname layout option on `Thinreports::Report` #99 [@meganemura]
 
 Bug Fixes:
