@@ -4,6 +4,12 @@ module Thinreports
   module Generator
     module PrawnExt
       module WidthOf
+        # TODO: Remove this path when a version of prawn that includes the following PR is released:
+        # https://github.com/prawnpdf/prawn/pull/1117
+        #
+        # This PR makes this patch unnecessary.
+        #
+        #
         # Subtract the width of one character space from the string width calculation result.
         #
         # The original Prawn::Document#width_of returns the following result:
