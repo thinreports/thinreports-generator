@@ -1,0 +1,39 @@
+name: Test
+
+on: push
+
+jobs:
+  test:
+    name: Test against ${{ matrix.ruby }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby:
+          - 2.4
+          - 2.5
+          - 2.6
+          - 2.7
+          - jruby
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Set up diff-pdf
+      run: |
+        sudo apt-get update
+        sudo apt-get install make automake g++ libpoppler-glib-dev poppler-utils libwxgtk3.0-dev
+        git clone https://github.com/vslavik/diff-pdf.git -b v0.4.1 --depth 1 /tmp/diff-pdf-src
+        cd /tmp/diff-pdf-src
+        ./bootstrap && ./configure && make && sudo make install
+
+    - name: Set up Ruby ${{ matrix.ruby }}
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby }}
+
+    - name: Build and test with Rake
+      run: |
+        gem install bundler
+        bundle install --jobs 4 --retry 3
+        bundle exec rake test:units
+        bundle exec rake test:features
