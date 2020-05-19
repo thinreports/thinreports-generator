@@ -265,6 +265,35 @@ Generator can dynamically:
 
 If you find bugs or improvements for the Editor, please report it [here](https://github.com/thinreports/thinreports-generator/issues/new).
 
+## Development
+
+### How to run feature tests
+
+```
+$ bundle exec rake test:features
+```
+
+In order to run `test:features`, you need to install [diff-pdf](https://github.com/vslavik/diff-pdf) in your environment, or you can run test in the docker container as below.
+
+### How to develop in Docker container
+
+You can use the Docker container for development. This container contains the libraries required for testing, such as diff-pdf.
+
+```
+$ docker build -t thinreports-dev .
+
+$ docker run -v $PWD:/thinreports -it thinreports-dev bash
+
+> /thinreports#
+```
+
+You can run test:
+
+```
+> /thinreports# bundle install
+> /thinreports# bundle exec rake test:features
+```
+
 ### Sending a Pull Request
 
   1. Fork it
