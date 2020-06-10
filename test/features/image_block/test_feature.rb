@@ -3,7 +3,7 @@
 require 'feature_test'
 require 'open-uri'
 
-class TestImageBlock < FeatureTest
+class TestImageBlockFeature < FeatureTest
   feature :image_block do
     image50x50 = path_of('img50x50.png')
     image200x100 = path_of('img200x100.png')

@@ -3,7 +3,7 @@
 require 'feature_test'
 require 'date'
 
-class TestTextBlockFormatting < FeatureTest
+class TestTextBlockFormattingFeature < FeatureTest
   feature :text_block_formatting do
     report = Thinreports::Report.new
 

@@ -2,7 +2,7 @@
 
 require 'feature_test'
 
-class TestTextBlockOverflow < FeatureTest
+class TestTextBlockOverflowFeature < FeatureTest
   feature :text_block_overflow do
     report = Thinreports::Report.new layout: template_path
 

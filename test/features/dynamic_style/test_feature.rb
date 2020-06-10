@@ -2,7 +2,7 @@
 
 require 'feature_test'
 
-class TestDynamicStyle < FeatureTest
+class TestDynamicStyleFeature < FeatureTest
   feature :dynamic_style do
     image = path_of('image.png')
     setup_values = Proc.new do |page|

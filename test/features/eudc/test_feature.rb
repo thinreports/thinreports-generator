@@ -2,7 +2,7 @@
 
 require 'feature_test'
 
-class TestEudc < FeatureTest
+class TestEudcFeature < FeatureTest
   feature :eudc do
     Thinreports.configure do |config|
       config.fallback_fonts = path_of('eudc.ttf')

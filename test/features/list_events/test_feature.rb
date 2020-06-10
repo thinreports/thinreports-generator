@@ -2,7 +2,7 @@
 
 require 'feature_test'
 
-class TestListEvents < FeatureTest
+class TestListEventsFeature < FeatureTest
   feature :list_events do
     report = Thinreports::Report.new layout: template_path
 

@@ -2,7 +2,7 @@
 
 require 'feature_test'
 
-class TestGraphics < FeatureTest
+class TestGraphicsFeature < FeatureTest
   feature :graphics do
     report = Thinreports::Report.new layout: template_path
     report.start_new_page

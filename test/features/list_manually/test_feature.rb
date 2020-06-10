@@ -2,7 +2,7 @@
 
 require 'feature_test'
 
-class TestListManually < FeatureTest
+class TestListManuallyFeature < FeatureTest
   feature :list_manually do
     report = Thinreports::Report.new layout: template_path
     report.list.header do |h|

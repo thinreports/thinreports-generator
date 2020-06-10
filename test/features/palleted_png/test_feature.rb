@@ -2,7 +2,7 @@
 
 require 'feature_test'
 
-class TestPalletedPng < FeatureTest
+class TestPalletedPngFeature < FeatureTest
   feature :palleted_png do
     report = Thinreports::Report.new layout: template_path
     report.start_new_page do |page|

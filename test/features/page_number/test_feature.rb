@@ -2,7 +2,7 @@
 
 require 'feature_test'
 
-class TestPageNumber < FeatureTest
+class TestPageNumberFeature < FeatureTest
   feature :page_number do
     report = Thinreports::Report.new layout: template_path
 

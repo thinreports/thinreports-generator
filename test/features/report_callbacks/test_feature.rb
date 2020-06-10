@@ -2,7 +2,7 @@
 
 require 'feature_test'
 
-class TestReportCallbacks < FeatureTest
+class TestReportCallbacksFeature < FeatureTest
   feature :report_callbacks do
     report = Thinreports::Report.new layout: template_path
 

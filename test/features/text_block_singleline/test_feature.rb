@@ -2,7 +2,7 @@
 
 require 'feature_test'
 
-class TestTextBlockSingleline < FeatureTest
+class TestTextBlockSinglelineFeature < FeatureTest
   feature :text_block_singleline do
     report = Thinreports::Report.new layout: template_path
     report.start_new_page

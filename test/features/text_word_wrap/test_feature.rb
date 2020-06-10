@@ -2,7 +2,7 @@
 
 require 'feature_test'
 
-class TestTextWordWrap < FeatureTest
+class TestTextWordWrapFeature < FeatureTest
   feature :text_word_wrap do
     report = Thinreports::Report.new layout: template_path
     report.start_new_page

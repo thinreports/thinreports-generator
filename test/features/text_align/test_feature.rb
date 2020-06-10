@@ -2,7 +2,7 @@
 
 require 'feature_test'
 
-class TestTextAlign < FeatureTest
+class TestTextAlignFeature < FeatureTest
   feature :text_align do
     report = Thinreports::Report.new layout: template_path
     report.start_new_page

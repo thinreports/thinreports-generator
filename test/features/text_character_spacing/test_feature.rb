@@ -2,7 +2,7 @@
 
 require 'feature_test'
 
-class TestTextCharacterSpacing < FeatureTest
+class TestTextCharacterSpacingFeature < FeatureTest
   feature :text_character_spacing do
     report = Thinreports::Report.new layout: template_path
     report.start_new_page

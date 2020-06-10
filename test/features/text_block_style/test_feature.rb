@@ -2,7 +2,7 @@
 
 require 'feature_test'
 
-class TestTextBlockStyle < FeatureTest
+class TestTextBlockStyleFeature < FeatureTest
   feature :text_block_style do
     report = Thinreports::Report.new
 
