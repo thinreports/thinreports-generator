@@ -281,8 +281,7 @@ You can use the Docker container for development. This container contains the li
 
 ```
 $ docker build -t thinreports-dev .
-
-$ docker run -v $PWD:/thinreports -it thinreports-dev bash
+$ docker run -v $PWD:/thinreports:cached -it thinreports-dev bash
 
 > /thinreports#
 ```
