@@ -12,6 +12,12 @@ module Thinreports
       end
     end
 
+    class UnknownSectionId < Basic
+      def initialize(section_type, section_id)
+        super(":#{section_id} is not defined in #{section_type}")
+      end
+    end
+
     class UnknownShapeType < Basic
     end
 

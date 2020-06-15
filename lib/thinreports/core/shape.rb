@@ -18,6 +18,7 @@ module Thinreports
         when TextBlock::TYPE_NAME  then TextBlock
         when ImageBlock::TYPE_NAME then ImageBlock
         when List::TYPE_NAME       then List
+        when StackView::TYPE_NAME  then StackView
         when Text::TYPE_NAME       then Text
         when PageNumber::TYPE_NAME then PageNumber
         when *Basic::TYPE_NAMES    then Basic
@@ -37,4 +38,5 @@ require_relative 'shape/text'
 require_relative 'shape/text_block'
 require_relative 'shape/image_block'
 require_relative 'shape/list'
+require_relative 'shape/stack_view'
 require_relative 'shape/page_number'
