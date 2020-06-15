@@ -1,0 +1,145 @@
+{
+  "schema-version": "1.0",
+  "last-modified-by": "1.0.0-alpha.4",
+  "title": "",
+  "report": {
+    "orientation": "portrait",
+    "paper-type": "A4",
+    "width": 0,
+    "height": 0,
+    "margin": [
+      20,
+      20,
+      20,
+      20
+    ]
+  },
+  "sections": [
+    {
+      "id": "header",
+      "type": "header",
+      "height": 60,
+      "display": true,
+      "auto-stretch": true,
+      "every-page": false,
+      "items": [
+        {
+          "type": "text-block",
+          "id": "text",
+          "x": 20,
+          "y": 20,
+          "width": 550,
+          "height": 20,
+          "description": "",
+          "reference-id": "",
+          "value": "",
+          "multiple-line": true,
+          "display": true,
+          "format": {
+            "base": "",
+            "type": ""
+          },
+          "follow-stretch": "none",
+          "style": {
+            "font-family": [
+              "Helvetica"
+            ],
+            "color": "#000000",
+            "font-style": [],
+            "text-align": "left",
+            "vertical-align": "top",
+            "letter-spacing": "",
+            "overflow": "truncate",
+            "word-wrap": "break-word",
+            "font-size": 18,
+            "line-height-ratio": "",
+            "line-height": 19.8
+          },
+          "affect-bottom-margin": true
+        }
+      ]
+    },
+    {
+      "id": "detail",
+      "type": "detail",
+      "height": 60,
+      "auto-stretch": true,
+      "items": [
+        {
+          "type": "text-block",
+          "id": "text",
+          "x": 20,
+          "y": 20,
+          "width": 550,
+          "height": 20,
+          "description": "",
+          "reference-id": "",
+          "value": "",
+          "multiple-line": true,
+          "display": true,
+          "format": {
+            "base": "",
+            "type": ""
+          },
+          "follow-stretch": "none",
+          "style": {
+            "font-family": [
+              "Helvetica"
+            ],
+            "color": "#000000",
+            "font-style": [],
+            "text-align": "left",
+            "vertical-align": "top",
+            "letter-spacing": "",
+            "overflow": "truncate",
+            "word-wrap": "break-word",
+            "font-size": 18,
+            "line-height-ratio": "",
+            "line-height": 19.8
+          },
+          "affect-bottom-margin": true
+        }
+      ]
+    },
+    {
+      "id": "footer",
+      "type": "footer",
+      "height": 60,
+      "display": true,
+      "auto-stretch": true,
+      "items": [
+        {
+          "type": "text",
+          "id": "",
+          "x": 20,
+          "y": 20,
+          "width": 200,
+          "height": 20,
+          "description": "",
+          "display": true,
+          "follow-stretch": "none",
+          "texts": [
+            "Footer"
+          ],
+          "style": {
+            "font-family": [
+              "Helvetica"
+            ],
+            "color": "#000000",
+            "font-style": [],
+            "text-align": "left",
+            "vertical-align": "top",
+            "letter-spacing": "",
+            "font-size": 18,
+            "line-height-ratio": "",
+            "line-height": 19.8
+          },
+          "affect-bottom-margin": true
+        }
+      ]
+    }
+  ],
+  "state": {
+    "layout-guides": []
+  }
+}
