@@ -39,9 +39,16 @@ module Thinreports
         # @param [Hash] options
         # @option options [:left, :center, :right] :position_x (:left)
         # @option options [:top, :center, :bottom] :position_y (:top)
+        # @option options [Numeric] :offset_x
+        # @option options [Numeric] :offset_y
         def image_box(filename_or_io, x, y, w, h, options = {})
           w, h = s2f(w, h)
-          pdf.bounding_box(pos(x, y), width: w, height: h) do
+
+          computed_position = pos(
+            x + (options[:offset_x] || 0),
+            y + (options[:offset_y] || 0)
+          )
+          pdf.bounding_box(computed_position, width: w, height: h) do
             pdf.image(
               filename_or_io,
               position: options[:position_x] || :left,
@@ -49,6 +56,17 @@ module Thinreports
               auto_fit: [w, h]
             )
           end
+        end
+
+        def image_dimensions(filename_or_io, x, y, w, h, options = {})
+          w, h = s2f(w, h)
+          # XXX: Calling @private method
+          _pdf_obj, info = pdf.build_image_object(filename_or_io)
+          info.calc_image_dimensions(
+            position: options[:position_x] || :left,
+            vposition: options[:position_y] || :top,
+            auto_fit: [w, h]
+          )
         end
 
         def clean_temp_images
