@@ -4,7 +4,7 @@ module Thinreports
   module Core
     module Shape
       module PageNumber
-        TYPE_NAME = 'page-number'.freeze
+        TYPE_NAME = 'page-number'
       end
     end
   end

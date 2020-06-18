@@ -3,7 +3,7 @@
 module Thinreports
   module Layout
     class Base
-      EXT_NAME = 'tlf'.freeze
+      EXT_NAME = 'tlf'
       include Utils
 
       class << self

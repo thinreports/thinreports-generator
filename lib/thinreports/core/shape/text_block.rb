@@ -4,7 +4,7 @@ module Thinreports
   module Core
     module Shape
       module TextBlock
-        TYPE_NAME = 'text-block'.freeze
+        TYPE_NAME = 'text-block'
       end
     end
   end
