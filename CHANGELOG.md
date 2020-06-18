@@ -1,11 +1,13 @@
 ## master
 
+## 0.11.0
+
 Breaking Changes:
 
- * Now formatter also works with a text-block with multiple-line #95
  * Dropped Ruby 2.1 support
  * Dropped Ruby 2.2 support
  * Dropped Ruby 2.3 support
+ * Formatter of a text-block works even with multiple-line (#95)
 
 Enhancements:
 
