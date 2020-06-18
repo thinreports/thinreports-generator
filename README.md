@@ -14,7 +14,6 @@
   * [Installation Guide](http://www.thinreports.org/documentation/getting-started/installation.html)
   * [Quick Start Guide](http://www.thinreports.org/documentation/getting-started/quickstart.html)
   * [Examples](https://github.com/thinreports/thinreports-examples)
-  * [Rails5 Example](https://github.com/thinreports/thinreports-rails5-example)
   * [Changelog](https://github.com/thinreports/thinreports-generator/blob/master/CHANGELOG.md)
   * [Discussion Group](https://groups.google.com/forum/#!forum/thinreports)
 
@@ -261,9 +260,7 @@ Generator can dynamically:
 
 ## Contributing
 
-### Report bug, post your suggestion
-
-If you find bugs or improvements for the Editor, please report it [here](https://github.com/thinreports/thinreports-generator/issues/new).
+Bug reports and pull requests are welcome on GitHub at https://github.com/thinreports/thinreports-generator.
 
 ## Development
 
@@ -292,16 +289,6 @@ You can run test:
 > /thinreports# bundle install
 > /thinreports# bundle exec rake test:features
 ```
-
-### Sending a Pull Request
-
-  1. Fork it
-  2. Clone your forked repository
-  3. Create your feature branch: `git checkout -b my-new-feature`
-  4. Fix your feature
-  5. Commit your changes: `git commit -am 'Fixed some bugs or features'`
-  6. Push to the branch: `git push origin my-new-feature`
-  7. Create new Pull Request
 
 ## License
 
