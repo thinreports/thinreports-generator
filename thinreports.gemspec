@@ -22,10 +22,4 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
 
   s.add_dependency 'prawn', '~> 2.2.0'
-
-  s.add_development_dependency 'bundler', '>= 1.0.0'
-  s.add_development_dependency 'minitest', '>= 5.0.0'
-  s.add_development_dependency 'mocha', '>= 0'
-  s.add_development_dependency 'pdf-inspector', '>= 0'
-  s.add_development_dependency 'rake', '>= 0'
 end
