@@ -4,7 +4,7 @@ module Thinreports
   module Core
     module Shape
       module ImageBlock
-        TYPE_NAME = 'image-block'.freeze
+        TYPE_NAME = 'image-block'
       end
     end
   end

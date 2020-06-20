@@ -4,7 +4,7 @@ module Thinreports
   module Layout
     class Version
       COMPATIBLE_RULES = ['>= 0.8.0', '< 1.0.0'].freeze
-      NEW_SCHEMA_FROM = '0.9.0'.freeze
+      NEW_SCHEMA_FROM = '0.9.0'
 
       class << self
         def compatible_rules

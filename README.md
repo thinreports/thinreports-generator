@@ -14,7 +14,6 @@
   * [Installation Guide](http://www.thinreports.org/documentation/getting-started/installation.html)
   * [Quick Start Guide](http://www.thinreports.org/documentation/getting-started/quickstart.html)
   * [Examples](https://github.com/thinreports/thinreports-examples)
-  * [Rails5 Example](https://github.com/thinreports/thinreports-rails5-example)
   * [Changelog](https://github.com/thinreports/thinreports-generator/blob/master/CHANGELOG.md)
   * [Discussion Group](https://groups.google.com/forum/#!forum/thinreports)
 
@@ -261,9 +260,7 @@ Generator can dynamically:
 
 ## Contributing
 
-### Report bug, post your suggestion
-
-If you find bugs or improvements for the Editor, please report it [here](https://github.com/thinreports/thinreports-generator/issues/new).
+Bug reports and pull requests are welcome on GitHub at https://github.com/thinreports/thinreports-generator.
 
 ## Development
 
@@ -293,15 +290,14 @@ You can run test:
 > /thinreports# bundle exec rake test:features
 ```
 
-### Sending a Pull Request
+## Releasing Generator
 
-  1. Fork it
-  2. Clone your forked repository
-  3. Create your feature branch: `git checkout -b my-new-feature`
-  4. Fix your feature
-  5. Commit your changes: `git commit -am 'Fixed some bugs or features'`
-  6. Push to the branch: `git push origin my-new-feature`
-  7. Create new Pull Request
+1. Update the version number in `version.rb`
+2. Update `CHANGELOG.md` and `README.md` (if needed)
+3. Create the Release PR like #105
+4. Merge the PR
+5. Is the master CI green? If not, make it green
+6. Run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to rubygems.org
 
 ## License
 

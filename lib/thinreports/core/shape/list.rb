@@ -4,7 +4,7 @@ module Thinreports
   module Core
     module Shape
       module List
-        TYPE_NAME = 'list'.freeze
+        TYPE_NAME = 'list'
       end
     end
   end
