@@ -290,6 +290,15 @@ You can run test:
 > /thinreports# bundle exec rake test:features
 ```
 
+## Releasing Generator
+
+1. Update the version number in `version.rb`
+2. Update `CHANGELOG.md` and `README.md` (if needed)
+3. Create the Release PR like #105
+4. Merge the PR
+5. Is the master CI green? If not, make it green
+6. Run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to rubygems.org
+
 ## License
 
 Thinreports Generator is licensed under the [MIT-License](https://github.com/thinreports/thinreports-generator/blob/master/MIT-LICENSE).
