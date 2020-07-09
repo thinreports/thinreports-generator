@@ -15,9 +15,6 @@ module Thinreports
           rows_schema = item.internal.format.rows
 
           schema_row_ids = rows_schema.map {|row_schema| row_schema.id.to_sym}.to_set
-          rows_params.each_key do |row_id|
-            raise Thinreports::Errors::UnknownSectionId.new(:row, row_id) unless schema_row_ids.include? row_id
-          end
 
           rows = []
           rows_schema.each do |row_schema|
