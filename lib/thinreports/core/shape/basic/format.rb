@@ -10,6 +10,11 @@ module Thinreports
           config_reader :type, :id
           config_reader :style
           config_checker true, :display
+          config_reader follow_stretch: %w[follow-stretch]
+
+          def affect_bottom_margin?
+            attributes.fetch('affect-bottom-margin', true)
+          end
         end
       end
     end
