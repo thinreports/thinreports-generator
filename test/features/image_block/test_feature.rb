@@ -24,7 +24,7 @@ class TestImageBlockFeature < FeatureTest
     )
 
     report.page.item(:overflow).src = image200x100
-    report.page[:thinreports_logo] = open('http://www.thinreports.org/assets/logos/thinreports-logo.png')
+    report.page[:thinreports_logo] = URI.open('http://www.thinreports.org/assets/logos/thinreports-logo.png')
 
     report.page.list(:list) do |list|
       3.times { list.add_row in_list: image50x50 }
