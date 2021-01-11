@@ -19,7 +19,7 @@
 
 ## Supported versions
 
-  * Ruby 2.4, 2.5, 2.6, 2.7, 3.0
+  * Ruby 2.5, 2.6, 2.7, 3.0
   * Prawn 2.2, 2.3, 2.4
   * JRuby 9.2
 

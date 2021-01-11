@@ -2,6 +2,7 @@
 
  * Ruby 3.0 support
  * Prawn 2.4 support
+ * Drop Ruby 2.4 support
 
 ## 0.11.0
 
