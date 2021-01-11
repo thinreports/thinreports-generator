@@ -45,7 +45,12 @@ class FeatureTest < Minitest::Test
   end
 
   def match_expect_pdf?
-    system("diff-pdf --output-diff=#{path_of('diff.pdf')} #{expect_pdf} #{actual_pdf}")
+    opts = [
+      '--mark-differences',
+      # Allow for small differences that cannot be seen
+      '--channel-tolerance=40'
+    ]
+    system("diff-pdf #{opts.join(' ')} --output-diff=#{path_of('diff.pdf')} #{expect_pdf} #{actual_pdf}")
   end
 
   def actual_pdf
