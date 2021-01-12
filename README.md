@@ -15,7 +15,7 @@
   * [Quick Start Guide](http://www.thinreports.org/documentation/getting-started/quickstart.html)
   * [Examples](https://github.com/thinreports/thinreports-examples)
   * [Changelog](https://github.com/thinreports/thinreports-generator/blob/master/CHANGELOG.md)
-  * [Discussion Group (GitHub Discussions)[https://github.com/thinreports/thinreports/discussions]
+  * [Discussion Group (GitHub Discussions)](https://github.com/thinreports/thinreports/discussions)
   * [Discussion Group (Google Groups)](https://groups.google.com/forum/#!forum/thinreports)
 
 ## Supported versions
