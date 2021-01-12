@@ -4,22 +4,13 @@ module Thinreports
   module Generator
     module PrawnExt
       module WidthOf
-        # TODO: Remove this path when a version of prawn that includes the following PR is released:
-        # https://github.com/prawnpdf/prawn/pull/1117
+        # This patch fixes the character_spacing effect on text width calculation.
         #
-        # This PR makes this patch unnecessary.
-        #
-        #
-        # Subtract the width of one character space from the string width calculation result.
-        #
-        # The original Prawn::Document#width_of returns the following result:
-        #
-        #  Width of Character is 1
-        #  Width of Character Space is 1
+        # The original #width_of:
         #
         #   width_of('abcd') #=> 4 + 4 = 8
         #
-        # In this width_of, returns the following result:
+        # The #width_of in this patch:
         #
         #   width_of('abcd') #=> 4 + 3 = 7
         #
@@ -32,4 +23,7 @@ module Thinreports
   end
 end
 
-Prawn::Document.prepend Thinreports::Generator::PrawnExt::WidthOf
+# Prawn v2.3 and later includes this patch by https://github.com/prawnpdf/prawn/pull/1117.
+if Prawn::VERSION < '2.3.0'
+  Prawn::Document.prepend Thinreports::Generator::PrawnExt::WidthOf
+end
