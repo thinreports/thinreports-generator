@@ -1,8 +1,15 @@
-## master
+## master (Unreleased)
 
- * Ruby 3.0 support
- * Prawn 2.4 support
- * Drop Ruby 2.4 support
+## 0.12.0
+
+Breaking Changes:
+
+ * Drop Ruby 2.4 support #108, #109
+
+Enhancements:
+
+ * Ruby 3.0 support #108, #109
+ * Prawn 2.4 support #108, #109
 
 ## 0.11.0
 
