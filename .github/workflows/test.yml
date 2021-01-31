@@ -6,6 +6,9 @@ jobs:
   test:
     name: Test against ruby ${{ matrix.ruby }} and prawn ${{ matrix.prawn }}
     runs-on: ubuntu-latest
+    # Run this build only on either pull request or push.
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
+
     strategy:
       matrix:
         ruby:
