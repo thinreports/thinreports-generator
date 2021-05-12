@@ -28,7 +28,7 @@ jobs:
             prawn: 2.3
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v2.3.4
 
     - uses: hidakatsuya/setup-diff-pdf@v1
       with:
