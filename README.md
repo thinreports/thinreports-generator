@@ -279,17 +279,17 @@ In order to run `test:features`, you need to install [diff-pdf](https://github.c
 You can use the Docker container for development. This container contains the libraries required for testing, such as diff-pdf.
 
 ```
-$ docker build -t thinreports-dev .
-$ docker run -v $PWD:/thinreports:cached -it thinreports-dev bash
+$ docker pull ghcr.io/hidakatsuya/ruby-with-diff-pdf:latest
+$ docker run -v $PWD:/thinreports:cached -it ghcr.io/hidakatsuya/ruby-with-diff-pdf bash
 
-> /thinreports#
+> /src#
 ```
 
 You can run test:
 
 ```
-> /thinreports# bundle install
-> /thinreports# bundle exec rake test:features
+> /src# bundle install
+> /src# bundle exec rake test:features
 ```
 
 ## Releasing Generator
