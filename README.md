@@ -280,7 +280,7 @@ You can use the Docker container for development. This container contains the li
 
 ```
 $ docker pull ghcr.io/hidakatsuya/ruby-with-diff-pdf:latest
-$ docker run -v $PWD:/thinreports:cached -it ghcr.io/hidakatsuya/ruby-with-diff-pdf bash
+$ docker run -v $PWD:/src:cached -it ghcr.io/hidakatsuya/ruby-with-diff-pdf bash
 
 > /src#
 ```
