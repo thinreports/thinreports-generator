@@ -14,8 +14,6 @@ module Thinreports
           rows_params = params[:rows] || {}
           rows_schema = item.internal.format.rows
 
-          schema_row_ids = rows_schema.map {|row_schema| row_schema.id.to_sym}.to_set
-
           rows = []
           rows_schema.each do |row_schema|
             row_params = rows_params[row_schema.id.to_sym] || {}
