@@ -2,33 +2,45 @@
 
 [![Gem Version](https://badge.fury.io/rb/thinreports.svg)](http://badge.fury.io/rb/thinreports)
 [![Test](https://github.com/thinreports/thinreports-generator/workflows/Test/badge.svg)](https://github.com/thinreports/thinreports-generator/actions)
-[![Maintainability](https://api.codeclimate.com/v1/badges/054b400031608957ec4a/maintainability)](https://codeclimate.com/github/thinreports/thinreports-generator/maintainability)
 
-[Thinreports](http://www.thinreports.org) is an open source report generating tool for Ruby.
+An Ruby library for [Thinreports](https://github.com/thinreports/thinreports).
 
-  * Thinreports Editor (GUI Designer)
-  * Thinreports Generator (Report Generator for Ruby)
+## Prerequisites
+
+### Supported Ruby Versions
+
+- Ruby 2.5, 2.6, 2.7, 3.0
+- Prawn 2.2, 2.3, 2.4
+- JRuby 9.2
+
+## Installation
+
+Add this line to your application's Gemfile:
+
+```ruby
+gem 'thinreports'
+```
+
+And then execute:
+
+    $ bundle install
+
+Or install it yourself as:
+
+    $ gem install thinreports
+
 
 ## Getting Started
 
-  * [Installation Guide](http://www.thinreports.org/documentation/getting-started/installation.html)
-  * [Quick Start Guide](http://www.thinreports.org/documentation/getting-started/quickstart.html)
-  * [Examples](https://github.com/thinreports/thinreports-examples)
-  * [Changelog](https://github.com/thinreports/thinreports-generator/blob/master/CHANGELOG.md)
-  * [Discussion Group (GitHub Discussions)](https://github.com/thinreports/thinreports/discussions)
-  * [Discussion Group (Google Groups)](https://groups.google.com/forum/#!forum/thinreports)
+First of all, check out [the README](https://github.com/thinreports/thinreports#getting-started) for an overview of Thinreports, its features, the two template formats available, and a complete example with template files and Ruby code.
 
-## Supported versions
+## Usage
 
-  * Ruby 2.5, 2.6, 2.7, 3.0
-  * Prawn 2.2, 2.3, 2.4
-  * JRuby 9.2
+See [the README](https://github.com/thinreports/thinreports) for usage of the Section Format.
 
-## Quick Reference
+### Basic Format
 
-**NOTE:** You need to create a layout file `.tlf` using [Thinreports Editor](http://www.thinreports.org/features/editor/).
-
-### Basic Objects and Basic Usage
+The template file (`.tlf`) must be created in [the Basic Editor of the Thinreports Editor](https://github.com/thinreports/thinreports-editor/tree/master/basic-editor).
 
 ```ruby
 require 'thinreports'
@@ -103,7 +115,7 @@ Thinreports::Report.generate(filename: 'report.pdf', layout: 'report.tlf') do |r
 end
 ```
 
-### Report and Page
+#### Report and Page
 
 ```ruby
 report = Thinreports::Report.new layout: 'foo.tlf'
@@ -121,7 +133,7 @@ report.add_blank_page
 report.pages.last # => Report::BlankPage
 ```
 
-### Using multiple layouts
+#### Using multiple layouts
 
 ```ruby
 report = Thinreports::Report.new
@@ -142,7 +154,7 @@ report.start_new_page layout: '/path/to/other2.tlf' do |page|
 end
 ```
 
-### Callbacks
+#### Callbacks
 
 ```ruby
 report = Thinreports::Report.new layout: 'foo.tlf'
@@ -155,7 +167,7 @@ end
 
 See also [features/report_callbacks](https://github.com/thinreports/thinreports-generator/tree/master/test/features/report_callbacks).
 
-### List
+#### List
 
 ```ruby
 report = Thinreports::Report.new layout: 'list.tlf'
@@ -204,7 +216,7 @@ end
 
 See also  [features/list_events](https://github.com/thinreports/thinreports-generator/tree/master/test/features/list_events).
 
-### Page Number
+#### Page Number
 
 ```ruby
 # Setting starting number of page
@@ -225,7 +237,7 @@ end
 
 See also [features/page_number](https://github.com/thinreports/thinreports-generator/blob/master/test/features/page_number) and [features/page_number_with_list](https://github.com/thinreports/thinreports-generator/blob/master/test/features/page_number_with_list).
 
-### Configuring fallback fonts
+#### Configuring fallback fonts
 
 ```ruby
 Thinreports.configure do |config|
@@ -237,32 +249,9 @@ Thinreports.config.fallback_fonts = ['/path/to/font_a.ttf', '/path/to/font_b.ttf
 
 See also [features/eudc](https://github.com/thinreports/thinreports-generator/blob/master/test/features/eudc).
 
-## Features
-
-Features of Editor is [here](http://www.thinreports.org/features/editor/).
-
-### Easy to generate PDF
-
-Design layout using Editor, then embed values to text field in layout.
-
-### Simple runtime environment
-
-Ruby, RubyGems, Prawn and Generator.
-
-### Dynamic operation
-
-Generator can dynamically:
-
-  * change value of TextBlock and ImageBlock
-  * change style (border, fill, visibility, position, color, font) of Shape
-
-### Others
-
-  * External characters (Gaiji) for Japanese
-
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/thinreports/thinreports-generator.
+Bug reports and pull requests are welcome on GitHub at https://github.com/thinreports/thinreports-generator. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/thinreports/thinreports/blob/master/CODE_OF_CONDUCT.md).
 
 ## Development
 
@@ -303,8 +292,8 @@ You can run test:
 
 ## License
 
-Thinreports Generator is licensed under the [MIT-License](https://github.com/thinreports/thinreports-generator/blob/master/MIT-LICENSE).
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
 ## Copyright
 
-&copy; 2010-2015 [Matsukei Co.,Ltd](http://www.matsukei.co.jp).
+&copy; 2021 [Matsukei Co.,Ltd](http://www.matsukei.co.jp).
