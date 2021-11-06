@@ -2,6 +2,7 @@
 
 require 'feature_test'
 require 'open-uri'
+require 'openssl'
 
 class TestImageBlockFeature < FeatureTest
   feature :image_block do
@@ -24,7 +25,10 @@ class TestImageBlockFeature < FeatureTest
     )
 
     report.page.item(:overflow).src = image200x100
-    report.page[:thinreports_logo] = URI.open('http://www.thinreports.org/assets/logos/thinreports-logo.png')
+    report.page[:thinreports_logo] = URI.open(
+      'https://www.thinreports.org/assets/logos/thinreports-logo.png',
+      ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
+    )
 
     report.page.list(:list) do |list|
       3.times { list.add_row in_list: image50x50 }
