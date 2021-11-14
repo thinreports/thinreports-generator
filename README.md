@@ -7,11 +7,11 @@ A Ruby library for [Thinreports](https://github.com/thinreports/thinreports).
 
 ## Prerequisites
 
-### Supported Ruby Versions
+### Supported Versions
 
 - Ruby 2.5, 2.6, 2.7, 3.0
-- Prawn 2.2, 2.3, 2.4
 - JRuby 9.2
+- Prawn 2.2, 2.3, 2.4
 
 ## Installation
 
@@ -296,4 +296,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Copyright
 
-&copy; 2021 [Matsukei Co.,Ltd](http://www.matsukei.co.jp).
+(c) 2021 [Matsukei Co.,Ltd](http://www.matsukei.co.jp).
