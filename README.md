@@ -3,7 +3,7 @@
 [![Gem Version](https://badge.fury.io/rb/thinreports.svg)](http://badge.fury.io/rb/thinreports)
 [![Test](https://github.com/thinreports/thinreports-generator/workflows/Test/badge.svg)](https://github.com/thinreports/thinreports-generator/actions)
 
-An Ruby library for [Thinreports](https://github.com/thinreports/thinreports).
+A Ruby library for [Thinreports](https://github.com/thinreports/thinreports).
 
 ## Prerequisites
 
