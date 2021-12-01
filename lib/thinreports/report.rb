@@ -13,8 +13,8 @@ module Thinreports
     end
 
     # @see Thinreports::Report::Base#generate
-    def self.generate(*args, &block)
-      Base.generate(*args, &block)
+    def self.generate(**args, &block)
+      Base.generate(**args, &block)
     end
   end
 end
