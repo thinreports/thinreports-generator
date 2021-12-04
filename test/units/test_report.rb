@@ -9,14 +9,19 @@ class Thinreports::TestReport < Minitest::Test
   Report = Thinreports::Report
 
   def test_new
-    assert_instance_of Report::Base, Report.new
+    report = Report.new(layout: layout_file.path)
+    assert_instance_of Report::Base, report
   end
 
   def test_create
-    assert_instance_of Report::Base, Report.create {}
+    report = Report.create(layout: layout_file.path, &:start_new_page)
+    assert_instance_of Report::Base, report
   end
 
-  def test_generate_should_raise_when_the_specified_layout_is_not_found
+  def test_generate
+    result = Report.generate(layout: layout_file.path, &:start_new_page)
+    assert_pdf_data result
+
     assert_raises Thinreports::Errors::LayoutFileNotFound do
       Report.generate(layout: '') { |_| }
     end

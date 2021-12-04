@@ -36,4 +36,8 @@ module Thinreports::TestHelper
       .reduce(:merge).values
       .select { |o| o.hash[:Subtype] == :Image }
   end
+
+  def assert_pdf_data(data)
+    assert_equal '%PDF-', data[0..4]
+  end
 end

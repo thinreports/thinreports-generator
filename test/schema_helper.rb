@@ -19,7 +19,23 @@ module Thinreports
         ]
       },
       "items": [
-        { "type": "rect", "id": "rect_with_id", "display": true },
+        {
+          "type": "rect",
+          "id": "rect_with_id",
+          "display": true,
+          "description": "",
+          "x": 20,
+          "y": 59,
+          "width": 120.1,
+          "height": 62,
+          "style": {
+            "border-color": "#000000",
+            "border-width": 1,
+            "border-style": "solid",
+            "fill-color": "#FFFFFF"
+          },
+          "border-radius": 0
+        },
         { "type": "text-block", "id": "text_block", "x": 100.0, "y": 100.0, "value": "", "display": true },
         { "type": "text-block", "id": "text_block_referenced", "x": 100.0, "y": 100.0, "value": "", "display": true, "reference-id": "text_block" },
         { "type": "text-block", "id": "text_block_hidden", "x": 100.0, "y": 100.0, "value": "default value", "display": false },
