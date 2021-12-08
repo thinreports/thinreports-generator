@@ -1,5 +1,7 @@
 ## master (Unreleased)
 
+## 0.12.1
+
 Bug Fixes:
 
  * Fix argument of Thinreports::Report.generate in Ruby 3.0 #116 [@sada]
