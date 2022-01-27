@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
   s.description = 'Thinreports is an open source report generation tool for Ruby.'
   s.homepage    = 'http://www.thinreports.org'
   s.license     = 'MIT'
+  s.metadata    = { 'rubygems_mfa_required' => 'true' }
 
   s.required_ruby_version = '>= 2.5.0'
 

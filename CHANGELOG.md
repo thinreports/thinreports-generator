@@ -1,5 +1,9 @@
 ## master (Unreleased)
 
+Notes:
+
+ * thinreports gem has opted in to the ["MFA required to publish" setting](https://guides.rubygems.org/mfa-requirement-opt-in/) on Rubygems.org
+
 ## 0.12.1
 
 Bug Fixes:
