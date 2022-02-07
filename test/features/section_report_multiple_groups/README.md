@@ -1,11 +1,12 @@
 # Multiple Groups
 
-group によって複数のパラメータを渡すことができ、それらを一つの PDF に描画することができる。
+Multiple parameter sets can be passed as a group and drawn into a single PDF.
 
 - [Example code](test_feature.rb)
 - [Example template file](template.tlf)
 - [Example PDF](expect.pdf)
 
-group の主な機能は次の通り。
-- group ごとに改ページされる
-- "毎ページ表示" オプションが無効なヘッダーやフッターは group ごとに描画される
+The main functions of groups are as follows:
+
+- Page break for each group
+- Headers and footers for which the "show every page" is disabled will be drawn only once per group
