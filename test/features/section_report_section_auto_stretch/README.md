@@ -1,55 +1,57 @@
 # Section Auto Stretch
 
-自動伸縮を有効にすることで、描画後の内容に応じて section の高さを自動的に伸縮させることができる。
+By enabling auto-stretch, the height of the section can be automatically stretched according to the content after drawing.
 
 - [Example code](test_feature.rb)
 - [Example template file](template.tlf)
 - [Example PDF](expect.pdf)
 
-## 伸縮時の高さの算出
+## Calculating the height when stretching
 
-### 下余白とコンテンツの下位置
+### Bottom margin and bottom position of content
 
-section の伸縮後の高さは「下余白」と「コンテンツの下位置」によって決定する。
+The height of the section after it is stretched is determined by the bottom margin and the bottom position of the content.
 
-コンテンツの下位置
-- section 内の item の最下部の位置を指す (「下余白に影響」が無効の item は除外)
-- 描画結果によって変動する
+Bottom Position of Content
 
-下余白
-- コンテンツの下位置から section の下位置との距離又は領域を指す
-- 定義時の内容で決定し不変
+- The bottom position of the item in the section (except for items for which "Affect bottom margin" is disabled)
+- Varies depending on the drawing result
 
-詳細は [Section Bottom Margin](../section_report_section_bottom_margin/README.md) を参照。
+Bottom Margin
 
-### 高さの算出
+- The height or area between the bottom position of the content and the bottom position of the section
+- Determined and fixed by the content of the template definition
 
-section の高さは次のように定義する。
+See [Section Bottom Margin](../section_report_section_bottom_margin/README.md) for details.
+
+### Calculating the height
+
+The height of the section is defined as follows:
 
 ```
-section の高さ = コンテンツの下位置 + 下余白の高さ
+height of section = bottom of content + height of bottom margin
 ```
 
-text-block や stack-view などの item が伸縮した場合、コンテンツの下位置が変動する可能性がある。sectionの自動伸縮が有効な場合、その変動後のコンテンツの下位置に基づいてsectionの高さが変化する。
+When an item such as text-block or stack-view is stretched, the bottom position of the content may change, and if auto-stretch of the section is enabled, the height of the section will be changed based on the changed bottom position of the content.
 
-## 拡張
+## Expanding the height
 
-高さの拡張は以下の条件によって発生する。
+Expanding the height occurs in the following cases:
 
-- text-block の描画後の高さが定義の高さよりも高くなり、その結果 section のコンテンツの下位置が大きくなる場合
-- stack-view の描画後の高さが定義の高さよりも高くなり、その結果 section のコンテンツの下位置が大きくなる場合
+- When the height of the text-block after drawing becomes higher than the defined height, and as a result, the bottom position of the section content becomes larger
+- When the height of stack-view becomes higher than the defined height, and as a result, the bottom position of the section content becomes larger
 
-このとき、section は以下のように拡張する。
+In these cases, the height of the section is expanded as follows:
 
 ![](images/auto-stretch-expand.png)
 
-## 縮小
+## Shrinking the height
 
-高さの縮小は以下の条件によって発生する。
+Shrinking the height occurs in the following cases:
 
-- stack-view の高さが定義の高さよりも小さくなり、その結果 section のコンテンツの下位置が小さくなる場合
-- 縦位置が「上揃え」の image-block の画像が定義した領域の高さよりも小さくなり、その結果 section のコンテンツの下位置が小さくなる場合
+- When the height of the stack-view becomes smaller than the defined height, and as a result, the bottom position of the section content becomes smaller
+- When the image of an image-block whose vertical position is top becomes smaller than the height of the defined area, and as a result, the bottom position of the section content becomes smaller
 
-このとき、section は以下のように縮小する。
+In these cases, the height of the section is shrinked as follows:
 
 ![](images/auto-stretch-shrink.png)
