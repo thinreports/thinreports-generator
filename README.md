@@ -40,7 +40,7 @@ See [the README](https://github.com/thinreports/thinreports) for usage of the Se
 
 ### Basic Format
 
-The template file (`.tlf`) must be created in [the Basic Editor of the Thinreports Editor](https://github.com/thinreports/thinreports-editor/tree/master/basic-editor).
+The template file (`.tlf`) must be created in the [Thinreports Basic Editor](https://github.com/thinreports/thinreports-basic-editor/).
 
 ```ruby
 require 'thinreports'
