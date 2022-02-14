@@ -1,14 +1,14 @@
 # Section Parameter
 
-各 section の定義時のプロパティの一部はパラメータで変更することができる。
+Some properties in the definition of each section can be changed by parameters.
 
 - [Example code](test_feature.rb)
 - [Example template file](template.tlf)
 - [Example PDF](expect.pdf)
 
-## 表示
+## Display
 
-header と footer は `display` プロパティで表示または非表示にすることができる。
+Headers and footers can be shown or hidden with the display property.
 
 ```
 header_and_footer: {
@@ -16,9 +16,9 @@ header_and_footer: {
 }
 ```
 
-## 最小の高さ
+## Minimum height
 
-`min_height` プロパティで section の描画時の最小の高さを指定することができる。
+The min_height property can be used to set the minimum height of a section.
 
 ```
 header_and_footer: {
