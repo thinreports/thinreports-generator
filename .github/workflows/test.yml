@@ -12,39 +12,37 @@ jobs:
     strategy:
       matrix:
         ruby:
-          - '2.5'
-          - '2.6'
-          - '2.7'
-          - '3.0'
-          - 'jruby'
+          - "2.5"
+          - "2.6"
+          - "2.7"
+          - "3.0"
+          - "jruby"
         prawn:
-          - '2.2'
-          - '2.3'
-          - '2.4'
+          - "2.2"
+          - "2.3"
+          - "2.4"
         exclude:
-          - ruby: '3.0'
-            prawn: '2.2'
-          - ruby: '3.0'
-            prawn: '2.3'
+          - ruby: "3.0"
+            prawn: "2.2"
+          - ruby: "3.0"
+            prawn: "2.3"
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - uses: hidakatsuya/setup-diff-pdf@v1
-      with:
-        diff-pdf-version: '0.5'
+      - uses: hidakatsuya/setup-diff-pdf@v1
+        with:
+          diff-pdf-version: "0.5"
 
-    - name: Set up Ruby ${{ matrix.ruby }}
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: ${{ matrix.ruby }}
+      - name: Set up Ruby ${{ matrix.ruby }}
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
 
-    - name: Install dependencies
-      run: |
-        gem install bundler
-        bundle install --gemfile gemfiles/prawn-${{ matrix.prawn }}.gemfile --jobs 4 --retry 3
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install --gemfile gemfiles/prawn-${{ matrix.prawn }}.gemfile --jobs 4 --retry 3
 
-    - name: Run tests
-      run: |
-        bundle exec rake test:units
-        bundle exec rake test:features
+      - name: Run tests
+        run: bundle exec rake test

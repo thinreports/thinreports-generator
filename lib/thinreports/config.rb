@@ -4,7 +4,7 @@ module Thinreports
   # @yield [config]
   # @yieldparam [Thinreports::Configuration] config
   def self.configure(&block)
-    Thinreports.call_block_in(config, &block)
+    block.call(config)
   end
 
   # @return [Thinreports::Configuration]
