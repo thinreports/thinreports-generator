@@ -43,4 +43,4 @@ jobs:
           bundle install --gemfile gemfiles/prawn-${{ matrix.prawn }}.gemfile --jobs 4 --retry 3
 
       - name: Run tests
-        run: bundle exec rake test
+        run: xvfb-run -a bundle exec rake test
