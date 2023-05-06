@@ -25,6 +25,8 @@ jobs:
             prawn: "2.3"
 
     steps:
+      - run: sudo apt-get install at-spi2-core
+
       - uses: actions/checkout@v3
 
       - uses: hidakatsuya/setup-diff-pdf@v1
