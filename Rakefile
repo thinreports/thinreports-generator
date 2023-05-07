@@ -8,7 +8,6 @@ Rake::TestTask.new do |t|
   t.description = 'Run tests for main'
   t.libs << 'test/main'
   t.test_files = Dir['test/main/**/test_*.rb']
-  t.warning = false
 end
 
 Rake::TestTask.new do |t|
@@ -23,7 +22,6 @@ Rake::TestTask.new do |t|
   t.description = 'Run tests for section report'
   t.libs << 'test' << 'test/section_report'
   t.test_files = Dir['test/section_report/**/test_*.rb']
-  t.warning = false
 end
 
 desc 'Run all tests'

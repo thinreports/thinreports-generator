@@ -13,6 +13,10 @@ require 'thinreports'
 require 'schema_helper'
 require 'feature_test'
 
+Mocha.configure do |c|
+  c.strict_keyword_argument_matching = true
+end
+
 module Thinreports
   module BasicReport
     module TestHelper

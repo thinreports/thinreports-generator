@@ -105,7 +105,7 @@ class Thinreports::BasicReport::Generator::PDF::Document::TestPage < Minitest::T
 
   def test_add_blank_page_should_create_an_A4_size_page_in_first_page
     create_pdf
-    @pdf.internal.expects(:start_new_page).with(size: 'A4').once
+    @pdf.internal.expects(:start_new_page).with({size: 'A4'}).once
 
     @pdf.add_blank_page
   end

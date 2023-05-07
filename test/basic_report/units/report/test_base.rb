@@ -125,7 +125,7 @@ class Thinreports::BasicReport::Report::TestBase < Minitest::Test
     generator.expects(:generate).with('result.pdf')
 
     Thinreports::BasicReport::Generator::PDF.expects(:new)
-      .with(report, { security: { owner_password: 'pass' }})
+      .with(report, security: { owner_password: 'pass' })
       .returns(generator)
 
     report.generate(
