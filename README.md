@@ -9,8 +9,8 @@ A Ruby library for [Thinreports](https://github.com/thinreports/thinreports).
 
 ### Supported Versions
 
-- Ruby 2.7, 3.0
-- Prawn 2.2, 2.3, 2.4
+- Ruby 2.7, 3.0, 3.1, 3.2
+- Prawn 2.4+
 
 ## Installation
 
