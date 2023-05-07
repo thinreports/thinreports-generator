@@ -1,5 +1,11 @@
 ## master (Unreleased)
 
+Breaking Changes:
+
+* Drop Ruby 2.5,2.6,JRuby support
+* Moved Basic Format implementation to `Thinreports::BasicReport` namespace
+  * `Thinreports::Report` and `Thinreports::Layout` are defined as aliases for `Thinreports::BasicReport::Report` and `Thinreports::BasicReport::Layout` respectively, but other than those Can be a destructive change if you rely on internal implementations
+
 Notes:
 
  * thinreports gem has opted in to the ["MFA required to publish" setting](https://guides.rubygems.org/mfa-requirement-opt-in/) on Rubygems.org
