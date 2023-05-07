@@ -60,10 +60,6 @@ module Thinreports
 
       private
 
-      def feature_name
-        self.class.name
-      end
-
       def actual_pdf
         dir.join('actual.pdf')
       end
