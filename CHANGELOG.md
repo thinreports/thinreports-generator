@@ -1,4 +1,4 @@
-## master (Unreleased)
+## main (Unreleased)
 
 Breaking Changes:
 
