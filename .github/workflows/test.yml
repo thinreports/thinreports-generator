@@ -3,9 +3,10 @@ name: Test
 on: [push, pull_request]
 
 jobs:
-  test:
+  setup:
     name: Test against ruby ${{ matrix.ruby }} and prawn ${{ matrix.prawn }}
     runs-on: ubuntu-latest
+
     # Run this build only on either pull request or push.
     if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
 
@@ -43,5 +44,11 @@ jobs:
           gem install bundler
           bundle install --gemfile gemfiles/prawn-${{ matrix.prawn }}.gemfile --jobs 4 --retry 3
 
-      - name: Run tests
-        run: xvfb-run -a bundle exec rake test
+      - name: Run tests for main
+        run: bundle exec rake test:main
+
+      - name: Run tests for basic report
+        run: xvfb-run -a bundle exec rake test:basic_report
+
+      - name: Run tests for section report
+        run: xvfb-run -a bundle exec rake test:section_report
