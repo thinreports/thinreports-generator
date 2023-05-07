@@ -164,7 +164,7 @@ report.on_page_create do |page|
 end
 ```
 
-See also [features/report_callbacks](https://github.com/thinreports/thinreports-generator/tree/master/test/features/report_callbacks).
+See also [basic_report/features/report_callbacks](https://github.com/thinreports/thinreports-generator/tree/main/test/basic_report/features/report_callbacks).
 
 #### List
 
@@ -213,7 +213,7 @@ report.list do |list|
 end
 ```
 
-See also  [features/list_events](https://github.com/thinreports/thinreports-generator/tree/master/test/features/list_events).
+See also  [basic_report/features/list_events](https://github.com/thinreports/thinreports-generator/tree/main/test/basic_report/features/list_events).
 
 #### Page Number
 
@@ -234,7 +234,7 @@ report.start_new_page do |page|
 end
 ```
 
-See also [features/page_number](https://github.com/thinreports/thinreports-generator/blob/master/test/features/page_number) and [features/page_number_with_list](https://github.com/thinreports/thinreports-generator/blob/master/test/features/page_number_with_list).
+See also [basic_report/features/page_number](https://github.com/thinreports/thinreports-generator/blob/main/test/basic_report/features/page_number) and [basic_report/features/page_number_with_list](https://github.com/thinreports/thinreports-generator/blob/main/test/basic_report/features/page_number_with_list).
 
 #### Configuring fallback fonts
 
@@ -246,21 +246,17 @@ end
 Thinreports.config.fallback_fonts = ['/path/to/font_a.ttf', '/path/to/font_b.ttf']
 ```
 
-See also [features/eudc](https://github.com/thinreports/thinreports-generator/blob/master/test/features/eudc).
+See also [basic_report/features/eudc](https://github.com/thinreports/thinreports-generator/blob/main/test/basic_report/features/eudc).
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/thinreports/thinreports-generator. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/thinreports/thinreports/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/thinreports/thinreports-generator. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/thinreports/thinreports/blob/main/CODE_OF_CONDUCT.md).
 
 ## Development
 
-### How to run feature tests
+### Feature test requires diff-pdf command
 
-```
-$ bundle exec rake test:features
-```
-
-In order to run `test:features`, you need to install [diff-pdf](https://github.com/vslavik/diff-pdf) in your environment, or you can run test in the docker container as below.
+In order to run feature test, you need to install [diff-pdf](https://github.com/vslavik/diff-pdf) in your environment, or you can run test in the docker container as below.
 
 ### How to develop in Docker container
 
@@ -277,7 +273,7 @@ You can run test:
 
 ```
 > /src# bundle install
-> /src# bundle exec rake test:features
+> /src# bundle exec rake test
 ```
 
 ## Releasing Generator
@@ -286,7 +282,7 @@ You can run test:
 2. Update `CHANGELOG.md` and `README.md` (if needed)
 3. Create the Release PR like #105
 4. Merge the PR
-5. Is the master CI green? If not, make it green
+5. Is the main CI green? If not, make it green
 6. Run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to rubygems.org
 
 ## License
