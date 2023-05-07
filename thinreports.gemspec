@@ -29,4 +29,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'mocha', '>= 1.11.2'
   s.add_development_dependency 'pdf-inspector', '>= 1.3.0'
   s.add_development_dependency 'rake', '>= 13.0.1'
+  s.add_development_dependency 'pdf_matcher-testing', '>= 0'
 end

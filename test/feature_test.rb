@@ -1,5 +1,12 @@
 # frozen_string_literal: true
 
+require 'pdf_matcher/testing/minitest_adapter'
+
+PdfMatcher.config.diff_pdf_opts = %w(
+  --mark-differences
+  --channel-tolerance=40
+)
+
 module Thinreports
   module FeatureTest
     def self.[](base_dir)
@@ -31,10 +38,12 @@ module Thinreports
         actual_pdf.binwrite(actual)
 
         if expect_pdf.exist?
-          assert match_expect_pdf?, 'Does not match expect.pdf. Check diff.pdf for details.'
+          assert_match_pdf expect_pdf, actual_pdf, output_diff: path_of('diff.pdf')
         else
           flunk 'expect.pdf does not exist.'
         end
+      rescue PdfMatcher::DiffPdf::CommandNotAvailable
+        skip 'The feature test was skipped because the diff-pdf command is not available; please install diff-pdf (https://github.com/vslavik/diff-pdf) and try again.'
       end
 
       def template_path(filename = 'template.tlf')
@@ -45,15 +54,6 @@ module Thinreports
 
       def feature_name
         self.class.name
-      end
-
-      def match_expect_pdf?
-        opts = [
-          '--mark-differences',
-          # Allow for small differences that cannot be seen
-          '--channel-tolerance=40'
-        ]
-        system("diff-pdf #{opts.join(' ')} --output-diff=#{path_of('diff.pdf')} #{expect_pdf} #{actual_pdf}")
       end
 
       def actual_pdf
