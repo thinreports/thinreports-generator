@@ -71,9 +71,8 @@ module Thinreports
           end
 
           def clean_temp_images
-            temp_image_registry.each_value do |image_path|
-              File.delete(image_path) if File.exist?(image_path)
-            end
+            temp_image_registry.each_value(&:close!)
+            temp_image_registry.clear
           end
 
           def temp_image_registry
