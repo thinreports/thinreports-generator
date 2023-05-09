@@ -36,6 +36,24 @@ class Thinreports::BasicReport::Generator::PDF::Graphics::TestImage < Minitest::
     assert_equal 6, analyze_pdf_images(@document.render).count
   end
 
+  def test_clean_temp_images
+    @document.base64image(Base64.encode64(read_data_file('image_normal.png')), 0, 0, 100, 100)
+    @document.base64image(Base64.encode64(read_data_file('image_normal.jpg')), 0, 0, 100, 100)
+
+    assert_equal 2, @document.temp_image_registry.size
+
+    image_file_and_paths = @document.temp_image_registry.values.map { |image| [image, image.path] }
+
+    @document.clean_temp_images
+
+    assert_empty @document.temp_image_registry
+
+    image_file_and_paths.each do |file, path|
+      assert_nil file.path
+      refute File.exist?(path)
+    end
+  end
+
   def each_image(&block)
     %w(
       image_normal.png
