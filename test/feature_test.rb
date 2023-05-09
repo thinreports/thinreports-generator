@@ -22,15 +22,7 @@ module Thinreports
     class Base < Minitest::Test
       class << self
         def feature(&block)
-          define_method(:test_feature) do
-            # In CI (GitHub Actions), the following error occurs rarely.
-            #
-            # > Errno::ENOENT: No such file or directory @ apply2files
-            #
-            # Probably GC related. It is not a fundamental solution, but for now,
-            # the problem is reproduced only by CI, so we will deal with it by disabling GC.
-            disable_gc { instance_exec(&block) }
-          end
+          define_method(:test_feature, &block)
         end
       end
 
@@ -66,15 +58,6 @@ module Thinreports
 
       def expect_pdf
         dir.join('expect.pdf')
-      end
-
-      def disable_gc
-        was_disabled = GC.disable
-        begin
-          yield
-        ensure
-          GC.enable unless was_disabled
-        end
       end
     end
   end
