@@ -1,19 +1,16 @@
 # frozen_string_literal: true
 
 require_relative 'build'
-require_relative 'pdf/render'
 
 module Thinreports
   module SectionReport
     class Generate
-      def initialize
-        @pdf = Thinreports::Generator::PDF::Document.new
-      end
-
       def call(report_params, filename: nil)
         report = Build.new.call(report_params)
 
-        PDF::Render.new(pdf).call!(report)
+        pdf = SectionReport::Pdf::Document.new(report.schema)
+
+        render(pdf, report)
 
         filename ? pdf.render_file(filename) : pdf.render
       end
@@ -21,6 +18,12 @@ module Thinreports
       private
 
       attr_reader :pdf
+
+      def render(pdf, report)
+        report.groups.each do |group|
+          group.render(pdf)
+        end
+      end
     end
   end
 end

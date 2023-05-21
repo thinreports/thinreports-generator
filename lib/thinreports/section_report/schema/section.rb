@@ -4,36 +4,29 @@ module Thinreports
   module SectionReport
     module Schema
       module Section
-        class Base < Core::Shape::Manager::Format
-          config_reader :id, :type
-          config_reader :height
-          config_checker true, :display
-          config_checker true, auto_stretch: 'auto-stretch'
+        class Base < Schema::Base
+          include ItemContainer
 
-          attr_reader :items
+          attributes :id, :type, :height
 
-          def initialize(schema_data, items:)
-            super(schema_data)
-            initialize_items(items)
+          attribute :display?, 'display'
+          attribute :auto_stretch?, 'auto-stretch'
+
+          def initialize(*)
+            super
+
+            initialize_items
           end
 
-          def find_item(id)
-            @item_with_ids[id.to_sym]
-          end
-
-          private
-
-          def initialize_items(items)
-            @items = items
-            @item_with_ids = items.each_with_object({}) do |item, item_with_ids|
-              next if item.id.empty?
-              item_with_ids[item.id.to_sym] = item
-            end
+          def bottom_margin
+            @bottom_margin ||= items.each_with_object([]) do |item, margins|
+              margins << height - item.bottom if item.affect_bottom_margin?
+            end.min
           end
         end
 
         class Header < Base
-          config_checker true, every_page: 'every-page'
+          attribute :every_page?, 'every-page'
         end
 
         class Footer < Base

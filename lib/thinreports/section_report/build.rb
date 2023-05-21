@@ -18,11 +18,10 @@ module Thinreports
       def load_schema(report_params)
         loader = Schema::Loader.new
 
-        case
-        when report_params[:layout_file]
-          loader.load_from_file(report_params[:layout_file])
-        when report_params[:layout_data]
-          loader.load_from_data(report_params[:layout_data])
+        if file = report_params[:layout_file]
+          loader.load_from_file(file)
+        elsif data = report_params[:layout_data]
+          loader.load_from_data(data)
         else
           raise Errors::LayoutFileNotFound
         end

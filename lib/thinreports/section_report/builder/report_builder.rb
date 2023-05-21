@@ -1,21 +1,19 @@
 # frozen_string_literal: true
 
-require_relative 'report_data'
 require_relative 'item_builder'
 
 module Thinreports
   module SectionReport
     module Builder
       class ReportBuilder
+        Root = Struct.new(:schema, :groups)
+
         def initialize(schema)
           @schema = schema
         end
 
         def build(params)
-          ReportData::Main.new(
-            schema,
-            build_groups(params[:groups])
-          )
+          Root.new(schema, build_groups(params[:groups]))
         end
 
         private
@@ -26,7 +24,7 @@ module Thinreports
           return [] unless groups_params
 
           groups_params.map do |group_params|
-            ReportData::Group.new(
+            Report::Group.new(
               build_sections(:header, group_params[:headers] || {}),
               build_detail_sections(group_params[:details] || []),
               build_sections(:footer, group_params[:footers] || {})
@@ -43,10 +41,11 @@ module Thinreports
 
           sections_schemas.each_with_object([]) do |(section_id, section_schema), sections|
             section_params = sections_params[section_id.to_sym] || {}
+
             next unless section_enabled?(section_schema, section_params)
 
             items = build_items(section_schema, section_params[:items] || {})
-            sections << ReportData::Section.new(section_schema, items, section_params[:min_height])
+            sections << Report::Section.new(section_schema, items, **section_params.slice(:min_height))
           end
         end
 
@@ -58,14 +57,22 @@ module Thinreports
             next unless detail_schema
 
             items = build_items(detail_schema, detail_params[:items] || {})
-            details << ReportData::Section.new(detail_schema, items, detail_params[:min_height])
+            details << Report::Section.new(detail_schema, items, **detail_params.slice(:min_height))
           end
         end
 
         def build_items(section_schema, items_params)
-          section_schema.items.each_with_object([]) do |item_schema, items|
-            item = ItemBuilder.new(item_schema, section_schema).build(items_params[item_schema.id&.to_sym])
-            items << item if item.visible?
+          section_schema.items.each_with_object([]) do |item_schema, m|
+            builder =
+              if item_schema.is_a?(Schema::StackView)
+                StackViewItemBuilder
+              else
+                ItemBuilder
+              end
+
+            item = builder.new(item_schema, section_schema).build(item_params[item_schema.id.to_sym])
+
+            m << item if item.visible?
           end
         end
 
