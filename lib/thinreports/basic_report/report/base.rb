@@ -149,13 +149,15 @@ module Thinreports
 
         # @param [String] filename
         # @param [Hash] security (see http://prawnpdf.org/api-docs/2.0/Prawn/Document/Security.html#encrypt_document-instance_method)
+        # @param [String] title Value of the title attribute of the PDF document metadata.
+        #   if nil, the title of the default layout file is set.
         # @return [String]
         # @example Generate PDF data
         #   report.generate # => "%PDF-1.4...."
         # @example Create a PDF file
         #   report.generate(filename: 'foo.pdf')
-        def generate(filename: nil, security: nil)
-          Thinreports::BasicReport::Generator::PDF.new(self, security: security).generate(filename)
+        def generate(filename: nil, security: nil, title: nil)
+          Thinreports::BasicReport::Generator::PDF.new(self, security: security, title: title).generate(filename)
         end
 
         # @see Thinreports::BasicReport::Core::Shape::Manager::Target#list

@@ -10,6 +10,7 @@ Breaking Changes:
 Enhancements:
 
 * Add Ruby 3.1, 3.2 support
+* Allow any string to be set to the title attribute of the PDF document metadata
 
 Notes:
 
