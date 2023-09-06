@@ -1,16 +1,18 @@
 ## main (Unreleased)
 
+## 0.13.0
+
 Breaking Changes:
 
-* Drop Ruby 2.5,2.6,JRuby support
-* Drop Prawn 2.2, 2.3 support
-* Moved Basic Format implementation to `Thinreports::BasicReport` namespace
-  * `Thinreports::Report` and `Thinreports::Layout` are defined as aliases for `Thinreports::BasicReport::Report` and `Thinreports::BasicReport::Layout` respectively, but other than those Can be a destructive change if you rely on internal implementations
+ * Drop Ruby 2.5,2.6,JRuby support
+ * Drop Prawn 2.2, 2.3 support
+ * Moved Basic Format implementation to `Thinreports::BasicReport` namespace
+   * `Thinreports::Report` and `Thinreports::Layout` are defined as aliases for `Thinreports::BasicReport::Report` and `Thinreports::BasicReport::Layout` respectively, but other than those can be a destructive change if you rely on internal implementations
 
 Enhancements:
 
-* Add Ruby 3.1, 3.2 support
-* Allow any string to be set to the title attribute of the PDF document metadata #125
+ * Allow any string to be set to the title attribute of the PDF document metadata #125
+ * Add Ruby 3.1, 3.2 support
 
 Notes:
 
