@@ -11,11 +11,12 @@ module Thinreports
 
         # @param [Thinreports::BasicReport::Report::Base] report
         # @param [Hash] security (nil)
-        def initialize(report, security: nil)
+        # @param [String] title (nil)
+        def initialize(report, security: nil, title: nil)
           report.finalize
 
           @report = report.internal
-          title = default_layout ? default_layout.format.report_title : nil
+          title ||= default_layout ? default_layout.format.report_title : nil
 
           @document = Document.new(title: title, security: security)
           @drawers = {}

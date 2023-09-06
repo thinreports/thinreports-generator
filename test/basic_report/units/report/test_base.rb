@@ -125,13 +125,20 @@ class Thinreports::BasicReport::Report::TestBase < Minitest::Test
     generator.expects(:generate).with('result.pdf')
 
     Thinreports::BasicReport::Generator::PDF.expects(:new)
-      .with(report, security: { owner_password: 'pass' })
+      .with(report, security: { owner_password: 'pass' }, title: nil)
       .returns(generator)
 
     report.generate(
       filename: 'result.pdf',
       security: { owner_password: 'pass' }
     )
+  end
+
+  def test_generate_when_title_argument_is_specified
+    report = Report::Base.new layout: @layout_file.path
+    pdf = report.generate(title: 'Custom title')
+
+    assert_equal 'Custom title', PDF::Reader.new(StringIO.new(pdf)).info[:Title]
   end
 
   def test_page_should_return_the_current_page
