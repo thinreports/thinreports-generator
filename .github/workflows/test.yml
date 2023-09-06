@@ -32,11 +32,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-
-      - name: Install dependencies
-        run: |
-          gem install bundler
-          bundle install --jobs 4 --retry 3
+          bundler-cache: true
 
       - name: Run tests for main
         run: bundle exec rake test:main
