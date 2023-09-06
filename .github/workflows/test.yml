@@ -20,8 +20,6 @@ jobs:
           - "3.2"
 
     steps:
-      - run: sudo apt-get install at-spi2-core
-
       - uses: actions/checkout@v4
 
       - uses: hidakatsuya/action-setup-diff-pdf@v1
