@@ -1,5 +1,11 @@
 ## main (Unreleased)
 
+## 0.13.1
+
+Bug fixes:
+
+ * allow title argument to be specified in Report.generate method #127
+
 ## 0.13.0
 
 Breaking Changes:
