@@ -26,12 +26,13 @@ module Thinreports
           # @param layout (see #initialize)
           # @param filename (see #generate)
           # @param security (see #generate)
+          # @param title (see #generate)
           # @param [Hash] report ({}) DEPRECATED. Options for Report.
           # @param [Hash] generator ({}) DEPRECATED. Options for Generator.
           # @yield (see .create)
           # @yieldparam (see .create)
           # @return [String]
-          def generate(layout: nil, filename: nil, security: nil, report: {}, generator: {}, &block)
+          def generate(layout: nil, filename: nil, security: nil, title: nil, report: {}, generator: {}, &block)
             raise ArgumentError, '#generate requires a block' unless block_given?
 
             if report.any? || generator.any?
@@ -44,7 +45,7 @@ module Thinreports
             security ||= generator[:security]
 
             report = create(layout: layout, &block)
-            report.generate(filename: filename, security: security)
+            report.generate(filename: filename, security: security, title: title)
           end
         end
 
