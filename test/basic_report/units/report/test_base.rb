@@ -222,7 +222,8 @@ class Thinreports::BasicReport::Report::TestBase < Minitest::Test
     Report::Base.expects(:create).with(layout: '/path/to/layout.tlf').returns(@report)
     @report.expects(:generate).with(
       filename: 'result.pdf',
-      security: { owner_password: 'pass' }
+      security: { owner_password: 'pass' },
+      title: nil
     )
 
     Report::Base.generate(
@@ -238,7 +239,8 @@ class Thinreports::BasicReport::Report::TestBase < Minitest::Test
     Report::Base.expects(:create).with(layout: '/path/to/layout.tlf').returns(@report)
     @report.expects(:generate).with(
       filename: 'result.pdf',
-      security: { owner_password: 'pass' }
+      security: { owner_password: 'pass' },
+      title: nil
     )
 
     Report::Base.generate(
@@ -251,5 +253,11 @@ class Thinreports::BasicReport::Report::TestBase < Minitest::Test
         security: { owner_password: 'deprecated' }
       }
     ) { |_| }
+  end
+
+  def test_Base_generate_when_title_argument_is_specified
+    pdf = Report::Base.generate(layout: @layout_file.path, title: 'Custom title') { start_new_page }
+
+    assert_equal 'Custom title', PDF::Reader.new(StringIO.new(pdf)).info[:Title]
   end
 end
