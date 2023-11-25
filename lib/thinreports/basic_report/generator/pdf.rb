@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 require 'prawn'
+require 'prawn/disable_word_break'
+
+Prawn::DisableWordBreak.config.default = false
 
 module Thinreports
   module BasicReport
