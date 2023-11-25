@@ -1,15 +1,15 @@
 name: Test
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
 
 jobs:
   setup:
     name: Ruby ${{ matrix.ruby }}
 
     runs-on: ubuntu-latest
-
-    # Run this build only on either pull request or push.
-    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
 
     strategy:
       matrix:
