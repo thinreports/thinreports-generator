@@ -23,6 +23,7 @@ module Thinreports
           # @option attrs [Boolean] :single (false)
           # @option attrs [:trancate, :shrink_to_fit, :expand] :overflow (:trancate)
           # @option attrs [:none, :break_word] :word_wrap (:none)
+          # @option attrs [:normal, :anywhere, :disable_break_word_by_space] :overflow_wrap (:normal)
           def text_box(content, x, y, w, h, attrs = {}, &block)
             w, h = s2f(w, h)
 
@@ -32,8 +33,7 @@ module Thinreports
               overflow: attrs[:overflow]
             )
 
-            # Do not break by word unless :word_wrap is :break_word
-            content = text_without_line_wrap(content) if attrs[:word_wrap] == :none
+            content = replace_space_to_nbsp(content) if attrs[:overflow_wrap] == :disable_break_word_by_space
 
             with_text_styles(attrs) do |built_attrs, font_styles|
               if block
@@ -112,6 +112,12 @@ module Thinreports
             spacing = attrs.delete(:letter_spacing)
             attrs[:character_spacing] = s2f(spacing) if spacing
 
+            # Disable line breaking on chars such as spaces and hyphens
+            attrs[:disable_word_break] = true if attrs.delete(:overflow_wrap) == :anywhere
+
+            # Delete unnecessary attributes
+            attrs.delete(:word_wrap)
+
             # Or... with_font_styles(attrs, fontinfo, &block)
             with_font_styles(attrs, fontinfo) do |modified_attrs, styles|
               block.call(modified_attrs, styles)
@@ -131,7 +137,7 @@ module Thinreports
 
           # @param [String] content
           # @return [String]
-          def text_without_line_wrap(content)
+          def replace_space_to_nbsp(content)
             content.gsub(/ /, Prawn::Text::NBSP)
           end
 

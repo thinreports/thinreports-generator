@@ -32,7 +32,7 @@ class Thinreports::BasicReport::Generator::PDF::Graphics::TestAttributes < Minit
   end
 
   def test_build_text_attributes
-    text_styles = {
+    text_styles_without_overflow_wrap = {
       'font-family' => %w( Helvetica IPAMincho ),
       'font-size' => 18.0,
       'color' => 'red',
@@ -44,7 +44,6 @@ class Thinreports::BasicReport::Generator::PDF::Graphics::TestAttributes < Minit
       'overflow' => 'expand',
       'word-wrap' => 'break-word'
     }
-
     assert_equal(
       {
         font: 'Helvetica',
@@ -56,12 +55,35 @@ class Thinreports::BasicReport::Generator::PDF::Graphics::TestAttributes < Minit
         letter_spacing: 2.0,
         line_height: 20.0,
         overflow: :expand,
-        word_wrap: :break_word
+        word_wrap: :break_word,
+        overflow_wrap: :normal
       },
-      @pdf.build_text_attributes(text_styles)
+      @pdf.build_text_attributes(text_styles_without_overflow_wrap)
     )
 
-    customized_attributes = @pdf.build_text_attributes(text_styles) { |attrs| attrs[:color] = 'blue' }
+    text_styles_with_overflow_wrap = text_styles_without_overflow_wrap.merge(
+      'overflow-wrap' => 'anywhere'
+    )
+    assert_equal(
+      {
+        font: 'Helvetica',
+        size: 18.0,
+        color: 'red',
+        align: :right,
+        valign: :bottom,
+        styles: [:bold, :italic],
+        letter_spacing: 2.0,
+        line_height: 20.0,
+        overflow: :expand,
+        word_wrap: :break_word,
+        overflow_wrap: :anywhere
+      },
+      @pdf.build_text_attributes(text_styles_with_overflow_wrap)
+    )
+
+    customized_attributes = @pdf.build_text_attributes(text_styles_without_overflow_wrap) { |attrs|
+      attrs[:color] = 'blue'
+    }
     assert_equal 'blue', customized_attributes[:color]
   end
 
@@ -131,5 +153,26 @@ class Thinreports::BasicReport::Generator::PDF::Graphics::TestAttributes < Minit
     assert_equal :bottom, @pdf.image_position_y('bottom')
     assert_equal :top, @pdf.image_position_y('')
     assert_equal :top, @pdf.image_position_y(nil)
+  end
+
+  def test_overflow_wrap
+    assert_equal :anywhere, @pdf.overflow_wrap('anywhere', :none)
+    assert_equal :disable_break_word_by_space, @pdf.overflow_wrap('disable-break-word-by-space', :break_word)
+    assert_equal :normal, @pdf.overflow_wrap('normal', :none)
+
+    # When value is unexpected value
+    assert_equal :normal, @pdf.overflow_wrap('', :none)
+  end
+
+  def text_overflow_wrap_fallback_to_word_wrap
+    # word_wrap: none fallbacks to :disable_break_word_by_space
+    assert_equal :disable_break_word_by_space, @pdf.overflow_wrap(nil, :none)
+    # word_wrap: break_word fallbacks to :normal
+    assert_equal :normal, @pdf.overflow_wrap(nil, :break_word)
+  end
+
+  def test_migrate_overflow_wrap_from_word_wrap
+    assert_equal 'normal', @pdf.migrate_overflow_wrap_from_word_wrap(:break_word)
+    assert_equal 'disable-break-word-by-space', @pdf.migrate_overflow_wrap_from_word_wrap(:none)
   end
 end

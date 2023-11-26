@@ -25,6 +25,8 @@ module Thinreports
           # @yieldparam [Hash] attrs
           # @return [Hash]
           def build_text_attributes(style, &block)
+            word_wrap = word_wrap(style['word-wrap'])
+
             text_attributes = {
               font: font_family(style['font-family']),
               size: style['font-size'],
@@ -35,10 +37,30 @@ module Thinreports
               letter_spacing: letter_spacing(style['letter-spacing']),
               line_height: line_height(style['line-height']),
               overflow: text_overflow(style['overflow']),
-              word_wrap: word_wrap(style['word-wrap'])
+              word_wrap: word_wrap,
+              # Deprecated: Use overflow_wrap instead of word_wrap
+              overflow_wrap: overflow_wrap(style['overflow-wrap'], word_wrap)
             }
             block.call(text_attributes) if block_given?
             text_attributes
+          end
+
+          def overflow_wrap(style, computed_word_wrap)
+            case style || migrate_overflow_wrap_from_word_wrap(computed_word_wrap)
+            when 'normal', nil then :normal
+            when 'anywhere' then :anywhere
+            # Deprecated: This is a temporary value for migrating from word_wrap.
+            when 'disable-break-word-by-space' then :disable_break_word_by_space
+            else :normal
+            end
+          end
+
+          def migrate_overflow_wrap_from_word_wrap(computed_word_wrap)
+            case computed_word_wrap
+            when :none then 'disable-break-word-by-space'
+            when :break_word then 'normal'
+            else raise ArgumentError, 'Invalid computed word_wrap value'
+            end
           end
 
           # @param [Array<String>] font_names
