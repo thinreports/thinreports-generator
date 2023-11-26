@@ -1,5 +1,7 @@
 ## main (Unreleased)
 
+* Drop Ruby 2.7 support
+
 ## 0.13.1
 
 Bug fixes:
