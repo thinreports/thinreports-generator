@@ -1,6 +1,9 @@
 ## main (Unreleased)
 
+## 0.14.0
+
 * Drop Ruby 2.7 support
+* Fix LoadError: cannot load such file -- matrix #131
 
 ## 0.13.1
 
