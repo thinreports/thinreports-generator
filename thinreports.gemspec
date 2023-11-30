@@ -23,5 +23,6 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
 
   s.add_dependency 'prawn', '>= 2.4.0'
+  s.add_dependency 'matrix', '~> 0.4'
   s.add_dependency 'rexml'
 end
