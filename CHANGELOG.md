@@ -2,12 +2,17 @@
 
 ## 0.14.0
 
+Breaking Changes:
+
 * Drop Ruby 2.7 support
+
+Bug Fixes:
+
 * Fix LoadError: cannot load such file -- matrix #131
 
 ## 0.13.1
 
-Bug fixes:
+Bug Fixes:
 
  * allow title argument to be specified in Report.generate method #127
 
