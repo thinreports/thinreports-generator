@@ -118,8 +118,8 @@ class Thinreports::BasicReport::Generator::PDF::Graphics::TestText < Minitest::T
     assert_equal @pdf.send(:text_line_leading, 100, font), 100 - font_height
   end
 
-  def test_text_without_line_wrap_should_replace_the_spaces_NBSP
-    assert_equal @pdf.send(:text_without_line_wrap, ' ' * 2), Prawn::Text::NBSP * 2
+  def test_replace_space_to_nbsp_should_replace_the_spaces_NBSP
+    assert_equal @pdf.send(:replace_space_to_nbsp, ' ' * 2), Prawn::Text::NBSP * 2
   end
 
   def test_text_box_should_not_raise_PrawnCannotFitError

@@ -1,5 +1,7 @@
 ## main (Unreleased)
 
+* Add overflow-wrap option #129
+
 ## 0.14.0
 
 Breaking Changes:
