@@ -1,5 +1,9 @@
 ## main (Unreleased)
 
+## 0.14.1
+
+Enhancements:
+
 * Add overflow-wrap option #129
 
 ## 0.14.0
