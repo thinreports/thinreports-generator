@@ -26,4 +26,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'matrix', '~> 0.4'
   s.add_dependency 'prawn-disable_word_break', '>= 2.3.1'
   s.add_dependency 'rexml'
+  s.add_dependency 'base64'
+  s.add_dependency 'bigdecimal'
 end
