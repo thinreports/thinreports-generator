@@ -1,5 +1,7 @@
 ## main (Unreleased)
 
+* Add base64 and bigdecimal to the gemspec #133
+
 ## 0.14.1
 
 Enhancements:
