@@ -1,6 +1,11 @@
 ## main (Unreleased)
 
+## 0.14.2
+
+Changes:
+
 * Add base64 and bigdecimal to the gemspec #133
+* Remove matrix gem version constraint
 
 ## 0.14.1
 
