@@ -9,7 +9,7 @@ on:
 
 jobs:
   setup:
-    name: Ruby ${{ matrix.ruby }}
+    name: Ruby ${{ matrix.ruby }} with prawn ${{ matrix.prawn }}
 
     runs-on: ubuntu-latest
 
@@ -20,6 +20,9 @@ jobs:
           - "3.1"
           - "3.2"
           - "3.3"
+        prawn:
+          - "2.4"
+          - "2.5"
 
     steps:
       - uses: actions/checkout@v4
@@ -33,6 +36,9 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
+
+      - name: Install dependencies
+        run: bundle install --gemfile gemfiles/prawn-${{ matrix.prawn }}.gemfile --jobs 4 --retry 3
 
       - name: Run tests for main
         run: bundle exec rake test:main
