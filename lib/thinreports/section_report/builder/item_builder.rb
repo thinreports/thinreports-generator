@@ -9,27 +9,41 @@ module Thinreports
         Context = Struct.new(:parent_schema)
 
         def initialize(item_schema, parent_schema)
-          @item = Core::Shape::Interface(nil, item_schema)
+          @item_schema = item_schema
           @parent_schema = parent_schema
         end
 
         def build(item_params)
           params = build_params(item_params)
 
-          item.visible(params[:display]) if params.key?(:display)
-          item.value(params[:value]) if params.key?(:value)
-          item.styles(params[:styles]) if params.key?(:styles)
-
-          if item.internal.format.attributes['type'] == Core::Shape::StackView::TYPE_NAME
-            StackViewBuilder.new(item).update(params)
+          build_item(item_schema).tap do |item|
+            item.visible(params[:display]) if params.key?(:display)
+            item.value(params[:value]) if params.key?(:value)
+            item.styles(params[:styles]) if params.key?(:styles)
           end
-
-          item
         end
 
         private
 
-        attr_reader :item, :parent_schema
+        attr_reader :item_schema, :parent_schema
+
+        def build_item(schema)
+          item_class =
+            case schema
+            when Schema::TextBlock
+              Item::TextBlock
+            when Schema::ImageBlock
+              Item::ImageBlock
+            when Schema::StackView
+              Item::StackView
+            when Schema::Text
+              Item::Text
+            when Schema::Basic
+              Item::Basic
+            end
+
+          item_class.new(schema)
+        end
 
         def build_params(params)
           return {} unless params
