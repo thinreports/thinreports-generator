@@ -25,7 +25,7 @@ jobs:
           - "2.5"
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: hidakatsuya/action-setup-diff-pdf@v1
         with:
