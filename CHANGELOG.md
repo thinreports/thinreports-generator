@@ -9,7 +9,7 @@ Breaking Changes:
 
 Changes:
 
-* Test against Rub 3.3 and 4.0
+* Test against Ruby 3.4 and 4.0
 
 ## 0.14.2
 
