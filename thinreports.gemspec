@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   end
   s.require_paths = ['lib']
 
-  s.add_dependency 'prawn', '>= 2.4.0'
+  s.add_dependency 'prawn', '>= 2.5.0'
   s.add_dependency 'prawn-disable_word_break', '>= 2.3.1'
   s.add_dependency 'base64'
   s.add_dependency 'bigdecimal'
