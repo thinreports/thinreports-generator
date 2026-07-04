@@ -1,5 +1,16 @@
 ## main (Unreleased)
 
+## 0.15.0
+
+Breaking Changes:
+
+* Drop support for Ruby 3.2 or earlier
+* Drop support for Prawn 2.4
+
+Changes:
+
+* Test against Rub 3.3 and 4.0
+
 ## 0.14.2
 
 Changes:

@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 module Thinreports
-  VERSION = '0.14.2'
+  VERSION = '0.15.0'
 end
