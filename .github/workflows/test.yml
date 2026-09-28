@@ -28,7 +28,7 @@ jobs:
           diff-pdf-version: "0.5.3"
 
       - name: Set up Ruby ${{ matrix.ruby }}
-        uses: ruby/setup-ruby@984c0c890880bbf811283d6f09c4607c62d210a4 # v1.323.0
+        uses: ruby/setup-ruby@14594264cd68ce8a2345dd349bc3d138a4ef85c8 # v1.327.0
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
