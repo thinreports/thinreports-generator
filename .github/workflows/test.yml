@@ -23,7 +23,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - uses: hidakatsuya/action-setup-diff-pdf@v1.6.0
+      - uses: hidakatsuya/action-setup-diff-pdf@v1.6.1
         with:
           diff-pdf-version: "0.5.3"
 
